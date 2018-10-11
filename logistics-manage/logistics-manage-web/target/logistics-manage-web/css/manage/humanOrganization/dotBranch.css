@@ -1,0 +1,34 @@
+/*新建模态框*/
+.project_info .creat_content{font-size: 14px;font-family: "Microsoft YaHei";color: rgb(51, 51, 51);line-height: 1.2;}
+.modal .modal-header{padding: 5px!important;}
+.modal h5{color:#FFAE00;margin-top: 0px !important;font-weight: normal;}
+.modal p{color:#04A9ED;margin:10px;}
+.modal hr{margin-top: 10px !important;margin-bottom: 10px !important;border-top: 1px dashed #D8D8D8 !important;}
+.modal .modal-lg{height: 700px;overflow: auto;}
+.modal-dialog label{font-weight: normal;font-size: 14px;font-family: "Microsoft YaHei";color: #666666;line-height: 1.2;}
+.modal-dialog select,.modal-dialog input[type=text]{width:120px;border: 1px solid #DDE3EF;height: 28px;margin: 5px 0; border-radius: 2px;}
+.modal-dialog .sm-tag{width: 70px;text-align: right;}
+.modal-dialog .lg-tag{width: 84px;text-align: right;}
+.modal .form-group{padding:0!important;position: relative;margin: 0 15px!important;}
+.modal .form-inline{position: relative;}
+@media screen and (min-width:300px) and (max-width:991px){
+.remarkInput{width: 78% !important;}	
+}
+@media (min-width: 992px){
+.remarkInput{width: 88% !important;}
+}
+.addressInput{width: 46% !important;}
+.relationClass{overflow: hidden;}
+.relationClass label{float: left;height: 30px;line-height: 40px;}
+.relationClass ul{list-style: none;margin:0}
+.relationClass ul li{padding-left: 3px;}
+#relationUl{float: left;padding-left: 0 !important;}
+.addImg{cursor: pointer;margin:0 10px;}
+.reduceImg{cursor: pointer;}
+.limitSpan{margin-right:20px ;position: absolute;top: 10px;right: 10px;color: #999;}
+.modal_btn{margin-top: 10px;margin-bottom: 0;}
+/*删除原因模态框*/
+.deletReasonModal .fa-exclamation-triangle{color:#04A9ED;font-size: 35px;margin-right: 20px;}
+/*.deletReasonModal .modal-body .body-content {padding-left: 30px;}*/
+.deletReasonModal span{vertical-align: middle;font-size: 20px;height: 35px;display: inline-block;}
+.deletReasonModal .delete_reason{margin-left: 30px;}

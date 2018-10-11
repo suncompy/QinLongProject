@@ -1,0 +1,9 @@
+.modal ul{list-style: none;padding:0}
+.modal ul li{float: left;width: 25%;}
+.modal table th{background-color:#EEF5FD ;}
+.modal .table-responsive{max-height: 213px;}
+.modal th{background-color: #EEF5FD;text-align: center;font-size: 14px;padding: 5px !important; border-right: 1px solid #DDE3EF;}
+.modal tr td{padding: 0 8px!important;border-right: 1px solid #DDE3EF;font-size: 12px;vertical-align: middle;}
+.modal-dialog label{font-weight: normal;font-size: 14px;font-family: "Microsoft YaHei";color: #666666;line-height: 1.2;}
+.modal-dialog form{margin-bottom: 10px;}
+.modal-dialog select,.modal-dialog input[type=text]{width:140px;border: 1px solid #DDE3EF;;height: 28px;margin: 5px 0;border-radius: 2px;}

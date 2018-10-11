@@ -1,0 +1,33 @@
+tbody tr td:first-child{width: 50px !important;}
+.modal table{border: 1px solid #dde3ef;}
+.modal .modal-header{padding: 5px!important;}
+.modal ul{list-style: none;padding: 0px;}
+.modal ul>li{float:left;min-width: 235px;}
+.modal hr {margin-top: 10px !important;margin-bottom: 10px !important;border-top: 1px dashed #D8D8D8 !important;}
+.modal label{font-weight: normal;}
+.modal dd{margin-left: 30px;}
+.modal .modal-body{padding: 20px 30px;}
+.modal .form-group{margin-left: 0;margin-right: 20px;}
+.modal-dialog select,.modal-dialog input[type=text]{width:130px;border: 1px solid #DDE3EF;height: 28px;margin: 5px 0; border-radius: 2px;}
+.modal h5{color:#FFAE00;margin-top: 0px !important;font-weight: normal;}
+.modal table tr th{border-right: 1px solid #dde3ef !important;border-bottom: none !important;text-align: center !important;text-align: center;}
+.modal table tr td{padding: 2px;font-size: 12px; border-right: 1px solid #dde3ef !important;border-bottom: none !important;text-align: center;height: 27px;vertical-align: middle;}
+.moreAdd,.moreAdds{text-align:center;padding:5px;border-bottom: 1px solid #DDE3EF;border-right: 1px solid #DDE3EF;border-left: 1px solid #DDE3EF;}
+.modal-body>div{margin-bottom: 20px;}
+@media screen and (min-width:300px) and (max-width:991px){
+.modal .table-responsive{float: left;width: 100%;}
+}
+@media (min-width: 992px){
+.modal .table-responsive{float: left;width: 90%;}
+}
+/*删除原因模态框*/
+.deletReasonModal .fa-exclamation-triangle{color:#04A9ED;font-size: 35px;margin-right: 20px;}
+.deletReasonModal span{vertical-align: middle;font-size: 20px;height: 35px;display: inline-block;}
+.deletReasonModal .delete_reason{margin-left: 30px;}
+
+.loadingTable input{width: 100% !important;height: 100% !important;}
+.loadingTable  td{padding: 0px !important;}
+
+.promptModal span{vertical-align: middle;font-size: 20px;display: inline-block;}
+#promptIdModal .fa-exclamation-triangle{color:#04A9ED;font-size: 35px;margin-right: 20px;}
+#promptIdModal .modal-body{text-align: center;padding-bottom: 0;}

@@ -1,0 +1,1883 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shenhesoft.logistics.manage.mapper.TbProjectMapper" >
+  <resultMap id="BaseResultMap" type="com.shenhesoft.logistics.manage.pojo.project.TbProject" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="project_code" property="projectCode" jdbcType="VARCHAR" />
+    <result column="branch_group_id" property="branchGroupId" jdbcType="INTEGER" />
+    <result column="branch_group_name" property="branchGroupName" jdbcType="VARCHAR" />
+    <result column="project_type" property="projectType" jdbcType="TINYINT" />
+    <result column="transport_type" property="transportType" jdbcType="TINYINT" />
+    <result column="cargo_id" property="cargoId" jdbcType="INTEGER" />
+    <result column="cargo_name" property="cargoName" jdbcType="VARCHAR" />
+    <result column="cargo_specifications" property="cargoSpecifications" jdbcType="VARCHAR" />
+    <result column="cargo_price" property="cargoPrice" jdbcType="DECIMAL" />
+    <result column="valuation_unit_name" property="valuationUnitName" jdbcType="TINYINT" />
+    <result column="send_cargo_company_id" property="sendCargoCompanyId" jdbcType="INTEGER" />
+    <result column="send_cargo_company_name" property="sendCargoCompanyName" jdbcType="VARCHAR" />
+    <result column="receive_cargo_company_id" property="receiveCargoCompanyId" jdbcType="INTEGER" />
+    <result column="receive_cargo_company_name" property="receiveCargoCompanyName" jdbcType="VARCHAR" />
+    <result column="send_cargo_unit_id" property="sendCargoUnitId" jdbcType="INTEGER" />
+    <result column="send_cargo_unit_name" property="sendCargoUnitName" jdbcType="VARCHAR" />
+    <result column="receive_cargo_site_id" property="receiveCargoSiteId" jdbcType="INTEGER" />
+    <result column="receive_cargo_site" property="receiveCargoSite" jdbcType="VARCHAR" />
+    <result column="short_barge_carrier_mode" property="shortBargeCarrierMode" jdbcType="TINYINT" />
+    <result column="short_barge_carrier_id" property="shortBargeCarrierId" jdbcType="INTEGER" />
+    <result column="short_barge_carrier_name" property="shortBargeCarrierName" jdbcType="VARCHAR" />
+    <result column="send_short_barge_carrier_mode" property="sendShortBargeCarrierMode" jdbcType="TINYINT" />
+    <result column="begin_center_site_id" property="beginCenterSiteId" jdbcType="INTEGER" />
+    <result column="begin_center_site_name" property="beginCenterSiteName" jdbcType="VARCHAR" />
+    <result column="begin_site_id" property="beginSiteId" jdbcType="INTEGER" />
+    <result column="begin_site_name" property="beginSiteName" jdbcType="VARCHAR" />
+    <result column="begin_address" property="beginAddress" jdbcType="VARCHAR" />
+    <result column="end_center_site_id" property="endCenterSiteId" jdbcType="INTEGER" />
+    <result column="end_center_site_name" property="endCenterSiteName" jdbcType="VARCHAR" />
+    <result column="end_site_id" property="endSiteId" jdbcType="INTEGER" />
+    <result column="end_site_name" property="endSiteName" jdbcType="VARCHAR" />
+    <result column="end_address" property="endAddress" jdbcType="VARCHAR" />
+    <result column="freight" property="freight" jdbcType="DECIMAL" />
+    <result column="material_cost" property="materialCost" jdbcType="DECIMAL" />
+    <result column="tarpaulin_cost" property="tarpaulinCost" jdbcType="DECIMAL" />
+    <result column="begin_stevedoring_cost" property="beginStevedoringCost" jdbcType="DECIMAL" />
+    <result column="end_stevedoring_cost" property="endStevedoringCost" jdbcType="DECIMAL" />
+    <result column="freight_sum" property="freightSum" jdbcType="DECIMAL" />
+    <result column="forwarding_site_id" property="forwardingSiteId" jdbcType="INTEGER" />
+    <result column="forwarding_site_name" property="forwardingSiteName" jdbcType="VARCHAR" />
+    <result column="forwarding_unit_id" property="forwardingUnitId" jdbcType="INTEGER" />
+    <result column="forwarding_unit_name" property="forwardingUnitName" jdbcType="VARCHAR" />
+    <result column="take_place" property="takePlace" jdbcType="VARCHAR" />
+    <result column="take_place_detail" property="takePlaceDetail" jdbcType="VARCHAR" />
+    <result column="receiving_department_id" property="receivingDepartmentId" jdbcType="INTEGER" />
+    <result column="receiving_department_name" property="receivingDepartmentName" jdbcType="VARCHAR" />
+    <result column="arrive_place" property="arrivePlace" jdbcType="VARCHAR" />
+    <result column="arrive_place_address" property="arrivePlaceAddress" jdbcType="VARCHAR" />
+    <result column="pick_up_price" property="pickUpPrice" jdbcType="DECIMAL" />
+    <result column="train_price" property="trainPrice" jdbcType="DECIMAL" />
+    <result column="arrive_price" property="arrivePrice" jdbcType="DECIMAL" />
+    <result column="transport_price" property="transportPrice" jdbcType="DECIMAL" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="edit_date" property="editDate" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="creator_id" property="creatorId" jdbcType="INTEGER" />
+    <result column="principal" property="principal" jdbcType="TINYINT" />
+    <result column="is__distribution" property="isDistribution" jdbcType="TINYINT" />
+    <result column="delete_flag" property="deleteFlag" jdbcType="TINYINT" />
+    <result column="finish_date" property="finishDate" jdbcType="TIMESTAMP" />
+    <result column="begin_site_freight_yard" property="beginSiteFreightYard" jdbcType="VARCHAR" />
+    <result column="end_site_freight_yard" property="endSiteFreightYard" jdbcType="VARCHAR" />
+    <result column="receive_center_cargo_site_id" property="receiveCenterCargoSiteId" jdbcType="INTEGER" />
+   <result column="receive_cargo_site_freight_yard_id" property="receiveCargoSiteFreightYardId" jdbcType="INTEGER" />
+   <result column="forwarding_center_site_id" property="forwardingCenterSiteId" jdbcType="INTEGER" />
+   <result column="forwarding_site_freight_yard_id" property="forwardingSiteFreightYardId" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="BaseResultMap2" type="com.shenhesoft.logistics.business.helpPojo.ProjectDetail" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="project_code" property="projectCode" jdbcType="VARCHAR" />
+    <result column="branch_group_id" property="branchGroupId" jdbcType="INTEGER" />
+    <result column="branch_group_name" property="branchGroupName" jdbcType="VARCHAR" />
+    <result column="project_type" property="projectType" jdbcType="TINYINT" />
+    <result column="transport_type" property="transportType" jdbcType="TINYINT" />
+    <result column="cargo_id" property="cargoId" jdbcType="INTEGER" />
+    <result column="cargo_name" property="cargoName" jdbcType="VARCHAR" />
+    <result column="cargo_specifications" property="cargoSpecifications" jdbcType="VARCHAR" />
+    <result column="cargo_price" property="cargoPrice" jdbcType="DECIMAL" />
+    <result column="valuation_unit_name" property="valuationUnitName" jdbcType="TINYINT" />
+    <result column="send_cargo_company_id" property="sendCargoCompanyId" jdbcType="INTEGER" />
+    <result column="send_cargo_company_name" property="sendCargoCompanyName" jdbcType="VARCHAR" />
+    <result column="receive_cargo_company_id" property="receiveCargoCompanyId" jdbcType="INTEGER" />
+    <result column="receive_cargo_company_name" property="receiveCargoCompanyName" jdbcType="VARCHAR" />
+    <result column="send_cargo_unit_id" property="sendCargoUnitId" jdbcType="INTEGER" />
+    <result column="send_cargo_unit_name" property="sendCargoUnitName" jdbcType="VARCHAR" />
+    <result column="receive_cargo_site_id" property="receiveCargoSiteId" jdbcType="INTEGER" />
+    <result column="receive_cargo_site" property="receiveCargoSite" jdbcType="VARCHAR" />
+    <result column="short_barge_carrier_mode" property="shortBargeCarrierMode" jdbcType="TINYINT" />
+    <result column="short_barge_carrier_id" property="shortBargeCarrierId" jdbcType="INTEGER" />
+    <result column="short_barge_carrier_name" property="shortBargeCarrierName" jdbcType="VARCHAR" />
+    <result column="send_short_barge_carrier_mode" property="sendShortBargeCarrierMode" jdbcType="TINYINT" />
+    <result column="begin_center_site_id" property="beginCenterSiteId" jdbcType="INTEGER" />
+    <result column="begin_center_site_name" property="beginCenterSiteName" jdbcType="VARCHAR" />
+    <result column="begin_site_id" property="beginSiteId" jdbcType="INTEGER" />
+    <result column="begin_site_name" property="beginSiteName" jdbcType="VARCHAR" />
+    <result column="begin_address" property="beginAddress" jdbcType="VARCHAR" />
+    <result column="end_center_site_id" property="endCenterSiteId" jdbcType="INTEGER" />
+    <result column="end_center_site_name" property="endCenterSiteName" jdbcType="VARCHAR" />
+    <result column="end_site_id" property="endSiteId" jdbcType="INTEGER" />
+    <result column="end_site_name" property="endSiteName" jdbcType="VARCHAR" />
+    <result column="end_address" property="endAddress" jdbcType="VARCHAR" />
+    <result column="freight" property="freight" jdbcType="DECIMAL" />
+    <result column="material_cost" property="materialCost" jdbcType="DECIMAL" />
+    <result column="tarpaulin_cost" property="tarpaulinCost" jdbcType="DECIMAL" />
+    <result column="begin_stevedoring_cost" property="beginStevedoringCost" jdbcType="DECIMAL" />
+    <result column="end_stevedoring_cost" property="endStevedoringCost" jdbcType="DECIMAL" />
+    <result column="freight_sum" property="freightSum" jdbcType="DECIMAL" />
+    <result column="forwarding_site_id" property="forwardingSiteId" jdbcType="INTEGER" />
+    <result column="forwarding_site_name" property="forwardingSiteName" jdbcType="VARCHAR" />
+    <result column="forwarding_unit_id" property="forwardingUnitId" jdbcType="INTEGER" />
+    <result column="forwarding_unit_name" property="forwardingUnitName" jdbcType="VARCHAR" />
+    <result column="take_place" property="takePlace" jdbcType="VARCHAR" />
+    <result column="take_place_detail" property="takePlaceDetail" jdbcType="VARCHAR" />
+    <result column="receiving_department_id" property="receivingDepartmentId" jdbcType="INTEGER" />
+    <result column="receiving_department_name" property="receivingDepartmentName" jdbcType="VARCHAR" />
+    <result column="arrive_place" property="arrivePlace" jdbcType="VARCHAR" />
+    <result column="arrive_place_address" property="arrivePlaceAddress" jdbcType="VARCHAR" />
+    <result column="pick_up_price" property="pickUpPrice" jdbcType="DECIMAL" />
+    <result column="train_price" property="trainPrice" jdbcType="DECIMAL" />
+    <result column="arrive_price" property="arrivePrice" jdbcType="DECIMAL" />
+    <result column="transport_price" property="transportPrice" jdbcType="DECIMAL" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="edit_date" property="editDate" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="creator_id" property="creatorId" jdbcType="INTEGER" />
+    <result column="principal" property="principal" jdbcType="TINYINT" />
+    <result column="is__distribution" property="isDistribution" jdbcType="TINYINT" />
+    <result column="delete_flag" property="deleteFlag" jdbcType="TINYINT" />
+     <result column="finish_date" property="finishDate" jdbcType="TIMESTAMP" />
+      <result column="begin_site_freight_yard" property="beginSiteFreightYard" jdbcType="VARCHAR" />
+    <result column="end_site_freight_yard" property="endSiteFreightYard" jdbcType="VARCHAR" />
+    <result column="receive_center_cargo_site_id" property="receiveCenterCargoSiteId" jdbcType="INTEGER" />
+   <result column="receive_cargo_site_freight_yard_id" property="receiveCargoSiteFreightYardId" jdbcType="INTEGER" />
+   <result column="forwarding_center_site_id" property="forwardingCenterSiteId" jdbcType="INTEGER" />
+   <result column="forwarding_site_freight_yard_id" property="forwardingSiteFreightYardId" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="BaseResultMap3" type="com.shenhesoft.logistics.business.helpPojo.ProjectOperationDetail" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="project_code" property="projectCode" jdbcType="VARCHAR" />
+    <result column="branch_group_id" property="branchGroupId" jdbcType="INTEGER" />
+    <result column="branch_group_name" property="branchGroupName" jdbcType="VARCHAR" />
+    <result column="project_type" property="projectType" jdbcType="TINYINT" />
+    <result column="transport_type" property="transportType" jdbcType="TINYINT" />
+    <result column="cargo_id" property="cargoId" jdbcType="INTEGER" />
+    <result column="cargo_name" property="cargoName" jdbcType="VARCHAR" />
+    <result column="cargo_specifications" property="cargoSpecifications" jdbcType="VARCHAR" />
+    <result column="cargo_price" property="cargoPrice" jdbcType="DECIMAL" />
+    <result column="valuation_unit_name" property="valuationUnitName" jdbcType="TINYINT" />
+    <result column="send_cargo_company_id" property="sendCargoCompanyId" jdbcType="INTEGER" />
+    <result column="send_cargo_company_name" property="sendCargoCompanyName" jdbcType="VARCHAR" />
+    <result column="receive_cargo_company_id" property="receiveCargoCompanyId" jdbcType="INTEGER" />
+    <result column="receive_cargo_company_name" property="receiveCargoCompanyName" jdbcType="VARCHAR" />
+    <result column="send_cargo_unit_id" property="sendCargoUnitId" jdbcType="INTEGER" />
+    <result column="send_cargo_unit_name" property="sendCargoUnitName" jdbcType="VARCHAR" />
+    <result column="receive_cargo_site_id" property="receiveCargoSiteId" jdbcType="INTEGER" />
+    <result column="receive_cargo_site" property="receiveCargoSite" jdbcType="VARCHAR" />
+    <result column="short_barge_carrier_mode" property="shortBargeCarrierMode" jdbcType="TINYINT" />
+    <result column="short_barge_carrier_id" property="shortBargeCarrierId" jdbcType="INTEGER" />
+    <result column="short_barge_carrier_name" property="shortBargeCarrierName" jdbcType="VARCHAR" />
+    <result column="send_short_barge_carrier_mode" property="sendShortBargeCarrierMode" jdbcType="TINYINT" />
+    <result column="begin_center_site_id" property="beginCenterSiteId" jdbcType="INTEGER" />
+    <result column="begin_center_site_name" property="beginCenterSiteName" jdbcType="VARCHAR" />
+    <result column="begin_site_id" property="beginSiteId" jdbcType="INTEGER" />
+    <result column="begin_site_name" property="beginSiteName" jdbcType="VARCHAR" />
+    <result column="begin_address" property="beginAddress" jdbcType="VARCHAR" />
+    <result column="end_center_site_id" property="endCenterSiteId" jdbcType="INTEGER" />
+    <result column="end_center_site_name" property="endCenterSiteName" jdbcType="VARCHAR" />
+    <result column="end_site_id" property="endSiteId" jdbcType="INTEGER" />
+    <result column="end_site_name" property="endSiteName" jdbcType="VARCHAR" />
+    <result column="end_address" property="endAddress" jdbcType="VARCHAR" />
+    <result column="freight" property="freight" jdbcType="DECIMAL" />
+    <result column="material_cost" property="materialCost" jdbcType="DECIMAL" />
+    <result column="tarpaulin_cost" property="tarpaulinCost" jdbcType="DECIMAL" />
+    <result column="begin_stevedoring_cost" property="beginStevedoringCost" jdbcType="DECIMAL" />
+    <result column="end_stevedoring_cost" property="endStevedoringCost" jdbcType="DECIMAL" />
+    <result column="freight_sum" property="freightSum" jdbcType="DECIMAL" />
+    <result column="forwarding_site_id" property="forwardingSiteId" jdbcType="INTEGER" />
+    <result column="forwarding_site_name" property="forwardingSiteName" jdbcType="VARCHAR" />
+    <result column="forwarding_unit_id" property="forwardingUnitId" jdbcType="INTEGER" />
+    <result column="forwarding_unit_name" property="forwardingUnitName" jdbcType="VARCHAR" />
+    <result column="take_place" property="takePlace" jdbcType="VARCHAR" />
+    <result column="take_place_detail" property="takePlaceDetail" jdbcType="VARCHAR" />
+    <result column="receiving_department_id" property="receivingDepartmentId" jdbcType="INTEGER" />
+    <result column="receiving_department_name" property="receivingDepartmentName" jdbcType="VARCHAR" />
+    <result column="arrive_place" property="arrivePlace" jdbcType="VARCHAR" />
+    <result column="arrive_place_address" property="arrivePlaceAddress" jdbcType="VARCHAR" />
+    <result column="pick_up_price" property="pickUpPrice" jdbcType="DECIMAL" />
+    <result column="train_price" property="trainPrice" jdbcType="DECIMAL" />
+    <result column="arrive_price" property="arrivePrice" jdbcType="DECIMAL" />
+    <result column="transport_price" property="transportPrice" jdbcType="DECIMAL" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="edit_date" property="editDate" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="creator_id" property="creatorId" jdbcType="INTEGER" />
+    <result column="principal" property="principal" jdbcType="TINYINT" />
+    <result column="is__distribution" property="isDistribution" jdbcType="TINYINT" />
+    <result column="delete_flag" property="deleteFlag" jdbcType="TINYINT" />
+     <result column="finish_date" property="finishDate" jdbcType="TIMESTAMP" />
+      <result column="begin_site_freight_yard" property="beginSiteFreightYard" jdbcType="VARCHAR" />
+    <result column="end_site_freight_yard" property="endSiteFreightYard" jdbcType="VARCHAR" />
+    <result column="receive_center_cargo_site_id" property="receiveCenterCargoSiteId" jdbcType="INTEGER" />
+   <result column="receive_cargo_site_freight_yard_id" property="receiveCargoSiteFreightYardId" jdbcType="INTEGER" />
+   <result column="forwarding_center_site_id" property="forwardingCenterSiteId" jdbcType="INTEGER" />
+   <result column="forwarding_site_freight_yard_id" property="forwardingSiteFreightYardId" jdbcType="INTEGER" />
+  </resultMap>
+   <resultMap id="BaseResultMapApp" type="com.shenhesoft.logistics.manage.helpPojo.ProjectAppHelp" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="project_code" property="projectCode" jdbcType="VARCHAR" />
+    <result column="branch_group_id" property="branchGroupId" jdbcType="INTEGER" />
+    <result column="branch_group_name" property="branchGroupName" jdbcType="VARCHAR" />
+    <result column="project_type" property="projectType" jdbcType="TINYINT" />
+    <result column="transport_type" property="transportType" jdbcType="TINYINT" />
+    <result column="cargo_id" property="cargoId" jdbcType="INTEGER" />
+    <result column="cargo_name" property="cargoName" jdbcType="VARCHAR" />
+    <result column="cargo_specifications" property="cargoSpecifications" jdbcType="VARCHAR" />
+    <result column="cargo_price" property="cargoPrice" jdbcType="DECIMAL" />
+    <result column="valuation_unit_name" property="valuationUnitName" jdbcType="TINYINT" />
+    <result column="send_cargo_company_id" property="sendCargoCompanyId" jdbcType="INTEGER" />
+    <result column="send_cargo_company_name" property="sendCargoCompanyName" jdbcType="VARCHAR" />
+    <result column="receive_cargo_company_id" property="receiveCargoCompanyId" jdbcType="INTEGER" />
+    <result column="receive_cargo_company_name" property="receiveCargoCompanyName" jdbcType="VARCHAR" />
+    <result column="send_cargo_unit_id" property="sendCargoUnitId" jdbcType="INTEGER" />
+    <result column="send_cargo_unit_name" property="sendCargoUnitName" jdbcType="VARCHAR" />
+    <result column="receive_cargo_site_id" property="receiveCargoSiteId" jdbcType="INTEGER" />
+    <result column="receive_cargo_site" property="receiveCargoSite" jdbcType="VARCHAR" />
+    <result column="short_barge_carrier_mode" property="shortBargeCarrierMode" jdbcType="TINYINT" />
+    <result column="short_barge_carrier_id" property="shortBargeCarrierId" jdbcType="INTEGER" />
+    <result column="short_barge_carrier_name" property="shortBargeCarrierName" jdbcType="VARCHAR" />
+    <result column="send_short_barge_carrier_mode" property="sendShortBargeCarrierMode" jdbcType="TINYINT" />
+    <result column="begin_center_site_id" property="beginCenterSiteId" jdbcType="INTEGER" />
+    <result column="begin_center_site_name" property="beginCenterSiteName" jdbcType="VARCHAR" />
+    <result column="begin_site_id" property="beginSiteId" jdbcType="INTEGER" />
+    <result column="begin_site_name" property="beginSiteName" jdbcType="VARCHAR" />
+    <result column="begin_address" property="beginAddress" jdbcType="VARCHAR" />
+    <result column="end_center_site_id" property="endCenterSiteId" jdbcType="INTEGER" />
+    <result column="end_center_site_name" property="endCenterSiteName" jdbcType="VARCHAR" />
+    <result column="end_site_id" property="endSiteId" jdbcType="INTEGER" />
+    <result column="end_site_name" property="endSiteName" jdbcType="VARCHAR" />
+    <result column="end_address" property="endAddress" jdbcType="VARCHAR" />
+    <result column="freight" property="freight" jdbcType="DECIMAL" />
+    <result column="material_cost" property="materialCost" jdbcType="DECIMAL" />
+    <result column="tarpaulin_cost" property="tarpaulinCost" jdbcType="DECIMAL" />
+    <result column="begin_stevedoring_cost" property="beginStevedoringCost" jdbcType="DECIMAL" />
+    <result column="end_stevedoring_cost" property="endStevedoringCost" jdbcType="DECIMAL" />
+    <result column="freight_sum" property="freightSum" jdbcType="DECIMAL" />
+    <result column="forwarding_site_id" property="forwardingSiteId" jdbcType="INTEGER" />
+    <result column="forwarding_site_name" property="forwardingSiteName" jdbcType="VARCHAR" />
+    <result column="forwarding_unit_id" property="forwardingUnitId" jdbcType="INTEGER" />
+    <result column="forwarding_unit_name" property="forwardingUnitName" jdbcType="VARCHAR" />
+    <result column="take_place" property="takePlace" jdbcType="VARCHAR" />
+    <result column="take_place_detail" property="takePlaceDetail" jdbcType="VARCHAR" />
+    <result column="receiving_department_id" property="receivingDepartmentId" jdbcType="INTEGER" />
+    <result column="receiving_department_name" property="receivingDepartmentName" jdbcType="VARCHAR" />
+    <result column="arrive_place" property="arrivePlace" jdbcType="VARCHAR" />
+    <result column="arrive_place_address" property="arrivePlaceAddress" jdbcType="VARCHAR" />
+    <result column="pick_up_price" property="pickUpPrice" jdbcType="DECIMAL" />
+    <result column="train_price" property="trainPrice" jdbcType="DECIMAL" />
+    <result column="arrive_price" property="arrivePrice" jdbcType="DECIMAL" />
+    <result column="transport_price" property="transportPrice" jdbcType="DECIMAL" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="edit_date" property="editDate" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="creator_id" property="creatorId" jdbcType="INTEGER" />
+    <result column="principal" property="principal" jdbcType="TINYINT" />
+    <result column="is__distribution" property="isDistribution" jdbcType="TINYINT" />
+    <result column="delete_flag" property="deleteFlag" jdbcType="TINYINT" />
+    <result column="finish_date" property="finishDate" jdbcType="TIMESTAMP" />
+     <result column="begin_site_freight_yard" property="beginSiteFreightYard" jdbcType="VARCHAR" />
+     <result column="end_site_freight_yard" property="endSiteFreightYard" jdbcType="VARCHAR" />
+     <result column="receive_center_cargo_site_id" property="receiveCenterCargoSiteId" jdbcType="INTEGER" />
+   <result column="receive_cargo_site_freight_yard_id" property="receiveCargoSiteFreightYardId" jdbcType="INTEGER" />
+   <result column="forwarding_center_site_id" property="forwardingCenterSiteId" jdbcType="INTEGER" />
+   <result column="forwarding_site_freight_yard_id" property="forwardingSiteFreightYardId" jdbcType="INTEGER" />
+  </resultMap>
+   <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, project_code, branch_group_id, branch_group_name, project_type, transport_type, 
+    cargo_id, cargo_name, cargo_specifications, cargo_price, valuation_unit_name, send_cargo_company_id, 
+    send_cargo_company_name, receive_cargo_company_id, receive_cargo_company_name, send_cargo_unit_id, 
+    send_cargo_unit_name, receive_cargo_site_id, receive_cargo_site, receive_center_cargo_site_id, 
+    receive_cargo_site_freight_yard_id, short_barge_carrier_mode, short_barge_carrier_id, 
+    short_barge_carrier_name, send_short_barge_carrier_mode, begin_center_site_id, begin_center_site_name, 
+    begin_site_id, begin_site_name, begin_site_freight_yard, begin_address, end_center_site_id, 
+    end_center_site_name, end_site_id, end_site_name, end_site_freight_yard, end_address, 
+    freight, material_cost, tarpaulin_cost, begin_stevedoring_cost, end_stevedoring_cost, 
+    freight_sum, forwarding_site_id, forwarding_site_name, forwarding_center_site_id, 
+    forwarding_site_freight_yard_id, forwarding_unit_id, forwarding_unit_name, take_place, 
+    take_place_detail, receiving_department_id, receiving_department_name, arrive_place, 
+    arrive_place_address, pick_up_price, train_price, arrive_price, transport_price, 
+    remark, create_date, project_distribution_id, edit_date, status, creator_id, principal, 
+    is__distribution, delete_flag, finish_date
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shenhesoft.logistics.manage.pojo.project.TbProjectExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_project
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_project
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_project
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.shenhesoft.logistics.manage.pojo.project.TbProjectExample" >
+    delete from tb_project
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>    
+   <insert id="insert" parameterType="com.shenhesoft.logistics.manage.pojo.project.TbProject" >
+    <selectKey keyProperty="id" resultType="int">  
+            select LAST_INSERT_ID()
+     </selectKey>
+   insert into tb_project (id, project_code, branch_group_id, 
+      branch_group_name, project_type, transport_type, 
+      cargo_id, cargo_name, cargo_specifications, 
+      cargo_price, valuation_unit_name, send_cargo_company_id, 
+      send_cargo_company_name, receive_cargo_company_id, 
+      receive_cargo_company_name, send_cargo_unit_id, 
+      send_cargo_unit_name, receive_cargo_site_id, 
+      receive_cargo_site, receive_center_cargo_site_id, 
+      receive_cargo_site_freight_yard_id, short_barge_carrier_mode, 
+      short_barge_carrier_id, short_barge_carrier_name, 
+      send_short_barge_carrier_mode, begin_center_site_id, 
+      begin_center_site_name, begin_site_id, begin_site_name, 
+      begin_site_freight_yard, begin_address, end_center_site_id, 
+      end_center_site_name, end_site_id, end_site_name, 
+      end_site_freight_yard, end_address, freight, 
+      material_cost, tarpaulin_cost, begin_stevedoring_cost, 
+      end_stevedoring_cost, freight_sum, forwarding_site_id, 
+      forwarding_site_name, forwarding_center_site_id, 
+      forwarding_site_freight_yard_id, forwarding_unit_id, 
+      forwarding_unit_name, take_place, take_place_detail, 
+      receiving_department_id, receiving_department_name, 
+      arrive_place, arrive_place_address, pick_up_price, 
+      train_price, arrive_price, transport_price, 
+      remark, create_date, project_distribution_id, 
+      edit_date, status, creator_id, 
+      principal, is__distribution, delete_flag, 
+      finish_date)
+    values (#{id,jdbcType=INTEGER}, #{projectCode,jdbcType=VARCHAR}, #{branchGroupId,jdbcType=INTEGER}, 
+      #{branchGroupName,jdbcType=VARCHAR}, #{projectType,jdbcType=TINYINT}, #{transportType,jdbcType=TINYINT}, 
+      #{cargoId,jdbcType=INTEGER}, #{cargoName,jdbcType=VARCHAR}, #{cargoSpecifications,jdbcType=VARCHAR}, 
+      #{cargoPrice,jdbcType=DECIMAL}, #{valuationUnitName,jdbcType=TINYINT}, #{sendCargoCompanyId,jdbcType=INTEGER}, 
+      #{sendCargoCompanyName,jdbcType=VARCHAR}, #{receiveCargoCompanyId,jdbcType=INTEGER}, 
+      #{receiveCargoCompanyName,jdbcType=VARCHAR}, #{sendCargoUnitId,jdbcType=INTEGER}, 
+      #{sendCargoUnitName,jdbcType=VARCHAR}, #{receiveCargoSiteId,jdbcType=INTEGER}, 
+      #{receiveCargoSite,jdbcType=VARCHAR}, #{receiveCenterCargoSiteId,jdbcType=INTEGER}, 
+      #{receiveCargoSiteFreightYardId,jdbcType=INTEGER}, #{shortBargeCarrierMode,jdbcType=TINYINT}, 
+      #{shortBargeCarrierId,jdbcType=INTEGER}, #{shortBargeCarrierName,jdbcType=VARCHAR}, 
+      #{sendShortBargeCarrierMode,jdbcType=TINYINT}, #{beginCenterSiteId,jdbcType=INTEGER}, 
+      #{beginCenterSiteName,jdbcType=VARCHAR}, #{beginSiteId,jdbcType=INTEGER}, #{beginSiteName,jdbcType=VARCHAR}, 
+      #{beginSiteFreightYard,jdbcType=VARCHAR}, #{beginAddress,jdbcType=VARCHAR}, #{endCenterSiteId,jdbcType=INTEGER}, 
+      #{endCenterSiteName,jdbcType=VARCHAR}, #{endSiteId,jdbcType=INTEGER}, #{endSiteName,jdbcType=VARCHAR}, 
+      #{endSiteFreightYard,jdbcType=VARCHAR}, #{endAddress,jdbcType=VARCHAR}, #{freight,jdbcType=DECIMAL}, 
+      #{materialCost,jdbcType=DECIMAL}, #{tarpaulinCost,jdbcType=DECIMAL}, #{beginStevedoringCost,jdbcType=DECIMAL}, 
+      #{endStevedoringCost,jdbcType=DECIMAL}, #{freightSum,jdbcType=DECIMAL}, #{forwardingSiteId,jdbcType=INTEGER}, 
+      #{forwardingSiteName,jdbcType=VARCHAR}, #{forwardingCenterSiteId,jdbcType=INTEGER}, 
+      #{forwardingSiteFreightYardId,jdbcType=INTEGER}, #{forwardingUnitId,jdbcType=INTEGER}, 
+      #{forwardingUnitName,jdbcType=VARCHAR}, #{takePlace,jdbcType=VARCHAR}, #{takePlaceDetail,jdbcType=VARCHAR}, 
+      #{receivingDepartmentId,jdbcType=INTEGER}, #{receivingDepartmentName,jdbcType=VARCHAR}, 
+      #{arrivePlace,jdbcType=VARCHAR}, #{arrivePlaceAddress,jdbcType=VARCHAR}, #{pickUpPrice,jdbcType=DECIMAL}, 
+      #{trainPrice,jdbcType=DECIMAL}, #{arrivePrice,jdbcType=DECIMAL}, #{transportPrice,jdbcType=DECIMAL}, 
+      #{remark,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{projectDistributionId,jdbcType=INTEGER}, 
+      #{editDate,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT}, #{creatorId,jdbcType=INTEGER}, 
+      #{principal,jdbcType=TINYINT}, #{isDistribution,jdbcType=TINYINT}, #{deleteFlag,jdbcType=TINYINT}, 
+      #{finishDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.shenhesoft.logistics.manage.pojo.project.TbProject" >
+    <selectKey keyProperty="id" resultType="int">  
+            select LAST_INSERT_ID()
+     </selectKey>
+    insert into tb_project
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="projectCode != null" >
+        project_code,
+      </if>
+      <if test="branchGroupId != null" >
+        branch_group_id,
+      </if>
+      <if test="branchGroupName != null" >
+        branch_group_name,
+      </if>
+      <if test="projectType != null" >
+        project_type,
+      </if>
+      <if test="transportType != null" >
+        transport_type,
+      </if>
+      <if test="cargoId != null" >
+        cargo_id,
+      </if>
+      <if test="cargoName != null" >
+        cargo_name,
+      </if>
+      <if test="cargoSpecifications != null" >
+        cargo_specifications,
+      </if>
+      <if test="cargoPrice != null" >
+        cargo_price,
+      </if>
+      <if test="valuationUnitName != null" >
+        valuation_unit_name,
+      </if>
+      <if test="sendCargoCompanyId != null" >
+        send_cargo_company_id,
+      </if>
+      <if test="sendCargoCompanyName != null" >
+        send_cargo_company_name,
+      </if>
+      <if test="receiveCargoCompanyId != null" >
+        receive_cargo_company_id,
+      </if>
+      <if test="receiveCargoCompanyName != null" >
+        receive_cargo_company_name,
+      </if>
+      <if test="sendCargoUnitId != null" >
+        send_cargo_unit_id,
+      </if>
+      <if test="sendCargoUnitName != null" >
+        send_cargo_unit_name,
+      </if>
+      <if test="receiveCargoSiteId != null" >
+        receive_cargo_site_id,
+      </if>
+      <if test="receiveCargoSite != null" >
+        receive_cargo_site,
+      </if>
+      <if test="receiveCenterCargoSiteId != null" >
+        receive_center_cargo_site_id,
+      </if>
+      <if test="receiveCargoSiteFreightYardId != null" >
+        receive_cargo_site_freight_yard_id,
+      </if>
+      <if test="shortBargeCarrierMode != null" >
+        short_barge_carrier_mode,
+      </if>
+      <if test="shortBargeCarrierId != null" >
+        short_barge_carrier_id,
+      </if>
+      <if test="shortBargeCarrierName != null" >
+        short_barge_carrier_name,
+      </if>
+      <if test="sendShortBargeCarrierMode != null" >
+        send_short_barge_carrier_mode,
+      </if>
+      <if test="beginCenterSiteId != null" >
+        begin_center_site_id,
+      </if>
+      <if test="beginCenterSiteName != null" >
+        begin_center_site_name,
+      </if>
+      <if test="beginSiteId != null" >
+        begin_site_id,
+      </if>
+      <if test="beginSiteName != null" >
+        begin_site_name,
+      </if>
+      <if test="beginSiteFreightYard != null" >
+        begin_site_freight_yard,
+      </if>
+      <if test="beginAddress != null" >
+        begin_address,
+      </if>
+      <if test="endCenterSiteId != null" >
+        end_center_site_id,
+      </if>
+      <if test="endCenterSiteName != null" >
+        end_center_site_name,
+      </if>
+      <if test="endSiteId != null" >
+        end_site_id,
+      </if>
+      <if test="endSiteName != null" >
+        end_site_name,
+      </if>
+      <if test="endSiteFreightYard != null" >
+        end_site_freight_yard,
+      </if>
+      <if test="endAddress != null" >
+        end_address,
+      </if>
+      <if test="freight != null" >
+        freight,
+      </if>
+      <if test="materialCost != null" >
+        material_cost,
+      </if>
+      <if test="tarpaulinCost != null" >
+        tarpaulin_cost,
+      </if>
+      <if test="beginStevedoringCost != null" >
+        begin_stevedoring_cost,
+      </if>
+      <if test="endStevedoringCost != null" >
+        end_stevedoring_cost,
+      </if>
+      <if test="freightSum != null" >
+        freight_sum,
+      </if>
+      <if test="forwardingSiteId != null" >
+        forwarding_site_id,
+      </if>
+      <if test="forwardingSiteName != null" >
+        forwarding_site_name,
+      </if>
+      <if test="forwardingCenterSiteId != null" >
+        forwarding_center_site_id,
+      </if>
+      <if test="forwardingSiteFreightYardId != null" >
+        forwarding_site_freight_yard_id,
+      </if>
+      <if test="forwardingUnitId != null" >
+        forwarding_unit_id,
+      </if>
+      <if test="forwardingUnitName != null" >
+        forwarding_unit_name,
+      </if>
+      <if test="takePlace != null" >
+        take_place,
+      </if>
+      <if test="takePlaceDetail != null" >
+        take_place_detail,
+      </if>
+      <if test="receivingDepartmentId != null" >
+        receiving_department_id,
+      </if>
+      <if test="receivingDepartmentName != null" >
+        receiving_department_name,
+      </if>
+      <if test="arrivePlace != null" >
+        arrive_place,
+      </if>
+      <if test="arrivePlaceAddress != null" >
+        arrive_place_address,
+      </if>
+      <if test="pickUpPrice != null" >
+        pick_up_price,
+      </if>
+      <if test="trainPrice != null" >
+        train_price,
+      </if>
+      <if test="arrivePrice != null" >
+        arrive_price,
+      </if>
+      <if test="transportPrice != null" >
+        transport_price,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="projectDistributionId != null" >
+        project_distribution_id,
+      </if>
+      <if test="editDate != null" >
+        edit_date,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="creatorId != null" >
+        creator_id,
+      </if>
+      <if test="principal != null" >
+        principal,
+      </if>
+      <if test="isDistribution != null" >
+        is__distribution,
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag,
+      </if>
+      <if test="finishDate != null" >
+        finish_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="projectCode != null" >
+        #{projectCode,jdbcType=VARCHAR},
+      </if>
+      <if test="branchGroupId != null" >
+        #{branchGroupId,jdbcType=INTEGER},
+      </if>
+      <if test="branchGroupName != null" >
+        #{branchGroupName,jdbcType=VARCHAR},
+      </if>
+      <if test="projectType != null" >
+        #{projectType,jdbcType=TINYINT},
+      </if>
+      <if test="transportType != null" >
+        #{transportType,jdbcType=TINYINT},
+      </if>
+      <if test="cargoId != null" >
+        #{cargoId,jdbcType=INTEGER},
+      </if>
+      <if test="cargoName != null" >
+        #{cargoName,jdbcType=VARCHAR},
+      </if>
+      <if test="cargoSpecifications != null" >
+        #{cargoSpecifications,jdbcType=VARCHAR},
+      </if>
+      <if test="cargoPrice != null" >
+        #{cargoPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="valuationUnitName != null" >
+        #{valuationUnitName,jdbcType=TINYINT},
+      </if>
+      <if test="sendCargoCompanyId != null" >
+        #{sendCargoCompanyId,jdbcType=INTEGER},
+      </if>
+      <if test="sendCargoCompanyName != null" >
+        #{sendCargoCompanyName,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveCargoCompanyId != null" >
+        #{receiveCargoCompanyId,jdbcType=INTEGER},
+      </if>
+      <if test="receiveCargoCompanyName != null" >
+        #{receiveCargoCompanyName,jdbcType=VARCHAR},
+      </if>
+      <if test="sendCargoUnitId != null" >
+        #{sendCargoUnitId,jdbcType=INTEGER},
+      </if>
+      <if test="sendCargoUnitName != null" >
+        #{sendCargoUnitName,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveCargoSiteId != null" >
+        #{receiveCargoSiteId,jdbcType=INTEGER},
+      </if>
+      <if test="receiveCargoSite != null" >
+        #{receiveCargoSite,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveCenterCargoSiteId != null" >
+        #{receiveCenterCargoSiteId,jdbcType=INTEGER},
+      </if>
+      <if test="receiveCargoSiteFreightYardId != null" >
+        #{receiveCargoSiteFreightYardId,jdbcType=INTEGER},
+      </if>
+      <if test="shortBargeCarrierMode != null" >
+        #{shortBargeCarrierMode,jdbcType=TINYINT},
+      </if>
+      <if test="shortBargeCarrierId != null" >
+        #{shortBargeCarrierId,jdbcType=INTEGER},
+      </if>
+      <if test="shortBargeCarrierName != null" >
+        #{shortBargeCarrierName,jdbcType=VARCHAR},
+      </if>
+      <if test="sendShortBargeCarrierMode != null" >
+        #{sendShortBargeCarrierMode,jdbcType=TINYINT},
+      </if>
+      <if test="beginCenterSiteId != null" >
+        #{beginCenterSiteId,jdbcType=INTEGER},
+      </if>
+      <if test="beginCenterSiteName != null" >
+        #{beginCenterSiteName,jdbcType=VARCHAR},
+      </if>
+      <if test="beginSiteId != null" >
+        #{beginSiteId,jdbcType=INTEGER},
+      </if>
+      <if test="beginSiteName != null" >
+        #{beginSiteName,jdbcType=VARCHAR},
+      </if>
+      <if test="beginSiteFreightYard != null" >
+        #{beginSiteFreightYard,jdbcType=VARCHAR},
+      </if>
+      <if test="beginAddress != null" >
+        #{beginAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="endCenterSiteId != null" >
+        #{endCenterSiteId,jdbcType=INTEGER},
+      </if>
+      <if test="endCenterSiteName != null" >
+        #{endCenterSiteName,jdbcType=VARCHAR},
+      </if>
+      <if test="endSiteId != null" >
+        #{endSiteId,jdbcType=INTEGER},
+      </if>
+      <if test="endSiteName != null" >
+        #{endSiteName,jdbcType=VARCHAR},
+      </if>
+      <if test="endSiteFreightYard != null" >
+        #{endSiteFreightYard,jdbcType=VARCHAR},
+      </if>
+      <if test="endAddress != null" >
+        #{endAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="freight != null" >
+        #{freight,jdbcType=DECIMAL},
+      </if>
+      <if test="materialCost != null" >
+        #{materialCost,jdbcType=DECIMAL},
+      </if>
+      <if test="tarpaulinCost != null" >
+        #{tarpaulinCost,jdbcType=DECIMAL},
+      </if>
+      <if test="beginStevedoringCost != null" >
+        #{beginStevedoringCost,jdbcType=DECIMAL},
+      </if>
+      <if test="endStevedoringCost != null" >
+        #{endStevedoringCost,jdbcType=DECIMAL},
+      </if>
+      <if test="freightSum != null" >
+        #{freightSum,jdbcType=DECIMAL},
+      </if>
+      <if test="forwardingSiteId != null" >
+        #{forwardingSiteId,jdbcType=INTEGER},
+      </if>
+      <if test="forwardingSiteName != null" >
+        #{forwardingSiteName,jdbcType=VARCHAR},
+      </if>
+      <if test="forwardingCenterSiteId != null" >
+        #{forwardingCenterSiteId,jdbcType=INTEGER},
+      </if>
+      <if test="forwardingSiteFreightYardId != null" >
+        #{forwardingSiteFreightYardId,jdbcType=INTEGER},
+      </if>
+      <if test="forwardingUnitId != null" >
+        #{forwardingUnitId,jdbcType=INTEGER},
+      </if>
+      <if test="forwardingUnitName != null" >
+        #{forwardingUnitName,jdbcType=VARCHAR},
+      </if>
+      <if test="takePlace != null" >
+        #{takePlace,jdbcType=VARCHAR},
+      </if>
+      <if test="takePlaceDetail != null" >
+        #{takePlaceDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="receivingDepartmentId != null" >
+        #{receivingDepartmentId,jdbcType=INTEGER},
+      </if>
+      <if test="receivingDepartmentName != null" >
+        #{receivingDepartmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="arrivePlace != null" >
+        #{arrivePlace,jdbcType=VARCHAR},
+      </if>
+      <if test="arrivePlaceAddress != null" >
+        #{arrivePlaceAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="pickUpPrice != null" >
+        #{pickUpPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="trainPrice != null" >
+        #{trainPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="arrivePrice != null" >
+        #{arrivePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="transportPrice != null" >
+        #{transportPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="projectDistributionId != null" >
+        #{projectDistributionId,jdbcType=INTEGER},
+      </if>
+      <if test="editDate != null" >
+        #{editDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="creatorId != null" >
+        #{creatorId,jdbcType=INTEGER},
+      </if>
+      <if test="principal != null" >
+        #{principal,jdbcType=TINYINT},
+      </if>
+      <if test="isDistribution != null" >
+        #{isDistribution,jdbcType=TINYINT},
+      </if>
+      <if test="deleteFlag != null" >
+        #{deleteFlag,jdbcType=TINYINT},
+      </if>
+      <if test="finishDate != null" >
+        #{finishDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+   <select id="countByExample" parameterType="com.shenhesoft.logistics.manage.pojo.project.TbProjectExample" resultType="java.lang.Integer" >
+    select count(*) from tb_project
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_project
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.projectCode != null" >
+        project_code = #{record.projectCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.branchGroupId != null" >
+        branch_group_id = #{record.branchGroupId,jdbcType=INTEGER},
+      </if>
+      <if test="record.branchGroupName != null" >
+        branch_group_name = #{record.branchGroupName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.projectType != null" >
+        project_type = #{record.projectType,jdbcType=TINYINT},
+      </if>
+      <if test="record.transportType != null" >
+        transport_type = #{record.transportType,jdbcType=TINYINT},
+      </if>
+      <if test="record.cargoId != null" >
+        cargo_id = #{record.cargoId,jdbcType=INTEGER},
+      </if>
+      <if test="record.cargoName != null" >
+        cargo_name = #{record.cargoName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cargoSpecifications != null" >
+        cargo_specifications = #{record.cargoSpecifications,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cargoPrice != null" >
+        cargo_price = #{record.cargoPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.valuationUnitName != null" >
+        valuation_unit_name = #{record.valuationUnitName,jdbcType=TINYINT},
+      </if>
+      <if test="record.sendCargoCompanyId != null" >
+        send_cargo_company_id = #{record.sendCargoCompanyId,jdbcType=INTEGER},
+      </if>
+      <if test="record.sendCargoCompanyName != null" >
+        send_cargo_company_name = #{record.sendCargoCompanyName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.receiveCargoCompanyId != null" >
+        receive_cargo_company_id = #{record.receiveCargoCompanyId,jdbcType=INTEGER},
+      </if>
+      <if test="record.receiveCargoCompanyName != null" >
+        receive_cargo_company_name = #{record.receiveCargoCompanyName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sendCargoUnitId != null" >
+        send_cargo_unit_id = #{record.sendCargoUnitId,jdbcType=INTEGER},
+      </if>
+      <if test="record.sendCargoUnitName != null" >
+        send_cargo_unit_name = #{record.sendCargoUnitName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.receiveCargoSiteId != null" >
+        receive_cargo_site_id = #{record.receiveCargoSiteId,jdbcType=INTEGER},
+      </if>
+      <if test="record.receiveCargoSite != null" >
+        receive_cargo_site = #{record.receiveCargoSite,jdbcType=VARCHAR},
+      </if>
+      <if test="record.receiveCenterCargoSiteId != null" >
+        receive_center_cargo_site_id = #{record.receiveCenterCargoSiteId,jdbcType=INTEGER},
+      </if>
+      <if test="record.receiveCargoSiteFreightYardId != null" >
+        receive_cargo_site_freight_yard_id = #{record.receiveCargoSiteFreightYardId,jdbcType=INTEGER},
+      </if>
+      <if test="record.shortBargeCarrierMode != null" >
+        short_barge_carrier_mode = #{record.shortBargeCarrierMode,jdbcType=TINYINT},
+      </if>
+      <if test="record.shortBargeCarrierId != null" >
+        short_barge_carrier_id = #{record.shortBargeCarrierId,jdbcType=INTEGER},
+      </if>
+      <if test="record.shortBargeCarrierName != null" >
+        short_barge_carrier_name = #{record.shortBargeCarrierName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sendShortBargeCarrierMode != null" >
+        send_short_barge_carrier_mode = #{record.sendShortBargeCarrierMode,jdbcType=TINYINT},
+      </if>
+      <if test="record.beginCenterSiteId != null" >
+        begin_center_site_id = #{record.beginCenterSiteId,jdbcType=INTEGER},
+      </if>
+      <if test="record.beginCenterSiteName != null" >
+        begin_center_site_name = #{record.beginCenterSiteName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.beginSiteId != null" >
+        begin_site_id = #{record.beginSiteId,jdbcType=INTEGER},
+      </if>
+      <if test="record.beginSiteName != null" >
+        begin_site_name = #{record.beginSiteName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.beginSiteFreightYard != null" >
+        begin_site_freight_yard = #{record.beginSiteFreightYard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.beginAddress != null" >
+        begin_address = #{record.beginAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.endCenterSiteId != null" >
+        end_center_site_id = #{record.endCenterSiteId,jdbcType=INTEGER},
+      </if>
+      <if test="record.endCenterSiteName != null" >
+        end_center_site_name = #{record.endCenterSiteName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.endSiteId != null" >
+        end_site_id = #{record.endSiteId,jdbcType=INTEGER},
+      </if>
+      <if test="record.endSiteName != null" >
+        end_site_name = #{record.endSiteName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.endSiteFreightYard != null" >
+        end_site_freight_yard = #{record.endSiteFreightYard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.endAddress != null" >
+        end_address = #{record.endAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.freight != null" >
+        freight = #{record.freight,jdbcType=DECIMAL},
+      </if>
+      <if test="record.materialCost != null" >
+        material_cost = #{record.materialCost,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tarpaulinCost != null" >
+        tarpaulin_cost = #{record.tarpaulinCost,jdbcType=DECIMAL},
+      </if>
+      <if test="record.beginStevedoringCost != null" >
+        begin_stevedoring_cost = #{record.beginStevedoringCost,jdbcType=DECIMAL},
+      </if>
+      <if test="record.endStevedoringCost != null" >
+        end_stevedoring_cost = #{record.endStevedoringCost,jdbcType=DECIMAL},
+      </if>
+      <if test="record.freightSum != null" >
+        freight_sum = #{record.freightSum,jdbcType=DECIMAL},
+      </if>
+      <if test="record.forwardingSiteId != null" >
+        forwarding_site_id = #{record.forwardingSiteId,jdbcType=INTEGER},
+      </if>
+      <if test="record.forwardingSiteName != null" >
+        forwarding_site_name = #{record.forwardingSiteName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.forwardingCenterSiteId != null" >
+        forwarding_center_site_id = #{record.forwardingCenterSiteId,jdbcType=INTEGER},
+      </if>
+      <if test="record.forwardingSiteFreightYardId != null" >
+        forwarding_site_freight_yard_id = #{record.forwardingSiteFreightYardId,jdbcType=INTEGER},
+      </if>
+      <if test="record.forwardingUnitId != null" >
+        forwarding_unit_id = #{record.forwardingUnitId,jdbcType=INTEGER},
+      </if>
+      <if test="record.forwardingUnitName != null" >
+        forwarding_unit_name = #{record.forwardingUnitName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.takePlace != null" >
+        take_place = #{record.takePlace,jdbcType=VARCHAR},
+      </if>
+      <if test="record.takePlaceDetail != null" >
+        take_place_detail = #{record.takePlaceDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.receivingDepartmentId != null" >
+        receiving_department_id = #{record.receivingDepartmentId,jdbcType=INTEGER},
+      </if>
+      <if test="record.receivingDepartmentName != null" >
+        receiving_department_name = #{record.receivingDepartmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.arrivePlace != null" >
+        arrive_place = #{record.arrivePlace,jdbcType=VARCHAR},
+      </if>
+      <if test="record.arrivePlaceAddress != null" >
+        arrive_place_address = #{record.arrivePlaceAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pickUpPrice != null" >
+        pick_up_price = #{record.pickUpPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.trainPrice != null" >
+        train_price = #{record.trainPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.arrivePrice != null" >
+        arrive_price = #{record.arrivePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.transportPrice != null" >
+        transport_price = #{record.transportPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDate != null" >
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.projectDistributionId != null" >
+        project_distribution_id = #{record.projectDistributionId,jdbcType=INTEGER},
+      </if>
+      <if test="record.editDate != null" >
+        edit_date = #{record.editDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=TINYINT},
+      </if>
+      <if test="record.creatorId != null" >
+        creator_id = #{record.creatorId,jdbcType=INTEGER},
+      </if>
+      <if test="record.principal != null" >
+        principal = #{record.principal,jdbcType=TINYINT},
+      </if>
+      <if test="record.isDistribution != null" >
+        is__distribution = #{record.isDistribution,jdbcType=TINYINT},
+      </if>
+      <if test="record.deleteFlag != null" >
+        delete_flag = #{record.deleteFlag,jdbcType=TINYINT},
+      </if>
+      <if test="record.finishDate != null" >
+        finish_date = #{record.finishDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_project
+    set id = #{record.id,jdbcType=INTEGER},
+      project_code = #{record.projectCode,jdbcType=VARCHAR},
+      branch_group_id = #{record.branchGroupId,jdbcType=INTEGER},
+      branch_group_name = #{record.branchGroupName,jdbcType=VARCHAR},
+      project_type = #{record.projectType,jdbcType=TINYINT},
+      transport_type = #{record.transportType,jdbcType=TINYINT},
+      cargo_id = #{record.cargoId,jdbcType=INTEGER},
+      cargo_name = #{record.cargoName,jdbcType=VARCHAR},
+      cargo_specifications = #{record.cargoSpecifications,jdbcType=VARCHAR},
+      cargo_price = #{record.cargoPrice,jdbcType=DECIMAL},
+      valuation_unit_name = #{record.valuationUnitName,jdbcType=TINYINT},
+      send_cargo_company_id = #{record.sendCargoCompanyId,jdbcType=INTEGER},
+      send_cargo_company_name = #{record.sendCargoCompanyName,jdbcType=VARCHAR},
+      receive_cargo_company_id = #{record.receiveCargoCompanyId,jdbcType=INTEGER},
+      receive_cargo_company_name = #{record.receiveCargoCompanyName,jdbcType=VARCHAR},
+      send_cargo_unit_id = #{record.sendCargoUnitId,jdbcType=INTEGER},
+      send_cargo_unit_name = #{record.sendCargoUnitName,jdbcType=VARCHAR},
+      receive_cargo_site_id = #{record.receiveCargoSiteId,jdbcType=INTEGER},
+      receive_cargo_site = #{record.receiveCargoSite,jdbcType=VARCHAR},
+      receive_center_cargo_site_id = #{record.receiveCenterCargoSiteId,jdbcType=INTEGER},
+      receive_cargo_site_freight_yard_id = #{record.receiveCargoSiteFreightYardId,jdbcType=INTEGER},
+      short_barge_carrier_mode = #{record.shortBargeCarrierMode,jdbcType=TINYINT},
+      short_barge_carrier_id = #{record.shortBargeCarrierId,jdbcType=INTEGER},
+      short_barge_carrier_name = #{record.shortBargeCarrierName,jdbcType=VARCHAR},
+      send_short_barge_carrier_mode = #{record.sendShortBargeCarrierMode,jdbcType=TINYINT},
+      begin_center_site_id = #{record.beginCenterSiteId,jdbcType=INTEGER},
+      begin_center_site_name = #{record.beginCenterSiteName,jdbcType=VARCHAR},
+      begin_site_id = #{record.beginSiteId,jdbcType=INTEGER},
+      begin_site_name = #{record.beginSiteName,jdbcType=VARCHAR},
+      begin_site_freight_yard = #{record.beginSiteFreightYard,jdbcType=VARCHAR},
+      begin_address = #{record.beginAddress,jdbcType=VARCHAR},
+      end_center_site_id = #{record.endCenterSiteId,jdbcType=INTEGER},
+      end_center_site_name = #{record.endCenterSiteName,jdbcType=VARCHAR},
+      end_site_id = #{record.endSiteId,jdbcType=INTEGER},
+      end_site_name = #{record.endSiteName,jdbcType=VARCHAR},
+      end_site_freight_yard = #{record.endSiteFreightYard,jdbcType=VARCHAR},
+      end_address = #{record.endAddress,jdbcType=VARCHAR},
+      freight = #{record.freight,jdbcType=DECIMAL},
+      material_cost = #{record.materialCost,jdbcType=DECIMAL},
+      tarpaulin_cost = #{record.tarpaulinCost,jdbcType=DECIMAL},
+      begin_stevedoring_cost = #{record.beginStevedoringCost,jdbcType=DECIMAL},
+      end_stevedoring_cost = #{record.endStevedoringCost,jdbcType=DECIMAL},
+      freight_sum = #{record.freightSum,jdbcType=DECIMAL},
+      forwarding_site_id = #{record.forwardingSiteId,jdbcType=INTEGER},
+      forwarding_site_name = #{record.forwardingSiteName,jdbcType=VARCHAR},
+      forwarding_center_site_id = #{record.forwardingCenterSiteId,jdbcType=INTEGER},
+      forwarding_site_freight_yard_id = #{record.forwardingSiteFreightYardId,jdbcType=INTEGER},
+      forwarding_unit_id = #{record.forwardingUnitId,jdbcType=INTEGER},
+      forwarding_unit_name = #{record.forwardingUnitName,jdbcType=VARCHAR},
+      take_place = #{record.takePlace,jdbcType=VARCHAR},
+      take_place_detail = #{record.takePlaceDetail,jdbcType=VARCHAR},
+      receiving_department_id = #{record.receivingDepartmentId,jdbcType=INTEGER},
+      receiving_department_name = #{record.receivingDepartmentName,jdbcType=VARCHAR},
+      arrive_place = #{record.arrivePlace,jdbcType=VARCHAR},
+      arrive_place_address = #{record.arrivePlaceAddress,jdbcType=VARCHAR},
+      pick_up_price = #{record.pickUpPrice,jdbcType=DECIMAL},
+      train_price = #{record.trainPrice,jdbcType=DECIMAL},
+      arrive_price = #{record.arrivePrice,jdbcType=DECIMAL},
+      transport_price = #{record.transportPrice,jdbcType=DECIMAL},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      project_distribution_id = #{record.projectDistributionId,jdbcType=INTEGER},
+      edit_date = #{record.editDate,jdbcType=TIMESTAMP},
+      status = #{record.status,jdbcType=TINYINT},
+      creator_id = #{record.creatorId,jdbcType=INTEGER},
+      principal = #{record.principal,jdbcType=TINYINT},
+      is__distribution = #{record.isDistribution,jdbcType=TINYINT},
+      delete_flag = #{record.deleteFlag,jdbcType=TINYINT},
+      finish_date = #{record.finishDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.shenhesoft.logistics.manage.pojo.project.TbProject" >
+    update tb_project
+    <set >
+      <if test="projectCode != null" >
+        project_code = #{projectCode,jdbcType=VARCHAR},
+      </if>
+      <if test="branchGroupId != null" >
+        branch_group_id = #{branchGroupId,jdbcType=INTEGER},
+      </if>
+      <if test="branchGroupName != null" >
+        branch_group_name = #{branchGroupName,jdbcType=VARCHAR},
+      </if>
+      <if test="projectType != null" >
+        project_type = #{projectType,jdbcType=TINYINT},
+      </if>
+      <if test="transportType != null" >
+        transport_type = #{transportType,jdbcType=TINYINT},
+      </if>
+      <if test="cargoId != null" >
+        cargo_id = #{cargoId,jdbcType=INTEGER},
+      </if>
+      <if test="cargoName != null" >
+        cargo_name = #{cargoName,jdbcType=VARCHAR},
+      </if>
+      <if test="cargoSpecifications != null" >
+        cargo_specifications = #{cargoSpecifications,jdbcType=VARCHAR},
+      </if>
+      <if test="cargoPrice != null" >
+        cargo_price = #{cargoPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="valuationUnitName != null" >
+        valuation_unit_name = #{valuationUnitName,jdbcType=TINYINT},
+      </if>
+      <if test="sendCargoCompanyId != null" >
+        send_cargo_company_id = #{sendCargoCompanyId,jdbcType=INTEGER},
+      </if>
+      <if test="sendCargoCompanyName != null" >
+        send_cargo_company_name = #{sendCargoCompanyName,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveCargoCompanyId != null" >
+        receive_cargo_company_id = #{receiveCargoCompanyId,jdbcType=INTEGER},
+      </if>
+      <if test="receiveCargoCompanyName != null" >
+        receive_cargo_company_name = #{receiveCargoCompanyName,jdbcType=VARCHAR},
+      </if>
+      <if test="sendCargoUnitId != null" >
+        send_cargo_unit_id = #{sendCargoUnitId,jdbcType=INTEGER},
+      </if>
+      <if test="sendCargoUnitName != null" >
+        send_cargo_unit_name = #{sendCargoUnitName,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveCargoSiteId != null" >
+        receive_cargo_site_id = #{receiveCargoSiteId,jdbcType=INTEGER},
+      </if>
+      <if test="receiveCargoSite != null" >
+        receive_cargo_site = #{receiveCargoSite,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveCenterCargoSiteId != null" >
+        receive_center_cargo_site_id = #{receiveCenterCargoSiteId,jdbcType=INTEGER},
+      </if>
+      <if test="receiveCargoSiteFreightYardId != null" >
+        receive_cargo_site_freight_yard_id = #{receiveCargoSiteFreightYardId,jdbcType=INTEGER},
+      </if>
+      <if test="shortBargeCarrierMode != null" >
+        short_barge_carrier_mode = #{shortBargeCarrierMode,jdbcType=TINYINT},
+      </if>
+      <if test="shortBargeCarrierId != null" >
+        short_barge_carrier_id = #{shortBargeCarrierId,jdbcType=INTEGER},
+      </if>
+      <if test="shortBargeCarrierName != null" >
+        short_barge_carrier_name = #{shortBargeCarrierName,jdbcType=VARCHAR},
+      </if>
+      <if test="sendShortBargeCarrierMode != null" >
+        send_short_barge_carrier_mode = #{sendShortBargeCarrierMode,jdbcType=TINYINT},
+      </if>
+      <if test="beginCenterSiteId != null" >
+        begin_center_site_id = #{beginCenterSiteId,jdbcType=INTEGER},
+      </if>
+      <if test="beginCenterSiteName != null" >
+        begin_center_site_name = #{beginCenterSiteName,jdbcType=VARCHAR},
+      </if>
+      <if test="beginSiteId != null" >
+        begin_site_id = #{beginSiteId,jdbcType=INTEGER},
+      </if>
+      <if test="beginSiteName != null" >
+        begin_site_name = #{beginSiteName,jdbcType=VARCHAR},
+      </if>
+      <if test="beginSiteFreightYard != null" >
+        begin_site_freight_yard = #{beginSiteFreightYard,jdbcType=VARCHAR},
+      </if>
+      <if test="beginAddress != null" >
+        begin_address = #{beginAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="endCenterSiteId != null" >
+        end_center_site_id = #{endCenterSiteId,jdbcType=INTEGER},
+      </if>
+      <if test="endCenterSiteName != null" >
+        end_center_site_name = #{endCenterSiteName,jdbcType=VARCHAR},
+      </if>
+      <if test="endSiteId != null" >
+        end_site_id = #{endSiteId,jdbcType=INTEGER},
+      </if>
+      <if test="endSiteName != null" >
+        end_site_name = #{endSiteName,jdbcType=VARCHAR},
+      </if>
+      <if test="endSiteFreightYard != null" >
+        end_site_freight_yard = #{endSiteFreightYard,jdbcType=VARCHAR},
+      </if>
+      <if test="endAddress != null" >
+        end_address = #{endAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="freight != null" >
+        freight = #{freight,jdbcType=DECIMAL},
+      </if>
+      <if test="materialCost != null" >
+        material_cost = #{materialCost,jdbcType=DECIMAL},
+      </if>
+      <if test="tarpaulinCost != null" >
+        tarpaulin_cost = #{tarpaulinCost,jdbcType=DECIMAL},
+      </if>
+      <if test="beginStevedoringCost != null" >
+        begin_stevedoring_cost = #{beginStevedoringCost,jdbcType=DECIMAL},
+      </if>
+      <if test="endStevedoringCost != null" >
+        end_stevedoring_cost = #{endStevedoringCost,jdbcType=DECIMAL},
+      </if>
+      <if test="freightSum != null" >
+        freight_sum = #{freightSum,jdbcType=DECIMAL},
+      </if>
+      <if test="forwardingSiteId != null" >
+        forwarding_site_id = #{forwardingSiteId,jdbcType=INTEGER},
+      </if>
+      <if test="forwardingSiteName != null" >
+        forwarding_site_name = #{forwardingSiteName,jdbcType=VARCHAR},
+      </if>
+      <if test="forwardingCenterSiteId != null" >
+        forwarding_center_site_id = #{forwardingCenterSiteId,jdbcType=INTEGER},
+      </if>
+      <if test="forwardingSiteFreightYardId != null" >
+        forwarding_site_freight_yard_id = #{forwardingSiteFreightYardId,jdbcType=INTEGER},
+      </if>
+      <if test="forwardingUnitId != null" >
+        forwarding_unit_id = #{forwardingUnitId,jdbcType=INTEGER},
+      </if>
+      <if test="forwardingUnitName != null" >
+        forwarding_unit_name = #{forwardingUnitName,jdbcType=VARCHAR},
+      </if>
+      <if test="takePlace != null" >
+        take_place = #{takePlace,jdbcType=VARCHAR},
+      </if>
+      <if test="takePlaceDetail != null" >
+        take_place_detail = #{takePlaceDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="receivingDepartmentId != null" >
+        receiving_department_id = #{receivingDepartmentId,jdbcType=INTEGER},
+      </if>
+      <if test="receivingDepartmentName != null" >
+        receiving_department_name = #{receivingDepartmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="arrivePlace != null" >
+        arrive_place = #{arrivePlace,jdbcType=VARCHAR},
+      </if>
+      <if test="arrivePlaceAddress != null" >
+        arrive_place_address = #{arrivePlaceAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="pickUpPrice != null" >
+        pick_up_price = #{pickUpPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="trainPrice != null" >
+        train_price = #{trainPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="arrivePrice != null" >
+        arrive_price = #{arrivePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="transportPrice != null" >
+        transport_price = #{transportPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="projectDistributionId != null" >
+        project_distribution_id = #{projectDistributionId,jdbcType=INTEGER},
+      </if>
+      <if test="editDate != null" >
+        edit_date = #{editDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="creatorId != null" >
+        creator_id = #{creatorId,jdbcType=INTEGER},
+      </if>
+      <if test="principal != null" >
+        principal = #{principal,jdbcType=TINYINT},
+      </if>
+      <if test="isDistribution != null" >
+        is__distribution = #{isDistribution,jdbcType=TINYINT},
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag = #{deleteFlag,jdbcType=TINYINT},
+      </if>
+      <if test="finishDate != null" >
+        finish_date = #{finishDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.shenhesoft.logistics.manage.pojo.project.TbProject" >
+    update tb_project
+    set project_code = #{projectCode,jdbcType=VARCHAR},
+      branch_group_id = #{branchGroupId,jdbcType=INTEGER},
+      branch_group_name = #{branchGroupName,jdbcType=VARCHAR},
+      project_type = #{projectType,jdbcType=TINYINT},
+      transport_type = #{transportType,jdbcType=TINYINT},
+      cargo_id = #{cargoId,jdbcType=INTEGER},
+      cargo_name = #{cargoName,jdbcType=VARCHAR},
+      cargo_specifications = #{cargoSpecifications,jdbcType=VARCHAR},
+      cargo_price = #{cargoPrice,jdbcType=DECIMAL},
+      valuation_unit_name = #{valuationUnitName,jdbcType=TINYINT},
+      send_cargo_company_id = #{sendCargoCompanyId,jdbcType=INTEGER},
+      send_cargo_company_name = #{sendCargoCompanyName,jdbcType=VARCHAR},
+      receive_cargo_company_id = #{receiveCargoCompanyId,jdbcType=INTEGER},
+      receive_cargo_company_name = #{receiveCargoCompanyName,jdbcType=VARCHAR},
+      send_cargo_unit_id = #{sendCargoUnitId,jdbcType=INTEGER},
+      send_cargo_unit_name = #{sendCargoUnitName,jdbcType=VARCHAR},
+      receive_cargo_site_id = #{receiveCargoSiteId,jdbcType=INTEGER},
+      receive_cargo_site = #{receiveCargoSite,jdbcType=VARCHAR},
+      receive_center_cargo_site_id = #{receiveCenterCargoSiteId,jdbcType=INTEGER},
+      receive_cargo_site_freight_yard_id = #{receiveCargoSiteFreightYardId,jdbcType=INTEGER},
+      short_barge_carrier_mode = #{shortBargeCarrierMode,jdbcType=TINYINT},
+      short_barge_carrier_id = #{shortBargeCarrierId,jdbcType=INTEGER},
+      short_barge_carrier_name = #{shortBargeCarrierName,jdbcType=VARCHAR},
+      send_short_barge_carrier_mode = #{sendShortBargeCarrierMode,jdbcType=TINYINT},
+      begin_center_site_id = #{beginCenterSiteId,jdbcType=INTEGER},
+      begin_center_site_name = #{beginCenterSiteName,jdbcType=VARCHAR},
+      begin_site_id = #{beginSiteId,jdbcType=INTEGER},
+      begin_site_name = #{beginSiteName,jdbcType=VARCHAR},
+      begin_site_freight_yard = #{beginSiteFreightYard,jdbcType=VARCHAR},
+      begin_address = #{beginAddress,jdbcType=VARCHAR},
+      end_center_site_id = #{endCenterSiteId,jdbcType=INTEGER},
+      end_center_site_name = #{endCenterSiteName,jdbcType=VARCHAR},
+      end_site_id = #{endSiteId,jdbcType=INTEGER},
+      end_site_name = #{endSiteName,jdbcType=VARCHAR},
+      end_site_freight_yard = #{endSiteFreightYard,jdbcType=VARCHAR},
+      end_address = #{endAddress,jdbcType=VARCHAR},
+      freight = #{freight,jdbcType=DECIMAL},
+      material_cost = #{materialCost,jdbcType=DECIMAL},
+      tarpaulin_cost = #{tarpaulinCost,jdbcType=DECIMAL},
+      begin_stevedoring_cost = #{beginStevedoringCost,jdbcType=DECIMAL},
+      end_stevedoring_cost = #{endStevedoringCost,jdbcType=DECIMAL},
+      freight_sum = #{freightSum,jdbcType=DECIMAL},
+      forwarding_site_id = #{forwardingSiteId,jdbcType=INTEGER},
+      forwarding_site_name = #{forwardingSiteName,jdbcType=VARCHAR},
+      forwarding_center_site_id = #{forwardingCenterSiteId,jdbcType=INTEGER},
+      forwarding_site_freight_yard_id = #{forwardingSiteFreightYardId,jdbcType=INTEGER},
+      forwarding_unit_id = #{forwardingUnitId,jdbcType=INTEGER},
+      forwarding_unit_name = #{forwardingUnitName,jdbcType=VARCHAR},
+      take_place = #{takePlace,jdbcType=VARCHAR},
+      take_place_detail = #{takePlaceDetail,jdbcType=VARCHAR},
+      receiving_department_id = #{receivingDepartmentId,jdbcType=INTEGER},
+      receiving_department_name = #{receivingDepartmentName,jdbcType=VARCHAR},
+      arrive_place = #{arrivePlace,jdbcType=VARCHAR},
+      arrive_place_address = #{arrivePlaceAddress,jdbcType=VARCHAR},
+      pick_up_price = #{pickUpPrice,jdbcType=DECIMAL},
+      train_price = #{trainPrice,jdbcType=DECIMAL},
+      arrive_price = #{arrivePrice,jdbcType=DECIMAL},
+      transport_price = #{transportPrice,jdbcType=DECIMAL},
+      remark = #{remark,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      project_distribution_id = #{projectDistributionId,jdbcType=INTEGER},
+      edit_date = #{editDate,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT},
+      creator_id = #{creatorId,jdbcType=INTEGER},
+      principal = #{principal,jdbcType=TINYINT},
+      is__distribution = #{isDistribution,jdbcType=TINYINT},
+      delete_flag = #{deleteFlag,jdbcType=TINYINT},
+      finish_date = #{finishDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <update id="stopJobByList" parameterType="java.util.List" >
+  		update tb_project set is__distribution = 0
+  		where id in 
+        <foreach item="id" collection="list" open="(" separator="," close=")">
+            #{id,jdbcType=INTEGER}
+        </foreach>
+  </update>
+  
+  
+  <update id="beginJobByList" parameterType="java.util.List" >
+  		update tb_project set is__distribution = 1
+  		where id in 
+        <foreach item="id" collection="list" open="(" separator="," close=")">
+            #{id,jdbcType=INTEGER}
+        </foreach>
+  </update>
+  
+   <select id="selectProjectDetailByPrimaryKey" resultMap="BaseResultMap2" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_project
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  
+   <select id="selectProjectDetailByExample" resultMap="BaseResultMap2" parameterType="com.shenhesoft.logistics.manage.pojo.project.TbProjectExample" >
+    select
+    p.id,p.project_code projectCode,p.branch_group_id,p.branch_group_name,p.project_type,p.transport_type,p.
+    cargo_id,p.cargo_name,p.cargo_specifications,p.cargo_price,p.valuation_unit_name,p.send_cargo_company_id,p.
+    send_cargo_company_name,p.receive_cargo_company_id,p.receive_cargo_company_name,p.send_cargo_unit_id,p.
+    send_cargo_unit_name,p.receive_cargo_site_id,p.receive_cargo_site,p.receive_center_cargo_site_id,p.
+    receive_cargo_site_freight_yard_id,p.short_barge_carrier_mode,p.short_barge_carrier_id,p.
+    short_barge_carrier_name,p.send_short_barge_carrier_mode,p.begin_center_site_id,p.begin_center_site_name,p.
+    begin_site_id,p.begin_site_name,p.begin_site_freight_yard,p.begin_address,p.end_center_site_id,p.
+    end_center_site_name,p.end_site_id,p.end_site_name,p.end_site_freight_yard,p.end_address,p.
+    freight,p.material_cost,p.tarpaulin_cost,p.begin_stevedoring_cost,p.end_stevedoring_cost,p.
+    freight_sum,p.forwarding_site_id,p.forwarding_site_name,p.forwarding_center_site_id,p.
+    forwarding_site_freight_yard_id,p.forwarding_unit_id,p.forwarding_unit_name,p.take_place,p.
+    take_place_detail,p.receiving_department_id,p.receiving_department_name,p.arrive_place,p.
+    arrive_place_address,p.pick_up_price,p.train_price,p.arrive_price,p.transport_price,p.
+    remark,p.create_date,p.project_distribution_id,p.edit_date,p.status,p.creator_id,p.principal,p.
+    is__distribution,p.delete_flag,p.finish_date
+    from tb_project p left join tb_branch_group_link y on p.id=y.row_id
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  
+   <select id="selectIsDistribution" resultType="java.lang.Integer" parameterType="java.lang.Integer" >
+    	select 
+    	is__distribution
+	    from tb_project
+	    where id = #{id,jdbcType=INTEGER}
+ 	 </select>
+ 	 
+ 	   <select id="selectPartDetailByPrimaryKey" resultType="com.shenhesoft.logistics.manage.pojo.project.TbProject" parameterType="java.lang.Integer" >
+    	select 
+    	 id ,project_code projectCode,cargo_name cargoName, cargo_specifications cargoSpecifications,cargo_price cargoPrice,valuation_unit_name valuationUnitName
+	    from tb_project
+	    where id = #{id,jdbcType=INTEGER}
+ 	 </select>
+ 	 
+      <update id="beginJobByMap" parameterType="java.util.Map" >
+  		update tb_project set is__distribution = #{distribution,jdbcType=TINYINT}
+  		where id = #{projectId,jdbcType=INTEGER}
+    </update>
+  
+  <select id="getProjects" resultMap="BaseResultMap">
+  		select <include refid="Base_Column_List"></include>
+  		from tb_project where delete_flag = 0
+  	</select>
+  	<select id="getProjectsByShort" parameterType="map" resultMap="BaseResultMap3">
+  		select 
+		p.id,p.project_code projectCode,p.branch_group_id,p.branch_group_name,p.project_type,p.transport_type,p.
+	    cargo_id,p.cargo_name,p.cargo_specifications,p.cargo_price,p.valuation_unit_name,p.send_cargo_company_id,p.
+	    send_cargo_company_name,p.receive_cargo_company_id,p.receive_cargo_company_name,p.send_cargo_unit_id,p.
+	    send_cargo_unit_name,p.receive_cargo_site_id,p.receive_cargo_site,p.receive_center_cargo_site_id,p.
+	    receive_cargo_site_freight_yard_id,p.short_barge_carrier_mode,p.short_barge_carrier_id,p.
+	    short_barge_carrier_name,p.send_short_barge_carrier_mode,p.begin_center_site_id,p.begin_center_site_name,p.
+	    begin_site_id,p.begin_site_name,p.begin_site_freight_yard,p.begin_address,p.end_center_site_id,p.
+	    end_center_site_name,p.end_site_id,p.end_site_name,p.end_site_freight_yard,p.end_address,p.
+	    freight,p.material_cost,p.tarpaulin_cost,p.begin_stevedoring_cost,p.end_stevedoring_cost,p.
+	    freight_sum,p.forwarding_site_id,p.forwarding_site_name,p.forwarding_center_site_id,p.
+	    forwarding_site_freight_yard_id,p.forwarding_unit_id,p.forwarding_unit_name,p.take_place,p.
+	    take_place_detail,p.receiving_department_id,p.receiving_department_name,p.arrive_place,p.
+	    arrive_place_address,p.pick_up_price,p.train_price,p.arrive_price,p.transport_price,p.
+	    remark,p.create_date,p.project_distribution_id,p.edit_date,p.status,p.creator_id,p.principal,p.
+	    is__distribution,p.delete_flag,p.finish_date
+	    
+  		from tb_project p left join tb_branch_group_link y on p.id=y.row_id
+  		where branch_group_id in 
+		  <foreach item="item" index="index" collection="branchGroupIdss" 
+                        open="(" separator="," close=")">
+                       #{item}
+         </foreach> 
+         and y.tab_name='tb_project'
+          and y.sys_org_code like CONCAT(#{sysOrgCode},'%')
+  		and delete_flag = 0 
+  		and status in (1,3)
+  		<if test="projectType == 0">
+  			and transport_type in (1,2,4,5,6,7) and project_type = #{projectType,jdbcType=TINYINT} 
+  		</if>
+  		<if test="projectType == 1">
+  			and transport_type in (0,1,2,4,5,6,7) and project_type = #{projectType,jdbcType=TINYINT} 
+  		</if>
+  	</select>
+	
+    <select id="selectDetailProjectById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  		select <include refid="Base_Column_List"></include>
+  		from tb_project where id = #{id,jdbcType = INTEGER}
+  	</select>
+  	
+  
+	
+	<!-- 项目核算 -->
+	 <select id="selectProjectOperationDetail" resultMap="BaseResultMap3" parameterType="com.shenhesoft.logistics.manage.pojo.project.TbProjectExample" >
+  		 select
+	    <if test="distinct" >
+	      distinct
+	    </if>
+	    p.id,p.project_code projectCode,p.branch_group_id,p.branch_group_name,p.project_type,p.transport_type,p.
+	    cargo_id,p.cargo_name,p.cargo_specifications,p.cargo_price,p.valuation_unit_name,p.send_cargo_company_id,p.
+	    send_cargo_company_name,p.receive_cargo_company_id,p.receive_cargo_company_name,p.send_cargo_unit_id,p.
+	    send_cargo_unit_name,p.receive_cargo_site_id,p.receive_cargo_site,p.receive_center_cargo_site_id,p.
+	    receive_cargo_site_freight_yard_id,p.short_barge_carrier_mode,p.short_barge_carrier_id,p.
+	    short_barge_carrier_name,p.send_short_barge_carrier_mode,p.begin_center_site_id,p.begin_center_site_name,p.
+	    begin_site_id,p.begin_site_name,p.begin_site_freight_yard,p.begin_address,p.end_center_site_id,p.
+	    end_center_site_name,p.end_site_id,p.end_site_name,p.end_site_freight_yard,p.end_address,p.
+	    freight,p.material_cost,p.tarpaulin_cost,p.begin_stevedoring_cost,p.end_stevedoring_cost,p.
+	    freight_sum,p.forwarding_site_id,p.forwarding_site_name,p.forwarding_center_site_id,p.
+	    forwarding_site_freight_yard_id,p.forwarding_unit_id,p.forwarding_unit_name,p.take_place,p.
+	    take_place_detail,p.receiving_department_id,p.receiving_department_name,p.arrive_place,p.
+	    arrive_place_address,p.pick_up_price,p.train_price,p.arrive_price,p.transport_price,p.
+	    remark,p.create_date,p.project_distribution_id,p.edit_date,p.status,p.creator_id,p.principal,p.
+	    is__distribution,p.delete_flag,p.finish_date
+	    from tb_project p left join tb_branch_group_link y on p.id=y.row_id
+	    <if test="_parameter != null" >
+	      <include refid="Example_Where_Clause" />
+	    </if>
+	    <if test="orderByClause != null" >
+	      order by ${orderByClause}
+	    </if>
+  	</select>
+	
+	<select id="selectAllProject" parameterType="map" resultMap="BaseResultMap3">
+  		select 
+		p.id,p.project_code projectCode,p.branch_group_id,p.branch_group_name,p.project_type,p.transport_type,p.
+	    cargo_id,p.cargo_name,p.cargo_specifications,p.cargo_price,p.valuation_unit_name,p.send_cargo_company_id,p.
+	    send_cargo_company_name,p.receive_cargo_company_id,p.receive_cargo_company_name,p.send_cargo_unit_id,p.
+	    send_cargo_unit_name,p.receive_cargo_site_id,p.receive_cargo_site,p.receive_center_cargo_site_id,p.
+	    receive_cargo_site_freight_yard_id,p.short_barge_carrier_mode,p.short_barge_carrier_id,p.
+	    short_barge_carrier_name,p.send_short_barge_carrier_mode,p.begin_center_site_id,p.begin_center_site_name,p.
+	    begin_site_id,p.begin_site_name,p.begin_site_freight_yard,p.begin_address,p.end_center_site_id,p.
+	    end_center_site_name,p.end_site_id,p.end_site_name,p.end_site_freight_yard,p.end_address,p.
+	    freight,p.material_cost,p.tarpaulin_cost,p.begin_stevedoring_cost,p.end_stevedoring_cost,p.
+	    freight_sum,p.forwarding_site_id,p.forwarding_site_name,p.forwarding_center_site_id,p.
+	    forwarding_site_freight_yard_id,p.forwarding_unit_id,p.forwarding_unit_name,p.take_place,p.
+	    take_place_detail,p.receiving_department_id,p.receiving_department_name,p.arrive_place,p.
+	    arrive_place_address,p.pick_up_price,p.train_price,p.arrive_price,p.transport_price,p.
+	    remark,p.create_date,p.project_distribution_id,p.edit_date,p.status,p.creator_id,p.principal,p.
+	    is__distribution,p.delete_flag,p.finish_date
+	    
+  		from tb_project p left join tb_branch_group_link y on p.id=y.row_id
+  		where branch_group_id in 
+		  <foreach item="item" index="index" collection="branchGroupIds" 
+                        open="(" separator="," close=")">
+                       #{item}
+         </foreach> 
+         and y.tab_name='tb_project'
+          and y.sys_org_code like CONCAT(#{sysOrgCode},'%')
+  		and transport_type in (3,4,5,6) and project_type = #{projectType,jdbcType=TINYINT} and delete_flag = 0
+  		and status in (1,3)
+  	</select>
+  	
+  	<!-- app端火运查询项目列表 -->
+  	<select id="selectAppAllProject" parameterType="map" resultMap="BaseResultMapApp">
+  		select 
+		p.id,p.project_code projectCode,p.branch_group_id,p.branch_group_name,p.project_type,p.transport_type,p.
+	    cargo_id,p.cargo_name,p.cargo_specifications,p.cargo_price,p.valuation_unit_name,p.send_cargo_company_id,p.
+	    send_cargo_company_name,p.receive_cargo_company_id,p.receive_cargo_company_name,p.send_cargo_unit_id,p.
+	    send_cargo_unit_name,p.receive_cargo_site_id,p.receive_cargo_site,p.receive_center_cargo_site_id,p.
+	    receive_cargo_site_freight_yard_id,p.short_barge_carrier_mode,p.short_barge_carrier_id,p.
+	    short_barge_carrier_name,p.send_short_barge_carrier_mode,p.begin_center_site_id,p.begin_center_site_name,p.
+	    begin_site_id,p.begin_site_name,p.begin_site_freight_yard,p.begin_address,p.end_center_site_id,p.
+	    end_center_site_name,p.end_site_id,p.end_site_name,p.end_site_freight_yard,p.end_address,p.
+	    freight,p.material_cost,p.tarpaulin_cost,p.begin_stevedoring_cost,p.end_stevedoring_cost,p.
+	    freight_sum,p.forwarding_site_id,p.forwarding_site_name,p.forwarding_center_site_id,p.
+	    forwarding_site_freight_yard_id,p.forwarding_unit_id,p.forwarding_unit_name,p.take_place,p.
+	    take_place_detail,p.receiving_department_id,p.receiving_department_name,p.arrive_place,p.
+	    arrive_place_address,p.pick_up_price,p.train_price,p.arrive_price,p.transport_price,p.
+	    remark,p.create_date,p.project_distribution_id,p.edit_date,p.status,p.creator_id,p.principal,p.
+	    is__distribution,p.delete_flag,p.finish_date
+	    
+	    from tb_project p left join tb_branch_group_link y on p.id=y.row_id
+  		where branch_group_id in 
+		  <foreach item="item" index="index" collection="branchGroupIdApps" 
+                        open="(" separator="," close=")">
+                       #{item}
+         </foreach> 
+         and y.tab_name='tb_project'
+          and y.sys_org_code like CONCAT(#{sysOrgCode},'%')
+  		and transport_type in (3,4,5,6) and delete_flag = 0
+  		and status in (1,3)
+  		order by create_date desc
+  	</select>
+  	
+  	<!-- app端短驳查询项目列表 -->
+  	<select id="selectAppAllProjectByBulk" parameterType="map" resultMap="BaseResultMapApp">
+  		select 
+  		p.id,p.project_code projectCode,p.branch_group_id,p.branch_group_name,p.project_type,p.transport_type,p.
+	    cargo_id,p.cargo_name,p.cargo_specifications,p.cargo_price,p.valuation_unit_name,p.send_cargo_company_id,p.
+	    send_cargo_company_name,p.receive_cargo_company_id,p.receive_cargo_company_name,p.send_cargo_unit_id,p.
+	    send_cargo_unit_name,p.receive_cargo_site_id,p.receive_cargo_site,p.receive_center_cargo_site_id,p.
+	    receive_cargo_site_freight_yard_id,p.short_barge_carrier_mode,p.short_barge_carrier_id,p.
+	    short_barge_carrier_name,p.send_short_barge_carrier_mode,p.begin_center_site_id,p.begin_center_site_name,p.
+	    begin_site_id,p.begin_site_name,p.begin_site_freight_yard,p.begin_address,p.end_center_site_id,p.
+	    end_center_site_name,p.end_site_id,p.end_site_name,p.end_site_freight_yard,p.end_address,p.
+	    freight,p.material_cost,p.tarpaulin_cost,p.begin_stevedoring_cost,p.end_stevedoring_cost,p.
+	    freight_sum,p.forwarding_site_id,p.forwarding_site_name,p.forwarding_center_site_id,p.
+	    forwarding_site_freight_yard_id,p.forwarding_unit_id,p.forwarding_unit_name,p.take_place,p.
+	    take_place_detail,p.receiving_department_id,p.receiving_department_name,p.arrive_place,p.
+	    arrive_place_address,p.pick_up_price,p.train_price,p.arrive_price,p.transport_price,p.
+	    remark,p.create_date,p.project_distribution_id,p.edit_date,p.status,p.creator_id,p.principal,p.
+	    is__distribution,p.delete_flag,p.finish_date
+	    
+	    from tb_project p left join tb_branch_group_link y on p.id=y.row_id 
+  		where branch_group_id in 
+		  <foreach item="item" index="index" collection="branchGroupIdbs" 
+                        open="(" separator="," close=")">
+                       #{item}
+         </foreach> 
+         and y.tab_name='tb_project'
+         and y.sys_org_code like CONCAT(#{sysOrgCode},'%')
+  		and transport_type in (0,1,2,4,5,6,7) and delete_flag = 0
+  		and status in (1,3)
+  		order by create_date desc
+  	</select>
+  	
+  	<select id="getAllProjectByFince" parameterType="map" resultMap="BaseResultMap">
+  		select p.id,p.project_code
+  		from tb_project p
+  		left join tb_branch_group_link y on p.id=y.row_id and y.tab_name='tb_project'
+  		where p.delete_flag = 0 and p.status in (1,2) 
+  		and y.sys_org_code like CONCAT(#{sysOrgCode},'%')
+  		<choose>
+		    <when test="checkFlag !=null  and  checkFlag ==0" >
+		        and p.transport_type in(0)
+		    </when>
+		    <when test="checkFlag !=null  and  checkFlag ==1">
+		        and p.transport_type in(1,4,6,7)  
+		    </when>
+		    <otherwise>
+		        and p.transport_type is not null   
+		    </otherwise>
+		</choose>
+  	</select>
+  	
+	<select id="queryAllProjectOfSence" parameterType="map" resultMap="BaseResultMap">
+  		select <include refid="Base_Column_List"></include>
+  		from tb_project 
+  		where branch_group_id in 
+		  <foreach item="item" index="index" collection="branchGroupIdList" 
+                        open="(" separator="," close=")">
+                       #{item}
+         </foreach> 
+  		and  delete_flag = 0
+  	</select>
+		
+	<update id="updateStatusById" parameterType="java.lang.Integer" >
+		update tb_project set status = 1
+		where id = #{projectId,jdbcType=INTEGER}
+	</update>
+	
+		<select id="selectCarTeams" parameterType="java.util.Map" resultType="com.shenhesoft.logistics.business.helpPojo.TbOrderCarDetail">
+		SELECT A.id driverId,B.id informationId,A.car_team_id teamId,B. NAME ownerCarName,B.model model,B.driver_name driverName,
+			B.brand brand,B.motorcycle_type motorcycleType,B.driver_phone driverPhone,B.plate_number plateNumber,C.transport_price transportPrice,
+			C.deduction_rate deductionRate,C.deduction_price deductionPrice
+		FROM
+			tb_login_user AS A,
+			tb_user_information AS B,
+			tb_short_barge AS C
+		WHERE
+			C.short_barge_id = A.car_team_id
+		AND A.car_team_id = C.short_barge_id
+		AND c.short_barge_type = 1
+		AND A.information_id = B.id
+		AND A.type = 0
+		AND A.state = 1
+		AND A.order_status = 0
+		<if test="projectId != null">
+			and  C.project_id = #{projectId,jdbcType = INTEGER}
+		</if>
+		<if test="driverId != null">
+			and  A.id = #{driverId,jdbcType = INTEGER}
+		</if>
+		<if test="shortType != null">
+			AND c.type = #{shortType,jdbcType = INTEGER}
+		</if>
+  	</select>
+	
+	<!-- 短驳管理:新建运单获取承运车辆 -->
+	<select id="selectCarTeamsByPlatform" parameterType="java.util.Map" resultType="com.shenhesoft.logistics.business.helpPojo.TbOrderCarDetail">
+		SELECT
+		  	A.id driverId,
+			B.id informationId,
+			A.car_team_id teamId,
+			B. NAME ownerCarName,
+			B.model model,
+			B.driver_name driverName,
+			B.brand brand,
+			B.motorcycle_type motorcycleType,
+			B.driver_phone driverPhone,
+			B.plate_number plateNumber,
+			tmp.transport_price transportPrice,
+			tmp.deduction_rate deductionRate,
+			tmp.deduction_price deductionPrice
+		FROM
+			tb_login_user AS A,
+			tb_user_information AS B,
+			(
+				SELECT
+					u.car_team_id,
+					b.transport_price,
+					b.deduction_rate,
+					b.deduction_price
+				FROM
+					tb_user_anchored_company uac,
+					tb_login_user u,
+					tb_short_barge b
+				WHERE
+					uac.anchored_company_id = b.short_barge_id
+				AND uac.user_id = u.id
+				AND uac.type = 1 
+				AND uac.is_stop = 0
+				<if test="projectId != null">
+					AND b.project_id = #{projectId,jdbcType = INTEGER}
+				</if>
+				<if test="shortType != null">
+					AND b.type = #{shortType,jdbcType = INTEGER}
+				</if>
+				AND u.state = 1
+			) AS tmp
+		WHERE
+			tmp.car_team_id = a.car_team_id
+		AND a.state = 1
+		AND a.type = 0
+		AND a.information_id = b.id
+		AND a.order_status = 0
+		<if test="driverId != null">
+			and  A.id = #{driverId,jdbcType = INTEGER}
+		</if>
+		UNION ALL
+		SELECT
+			A.id driverId,
+			B.id informationId,
+			A.car_team_id teamId,
+			B. NAME ownerCarName,
+			B.model model,
+			B.driver_name driverName,
+			B.brand brand,
+			B.motorcycle_type motorcycleType,
+			B.driver_phone driverPhone,
+			B.plate_number plateNumber,
+			C.transport_price transportPrice,
+			C.deduction_rate deductionRate,
+			C.deduction_price deductionPrice
+		FROM
+			tb_user_anchored_company AS uac,
+			tb_login_user AS A,
+			tb_user_information AS B,
+			tb_short_barge AS C
+		WHERE
+			uac.anchored_company_id = C.short_barge_id
+		AND uac.user_id = A.id
+		AND uac.type = 0
+		AND uac.is_stop = 0
+		AND A.state = 1
+		AND A.information_id = b.id
+		AND A.order_status = 0
+		<if test="projectId != null">
+			AND C.project_id = #{projectId,jdbcType = INTEGER}
+		</if>
+		<if test="shortType != null">
+			AND C.type = #{shortType,jdbcType = INTEGER}
+		</if>
+		<if test="driverId != null">
+			and  A.id = #{driverId,jdbcType = INTEGER}
+		</if>
+  	</select>
+  	
+	<select id="viewTbOrderCarDetailByPlateNumber" parameterType="java.util.Map" resultType="com.shenhesoft.logistics.business.helpPojo.TbOrderCarDetail">
+		select 
+			A.id as  driverId,C.id informationId,C.driver_name driverName,C.motorcycle_type motorcycleType,
+			C.driver_phone  driverPhone,C.model model,C.plate_number plateNumber,A.car_team_id teamId
+			from tb_login_user as A, tb_user_information as C
+			where  C.id = A.information_id 
+			and C.plate_number = #{plateNumber,jdbcType = VARCHAR} 
+			limit 1
+  	</select>
+  	
+  	
+  	<select id="selectRuningCarTeams" parameterType="java.lang.Integer" resultType="com.shenhesoft.logistics.business.helpPojo.TbOrderCarDetail">
+		select  lu.id driverId,info.id informationId,lu.car_team_id teamId,info. NAME ownerCarName,info.model model,info.driver_name driverName,
+			info.brand brand,info.motorcycle_type motorcycleType,info.driver_phone driverPhone,info.plate_number plateNumber from tb_project AS pro ,tb_order tor,tb_login_user lu ,tb_user_information info
+			where pro.id=tor.project_id AND tor.driver_id = lu.id AND lu.information_id = info.id AND tor.is_cancel =0
+			AND tor.delete_flag=0 AND tor.status IN (2,3,4,5) AND tor.receipter_date is NULL 
+			AND lu.type = 0 AND lu.state = 1
+			and  pro.id = #{projectId,jdbcType = INTEGER}
+  	</select>
+  	
+  	<select id="selectDriverByDriverId" parameterType="java.lang.Integer" resultType="com.shenhesoft.logistics.business.helpPojo.TbOrderCarDetail">
+		SELECT
+		lu.id driverId,
+		info.id informationId,
+		lu.car_team_id teamId,
+		team.car_item_name teamName,
+		info. NAME ownerCarName,
+		info.model model,
+		info.driver_name driverName,
+		info.brand brand,
+		info.motorcycle_type motorcycleType,
+		info.driver_phone driverPhone,
+		info.plate_number plateNumber
+	FROM
+		tb_login_user lu
+		LEFT JOIN tb_user_information info ON lu.information_id = info.id
+		LEFT JOIN tb_car_team team ON lu.car_team_id = team.id
+		where  lu.id = #{driverId,jdbcType = INTEGER}
+  	</select>
+  	
+</mapper>

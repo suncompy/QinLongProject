@@ -1,0 +1,10 @@
+table .seatTable{
+	border: solid 1px #000;
+	cellpadding:10px;
+	cellspacing:10px;
+	width:300px;
+}
+label .seatLabel{
+	font-size:30mm;
+	
+}

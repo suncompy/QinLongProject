@@ -1,0 +1,4 @@
+.detailModal{width: 1000px !important;}
+.waitUl{overflow:hidden;padding-left: 0 !important;}
+.waitUl li{float: left;list-style: none;min-width: 222px;margin: 2px 10px;}
+.remarkLi{width: 100% !important;}

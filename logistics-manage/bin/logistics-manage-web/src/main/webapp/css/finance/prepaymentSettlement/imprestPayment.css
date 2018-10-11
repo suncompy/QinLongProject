@@ -1,0 +1,67 @@
+.modal-dialog select, .modal-dialog input[type=text]{height:29px;width:140px;border: 1px solid #DDE3EF;height: 28px;margin: 5px 0;border-radius: 4px;}
+ .form-group{padding:0!important;position: relative;}
+ .form-group span{position: absolute;top: 10px;right: 10px;display: inline-block;}
+ .longInput{width: 352px !important;}	
+@media (max-width: 768px){
+.form-inline .form-group {
+    display: inline-block;
+    margin-bottom: 0;
+    vertical-align: middle;
+}
+}
+#depositForm label{color: #666666;}
+.trainMoney{display: none;}
+ select, input[type=text]{width:140px;border: 1px solid #DDE3EF;height: 28px;margin: 5px 0;border-radius: 4px;}
+ .form-group{padding:0!important;position: relative;}
+ .form-group span{position: absolute;top: 10px;right: 10px;display: inline-block;}
+ .longInput{width: 352px !important;}	
+@media (max-width: 768px){
+.form-inline .form-group {
+    display: inline-block;
+    margin-bottom: 0;
+    vertical-align: middle;
+}
+}
+#depositForm label{color: #666666;}
+
+
+.form-group{margin:0px 10px 0px 5px;display: inline-block;}
+.form-group label{font-weight: normal;}
+
+.form-group input{width: 130px;height: 19px;border-radius: 4px;border: 1px solid #dde3ef;line-height: 19px !important;     font-size: 12px;padding-left: 5px;}
+
+.modal-header {text-align: center !important;color: #364E66 !important;position: relative;background: #EEF5FD !important;/*border-bottom: 1px solid #e5e5e5;*/}
+/*.modal .modal-lg{height: 700px;overflow: auto;}*/
+@media (min-width: 992px){
+.modal-lg {
+    width: 1000px !important;
+}
+}
+@media screen and (min-width:300px) and (max-width:991px){
+.modal-lg {
+    width: 600px !important;
+    margin: 30px auto
+}	
+}
+.modal-title{font-weight: bold !important;text-align: left;margin-left: 10px;color: #333333;font-size: 18px !important;}
+.modal .modal-header span{background:url(../../../img/close.png); no-repeat center !important;;display: block !important;;width: 16px !important;;height: 16px !important;;cursor: pointer !important;;}
+.modal-header span{position: absolute;top: 10px;right: 20px;}
+.modal-header {padding: 10px !important;}
+.inputbg{background: #eff6ff;}
+.modal-content{border: none !important;}
+
+.modal-dialog h5{font-size: 16px;font-family: "Microsoft YaHei";/*color: rgb(51, 51, 51);*//*font-weight: bold;*/line-height: 1.2;}
+.modal h5{color: #FFAE00; margin-top: 0px !important;font-weight: normal;}
+.modal hr{margin-top: 10px !important; margin-bottom: 10px !important;border-top: 1px dashed #D8D8D8 !important;}
+.modal_btn{text-align: right;margin: 10px 0;}
+.modal_btn button{margin: 0 10px;}
+.sureBtn,.sureBtn:hover,.sureBtn:visited{background: #04a9ed !important;color: #FFFFFF !important;}
+.cancleBtn{background: #ccc;}
+.btn{border-radius: 0 !important;padding: 4px 15px !important;}
+.modal_btn .btn{border-radius: 0 ;}
+.modal-body{max-height:700px !important; overflow: auto;}
+@media (max-width: 1300px){
+.modal-body{max-height:480px !important; overflow: auto;}
+}
+strong:{font-weight: normal;}
+

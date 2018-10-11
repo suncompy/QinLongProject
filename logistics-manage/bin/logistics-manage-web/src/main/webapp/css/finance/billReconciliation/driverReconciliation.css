@@ -1,0 +1,48 @@
+.tableDivs{background: #fff;border: 1px solid #ccc;margin-bottom: 10px;position: relative;display: none;}
+
+
+/*新建模态框*/
+.packModal ul{list-style: none;padding: 0;}
+.packModal ul li{float: left;min-width: 235px;}
+#packForm  th{background-color: #EEF5FD;font-weight:normal;text-align: center;font-size: 14px;padding: 5px !important; border-right: 1px solid #dde3ef;}
+#packForm  tr td{padding: 0 8px!important;border-right: 1px solid #dde3ef;font-size: 12px;vertical-align: middle;}
+#packForm  .modal-header{padding: 5px!important;}
+#packForm  h5{color:#FFAE00;margin-top: 0px !important;font-weight: normal;}
+#packForm  p{color:#04A9ED;margin:10px;}
+#packForm  hr{margin-top: 10px !important;margin-bottom: 10px !important;border-top: 1px dashed #D8D8D8 !important;}
+#packForm {margin-bottom: 10px;}
+#packForm  label{font-weight: normal;font-size: 14px;font-family: "Microsoft YaHei";color: #666666;line-height: 1.2;}
+#packForm select,#packForm input[type=text]{width:145px;border: 1px solid #DDE3EF;;height: 28px;margin: 5px 0;border-radius: 4px;}
+#packForm textarea{width:135px;border: 1px solid #DDE3EF;;height: 50px;margin: 5px 0;border-radius: 4px;}
+.modal .v-top{vertical-align: top;}
+.modal .form-group{padding:0!important;position: relative;margin: 0 15px!important;}
+.addr_info{width: 390px !important;border:1px solid #dde3ef;height: 28px;border-radius: 4px;}
+@media (min-width: 768px){
+.addr_info{width: 200px !important;border:1px solid #dde3ef !important;height: 28px;}	
+}
+@media (min-width: 992px){
+.addr_info{width: 449px !important;border:1px solid #dde3ef;height: 28px;border-radius: 4px;}
+.modal-lg{width: 930px;border:1px solid #dde3ef;height: 28px;border-radius: 4px;}
+}
+@media (min-width: 768px){
+.addr_infos{width: 200px !important;border:1px solid #dde3ef;height: 28px;}	
+}
+@media (min-width: 992px){
+.addr_infos{width: 390px !important;border:1px solid #dde3ef;height: 28px;border-radius: 4px;}
+.modal-lg{width: 930px;border:1px solid #dde3ef;height: 28px;border-radius: 4px;}
+}
+.remarkInput{width: 91.8% !important;}
+.detailsForm{display: none;}
+#packForm ul{overflow: hidden;padding-left: 10px;}
+#packForm ul li{float: left;min-width: 228px;list-style: none;}
+.v-top{vertical-align: top;margin: 5px 0;}
+#packForm  .form-inline{margin-left: 0 !important;}
+.secTime {
+    margin-left: -13px;
+}
+@media (max-width: 1611px){
+.secTime{margin-left: 0 !important;}
+}
+
+#repayment select, #repayment input{width:140px ;border: 1px solid #DDE3EF;height: 28px !important;margin: 5px 0;border-radius: 4px;}
+#accountAdjust select, #accountAdjust input{width:140px ;border: 1px solid #DDE3EF;height: 28px !important;margin: 5px 0;border-radius: 4px;}

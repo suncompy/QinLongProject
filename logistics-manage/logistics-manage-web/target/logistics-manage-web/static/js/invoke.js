@@ -1,0 +1,2 @@
+document.write('<link rel="stylesheet" href="${pageContext.request.contextPath}/static/lib/bootstrap/css/bootstrap.min.css"/>');
+document.write('<script src="../lib/graphic/echart/echarts.js"></script>');

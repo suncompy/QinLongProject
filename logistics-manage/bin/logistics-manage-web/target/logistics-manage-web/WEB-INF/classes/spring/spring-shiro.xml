@@ -1,0 +1,83 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd 
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd 
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd 
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+        
+    <!-- 用户登录过滤器，只过滤是否登录，不考虑是否有权限 -->
+	<bean id="systemUserLoginShiroFilter" class="com.shenhesoft.logistics.filter.SystemUserLoginShiroFilter" />
+	
+	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+		<!-- 配置securityManager -->
+		<property name="securityManager" ref="securityManager" />
+		<!-- 当访问需要认证的资源时，如果没有认证，那么将自动跳转到该url; 如果不配置该属性 默认情况下会到根路径下的login.jsp -->
+		<property name="loginUrl" value="/login.do"></property>
+		<!-- 配置认证成功后 跳转到那个url上，通常不设置，如果不设置，那么默认认证成功后跳转上上一个url -->
+		<property name="successUrl" value="/index.do"></property>
+		<!-- 配置用户没有权限访问资源时 跳转的页面 -->
+		<property name="unauthorizedUrl" value="/error/unauthorized.do" />
+		<!-- 配置shiro的过滤器链 -->
+		<property name="filterChainDefinitions">
+			<value>
+				/login.do=anon
+				/doLogin.do=anon
+				/html/**=systemUserLoginShiroFilter
+				/html/*.do=systemUserLoginShiroFilter
+				/*/*.do=systemUserLoginShiroFilter
+			</value>
+		</property>
+	</bean>
+	<!-- 配置securityManager <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager"> 
+		<property name="realm" ref="loisticsManageRealm"/> </bean> <bean id="loisticsManageRealm" 
+		class="wl.manager.controller.LoisticsManageRealm"/> <bean id="lifecycleBeanPostProcessor" 
+		class="org.apache.shiro.spring.LifecycleBeanPostProcessor"></bean> -->
+	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"></bean>
+	<!-- 数据库保存的密码是使用MD5算法加密的，所以这里需要配置一个密码匹配对象 -->
+	<bean id="credentialsMatcher" class="org.apache.shiro.authc.credential.Md5CredentialsMatcher"></bean>
+	<!-- 缓存管理 -->
+	<bean id="shiroCacheManager" class="org.apache.shiro.cache.MemoryConstrainedCacheManager"></bean>
+	<!-- 使用Shiro自带的JdbcRealm类 指定密码匹配所需要用到的加密对象 指定存储用户、角色、权限许可的数据源及相关查询语句 -->
+	<bean id="jdbcRealm" class="org.apache.shiro.realm.jdbc.JdbcRealm">
+		<property name="credentialsMatcher" ref="credentialsMatcher"></property>
+		<property name="permissionsLookupEnabled" value="true"></property>
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="authenticationQuery"
+			value="SELECT passwd FROM tb_system_user WHERE account = ?"></property>
+		<property name="userRolesQuery"
+			value="SELECT
+							B.name
+						FROM
+							tb_role_systemuser A
+						LEFT JOIN tb_role B  ON A.role_id=B.id
+						LEFT JOIN tb_system_user C ON A.user_id=C.id
+						WHERE
+						account = ?"></property>
+		<property name="permissionsQuery"
+			value="SELECT
+							C.name
+						FROM
+							tb_role_perssion A
+						LEFT JOIN tb_role B ON A.role_id = B.id
+						LEFT JOIN tb_permission C ON A.perssion_id=C.id
+						WHERE
+							B.name=?"></property>
+	</bean>
+
+	<!-- Shiro安全管理器 -->
+	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+		<property name="realm" ref="jdbcRealm"></property>
+		<property name="cacheManager" ref="shiroCacheManager"></property>
+		<property name="rememberMeManager" ref="rememberMeManager"></property> 
+	</bean>
+	
+	<!-- rememberMe管理器 -->
+   <bean id="rememberMeManager" class="org.apache.shiro.web.mgt.CookieRememberMeManager">
+       <property name="cipherKey" value="#{T(org.apache.shiro.codec.Base64).decode('MnNGQx/zB6Ln4cZheWskvA==')}"/>  
+   </bean>
+</beans>

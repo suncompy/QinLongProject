@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shenhesoft.logistics.finance.mapper.CustomerPackInvoiceMapper">
+
+	<!-- 新增客户打包-发票信息表 -->
+	<insert id="addCustomerPackInvoice">
+		insert into tb_customer_pack_invoice(cust_pack_invo_id,cust_pack_id,receive_company_id,provide_company_id,invoice_money,tax_rate,tax_money,total_money,create_date,create_user_id,modifiy_date,delete_flag
+		)values(#{custPackInvoId},#{custPackId},#{receiveCompanyId},#{provideCompanyId},#{invoiceMoney},#{taxRate},#{taxMoney},#{totalMoney},#{createDate},#{createUserId},#{modifiyDate},#{deleteFlag})
+	</insert>
+
+	<!-- 批量新增客户打包-发票信息表 -->
+	<insert id="addCustomerPackInvoices">
+		insert into tb_customer_pack_invoice(cust_pack_invo_id,cust_pack_id,receive_company_id,provide_company_id,invoice_money,tax_rate,tax_money,total_money,create_date,create_user_id,modifiy_date,delete_flag
+		)values
+		<foreach collection="list" item="item" index="index" separator=",">
+            (#{custPackInvoId},#{custPackId},#{receiveCompanyId},#{provideCompanyId},#{invoiceMoney},#{taxRate},#{taxMoney},#{totalMoney},#{createDate},#{createUserId},#{modifiyDate},#{deleteFlag})
+        </foreach>
+	</insert>
+
+	<!-- 修改客户打包-发票信息表 -->
+	<update id="editCustomerPackInvoiceById">
+		update tb_customer_pack_invoice
+		<set>
+		 <if test="custPackId != null and custPackId != '' and custPackId != 'null' and custPackId != 'undefined'">
+               cust_pack_id=#{custPackId},
+         </if>
+		<if test="receiveCompanyId != null">
+               receive_company_id=#{receiveCompanyId},
+         </if>
+		<if test="provideCompanyId != null">
+               provide_company_id=#{provideCompanyId},
+         </if>
+		<if test="invoiceMoney != null">
+               invoice_money=#{invoiceMoney},
+         </if>
+		<if test="taxRate != null">
+               tax_rate=#{taxRate},
+         </if>
+		<if test="taxMoney != null">
+               tax_money=#{taxMoney},
+         </if>
+		<if test="totalMoney != null">
+               total_money=#{totalMoney},
+         </if>
+		<if test="createDate != null">
+               create_date=#{createDate},
+         </if>
+		<if test="createUserId != null">
+               create_user_id=#{createUserId},
+         </if>
+		<if test="modifiyDate != null">
+               modifiy_date=#{modifiyDate},
+         </if>
+		<if test="deleteFlag != null">
+               delete_flag=#{deleteFlag},
+         </if>
+		</set>
+		where cust_pack_invo_id=#{custPackInvoId}
+	</update>
+
+	<!-- 批量修改客户打包-发票信息表 -->
+	<update id="editCustomerPackInvoiceByIds">
+		update tb_customer_pack_invoice
+		<set>
+		 <if test="map.custPackId != null and map.custPackId != '' and map.custPackId != 'null' and map.custPackId != 'undefined'">
+	       cust_pack_id=#{map.custPackId},
+         </if>
+		<if test="map.receiveCompanyId != null">
+	       receive_company_id=#{map.receiveCompanyId},
+         </if>
+		<if test="map.provideCompanyId != null">
+	       provide_company_id=#{map.provideCompanyId},
+         </if>
+		<if test="map.invoiceMoney != null">
+	       invoice_money=#{map.invoiceMoney},
+         </if>
+		<if test="map.taxRate != null">
+	       tax_rate=#{map.taxRate},
+         </if>
+		<if test="map.taxMoney != null">
+	       tax_money=#{map.taxMoney},
+         </if>
+		<if test="map.totalMoney != null">
+	       total_money=#{map.totalMoney},
+         </if>
+		<if test="map.createDate != null">
+	       create_date=#{map.createDate},
+         </if>
+		<if test="map.createUserId != null">
+	       create_user_id=#{map.createUserId},
+         </if>
+		<if test="map.modifiyDate != null">
+	       modifiy_date=#{map.modifiyDate},
+         </if>
+		<if test="map.deleteFlag != null">
+	       delete_flag=#{map.deleteFlag},
+         </if>
+		</set>
+		where cust_pack_invo_id in
+		<foreach collection="list" index="index" item="item" open="(" separator="," close=")">   
+             #{item}   
+        </foreach>
+	</update>
+
+	<!-- 查看客户打包-发票信息表 -->
+	<select id="getCustomerPackInvoiceById" resultType="Map">
+        select a.cust_pack_invo_id custPackInvoId,a.cust_pack_id custPackId,a.receive_company_id receiveCompanyId,a.provide_company_id provideCompanyId,a.invoice_money invoiceMoney,a.tax_rate taxRate,a.tax_money taxMoney,a.total_money totalMoney,a.create_date createDate,a.create_user_id createUserId,a.modifiy_date modifiyDate,a.delete_flag deleteFlag
+        from tb_customer_pack_invoice a
+        where a.cust_pack_invo_id=#{id}
+    </select>
+    
+  <select id="getCustomerPackInvoiceByCustPackId" resultType="Map">
+  	select a.receive_company_id receiveCompanyId,a.provide_company_id provideCompanyId from tb_customer_pack_invoice a
+ 		where a.cust_pack_id = #{custPackId}
+ 		GROUP BY a.cust_pack_id
+  </select>
+
+	<!-- 删除客户打包-发票信息表 -->
+	<delete id="delCustomerPackInvoiceById">
+		delete from tb_customer_pack_invoice where cust_pack_invo_id = #{id}
+	</delete>	
+
+	<!-- 批量删除客户打包-发票信息表 -->
+    <delete id="delCustomerPackInvoiceByIds">  
+        delete from tb_customer_pack_invoice where cust_pack_invo_id in 
+        <foreach collection="list" index="index" item="item" open="(" separator="," close=")">   
+            #{item}   
+        </foreach>  
+    </delete>
+
+	<!-- 清空客户打包-发票信息表 -->
+	<delete id="delCustomerPackInvoices">
+		delete from tb_customer_pack_invoice
+	</delete>	
+
+	<!-- 检索客户打包-发票信息表列表 -->
+	<select id="getCustomerPackInvoices" resultType="Map">
+		select a.cust_pack_invo_id custPackInvoId,a.cust_pack_id custPackId,a.receive_company_id receiveCompanyId,a.provide_company_id provideCompanyId,a.invoice_money invoiceMoney,a.tax_rate taxRate,a.tax_money taxMoney,a.total_money totalMoney,a.create_date createDate,a.create_user_id createUserId,a.modifiy_date modifiyDate
+		from tb_customer_pack_invoice a
+		<where>
+            <if test="map != null">
+		<if test="map.custPackInvoId != null and map.custPackInvoId != '' and map.custPackInvoId != 'null' and map.custPackInvoId != 'undefined'">				  
+		    AND a.cust_pack_invo_id = #{map.custPackInvoId}
+                </if>
+		<if test="map.custPackId != null and map.custPackId != '' and map.custPackId != 'null' and map.custPackId != 'undefined'">				  
+		    AND a.cust_pack_id = #{map.custPackId}
+                </if>
+		<if test="map.receiveCompanyId != null">
+		    AND a.receive_company_id = #{map.receiveCompanyId}
+                </if>
+		<if test="map.provideCompanyId != null">
+		    AND a.provide_company_id = #{map.provideCompanyId}
+                </if>
+		<if test="map.invoiceMoney != null">
+		    AND a.invoice_money = #{map.invoiceMoney}
+                </if>
+		<if test="map.taxRate != null">
+		    AND a.tax_rate = #{map.taxRate}
+                </if>
+		<if test="map.taxMoney != null">
+		    AND a.tax_money = #{map.taxMoney}
+                </if>
+		<if test="map.totalMoney != null">
+		    AND a.total_money = #{map.totalMoney}
+                </if>
+		<if test="map.createDate != null">
+		    AND a.create_date = #{map.createDate}
+                </if>
+		<if test="map.createUserId != null">
+		    AND a.create_user_id = #{map.createUserId}
+                </if>
+		<if test="map.modifiyDate != null">
+		    AND a.modifiy_date = #{map.modifiyDate}
+                </if>
+		<if test="map.deleteFlag != null">
+		    AND a.delete_flag = #{map.deleteFlag}
+                </if>
+            </if>
+        </where>
+        order by a.cust_pack_invo_id desc
+	</select>
+	
+	<!-- 发票登入 -->
+	<insert id="insertCustomerPackInvoice">
+		insert into tb_customer_pack_invoice(cust_pack_invo_id,cust_pack_id,sh_pack_id,receive_company_id,provide_company_id,invoice_money,tax_rate,tax_money,total_money,create_date,create_user_id,modifiy_date,delete_flag
+		)values(#{custPackInvoId},#{custPackId},#{shPackId},#{receiveCompanyId},#{provideCompanyId},#{invoiceMoney},#{taxRate},#{taxMoney},#{totalMoney},#{createDate},#{createUserId},#{modifiyDate},#{deleteFlag})
+	</insert>
+	
+	<!-- 获取发票列表 -->
+	<select id="getInvoiceManagement" resultType="Map">
+		<!-- select c.*,
+		p.project_code projectCode,p.branch_group_id branchGroupId,p.branch_group_name branchGroupName,p.project_type projectType,p.transport_type transportType,p.cargo_id cargoId,p.cargo_name cargoName,p.cargo_specifications cargoSpecifications,p.cargo_price cargoPrice,p.valuation_unit_name valuationUnitName,p.send_cargo_company_id sendCargoCompanyId,p.send_cargo_company_name sendCargoCompanyName,p.receive_cargo_company_id receiveCargoCompanyId,p.receive_cargo_company_name receiveCargoCompanyName,p.send_cargo_unit_id sendCargoUnitId,p.send_cargo_unit_name sendCargoUnitName,p.receive_cargo_site_id receiveCargoSiteId,p.receive_cargo_site receiveCargoSite,p.short_barge_carrier_mode shortBargeCarrierMode,p.short_barge_carrier_id shortBargeCarrierId,p.short_barge_carrier_name shortBargeCarrierName,p.send_short_barge_carrier_mode sendShortBargeCarrierMode,p.begin_center_site_id beginCenterSiteId,p.begin_center_site_name beginCenterSiteName,p.begin_site_id beginSiteId,p.begin_site_name beginSiteName,p.begin_address beginAddress,p.end_center_site_id endCenterSiteId,p.end_center_site_name endCenterSiteName,p.end_site_id endSiteId,p.end_site_name endSiteName,p.end_address endAddress,p.freight freight,p.material_cost materialCost,p.tarpaulin_cost tarpaulinCost,p.begin_stevedoring_cost beginStevedoringCost,p.end_stevedoring_cost endStevedoringCost,p.freight_sum freightSum,p.forwarding_site_id forwardingSiteId,p.forwarding_site_name forwardingSiteName,p.forwarding_unit_id forwardingUnitId,p.forwarding_unit_name forwardingUnitName,p.take_place takePlace,p.take_place_detail takePlaceDetail,p.receiving_department_id receivingDepartmentId,p.receiving_department_name receivingDepartmentName,p.arrive_place arrivePlace,p.arrive_place_address arrivePlaceAddress,p.pick_up_price pickUpPrice,p.train_price trainPrice,p.arrive_price arrivePrice,p.transport_price transportPrice,
+		cu.account_name provideAccountName,cu.tax_identification_number provideDutyParagraph,
+		cr.account_name receiveAccountName,cr.tax_identification_number receiveDutyParagraph,
+		suc.name auditUserName,
+		sua.name createUserName,
+		sub.name backName,
+		sud.name auditName
+		 from(
+				select b.cust_pack_id custPackId,b.cust_check_con_id custCheckConId,a.receive_company_id receiveCompanyId,a.provide_company_id provideCompanyId,IFNULL(a.total_money,IFNULL(b.produce_money,0)-IFNULL(a.tax_money,IFNULL(b.tax_money,0))) totalMoney,IFNULL(a.tax_rate,c.tax_rate) taxRate,IFNULL(a.tax_money,b.tax_money) taxMoney,a.audit_user_id auditUserId,a.audit_date iAuditDate,a.modifiy_date updateDate,a.create_user_id createUserId,
+						1 as invoiceType,b.project_id projectId,b.pack_type packType,DATE_FORMAT(b.create_date,'%Y-%m-%d %H:%i:%s') createDate,b.start_date startDate,b.invoice_status invoiceStatus,b.back_id backId,b.back_date backDate,b.audit_id auditId,b.audit_date auditDate,b.produce_money invoiceMoney
+					from  tb_customer_pack b
+					left join tb_customer_pack_invoice a on a.cust_pack_id = b.cust_pack_id
+					left join tb_customer_checking_conf c on c.cust_check_con_id = b.cust_check_con_id
+				union
+				select b.sh_pack_id shPackId,b.cost_pack_code custCheckConId,a.receive_company_id receiveCompanyId,a.provide_company_id provideCompanyId,IFNULL(a.total_money,IFNULL(b.cargo_price,0)-IFNULL(a.tax_money,IFNULL(b.tax_money,0))) totalMoney,IFNULL(a.tax_rate,b.tax_rate) taxRate,IFNULL(a.tax_money,b.tax_money) taxMoney,a.audit_user_id auditUserId,a.audit_date iAuditDate,a.modifiy_date updateDate,a.create_user_id createUserId,
+						2 as invoiceType,b.project_id projectId,1 as packType,DATE_FORMAT(b.create_date,'%Y-%m-%d %H:%i:%s') createDate,b.checking_audit_date startDate,b.invoice_status invoiceStatus,b.back_id backId,b.back_date backDate,b.audit_id auditId,b.checking_audit_date auditDate,b.cargo_price invoiceMoney
+					from tb_cost_pack b
+					left join tb_customer_pack_invoice a on a.sh_pack_id = b.sh_pack_id
+		) c
+		left join tb_finance_account cu on cu.id = c.provideCompanyId
+		left join tb_finance_account cr on cr.id = c.receiveCompanyId
+		left join tb_system_user suc on suc.id = c.auditUserId
+		left join tb_system_user sua on sua.id = c.createUserId
+		left join tb_system_user sub on sub.id = c.backId
+		left join tb_system_user sud on sud.id = c.auditId
+		left join tb_project p on c.projectId = p.id
+		<where>
+            <if test="map != null">
+            <if test="map.branchGroupIdBulkTrainSport != null">
+			    and p.branch_group_id in 
+			 	<foreach item="item" index="index" collection="map.branchGroupIdCount" 
+	                   open="(" separator="," close=")">
+	                  #{item}
+	         	</foreach>
+	        </if>
+		<if test="map.custPackId != null and map.custPackId != '' and map.custPackId != 'null' and map.custPackId != 'undefined'">				  
+		    AND c.custPackId = #{map.custPackId}
+                </if>
+		<if test="map.projectId != null">
+		    AND p.id = #{map.projectId}
+                </if>
+            </if>
+        </where> -->
+        select DISTINCT a.invoice_id invoiceId,a.pack_id packId,a.pack_type packType,a.receive_company_id receiveCompanyId,a.provide_company_id provideCompanyId,a.invoice_money invoiceMoney
+		,a.tax_rate taxRate,a.tax_money taxMoney,a.total_money totalMoney,DATE_FORMAT(a.create_date,'%Y-%m-%d %H:%i:%s') createDate,a.create_user_id createUserId
+		,a.audit_user_id auditUserId,DATE_FORMAT(a.audit_date,'%Y-%m-%d %H:%i:%s') auditDate,a.back_user_id backUserId,DATE_FORMAT(a.back_date,'%Y-%m-%d %H:%i:%s') backDate
+		,a.back_org_name backOrgName,DATE_FORMAT(a.modifiy_date,'%Y-%m-%d %H:%i:%s') modifiyDate,a.delete_flag deleteFlag,a.project_id projectId,a.order_id orderId,a.train_flag trainFlag
+		,a.invoice_status invoiceStatus
+		,case when a.pack_type=1 then '客户发票'
+			    when a.pack_type=2 then '货款发票'
+		 else '客户总账发票' end invoiceTypeName
+		,case when a.pack_type=1 then '运费'
+			    when a.pack_type=2 then '货款'
+		 else '运费总账' end openInvoiceProject
+		 ,case when a.train_flag=0 then '汽运'
+			    when a.train_flag=1 then '接取'
+			    when a.train_flag=2 then '送达'
+			    when a.train_flag=3 then '火运'
+		 else '联运' end trainFlagName
+		,p.project_code projectCode,p.branch_group_id branchGroupId,p.branch_group_name branchGroupName,p.project_type projectType,p.transport_type transportType,p.cargo_id cargoId,p.cargo_name cargoName,p.cargo_specifications cargoSpecifications,p.cargo_price cargoPrice,p.valuation_unit_name valuationUnitName,p.send_cargo_company_id sendCargoCompanyId,p.send_cargo_company_name sendCargoCompanyName,p.receive_cargo_company_id receiveCargoCompanyId,p.receive_cargo_company_name receiveCargoCompanyName,p.send_cargo_unit_id sendCargoUnitId,p.send_cargo_unit_name sendCargoUnitName,p.receive_cargo_site_id receiveCargoSiteId,p.receive_cargo_site receiveCargoSite,p.short_barge_carrier_mode shortBargeCarrierMode,p.short_barge_carrier_id shortBargeCarrierId,p.short_barge_carrier_name shortBargeCarrierName,p.send_short_barge_carrier_mode sendShortBargeCarrierMode,p.begin_center_site_id beginCenterSiteId,p.begin_center_site_name beginCenterSiteName,p.begin_site_id beginSiteId,p.begin_site_name beginSiteName,p.end_center_site_id endCenterSiteId,p.end_center_site_name endCenterSiteName,p.end_site_id endSiteId,p.end_site_name endSiteName,p.freight freight,p.material_cost materialCost,p.tarpaulin_cost tarpaulinCost,p.begin_stevedoring_cost beginStevedoringCost,p.end_stevedoring_cost endStevedoringCost,p.freight_sum freightSum,p.forwarding_site_id forwardingSiteId,p.forwarding_site_name forwardingSiteName,p.forwarding_unit_id forwardingUnitId,p.forwarding_unit_name forwardingUnitName,p.take_place takePlace,p.take_place_detail takePlaceDetail,p.receiving_department_id receivingDepartmentId,p.receiving_department_name receivingDepartmentName,p.arrive_place arrivePlace,p.arrive_place_address arrivePlaceAddress,p.pick_up_price pickUpPrice,p.train_price trainPrice,p.arrive_price arrivePrice,p.transport_price transportPrice,
+		cu.account_name provideAccountName,cu.tax_identification_number provideDutyParagraph,
+		cr.account_name receiveAccountName,cr.tax_identification_number receiveDutyParagraph,
+		suc.name auditUserName,
+		sua.name createUserName,
+		sub.name backName,c.startDate
+		,a.provide_company_name provideCompanyName,a.receive_company_name receiveCompanyName
+		,IFNULL(a.beginAddress,p.begin_address) beginAddress,IFNULL(a.endAddress,p.end_address) endAddress
+		from tb_invoice a
+		left join (
+				select b.cust_check_con_id pack_id,b.cust_check_con_id custCheckConId,DATE_FORMAT(b.create_date,'%Y-%m-%d %H:%i:%s') createDate,b.start_date startDate
+					from tb_customer_checking_conf b,tb_invoice i,tb_project p
+					where i.pack_id=b.cust_check_con_id and p.id=b.project_id and p.transport_type=6
+				union all
+				select b.cust_pack_id pack_id,b.cust_check_con_id custCheckConId,DATE_FORMAT(b.create_date,'%Y-%m-%d %H:%i:%s') createDate,b.start_date startDate
+					from  tb_customer_pack b,tb_invoice i
+				where i.pack_id=b.cust_pack_id
+				union all
+				select b.cost_pack_code pack_id,b.cost_pack_code custCheckConId,DATE_FORMAT(b.create_date,'%Y-%m-%d %H:%i:%s') createDate,b.checking_audit_date startDate
+					from tb_cost_pack b,tb_invoice i
+				where i.pack_id=b.cost_pack_code
+		) c on c.pack_id = a.pack_id
+		left join tb_finance_account cu on cu.id = a.provide_company_id
+		left join tb_finance_account cr on cr.id = a.receive_company_id
+		left join tb_system_user suc on suc.id = a.audit_user_id
+		left join tb_system_user sua on sua.id = a.create_user_id
+		left join tb_system_user sub on sub.id = a.back_user_id
+		left join tb_project p on a.project_id = p.id
+		left join tb_branch_group_link y on a.invoice_id=y.row_id and y.tab_name='tb_invoice'
+		<where>
+		and y.sys_org_code like CONCAT(#{map.sysOrgCode},'%')
+		<if test="map != null">
+		 <if test="map.projectCode != null and map.projectCode != '' and map.projectCode != 'null' and map.projectCode != 'undefined'">
+		    AND p.project_code like CONCAT('%',#{map.projectCode},'%') 
+         </if> 
+        <if test="map.branchGroupName != null and map.branchGroupName != '' and map.branchGroupName != 'null' and map.branchGroupName != 'undefined'">
+		    AND p.branch_group_name like CONCAT('%',#{map.branchGroupName},'%') 
+         </if> 
+         <if test="map.beginDate != null and map.beginDate !='' and map.beginDate != 'null' and map.beginDate != 'undefined' " >
+		       and date_format(a.create_date, '%Y-%m-%d') &gt;= date_format(#{map.beginDate}, '%Y-%m-%d')
+		    </if>
+		    <if test="map.endDate != null and map.endDate !='' and map.endDate != 'null' and map.endDate != 'undefined' " >
+		       and date_format(a.create_date, '%Y-%m-%d') &lt;= date_format(#{map.endDate}, '%Y-%m-%d')
+		    </if>
+            <if test="map.branchGroupIdBulkTrainSport != null">
+			    and p.branch_group_id in 
+			 	<foreach item="item" index="index" collection="map.branchGroupIdCount" 
+	                   open="(" separator="," close=")">
+	                  #{item}
+	         	</foreach>
+	        </if>
+		<if test="map.invoiceId != null and map.invoiceId != '' and map.invoiceId != 'null' and map.invoiceId != 'undefined'">				  
+		    AND a.invoice_id = #{map.invoiceId}
+                </if>
+		<if test="map.packId != null and map.packId != '' and map.packId != 'null' and map.packId != 'undefined'">				  
+		    AND a.pack_id = #{map.packId}
+                </if>
+		<if test="map.packType != null and map.packType != '' and map.packType != 'null' and map.packType != 'undefined'">				  
+		    AND a.pack_type = #{map.packType}
+                </if>
+		<if test="map.receiveCompanyId != null">
+		    AND a.receive_company_id = #{map.receiveCompanyId}
+                </if>
+		<if test="map.provideCompanyId != null">
+		    AND a.provide_company_id = #{map.provideCompanyId}
+                </if>
+		<if test="map.invoiceMoney != null">
+		    AND a.invoice_money = #{map.invoiceMoney}
+                </if>
+		<if test="map.taxRate != null">
+		    AND a.tax_rate = #{map.taxRate}
+                </if>
+		<if test="map.taxMoney != null">
+		    AND a.tax_money = #{map.taxMoney}
+                </if>
+		<if test="map.totalMoney != null">
+		    AND a.total_money = #{map.totalMoney}
+                </if>
+         <if test="map.beginDate != null and map.beginDate !='' and map.beginDate != 'null' and map.beginDate != 'undefined' " >
+	       and date_format(a.create_date, '%Y-%m-%d') &gt;= date_format(#{map.beginDate}, '%Y-%m-%d')
+	    </if>
+	    <if test="map.endDate != null and map.endDate !='' and map.endDate != 'null' and map.endDate != 'undefined' " >
+	       and date_format(a.create_date, '%Y-%m-%d') &lt;= date_format(#{map.endDate}, '%Y-%m-%d')
+	    </if>
+		<if test="map.createUserId != null">
+		    AND a.create_user_id = #{map.createUserId}
+                </if>
+		<if test="map.auditUserId != null">
+		    AND a.audit_user_id = #{map.auditUserId}
+                </if>
+		<if test="map.auditDate != null">
+		    AND a.audit_date = #{map.auditDate}
+                </if>
+		<if test="map.backUserId != null">
+		    AND a.back_user_id = #{map.backUserId}
+                </if>
+		<if test="map.backDate != null">
+		    AND a.back_date = #{map.backDate}
+                </if>
+		<if test="map.backOrgName != null and map.backOrgName != '' and map.backOrgName != 'null' and map.backOrgName != 'undefined'">				  
+		    AND a.back_org_name = #{map.backOrgName}
+                </if>
+		<if test="map.modifiyDate != null">
+		    AND a.modifiy_date = #{map.modifiyDate}
+                </if>
+		<if test="map.deleteFlag != null">
+		    AND a.delete_flag = #{map.deleteFlag}
+                </if>
+		<if test="map.projectId != null">
+		    AND a.project_id = #{map.projectId}
+                </if>
+		<if test="map.orderId != null">
+		    AND a.order_id = #{map.orderId}
+                </if>
+		<if test="map.trainFlag != null">
+		    AND a.train_flag = #{map.trainFlag}
+                </if>
+         <if test="map.custPackId != null and map.custPackId != '' and map.custPackId != 'null' and map.custPackId != 'undefined'">
+		    AND c.pack_id = #{map.custPackId}
+                </if>       
+		<if test="map.invoiceStatus != null">
+		    AND a.invoice_status = #{map.invoiceStatus}
+                </if>
+            </if>
+        </where>
+        order by a.invoice_id desc
+        
+	</select>
+
+</mapper>

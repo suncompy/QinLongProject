@@ -1,0 +1,421 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shenhesoft.logistics.finance.mapper.AdvanceSettlementMapper">
+
+	<select id="getProjectAdvance" resultType="Map">
+			SELECT b.*,c.st as needHandle FROM
+				(SELECT a.project_id as projectId,a.project_code as projectCode,a.branch_id as branchId,a.branch_name as branchName,a.da as depositAmount,a.pa as purposeAmount,a.ca as cashAmount,
+	        	(a.da - a.pa - a.ca) as blance,a.updtime as assessorDate
+	        	from 
+				(SELECT project_id,project_code,branch_id,branch_name,CASE when SUM(deposit_amount) is null then 0 else SUM(deposit_amount) end as da,
+				CASE when SUM(purpose_amount) is null then 0 else SUM(purpose_amount) end as pa,CASE when SUM(cash_amount) is null then 0 else SUM(cash_amount) end as ca,
+				MAX(assessor_date) as updtime
+				from tb_advance_charge s
+				left join tb_branch_group_link y on s.project_id=y.row_id 
+				where s.delete_flag = 0 and s.status in (0,2)  and y.sys_org_code like CONCAT(#{map.sysOrgCode},'%') and y.tab_name='tb_project'
+				<if test="map != null">
+					<if test="map.projectCode != null and map.projectCode != '' and map.projectCode != 'null' and map.projectCode != 'undefined'">
+					    AND project_code like CONCAT('%',#{map.projectCode},'%') 
+			         </if>
+	        	</if>
+	        	GROUP BY project_id
+				ORDER BY project_id desc
+				) a) b,
+				(SELECT s.project_id projectId,COUNT(CASE when s.status in (1,3,4) then 1 else null end)  st from tb_advance_charge s
+				left join tb_branch_group_link y on s.project_id=y.row_id 
+				where s.delete_flag = 0 and y.sys_org_code like CONCAT(#{map.sysOrgCode},'%') and y.tab_name='tb_project'
+				<if test="map != null">
+					<if test="map.projectCode != null and map.projectCode != '' and map.projectCode != 'null' and map.projectCode != 'undefined'">
+					    AND project_code like CONCAT('%',#{map.projectCode},'%') 
+			         </if>
+	        	</if>
+				GROUP BY s.project_id) c
+			where b.projectId = c.projectId
+    </select>
+    
+    <select id="getProjectAdvanceByProjectId" resultType="Map">
+        SELECT id,serial_number as serialNumber,status,type,deposit_amount as depositAmount,purpose_amount as purposeAmount,cash_amount as cashAmount,produce_time as produceTime,
+			operation_person as operationPerson,operation_date as operationDate,assessor,assessor_date as assessorDate,receive_number as receiveNumber,already_depose_account as alreadyDeposeAccount
+		from tb_advance_charge
+		where 1=1 and type in (0,1,3) and delete_flag = 0
+		<if test="map != null">
+			<if test="map.projectId != null">
+			    AND project_id = #{map.projectId}
+	         </if>
+        </if>
+    </select>
+    
+     <!-- #{map.id} -->
+    <select id="getAccountByUnitId" resultType="Map">
+        SELECT id,name 
+		from tb_finance_account fa
+		where fa.account_kind = #{map.type} and fa.choose_account_id =
+		<if test="map != null">
+			<if test="map.type == 0 "><!--客户  -->
+			    #{map.id}
+	         </if>
+	         <if test="map.type == 1 "><!--站点  -->
+			    #{map.id}
+	         </if>
+	           <if test="map.type == 2 "><!--公司  -->
+			  (select bg.id from tb_branch_group bg where bg.sys_org_code =  #{map.sysOrgCode} )
+	         </if>
+        </if>
+       
+         <if test="map!=null">
+          <if test="map.accountType == -1 "><!--非预付款  -->
+			   and fa.account_type in (0,2,3,4,5,6)
+	         </if>
+	         <if test="map.accountType!=null and map.accountType != -1">
+	         	 and fa.account_type =  #{map.accountType}
+	         </if>
+         </if>
+         
+		 and fa.status = 0
+    </select>
+    
+    <select id="getAccountDetailById" resultType="Map">
+        SELECT id,name,account_num as accountNum,bank_num as bankNum,tax_identification_number as taxIdentificationNumber,account_balance as accountBalance
+		from tb_finance_account
+		where id = #{map.id} and status = 0
+    </select>
+    
+    <insert id="addAdvanceCharge">
+		insert into tb_advance_charge(project_id,project_code,branch_id,branch_name,serial_number,status,type,deposit_amount,operation_date,operation_person,receive_type,
+		receive_unit_id,receive_account_id,receive_agent,receive_number,receive_bank_number,receive_tax_number,pay_type,pay_unit_id,pay_account_id,pay_agent,pay_number,
+		pay_bank_number,pay_tax_number,advance_type,payment,purpose_amount,purpose_choose_account,bill_name,start_number,end_number,sheet_number,invalid_number,cargo_name,tonnage,total_amount,delete_flag,
+		train_order_id,please_train_num,cost_pack_id,cost_pack_num,already_depose_account,receive_unit_name,receive_account_name,pay_unit_name,pay_account_name,purpose_choose_account_name,assessor_date,cash_amount,
+		other_proof,other_proof_start,other_proof_end,other_proof_num,self_proof,self_proof_start,self_proof_end,self_proof_num,entruck_weight,sum_cost,produce_time
+		)values(#{projectId},#{projectCode},#{branchId},#{branchName},#{serialNumber},#{status},#{type},#{depositAmount},#{operationDate},#{operationPerson},#{receiveType},
+		#{receiveUnitId},#{receiveAccountId},#{receiveAgent},#{receiveNumber},#{receiveBankNumber},#{receiveTaxNumber},#{payType},#{payUnitId},#{payAccountId},#{payAgent},#{payNumber},
+		#{payBankNumber},#{payTaxNumber},#{advanceType},#{payment},#{purposeAmount},#{purposeChooseAccount},#{billName},#{startNumber},#{endNumber},#{sheetNumber},#{invalidNumber},#{cargoName},#{tonnage},#{totalAmount},#{deleteFlag},
+		#{trainOrderId},#{pleaseTrainNum},#{costPackId},#{costPackNum},#{alreadyDeposeAccount},
+		#{receiveUnitName},#{receiveAccountName},#{payUnitName},#{payAccountName},#{purposeChooseAccountName},#{assessorDate},#{cashAmount},
+		#{otherProof},#{otherProofStart},#{otherProofEnd},#{otherProofNum},#{selfProof},#{selfProofStart},#{selfProofEnd},#{selfProofNum},#{entruckWeight},#{sumCost},#{produceTime})
+	</insert>
+	
+	<!-- 批量修改预付款结算表 财务审核  反审核-->
+	<update id="accountAuditStatusByIds">
+		update tb_advance_charge
+		<set>
+		 <if test="map.status != null">
+               status=#{map.status},
+         </if>
+		 <if test="map.assessor != null">
+               assessor=#{map.assessor},
+         </if>
+		 <if test="map.assessorDate != null">
+               assessor_date=#{map.assessorDate},
+         </if>
+		</set>
+		where id in
+		<foreach collection="list" index="index" item="item" open="(" separator="," close=")">   
+             #{item}   
+        </foreach>
+	</update>
+	
+	<select id="getAdvanceChargeDetailByid" resultType="Map">
+        SELECT 
+	        id as id,project_id as projectId,project_code as projectCode,branch_id as branchId,branch_name as branchName,serial_number as serialNumber,status,type,deposit_amount as depositAmount,
+	        operation_date as operationDate,operation_person as operationPerson,receive_type as receiveType,receive_unit_id as receiveUnitId,receive_account_id as receiveAccountId,
+			receive_agent as receiveAgent,receive_number as receiveNumber,receive_bank_number as receiveBankNumber,receive_tax_number as receiveTaxNumber,pay_type as payType,
+			pay_unit_id as payUnitId,pay_account_id as payAccountId,pay_agent as payAgent,pay_number as payNumber,pay_bank_number as payBankNumber,pay_tax_number as payTaxNumber,
+			advance_type as advanceType,payment,purpose_amount as purposeAmount,cash_amount as cashAmount,
+			purpose_choose_account as purposeChooseAccount,bill_name as billName,start_number as startNumber,end_number as endNumber,sheet_number as sheetNumber,invalid_number as invalidNumber,
+			cargo_name as cargoName,tonnage,total_amount as totalAmount,delete_flag as deleteFlag,receive_unit_name as receiveUnitName,receive_account_name as receiveAccountName,
+			pay_account_name as payAccountName,pay_unit_name as payUnitName,purpose_choose_account_name as purposeChooseAccountName,assessor,assessor_date as assessorDate,
+			please_train_num as pleaseTrainNum,train_order_id as trainOrderId,cost_pack_id as costPackId,cost_pack_num as costPackNum,already_depose_account as alreadyDeposeAccount,
+			other_proof as otherProof,other_proof_start as otherProofStart,other_proof_end as otherProofEnd,other_proof_num as otherProofNum,self_proof as selfProof,
+			self_proof_start as selfProofStart,self_proof_end as selfProofEnd,self_proof_num as selfProofNum,entruck_weight as entruckWeight,sum_cost as sumCost,produce_time as produceTime
+		from tb_advance_charge
+		where id = #{id}
+    </select>
+    
+     <select id="getDepostAccountByProjectId" resultType="Map">
+        SELECT b.id as id,b.name as name
+		from tb_finance_account b RIGHT JOIN
+			(SELECT receive_account_id from tb_advance_charge 
+			where project_id = #{map.projectId} and type = 0 and status = 0 and delete_flag = 0 
+			and receive_type = #{map.advancetType}
+			GROUP BY receive_account_id) a
+		on a.receive_account_id = b.id
+    </select>
+    
+    <!-- SELECT b.id as id,b.name as name
+		from tb_finance_account b RIGHT JOIN
+			(SELECT pay_account_id from tb_advance_charge 
+			where project_id = #{map.projectId} and type = 0 and status = 0 and delete_flag = 0 
+			GROUP BY pay_account_id) a
+		on a.pay_account_id = b.id -->
+    <select id="getCashAccountByProjectId" resultType="Map">
+		SELECT b.id as id,b.name as name
+		from tb_finance_account b RIGHT JOIN
+			(SELECT pay_unit_id from tb_advance_charge 
+			where project_id = #{map.projectId} and type = 0  and delete_flag = 0 
+			GROUP BY pay_unit_id) a
+		on a.pay_unit_id = b.choose_account_id and b.account_kind = 2 and b.status = 0
+    </select>
+    
+    <select id="getTrainInfoByBillName" resultType="Map">
+        SELECT id,please_train_number as pleaseTrainNum
+		from tb_train_order 
+		where delete_flag = 0 and is_exception = 0 and status in (4,5,6,7) and project_id = #{map.projectId}
+    </select>
+    
+    <select id="getCostByBillName" resultType="Map">
+        SELECT sh_pack_id as shPackId,cost_pack_code as costPackCode
+		from tb_cost_pack 
+		where checking_status = 1 and project_id = #{map.projectId}
+    </select>
+    
+    <select id="getCostInfoByCostId" resultType="Map">
+        SELECT A.cargo_name as cargoName,B.send_net as sendNet,B.cargo_price as cargoPrice
+			from tb_project A LEFT JOIN tb_cost_pack B
+			on A.id  = B.project_id
+			where A.id =  (SELECT project_id from tb_cost_pack where sh_pack_id = #{map.costPackId})
+    </select>
+    
+    <select id="getCousterAgentById" resultType="Map">
+        SELECT id,name
+			from tb_station_business 
+			where relate_id = #{map.relateId} and type = 2
+    </select>
+    
+    <select id="selectExistAdvanceCharge" resultType="com.shenhesoft.logistics.finance.AdvanceCharge">
+        SELECT 
+			distinct project_id as projectId,receive_unit_id as receiveUnitId,receive_unit_name as receiveUnitName,receive_account_id as receiveAccountId,
+			receive_account_name as receiveAccountName,receive_number as receiveNumber
+		from tb_advance_charge 
+		where project_id = #{map.projectId} and type = 0 and receive_type = 1 and delete_flag = 0
+    </select>
+    
+    <!-- SELECT 
+			receive_account_id as receiveAccountId,receive_account_name as receiveAccountName,receive_number as receiveNumber,receive_bank_number as receiveBankNumber,
+			sum(deposit_amount) depositAmount,receive_unit_id as receiveUnitId,receive_unit_name as receiveUnitName
+		from tb_advance_charge 
+		where project_id = #{map.projectId} and type = 0 and receive_type = #{map.advancetType} and status = 0
+		and receive_account_id = #{map.id} -->
+    <select id="getDepostAccountByProjectIdDetail" resultType="Map">
+		SELECT receiveAccountId,receiveAccountName, receiveNumber,receiveBankNumber ,receiveUnitId,receiveUnitName ,(IFNULL(depositAmounts,0)-IFNULL(purposeAmount,0)-IFNULL(cashAmount,0)) depositAmount from
+		((SELECT 
+			receive_account_id as receiveAccountId,receive_account_name as receiveAccountName,receive_number as receiveNumber,receive_bank_number as receiveBankNumber,
+			receive_unit_id as receiveUnitId,receive_unit_name as receiveUnitName,sum(deposit_amount) depositAmounts
+			from tb_advance_charge 
+			where project_id = #{map.projectId} and type = 0 and advance_type = #{map.advanceType} and status = 0
+			and receive_account_id = #{map.id}  and delete_flag = 0) a,
+		(SELECT sum(purpose_amount) purposeAmount
+			from tb_advance_charge 
+			where project_id = #{map.projectId} and type = 1 and advance_type = #{map.advanceType} and status = 0
+			and pay_account_id = #{map.id}  and delete_flag = 0) b,
+		(SELECT sum(cash_amount) cashAmount
+			from tb_advance_charge 
+			where project_id = #{map.projectId} and type = 3 and advance_type = #{map.advanceType} and status = 0
+			and pay_account_id = #{map.id}  and delete_flag = 0) c)
+    </select>
+    
+    <update id="updateAdvanceCharge" parameterType="com.shenhesoft.logistics.finance.AdvanceCharge" >
+    update tb_advance_charge
+    <set >
+      <if test="projectId != null" >
+        project_id = #{projectId,jdbcType=INTEGER},
+      </if>
+      <if test="projectCode != null" >
+        project_code = #{projectCode,jdbcType=VARCHAR},
+      </if>
+      <if test="branchId != null" >
+        branch_id = #{branchId,jdbcType=INTEGER},
+      </if>
+      <if test="branchName != null" >
+        branch_name = #{branchName,jdbcType=VARCHAR},
+      </if>
+      <if test="serialNumber != null" >
+        serial_number = #{serialNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=TINYINT},
+      </if>
+      <if test="depositAmount != null" >
+        deposit_amount = #{depositAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="purposeAmount != null" >
+        purpose_amount = #{purposeAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="cashAmount != null" >
+        cash_amount = #{cashAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="operationDate != null" >
+        operation_date = #{operationDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operationPerson != null" >
+        operation_person = #{operationPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveType != null" >
+        receive_type = #{receiveType,jdbcType=TINYINT},
+      </if>
+      <if test="receiveUnitId != null" >
+        receive_unit_id = #{receiveUnitId,jdbcType=INTEGER},
+      </if>
+      <if test="receiveUnitName != null" >
+        receive_unit_name = #{receiveUnitName,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveAccountId != null" >
+        receive_account_id = #{receiveAccountId,jdbcType=INTEGER},
+      </if>
+      <if test="receiveAccountName != null" >
+        receive_account_name = #{receiveAccountName,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveAgent != null" >
+        receive_agent = #{receiveAgent,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveNumber != null" >
+        receive_number = #{receiveNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveBankNumber != null" >
+        receive_bank_number = #{receiveBankNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveTaxNumber != null" >
+        receive_tax_number = #{receiveTaxNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="payType != null" >
+        pay_type = #{payType,jdbcType=TINYINT},
+      </if>
+      <if test="payUnitId != null" >
+        pay_unit_id = #{payUnitId,jdbcType=INTEGER},
+      </if>
+      <if test="payUnitName != null" >
+        pay_unit_name = #{payUnitName,jdbcType=VARCHAR},
+      </if>
+      <if test="payAccountName != null" >
+        pay_account_name = #{payAccountName,jdbcType=VARCHAR},
+      </if>
+      <if test="payAccountId != null" >
+        pay_account_id = #{payAccountId,jdbcType=INTEGER},
+      </if>
+      <if test="payAgent != null" >
+        pay_agent = #{payAgent,jdbcType=VARCHAR},
+      </if>
+      <if test="payNumber != null" >
+        pay_number = #{payNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="payBankNumber != null" >
+        pay_bank_number = #{payBankNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="payTaxNumber != null" >
+        pay_tax_number = #{payTaxNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="advanceType != null" >
+        advance_type = #{advanceType,jdbcType=TINYINT},
+      </if>
+      <if test="payment != null" >
+        payment = #{payment,jdbcType=TINYINT},
+      </if>
+      <if test="assessor != null" >
+        assessor = #{assessor,jdbcType=VARCHAR},
+      </if>
+      <if test="assessorDate != null" >
+        assessor_date = #{assessorDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="purposeChooseAccountName != null" >
+        purpose_choose_account_name = #{purposeChooseAccountName,jdbcType=VARCHAR},
+      </if>
+      <if test="purposeChooseAccount != null" >
+        purpose_choose_account = #{purposeChooseAccount,jdbcType=INTEGER},
+      </if>
+      <if test="billName != null" >
+        bill_name = #{billName,jdbcType=TINYINT},
+      </if>
+      <if test="startNumber != null" >
+        start_number = #{startNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="endNumber != null" >
+        end_number = #{endNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="sheetNumber != null" >
+        sheet_number = #{sheetNumber,jdbcType=INTEGER},
+      </if>
+      <if test="invalidNumber != null" >
+        invalid_number = #{invalidNumber,jdbcType=INTEGER},
+      </if>
+      <if test="cargoName != null" >
+        cargo_name = #{cargoName,jdbcType=VARCHAR},
+      </if>
+      <if test="tonnage != null" >
+        tonnage = #{tonnage,jdbcType=DECIMAL},
+      </if>
+      <if test="totalAmount != null" >
+        total_amount = #{totalAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag = #{deleteFlag,jdbcType=TINYINT},
+      </if>
+      <if test="pleaseTrainNum != null" >
+        please_train_num = #{pleaseTrainNum,jdbcType=VARCHAR},
+      </if>
+      <if test="trainOrderId != null" >
+        train_order_id = #{trainOrderId,jdbcType=INTEGER},
+      </if>
+      <if test="costPackId != null" >
+        cost_pack_id = #{costPackId,jdbcType=INTEGER},
+      </if>
+      <if test="costPackNum != null" >
+        cost_pack_num = #{costPackNum,jdbcType=VARCHAR},
+      </if>
+      <if test="alreadyDeposeAccount != null" >
+        already_depose_account = #{alreadyDeposeAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="otherProof != null" >
+        other_proof = #{otherProof,jdbcType=INTEGER},
+      </if>
+      <if test="otherProofStart != null" >
+        other_proof_start = #{otherProofStart,jdbcType=VARCHAR},
+      </if>
+      <if test="otherProofEnd != null" >
+        other_proof_end = #{otherProofEnd,jdbcType=VARCHAR},
+      </if>
+      <if test="otherProofNum != null" >
+        other_proof_num = #{otherProofNum,jdbcType=VARCHAR},
+      </if>
+      <if test="selfProof != null" >
+        self_proof = #{selfProof,jdbcType=INTEGER},
+      </if>
+      <if test="selfProofStart != null" >
+        self_proof_start = #{selfProofStart,jdbcType=VARCHAR},
+      </if>
+      <if test="selfProofEnd != null" >
+        self_proof_end = #{selfProofEnd,jdbcType=VARCHAR},
+      </if>
+      <if test="selfProofNum != null" >
+        self_proof_num = #{selfProofNum,jdbcType=VARCHAR},
+      </if>
+      <if test="entruckWeight != null" >
+        entruck_weight = #{entruckWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="sumCost != null" >
+        sum_cost = #{sumCost,jdbcType=DECIMAL},
+      </if>
+      <if test="produceTime != null" >
+        produce_time = #{produceTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <update id="deleteAdvanceById" parameterType="java.lang.Integer">
+		update tb_advance_charge
+		<set>
+		 delete_flag = 1
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	
+	<update id="delAdvanceByProjectId" parameterType="java.lang.Integer">
+		update tb_advance_charge
+		<set>
+		 delete_flag = 1
+		</set>
+		where project_id = #{id,jdbcType=INTEGER}
+	</update>
+</mapper>

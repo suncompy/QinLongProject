@@ -1,0 +1,103 @@
+/*��Ŀ����*/
+.project_wrap .project_form{padding: 30px;font-size: 16px;font-family: "Microsoft YaHei";}
+.project_wrap .project_form .form-group{position: relative;margin-bottom: 20px;}
+.project_wrap .project_form .form-group i{position: absolute;color: #ccd1d5;top: 10px;left: 85%}
+.project_table{margin-top: 50px;margin-left: 20px; }
+.project_table span{border: 1px solid #ccc;}
+.table_container{text-align: center;}
+/*ģ̬��*/
+
+.projectManagment  .cut_apart>div{float: left;}
+.projectManagment  .cut_apart>div{float: left;}
+.projectManagment  .cut_apart .half{width: 50%; padding-left: 20px;}
+.splitters{border-right: 1px dotted #ccc;padding-left: 0px !important;}
+.whole{width: 100%;background-color:#F5F5F5}
+.projectManagment .detailModal li{float: left;}
+.send_truck .whole li,.receve_truck .whole li{margin-right: 30px;}
+.train_line .whole li{width: 25%}
+
+.short-client input,.short-client select{width: 90px !important;}
+ 
+
+.projectManagment .detailModal ul{list-style-type: none;padding:0px;}
+.projectManagment .detailModal .detail_info li{float: left;}
+.projectManagment .detailModal .project_info li{float: left;width: 30%}
+.projectManagment .detailModal .cargo_info li,.detailModal .other_info li,.detailModal .client_cost li{float: left;width: 25%}
+.projectManagment .detailModal .cost_info li{float: left;width: 33%}
+.projectManagment .detailModal .long{width: 55%;margin-right: 10px}
+.projectManagment .cost_sort {white-space: nowrap;text-align: left;}
+.projectManagment  .modal-body .body-content{text-align: center;padding-top: 20px}
+.projectManagment .body-content span{vertical-align: middle;font-size: 20px;}
+.projectManagment .body-content .glyphicon-question-sign{color: #FFB106;font-size: 30px;margin-right: 10px;}
+.exportModal .modal-dialog,.deletModal .modal-dialog{margin-top: 300px}
+.exportModal .modal-footer, .deletModal .modal-footer{border:none;}
+.exportModal .modal-title, .deletModal .modal-title{text-align: left;}
+.train_line .whole span{position: absolute;top: 10px;right: 5px;}
+.whole{position: relative;}
+.whole .modify-info{position: absolute;top: 0; right: 10px;padding: 2px 10px;}
+.add-more{margin-right: 10px;padding: 2px 10px;margin-bottom: 10px;}
+.glyphicon-plus{margin-right: 10px}
+.whole .modifyBtn{margin: 0 10px}
+
+
+
+/*��Ŀ��Ӫ*/
+.depot{margin: 20px}
+#depot_table  {border-radius: 5px;border: 2px solid #dde3ef; border-collapse:collapse;border-spacing:0; margin-left: 20px;margin-right: 20px}
+#depot_table td{border:1px solid #eef5fd;font-family: "Microsoft YaHei"; font-size:14px;padding:10px 5px;overflow:hidden;word-break:normal;}
+#depot_table th{border:1px solid #dde3ef;font-family: "Microsoft YaHei";text-align: center; line-height: 1.375;background: #EEF5FD;font-size:16px;font-weight:normal;padding:10px 5px;overflow:hidden;word-break:normal;}
+#depot_table td dl{text-align: center;margin-bottom: 0px !important}
+#depot_table td dl dt{ font-size: 12px;font-family: "Microsoft YaHei";color: rgb(153, 153, 153);line-height: 1.833;}
+#depot_table td dl dd{ font-size: 16px;font-family: "Microsoft YaHei";color: rgb(51, 51, 51);line-height: 1.375;}
+/*ģ̬��*/
+.projectOperation .detailModal .modal-body>div{padding-left: 20px;}
+.projectDetail_info,.receve_info,.train_info{border-bottom: 1px dashed #ccc;}
+.projectOperation .detailModal ul{list-style-type: none;padding: 0px;}
+.projectOperation .detailModal li{float: left;width: 25%;}
+
+
+/*��Ŀ�˲�*/
+.projectCheck .detailModal .modal-body>div{padding-left: 20px;}
+
+
+
+
+
+
+
+
+/*�½���Ŀ+��Ŀ����ģ̬�򹫹���ʽ*/
+
+.modal-dialog .detailModal .form-group{margin-right: 20px;}
+
+/*�½���Ŀģ̬��*/
+.project_info .creat_content{font-size: 14px;font-family: "Microsoft YaHei";color: rgb(51, 51, 51);line-height: 1.2;}
+
+
+.modal .modal-header{padding: 5px!important;}
+.modal h5{color:#FFAE00;margin-top: 0px !important;font-weight: normal;}
+.modal p{color:#04A9ED;margin:10px;}
+.modal hr{margin-top: 10px !important;margin-bottom: 10px !important;border-top: 1px dashed #D8D8D8 !important;}
+.modal .modal-lg{height: 700px;overflow: auto;}
+.modal-dialog label{font-weight: normal;font-size: 14px;font-family: "Microsoft YaHei";color: #666666;line-height: 1.2;}
+.modal-dialog select,.modal-dialog input{width:120px;border-radius: 5px;border: 1px solid #ccc;height: 24px;margin: 5px 0;}
+.modal-dialog .sm-tag{width: 70px;text-align: right;}
+.modal-dialog .lg-tag{width: 84px;text-align: right;}
+.modal .form-group{padding:0!important;position: relative;margin: 0!important;}
+
+ 
+@media (min-width: 768px){
+
+.creatProjectModal .addr_info{width: 150px;}	
+}
+@media (min-width: 992px){
+
+.creatProjectModal .addr_info{width: 320px;}
+.modal-lg{width: 930px}
+}
+.creatProjectModal .modal-content .form-group span{position: absolute;top: 10px;right: 5px;}
+.creatProjectModal .cost_info label{width: 100px;text-align: right;}
+.cost_info td{vertical-align: text-top;}
+
+.truck{display: block}
+.receve,.send,.train,.receveAndTrain,.trainAndSend,.union{display: none}

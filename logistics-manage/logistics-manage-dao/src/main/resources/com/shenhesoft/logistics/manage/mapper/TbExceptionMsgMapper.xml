@@ -1,0 +1,483 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shenhesoft.logistics.manage.mapper.TbExceptionMsgMapper" >
+  <resultMap id="BaseResultMap" type="com.shenhesoft.logistics.manage.pojo.exception.TbExceptionMsg" >
+    <id column="exception_id" property="exceptionId" jdbcType="INTEGER" />
+    <result column="project_id" property="projectId" jdbcType="INTEGER" />
+    <result column="order_id" property="orderId" jdbcType="INTEGER" />
+    <result column="train_order_id" property="trainOrderId" jdbcType="INTEGER" />
+    <result column="short_train_flag" property="shortTrainFlag" jdbcType="TINYINT" />
+    <result column="order_status" property="orderStatus" jdbcType="TINYINT" />
+    <result column="exception_reason_id" property="exceptionReasonId" jdbcType="INTEGER" />
+    <result column="exception_reason" property="exceptionReason" jdbcType="VARCHAR" />
+    <result column="exception_reason_detail" property="exceptionReasonDetail" jdbcType="VARCHAR" />
+    <result column="exception_source" property="exceptionSource" jdbcType="TINYINT" />
+    <result column="submit_user_id" property="submitUserId" jdbcType="INTEGER" />
+    <result column="submit_date" property="submitDate" jdbcType="TIMESTAMP" />
+    <result column="affirm_status" property="affirmStatus" jdbcType="TINYINT" />
+    <result column="affirm_user_id" property="affirmUserId" jdbcType="INTEGER" />
+    <result column="affirm_date" property="affirmDate" jdbcType="TIMESTAMP" />
+    <result column="resolve_status" property="resolveStatus" jdbcType="TINYINT" />
+    <result column="resolve_date" property="resolveDate" jdbcType="TIMESTAMP" />
+    <result column="resolve_user_id" property="resolveUserId" jdbcType="INTEGER" />
+    <result column="delete_flag" property="deleteFlag" jdbcType="TINYINT" />
+    <result column="delete_user_id" property="deleteUserId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    exception_id, project_id, order_id, train_order_id, short_train_flag, order_status, 
+    exception_reason_id, exception_reason, exception_reason_detail, exception_source, 
+    submit_user_id, submit_date, affirm_status, affirm_user_id, affirm_date, resolve_status, 
+    resolve_date, resolve_user_id, delete_flag, delete_user_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shenhesoft.logistics.manage.pojo.exception.TbExceptionMsgExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_exception_msg
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_exception_msg
+    where exception_id = #{exceptionId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_exception_msg
+    where exception_id = #{exceptionId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.shenhesoft.logistics.manage.pojo.exception.TbExceptionMsgExample" >
+    delete from tb_exception_msg
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.shenhesoft.logistics.manage.pojo.exception.TbExceptionMsg" >
+    insert into tb_exception_msg (exception_id, project_id, order_id, 
+      train_order_id, short_train_flag, order_status, 
+      exception_reason_id, exception_reason, exception_reason_detail, 
+      exception_source, submit_user_id, submit_date, 
+      affirm_status, affirm_user_id, affirm_date, 
+      resolve_status, resolve_date, resolve_user_id, 
+      delete_flag, delete_user_id)
+    values (#{exceptionId,jdbcType=INTEGER}, #{projectId,jdbcType=INTEGER}, #{orderId,jdbcType=INTEGER}, 
+      #{trainOrderId,jdbcType=INTEGER}, #{shortTrainFlag,jdbcType=TINYINT}, #{orderStatus,jdbcType=TINYINT}, 
+      #{exceptionReasonId,jdbcType=INTEGER}, #{exceptionReason,jdbcType=VARCHAR}, #{exceptionReasonDetail,jdbcType=VARCHAR}, 
+      #{exceptionSource,jdbcType=TINYINT}, #{submitUserId,jdbcType=INTEGER}, #{submitDate,jdbcType=TIMESTAMP}, 
+      #{affirmStatus,jdbcType=TINYINT}, #{affirmUserId,jdbcType=INTEGER}, #{affirmDate,jdbcType=TIMESTAMP}, 
+      #{resolveStatus,jdbcType=TINYINT}, #{resolveDate,jdbcType=TIMESTAMP}, #{resolveUserId,jdbcType=INTEGER}, 
+      #{deleteFlag,jdbcType=TINYINT}, #{deleteUserId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.shenhesoft.logistics.manage.pojo.exception.TbExceptionMsg" >
+    insert into tb_exception_msg
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="exceptionId != null" >
+        exception_id,
+      </if>
+      <if test="projectId != null" >
+        project_id,
+      </if>
+      <if test="orderId != null" >
+        order_id,
+      </if>
+      <if test="trainOrderId != null" >
+        train_order_id,
+      </if>
+      <if test="shortTrainFlag != null" >
+        short_train_flag,
+      </if>
+      <if test="orderStatus != null" >
+        order_status,
+      </if>
+      <if test="exceptionReasonId != null" >
+        exception_reason_id,
+      </if>
+      <if test="exceptionReason != null" >
+        exception_reason,
+      </if>
+      <if test="exceptionReasonDetail != null" >
+        exception_reason_detail,
+      </if>
+      <if test="exceptionSource != null" >
+        exception_source,
+      </if>
+      <if test="submitUserId != null" >
+        submit_user_id,
+      </if>
+      <if test="submitDate != null" >
+        submit_date,
+      </if>
+      <if test="affirmStatus != null" >
+        affirm_status,
+      </if>
+      <if test="affirmUserId != null" >
+        affirm_user_id,
+      </if>
+      <if test="affirmDate != null" >
+        affirm_date,
+      </if>
+      <if test="resolveStatus != null" >
+        resolve_status,
+      </if>
+      <if test="resolveDate != null" >
+        resolve_date,
+      </if>
+      <if test="resolveUserId != null" >
+        resolve_user_id,
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag,
+      </if>
+      <if test="deleteUserId != null" >
+        delete_user_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="exceptionId != null" >
+        #{exceptionId,jdbcType=INTEGER},
+      </if>
+      <if test="projectId != null" >
+        #{projectId,jdbcType=INTEGER},
+      </if>
+      <if test="orderId != null" >
+        #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="trainOrderId != null" >
+        #{trainOrderId,jdbcType=INTEGER},
+      </if>
+      <if test="shortTrainFlag != null" >
+        #{shortTrainFlag,jdbcType=TINYINT},
+      </if>
+      <if test="orderStatus != null" >
+        #{orderStatus,jdbcType=TINYINT},
+      </if>
+      <if test="exceptionReasonId != null" >
+        #{exceptionReasonId,jdbcType=INTEGER},
+      </if>
+      <if test="exceptionReason != null" >
+        #{exceptionReason,jdbcType=VARCHAR},
+      </if>
+      <if test="exceptionReasonDetail != null" >
+        #{exceptionReasonDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="exceptionSource != null" >
+        #{exceptionSource,jdbcType=TINYINT},
+      </if>
+      <if test="submitUserId != null" >
+        #{submitUserId,jdbcType=INTEGER},
+      </if>
+      <if test="submitDate != null" >
+        #{submitDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="affirmStatus != null" >
+        #{affirmStatus,jdbcType=TINYINT},
+      </if>
+      <if test="affirmUserId != null" >
+        #{affirmUserId,jdbcType=INTEGER},
+      </if>
+      <if test="affirmDate != null" >
+        #{affirmDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="resolveStatus != null" >
+        #{resolveStatus,jdbcType=TINYINT},
+      </if>
+      <if test="resolveDate != null" >
+        #{resolveDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="resolveUserId != null" >
+        #{resolveUserId,jdbcType=INTEGER},
+      </if>
+      <if test="deleteFlag != null" >
+        #{deleteFlag,jdbcType=TINYINT},
+      </if>
+      <if test="deleteUserId != null" >
+        #{deleteUserId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.shenhesoft.logistics.manage.pojo.exception.TbExceptionMsgExample" resultType="java.lang.Integer" >
+    select count(*) from tb_exception_msg
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_exception_msg
+    <set >
+      <if test="record.exceptionId != null" >
+        exception_id = #{record.exceptionId,jdbcType=INTEGER},
+      </if>
+      <if test="record.projectId != null" >
+        project_id = #{record.projectId,jdbcType=INTEGER},
+      </if>
+      <if test="record.orderId != null" >
+        order_id = #{record.orderId,jdbcType=INTEGER},
+      </if>
+      <if test="record.trainOrderId != null" >
+        train_order_id = #{record.trainOrderId,jdbcType=INTEGER},
+      </if>
+      <if test="record.shortTrainFlag != null" >
+        short_train_flag = #{record.shortTrainFlag,jdbcType=TINYINT},
+      </if>
+      <if test="record.orderStatus != null" >
+        order_status = #{record.orderStatus,jdbcType=TINYINT},
+      </if>
+      <if test="record.exceptionReasonId != null" >
+        exception_reason_id = #{record.exceptionReasonId,jdbcType=INTEGER},
+      </if>
+      <if test="record.exceptionReason != null" >
+        exception_reason = #{record.exceptionReason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.exceptionReasonDetail != null" >
+        exception_reason_detail = #{record.exceptionReasonDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.exceptionSource != null" >
+        exception_source = #{record.exceptionSource,jdbcType=TINYINT},
+      </if>
+      <if test="record.submitUserId != null" >
+        submit_user_id = #{record.submitUserId,jdbcType=INTEGER},
+      </if>
+      <if test="record.submitDate != null" >
+        submit_date = #{record.submitDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.affirmStatus != null" >
+        affirm_status = #{record.affirmStatus,jdbcType=TINYINT},
+      </if>
+      <if test="record.affirmUserId != null" >
+        affirm_user_id = #{record.affirmUserId,jdbcType=INTEGER},
+      </if>
+      <if test="record.affirmDate != null" >
+        affirm_date = #{record.affirmDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.resolveStatus != null" >
+        resolve_status = #{record.resolveStatus,jdbcType=TINYINT},
+      </if>
+      <if test="record.resolveDate != null" >
+        resolve_date = #{record.resolveDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.resolveUserId != null" >
+        resolve_user_id = #{record.resolveUserId,jdbcType=INTEGER},
+      </if>
+      <if test="record.deleteFlag != null" >
+        delete_flag = #{record.deleteFlag,jdbcType=TINYINT},
+      </if>
+      <if test="record.deleteUserId != null" >
+        delete_user_id = #{record.deleteUserId,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_exception_msg
+    set exception_id = #{record.exceptionId,jdbcType=INTEGER},
+      project_id = #{record.projectId,jdbcType=INTEGER},
+      order_id = #{record.orderId,jdbcType=INTEGER},
+      train_order_id = #{record.trainOrderId,jdbcType=INTEGER},
+      short_train_flag = #{record.shortTrainFlag,jdbcType=TINYINT},
+      order_status = #{record.orderStatus,jdbcType=TINYINT},
+      exception_reason_id = #{record.exceptionReasonId,jdbcType=INTEGER},
+      exception_reason = #{record.exceptionReason,jdbcType=VARCHAR},
+      exception_reason_detail = #{record.exceptionReasonDetail,jdbcType=VARCHAR},
+      exception_source = #{record.exceptionSource,jdbcType=TINYINT},
+      submit_user_id = #{record.submitUserId,jdbcType=INTEGER},
+      submit_date = #{record.submitDate,jdbcType=TIMESTAMP},
+      affirm_status = #{record.affirmStatus,jdbcType=TINYINT},
+      affirm_user_id = #{record.affirmUserId,jdbcType=INTEGER},
+      affirm_date = #{record.affirmDate,jdbcType=TIMESTAMP},
+      resolve_status = #{record.resolveStatus,jdbcType=TINYINT},
+      resolve_date = #{record.resolveDate,jdbcType=TIMESTAMP},
+      resolve_user_id = #{record.resolveUserId,jdbcType=INTEGER},
+      delete_flag = #{record.deleteFlag,jdbcType=TINYINT},
+      delete_user_id = #{record.deleteUserId,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.shenhesoft.logistics.manage.pojo.exception.TbExceptionMsg" >
+    update tb_exception_msg
+    <set >
+      <if test="projectId != null" >
+        project_id = #{projectId,jdbcType=INTEGER},
+      </if>
+      <if test="orderId != null" >
+        order_id = #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="trainOrderId != null" >
+        train_order_id = #{trainOrderId,jdbcType=INTEGER},
+      </if>
+      <if test="shortTrainFlag != null" >
+        short_train_flag = #{shortTrainFlag,jdbcType=TINYINT},
+      </if>
+      <if test="orderStatus != null" >
+        order_status = #{orderStatus,jdbcType=TINYINT},
+      </if>
+      <if test="exceptionReasonId != null" >
+        exception_reason_id = #{exceptionReasonId,jdbcType=INTEGER},
+      </if>
+      <if test="exceptionReason != null" >
+        exception_reason = #{exceptionReason,jdbcType=VARCHAR},
+      </if>
+      <if test="exceptionReasonDetail != null" >
+        exception_reason_detail = #{exceptionReasonDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="exceptionSource != null" >
+        exception_source = #{exceptionSource,jdbcType=TINYINT},
+      </if>
+      <if test="submitUserId != null" >
+        submit_user_id = #{submitUserId,jdbcType=INTEGER},
+      </if>
+      <if test="submitDate != null" >
+        submit_date = #{submitDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="affirmStatus != null" >
+        affirm_status = #{affirmStatus,jdbcType=TINYINT},
+      </if>
+      <if test="affirmUserId != null" >
+        affirm_user_id = #{affirmUserId,jdbcType=INTEGER},
+      </if>
+      <if test="affirmDate != null" >
+        affirm_date = #{affirmDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="resolveStatus != null" >
+        resolve_status = #{resolveStatus,jdbcType=TINYINT},
+      </if>
+      <if test="resolveDate != null" >
+        resolve_date = #{resolveDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="resolveUserId != null" >
+        resolve_user_id = #{resolveUserId,jdbcType=INTEGER},
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag = #{deleteFlag,jdbcType=TINYINT},
+      </if>
+      <if test="deleteUserId != null" >
+        delete_user_id = #{deleteUserId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where exception_id = #{exceptionId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.shenhesoft.logistics.manage.pojo.exception.TbExceptionMsg" >
+    update tb_exception_msg
+    set project_id = #{projectId,jdbcType=INTEGER},
+      order_id = #{orderId,jdbcType=INTEGER},
+      train_order_id = #{trainOrderId,jdbcType=INTEGER},
+      short_train_flag = #{shortTrainFlag,jdbcType=TINYINT},
+      order_status = #{orderStatus,jdbcType=TINYINT},
+      exception_reason_id = #{exceptionReasonId,jdbcType=INTEGER},
+      exception_reason = #{exceptionReason,jdbcType=VARCHAR},
+      exception_reason_detail = #{exceptionReasonDetail,jdbcType=VARCHAR},
+      exception_source = #{exceptionSource,jdbcType=TINYINT},
+      submit_user_id = #{submitUserId,jdbcType=INTEGER},
+      submit_date = #{submitDate,jdbcType=TIMESTAMP},
+      affirm_status = #{affirmStatus,jdbcType=TINYINT},
+      affirm_user_id = #{affirmUserId,jdbcType=INTEGER},
+      affirm_date = #{affirmDate,jdbcType=TIMESTAMP},
+      resolve_status = #{resolveStatus,jdbcType=TINYINT},
+      resolve_date = #{resolveDate,jdbcType=TIMESTAMP},
+      resolve_user_id = #{resolveUserId,jdbcType=INTEGER},
+      delete_flag = #{deleteFlag,jdbcType=TINYINT},
+      delete_user_id = #{deleteUserId,jdbcType=INTEGER}
+    where exception_id = #{exceptionId,jdbcType=INTEGER}
+  </update>
+
+	<select id="listShortExceptionInfoByUserId" parameterType="map"
+		resultType="java.util.Map">
+		select
+		p.id projectId,
+		p.project_code projectCode,
+		o.id order_id,
+		o.order_code orderCode,
+		o.carrier_vehicle_name carrierVehicleName,
+		o.cargo_name cargoName,
+		o.send_company receiptCompany,
+		o.receipt_company sendCompany,
+		o.status status,
+		m.exception_id exceptionId,
+		m.exception_reason exceptionReason,
+		m.exception_reason_detail exceptionReasonDetail,
+		m.exception_source exceptionSource,
+		u.name username
+		from tb_exception_msg m
+		LEFT JOIN tb_order o on o.id = m.order_id
+		LEFT JOIN tb_project p on p.id = o.project_id
+		LEFT JOIN tb_user_branch_group g on p.branch_group_id = g.branch_group_id
+		LEFT JOIN tb_system_user u on u.id = m.submit_user_id
+		where m.delete_flag = 0
+		and m.delete_flag = 0
+		and o.delete_flag = 0
+		and o.is_cancel = 0
+		and m.affirm_status = 0
+		and m.short_train_flag = 0
+		and p.delete_flag = 0
+		and p.branch_group_id = g.branch_group_id
+		and g.user_id = #{userId,jdbcType=INTEGER}
+		order by m.exception_id desc 
+	</select>
+</mapper>

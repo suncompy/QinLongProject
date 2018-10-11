@@ -1,0 +1,52 @@
+.tableDivs{background: #fff;border: 1px solid #ccc;margin-bottom: 10px;position: relative;display: none;}
+
+/*新建模态框*/
+.project_info .creat_content{font-size: 14px;font-family: "Microsoft YaHei";color: rgb(51, 51, 51);line-height: 1.2;}
+.modal .modal-header{padding: 5px!important;}
+ #changeForm h5{color:#FFAE00;margin-top: 0px !important;font-weight: normal;}
+ #changeForm p{color:#04A9ED;margin:10px;}
+ #changeForm hr{margin-top: 10px !important;margin-bottom: 10px !important;border-top: 1px dashed #D8D8D8 !important;}
+.modal .modal-lg{height: 700px;overflow: auto;}
+ #changeForm label{font-weight: normal;font-size: 14px;font-family: "Microsoft YaHei";color: #666666;line-height: 1.2;}
+ #changeForm select, #changeForm input[type=text]{width:120px;border: 1px solid #dde3ef;height: 24px;margin: 5px 0;border-radius: 4px !important;}
+ #changeForm .sm-tag{width: 70px;text-align: right;}
+  #changeForm .form-inline{margin-left: 0px !important;}
+ #changeForm.lg-tag{width: 84px;text-align: right;}
+ #changeForm .form-group{padding:0!important;position: relative;margin: 0 15px!important;}
+@media (min-width: 768px){
+.addr_info{width: 150px;}	
+}
+@media (min-width: 992px){
+.addr_info{width: 333px !important;}
+.modal-lg{width: 930px}
+}
+.waitUl {overflow: hidden; padding-left: 10px !important;}
+.waitUl li{float: left;list-style: none;min-width: 235px;margin: 10px 0 0 0;}
+/*开始对账模态框*/
+ #startDetail h5{color:#FFAE00;margin-top: 0px !important;font-weight: normal;}
+ #startDetail p{color:#04A9ED;margin:10px;}
+  #startDetail label{font-weight: normal;font-size: 14px;font-family: "Microsoft YaHei";color: #666666;line-height: 1.2;}
+ #startDetail select, #startDetail input[type=text]{width:140px;border: 1px solid #dde3ef;height: 28px;margin: 5px 0;border-radius: 4px !important;}
+ /*打包*/
+label{
+	font-weight: normal;
+}
+#packForm th {
+    background-color: #EEF5FD;
+    font-weight: normal;
+    text-align: center;
+    font-size: 14px;
+    padding: 5px !important;
+    border-right: 1px solid #dde3ef;
+    }
+#packForm ul li {
+    float: left;
+    min-width: 228px;
+    list-style: none;
+    }
+#packForm tr td {
+    padding: 0 8px!important;
+    border-right: 1px solid #dde3ef;
+    font-size: 12px;
+    vertical-align: middle;
+    }

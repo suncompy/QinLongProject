@@ -1,0 +1,8 @@
+.modal .modal-header{padding: 5px!important;}
+.modal-dialog select,.modal-dialog input[type=text]{width:140px;border: 1px solid #DDE3EF;;height: 28px;margin: 5px 0;border-radius: 2px;}
+.modal form{margin-bottom: 10px;}
+.modal .form-group{padding:0!important;position: relative;margin: 0 15px!important;}
+.modal .form-group span{position: absolute;top: 10px;right: 10px;}
+.modal .longInput{width: 290px !important;}
+
+ 

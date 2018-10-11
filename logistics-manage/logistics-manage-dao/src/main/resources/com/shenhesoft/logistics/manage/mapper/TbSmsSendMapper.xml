@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shenhesoft.logistics.manage.mapper.TbSmsSendMapper" >
+  <resultMap id="BaseResultMap" type="com.shenhesoft.logistics.manage.pojo.tbSmsSend.TbSmsSend" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="send_time" property="sendTime" jdbcType="TIMESTAMP" />
+    <result column="recive_phone" property="recivePhone" jdbcType="VARCHAR" />
+    <result column="msg" property="msg" jdbcType="VARCHAR" />
+    <result column="recive_user_id" property="reciveUserId" jdbcType="INTEGER" />
+    <result column="recive_user_name" property="reciveUserName" jdbcType="VARCHAR" />
+    <result column="order_code" property="orderCode" jdbcType="VARCHAR" />
+    <result column="order_id" property="orderId" jdbcType="INTEGER" />
+    <result column="msg_status" property="msgStatus" jdbcType="INTEGER" />
+    <result column="opt_user_name" property="optUserName" jdbcType="VARCHAR" />
+    <result column="opt_user_id" property="optUserId" jdbcType="INTEGER" />
+    <result column="msg_sign_name" property="msgSignName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, send_time, recive_phone, msg, recive_user_id, recive_user_name, order_code, order_id, 
+    msg_status, opt_user_name, opt_user_id, msg_sign_name
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shenhesoft.logistics.manage.pojo.tbSmsSend.TbSmsSendExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_sms_send
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_sms_send
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_sms_send
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.shenhesoft.logistics.manage.pojo.tbSmsSend.TbSmsSendExample" >
+    delete from tb_sms_send
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.shenhesoft.logistics.manage.pojo.tbSmsSend.TbSmsSend" >
+    insert into tb_sms_send (id, send_time, recive_phone, 
+      msg, recive_user_id, recive_user_name, 
+      order_code, order_id, msg_status, 
+      opt_user_name, opt_user_id, msg_sign_name
+      )
+    values (#{id,jdbcType=INTEGER}, #{sendTime,jdbcType=TIMESTAMP}, #{recivePhone,jdbcType=VARCHAR}, 
+      #{msg,jdbcType=VARCHAR}, #{reciveUserId,jdbcType=INTEGER}, #{reciveUserName,jdbcType=VARCHAR}, 
+      #{orderCode,jdbcType=VARCHAR}, #{orderId,jdbcType=INTEGER}, #{msgStatus,jdbcType=INTEGER}, 
+      #{optUserName,jdbcType=VARCHAR}, #{optUserId,jdbcType=INTEGER}, #{msgSignName,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.shenhesoft.logistics.manage.pojo.tbSmsSend.TbSmsSend" >
+    insert into tb_sms_send
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="sendTime != null" >
+        send_time,
+      </if>
+      <if test="recivePhone != null" >
+        recive_phone,
+      </if>
+      <if test="msg != null" >
+        msg,
+      </if>
+      <if test="reciveUserId != null" >
+        recive_user_id,
+      </if>
+      <if test="reciveUserName != null" >
+        recive_user_name,
+      </if>
+      <if test="orderCode != null" >
+        order_code,
+      </if>
+      <if test="orderId != null" >
+        order_id,
+      </if>
+      <if test="msgStatus != null" >
+        msg_status,
+      </if>
+      <if test="optUserName != null" >
+        opt_user_name,
+      </if>
+      <if test="optUserId != null" >
+        opt_user_id,
+      </if>
+      <if test="msgSignName != null" >
+        msg_sign_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="sendTime != null" >
+        #{sendTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="recivePhone != null" >
+        #{recivePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="msg != null" >
+        #{msg,jdbcType=VARCHAR},
+      </if>
+      <if test="reciveUserId != null" >
+        #{reciveUserId,jdbcType=INTEGER},
+      </if>
+      <if test="reciveUserName != null" >
+        #{reciveUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="orderCode != null" >
+        #{orderCode,jdbcType=VARCHAR},
+      </if>
+      <if test="orderId != null" >
+        #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="msgStatus != null" >
+        #{msgStatus,jdbcType=INTEGER},
+      </if>
+      <if test="optUserName != null" >
+        #{optUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="optUserId != null" >
+        #{optUserId,jdbcType=INTEGER},
+      </if>
+      <if test="msgSignName != null" >
+        #{msgSignName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.shenhesoft.logistics.manage.pojo.tbSmsSend.TbSmsSendExample" resultType="java.lang.Integer" >
+    select count(*) from tb_sms_send
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_sms_send
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.sendTime != null" >
+        send_time = #{record.sendTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.recivePhone != null" >
+        recive_phone = #{record.recivePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.msg != null" >
+        msg = #{record.msg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reciveUserId != null" >
+        recive_user_id = #{record.reciveUserId,jdbcType=INTEGER},
+      </if>
+      <if test="record.reciveUserName != null" >
+        recive_user_name = #{record.reciveUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderCode != null" >
+        order_code = #{record.orderCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderId != null" >
+        order_id = #{record.orderId,jdbcType=INTEGER},
+      </if>
+      <if test="record.msgStatus != null" >
+        msg_status = #{record.msgStatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.optUserName != null" >
+        opt_user_name = #{record.optUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.optUserId != null" >
+        opt_user_id = #{record.optUserId,jdbcType=INTEGER},
+      </if>
+      <if test="record.msgSignName != null" >
+        msg_sign_name = #{record.msgSignName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_sms_send
+    set id = #{record.id,jdbcType=INTEGER},
+      send_time = #{record.sendTime,jdbcType=TIMESTAMP},
+      recive_phone = #{record.recivePhone,jdbcType=VARCHAR},
+      msg = #{record.msg,jdbcType=VARCHAR},
+      recive_user_id = #{record.reciveUserId,jdbcType=INTEGER},
+      recive_user_name = #{record.reciveUserName,jdbcType=VARCHAR},
+      order_code = #{record.orderCode,jdbcType=VARCHAR},
+      order_id = #{record.orderId,jdbcType=INTEGER},
+      msg_status = #{record.msgStatus,jdbcType=INTEGER},
+      opt_user_name = #{record.optUserName,jdbcType=VARCHAR},
+      opt_user_id = #{record.optUserId,jdbcType=INTEGER},
+      msg_sign_name = #{record.msgSignName,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.shenhesoft.logistics.manage.pojo.tbSmsSend.TbSmsSend" >
+    update tb_sms_send
+    <set >
+      <if test="sendTime != null" >
+        send_time = #{sendTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="recivePhone != null" >
+        recive_phone = #{recivePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="msg != null" >
+        msg = #{msg,jdbcType=VARCHAR},
+      </if>
+      <if test="reciveUserId != null" >
+        recive_user_id = #{reciveUserId,jdbcType=INTEGER},
+      </if>
+      <if test="reciveUserName != null" >
+        recive_user_name = #{reciveUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="orderCode != null" >
+        order_code = #{orderCode,jdbcType=VARCHAR},
+      </if>
+      <if test="orderId != null" >
+        order_id = #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="msgStatus != null" >
+        msg_status = #{msgStatus,jdbcType=INTEGER},
+      </if>
+      <if test="optUserName != null" >
+        opt_user_name = #{optUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="optUserId != null" >
+        opt_user_id = #{optUserId,jdbcType=INTEGER},
+      </if>
+      <if test="msgSignName != null" >
+        msg_sign_name = #{msgSignName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.shenhesoft.logistics.manage.pojo.tbSmsSend.TbSmsSend" >
+    update tb_sms_send
+    set send_time = #{sendTime,jdbcType=TIMESTAMP},
+      recive_phone = #{recivePhone,jdbcType=VARCHAR},
+      msg = #{msg,jdbcType=VARCHAR},
+      recive_user_id = #{reciveUserId,jdbcType=INTEGER},
+      recive_user_name = #{reciveUserName,jdbcType=VARCHAR},
+      order_code = #{orderCode,jdbcType=VARCHAR},
+      order_id = #{orderId,jdbcType=INTEGER},
+      msg_status = #{msgStatus,jdbcType=INTEGER},
+      opt_user_name = #{optUserName,jdbcType=VARCHAR},
+      opt_user_id = #{optUserId,jdbcType=INTEGER},
+      msg_sign_name = #{msgSignName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

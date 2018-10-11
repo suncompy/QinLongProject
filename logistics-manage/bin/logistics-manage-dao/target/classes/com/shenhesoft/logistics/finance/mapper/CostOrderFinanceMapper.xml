@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shenhesoft.logistics.finance.mapper.CostOrderFinanceMapper">
+
+	<!-- 新增短驳运单财务表 -->
+	<insert id="addCostOrderFinance">
+		INSERT INTO `tb_cost_order_finance` (`cost_order_fin_id`,`project_id`,`order_id`,`finace_status`,`pack_flag`,`delete_flag`,`send_tare`,`send_gross`,`send_net`,`cargo_unit_price`,`cargo_price`,`create_date`,`create_user_id`,`modifiy_date`,`tb_cost_pack_id`
+	)values(#{costOrderFinId},#{projectId},#{orderId},#{financeStatus},#{packFlag},#{deleteFlag},#{sendTare},#{sendGross},#{sendNet},#{cargoUnitPrice},#{cargoPrice},#{createDate},#{createUserId},#{modifiyDate},#{tbCostPackId})
+	</insert>
+
+	<!-- 批量新增短驳运单财务表 -->
+	<insert id="addCostOrderFinances">
+		INSERT INTO `tb_cost_order_finance` (`cost_order_fin_id`,`project_id`,`order_id`,`finace_status`,`pack_flag`,`delete_flag`,`send_tare`,`send_gross`,`send_net`,`cargo_unit_price`,`cargo_price`,`create_date`,`create_user_id`,`modifiy_date`,`tb_cost_pack_id`
+		)values
+		<foreach collection="list" item="item" index="index" separator=",">
+            (#{costOrderFinId},#{projectId},#{orderId},#{financeStatus},#{packFlag},#{deleteFlag},#{sendTare},#{sendGross},#{sendNet},#{cargoUnitPrice},#{cargoPrice},#{createDate},#{createUserId},#{modifiyDate},#{tbCostPackId})
+        </foreach>
+	</insert>
+
+	<!-- 修改短驳运单财务表 -->
+	<update id="editCostOrderFinanceById">
+		update tb_cost_order_finance
+		<set>
+		 <if test="projectId != null">
+               project_id=#{projectId},
+         </if>
+		<if test="orderId != null">
+               order_id=#{orderId},
+         </if>
+		<if test="financeStatus != null">
+               finace_status=#{financeStatus},
+         </if>
+		<if test="packFlag != null">
+               pack_flag=#{packFlag},
+         </if>
+		<if test="deleteFlag != null">
+               delete_flag=#{deleteFlag},
+         </if>
+		<if test="sendTare != null">
+               send_tare=#{sendTare},
+         </if>
+		<if test="sendGross != null">
+               send_gross=#{sendGross},
+         </if>
+		<if test="sendNet != null">
+               send_net=#{sendNet},
+         </if>
+		<if test="cargoPrice != null">
+               cargo_price=#{cargoPrice},
+         </if>
+		<if test="createDate != null">
+               create_date=#{createDate},
+         </if>
+		<if test="createUserId != null">
+               create_user_id=#{createUserId},
+         </if>
+		<if test="modifiyDate != null">
+               modifiy_date=#{modifiyDate},
+         </if>
+         <if test="tbCostPackId != null">
+               tb_cost_pack_id=#{tbCostPackId},
+         </if>
+		</set>
+		where cost_order_fin_id=#{costOrderFinId}
+	</update>
+
+	<!-- 批量修改短驳运单财务表 -->
+	<update id="editCostOrderFinanceByIds">
+		update tb_cost_order_finance
+		<set>
+		 <if test="map.financeStatus != null">
+               finace_status=#{map.financeStatus},
+         </if>
+	<!-- 	 <if test="map.billingDate != null">
+               billing_date=#{map.billingDate},
+         </if>
+		 <if test="map.financeAuditDate != null">
+               finance_audit_date=#{map.financeAuditDate},
+         </if> -->
+         <if test="map.packFlag != null">
+               pack_flag=#{map.packFlag},
+         </if>
+		</set>
+		where cost_order_fin_id in
+		<foreach collection="list" index="index" item="item" open="(" separator="," close=")">   
+             #{item}   
+        </foreach>
+	</update>
+
+	<!-- 查看短驳运单财务表 -->
+	<select id="getCostOrderFinanceById" resultType="Map">
+        select a.cost_order_fin_id costOrderFinId,a.project_id projectId,a.order_id orderId,a.finace_status financeStatus,a.send_tare sendTare,a.send_gross sendGross,a.send_net sendNet,a.cargo_unit_price cargoUnitPrice,a.cargo_price cargoPrice,a.pack_flag packFlag,a.delete_flag deleteFlag,a.create_date createDate,a.create_user_id createUserId,a.modifiy_date modifiyDate
+        from tb_cost_order_finance a
+        where a.cost_order_fin_id=#{id}
+    </select>
+
+	<!-- 删除短驳运单财务表 -->
+	<update id="delCostOrderFinanceById">
+		update tb_cost_order_finance set delete_flag = 1 where cost_order_fin_id = #{id}
+	</update>	
+
+	<!-- 批量删除短驳运单财务表 -->
+    <update id="delCostOrderFinanceByIds">  
+    	update tb_cost_order_finance set delete_flag = 1 where cost_order_fin_id in
+        <foreach collection="list" index="index" item="item" open="(" separator="," close=")">   
+            #{item}   
+        </foreach>  
+    </update>
+
+	<!-- 清空短驳运单财务表 -->
+	<update id="delCostOrderFinances">
+		update tb_cost_order_finance set delete_flag = 1
+	</update>	
+
+	<!-- 检索短驳运单财务表列表 -->
+	<select id="getCostOrderFinances" resultType="Map">
+		SELECT
+			cof.cost_order_fin_id costOrderFinId,
+			cof.project_id projectId,
+			p.project_code projectCode,
+			cof.finace_status financeStatus,
+			p.cargo_name cargoName,
+			p.cargo_price cargoPrice,
+			p.branch_group_name branchGroupName,
+			o.id orderId,
+			o.order_code orderCode,
+			o.car_plate_number carPlateNumber,
+			cof.send_tare sendTare,
+			cof.send_gross sendGross,
+			cof.send_net sendNet,
+			o.order_origin orderOrign,
+			o.create_date createDate,
+			o.pickup_place pickupPlace,
+			o.take_delivery_date takeDeliveryDate,
+			o.arrive_place arrivePlace,
+			o.receipter_date receipterDate,
+			o.user_dispatch_name userDispatchName
+			,IFNULL(b.totalCarNum,0) totalCarNum
+			,IFNULL(b.totalNetWeight,0) totalWeight
+			,IFNULL(b.totalPieceNum,0) totalPiece
+		FROM
+			tb_cost_order_finance cof
+		LEFT JOIN tb_order o ON cof.order_id = o.id and o.step_select='接取'
+		LEFT JOIN tb_project p ON cof.project_id = p.id and p.transport_type in(1,4,6,7)  
+		LEFT JOIN (
+		select o.project_id projectId,count(o.carrier_vehicle_id) totalCarNum
+		,sum(IFNULL(o.container_one_send_net,0)+IFNULL(o.container_two_send_net,0)) totalNetWeight
+		,sum(IFNULL(o.piece_number,0)) totalPieceNum
+		from tb_order o
+		group by o.project_id
+		) b on b.projectId = p.id
+		left join tb_branch_group_link y on cof.cost_order_fin_id=y.row_id and y.tab_name='tb_cost_order_finance'
+		WHERE
+			o.is_cancel = 0
+		AND o.delete_flag = 0
+		AND cof.delete_flag = 0
+		and y.sys_org_code like CONCAT(#{map.sysOrgCode},'%')
+        <if test="map != null">
+		<if test="map.costOrderFinId != null and map.costOrderFinId != '' and map.costOrderFinId != 'null' and map.costOrderFinId != 'undefined'">				  
+		    AND cof.cost_order_fin_id = #{map.costOrderFinId}
+                </if>
+         <if test="map.tbCostPackId != null and map.tbCostPackId != '' and map.tbCostPackId != 'null' and map.tbCostPackId != 'undefined'">				  
+		    AND cof.tb_cost_pack_id = #{map.tbCostPackId}
+                </if>       
+		<if test="map.projectId != null and map.projectId != '' and map.projectId != 'null' and map.projectId != 'undefined'">
+		    AND cof.project_id = #{map.projectId}
+         </if>
+        <if test="map.projectCode != null and map.projectCode != '' and map.projectCode != 'null' and map.projectCode != 'undefined'">
+		    AND o.project_code like CONCAT('%',#{map.projectCode},'%') 
+         </if> 
+        <if test="map.branchGroupName != null and map.branchGroupName != '' and map.branchGroupName != 'null' and map.branchGroupName != 'undefined'">
+		    AND o.branch_group_name like CONCAT('%',#{map.branchGroupName},'%') 
+         </if> 
+         <if test="map.beginDate != null and map.beginDate !='' and map.beginDate != 'null' and map.beginDate != 'undefined' " >
+		       and date_format(o.create_date, '%Y-%m-%d') >= date_format(#{map.beginDate}, '%Y-%m-%d')
+		    </if>
+		    <if test="map.endDate != null and map.endDate !='' and map.endDate != 'null' and map.endDate != 'undefined' " >
+		       and date_format(o.create_date, '%Y-%m-%d') &lt;= date_format(#{map.endDate}, '%Y-%m-%d')
+		    </if>
+		<if test="map.orderId != null">
+		    AND cof.order_id = #{map.orderId}
+                </if>
+		<if test="map.financeStatus != null">
+		    AND cof.finace_status = #{map.financeStatus}
+                </if>
+		<if test="map.packFlag != null">
+		    AND cof.pack_flag = #{map.packFlag}
+                </if>
+		<if test="map.deleteFlag != null">
+		    AND cof.delete_flag = #{map.deleteFlag}
+                </if>
+		<if test="map.createDate != null">
+		    AND cof.create_date = #{map.createDate}
+                </if>
+		<if test="map.createUserId != null">
+		    AND cof.create_user_id = #{map.createUserId}
+                </if>
+		<if test="map.modifiyDate != null">
+		    AND cof.modifiy_date = #{map.modifiyDate}
+                </if>
+		<if test="map.costOrderFinId != null and map.costOrderFinId != '' and map.costOrderFinId != 'null' and map.costOrderFinId != 'undefined'">
+		    and exists (select spo.sh_pack_id from tb_sh_pack_order spo where spo.sh_pack_id = #{map.shPackId} and spo.cost_order_fin_id = cof.cost_order_fin_id)
+        		</if>
+            </if>
+        order by cof.cost_order_fin_id desc
+	</select>
+
+</mapper>

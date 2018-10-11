@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shenhesoft.logistics.finance.mapper.CustomerPackOrderMapper">
+
+	<!-- 新增客户打包-运单中间表 -->
+	<insert id="addCustomerPackOrder">
+		insert into tb_customer_pack_order(cust_pack_order_id,cust_pack_id,order_id,delete_flag
+		)values(#{custPackOrderId},#{custPackId},#{orderId},#{deleteFlag})
+	</insert>
+
+	<!-- 批量新增客户打包-运单中间表 -->
+	<insert id="addCustomerPackOrders">
+		insert into tb_customer_pack_order(cust_pack_order_id,cust_pack_id,order_id,delete_flag
+		)values
+		<foreach collection="list" item="item" index="index" separator=",">
+            (#{custPackOrderId},#{custPackId},#{orderId},#{deleteFlag})
+        </foreach>
+	</insert>
+
+	<!-- 修改客户打包-运单中间表 -->
+	<update id="editCustomerPackOrderById">
+		update tb_customer_pack_order
+		<set>
+		 <if test="custPackOrderId != null and custPackOrderId != '' and custPackOrderId != 'null' and custPackOrderId != 'undefined'">
+               cust_pack_order_id=#{custPackOrderId},
+         </if>
+		 <if test="custPackId != null and custPackId != '' and custPackId != 'null' and custPackId != 'undefined'">
+               cust_pack_id=#{custPackId},
+         </if>
+		<if test="orderId != null">
+               order_id=#{orderId},
+         </if>
+		<if test="deleteFlag != null">
+               delete_flag=#{deleteFlag},
+         </if>
+		</set>
+		where cust_pack_order_id=#{custPackOrderId}
+	</update>
+
+	<!-- 批量修改客户打包-运单中间表 -->
+	<update id="editCustomerPackOrderByIds">
+		update tb_customer_pack_order
+		<set>
+		 <if test="map.custPackOrderId != null and map.custPackOrderId != '' and map.custPackOrderId != 'null' and map.custPackOrderId != 'undefined'">
+	       cust_pack_order_id=#{map.custPackOrderId},
+         </if>
+		 <if test="map.custPackId != null and map.custPackId != '' and map.custPackId != 'null' and map.custPackId != 'undefined'">
+	       cust_pack_id=#{map.custPackId},
+         </if>
+		<if test="map.orderId != null">
+	       order_id=#{map.orderId},
+         </if>
+		<if test="map.deleteFlag != null">
+	       delete_flag=#{map.deleteFlag},
+         </if>
+		</set>
+		where cust_pack_order_id in
+		<foreach collection="list" index="index" item="item" open="(" separator="," close=")">   
+             #{item}   
+        </foreach>
+	</update>
+
+	<!-- 查看客户打包-运单中间表 -->
+	<select id="getCustomerPackOrderById" resultType="Map">
+        select a.cust_pack_order_id custPackOrderId,a.cust_pack_id custPackId,a.order_id orderId,a.delete_flag deleteFlag
+        from tb_customer_pack_order a
+        where a.cust_pack_order_id=#{id}
+    </select>
+
+	<!-- 删除客户打包-运单中间表 -->
+	<delete id="delCustomerPackOrderById">
+		delete from tb_customer_pack_order where cust_pack_order_id = #{id}
+	</delete>	
+
+	<!-- 批量删除客户打包-运单中间表 -->
+    <delete id="delCustomerPackOrderByIds">  
+        delete from tb_customer_pack_order where cust_pack_order_id in 
+        <foreach collection="list" index="index" item="item" open="(" separator="," close=")">   
+            #{item}   
+        </foreach>  
+    </delete>
+
+	<!-- 清空客户打包-运单中间表 -->
+	<delete id="delCustomerPackOrders">
+		delete from tb_customer_pack_order
+	</delete>	
+
+	<!-- 检索客户打包-运单中间表列表 -->
+	<select id="getCustomerPackOrders" resultType="Map">
+		select a.cust_pack_order_id custPackOrderId,a.cust_pack_id custPackId,a.order_id orderId,a.delete_flag deleteFlag
+		from tb_customer_pack_order a
+		left join tb_branch_group_link y on a.cust_pack_order_id=y.row_id and y.tab_name='tb_customer_pack_order'
+		<where>
+		and y.sys_org_code like CONCAT(#{map.sysOrgCode},'%')
+            <if test="map != null">
+                <if test="map.custPackOrderId != null and map.custPackOrderId != '' and map.custPackOrderId != 'null' and map.custPackOrderId != 'undefined'">				  
+                    AND a.cust_pack_order_id = #{map.custPackOrderId}
+                </if>
+                <if test="map.custPackId != null and map.custPackId != '' and map.custPackId != 'null' and map.custPackId != 'undefined'">				  
+                    AND a.cust_pack_id = #{map.custPackId}
+                </if>
+                <if test="map.orderId != null and map.orderId != '' and map.orderId != 'null' and map.orderId != 'undefined'">				  
+                    AND a.order_id = #{map.orderId}
+                </if>
+                <if test="map.deleteFlag != null and map.deleteFlag != '' and map.deleteFlag != 'null' and map.deleteFlag != 'undefined'">				  
+                    AND a.delete_flag = #{map.deleteFlag}
+                </if>
+            </if>
+        </where>
+        order by a.cust_pack_order_id desc
+	</select>
+	
+	<select id="listCustomerPackOrderByCustPackIds" resultType="Map">
+		select cpo.cust_pack_order_id custPackOrderId,cpo.cust_pack_id custPackId,cpo.order_id orderId,cpo.delete_flag deleteFlag
+		from tb_customer_pack_order cpo
+		where cpo.cust_pack_id in
+		<foreach collection="list" index="index" item="item" open="(" separator="," close=")">   
+             #{item}   
+        </foreach>
+        order by cpo.cust_pack_order_id desc
+	</select>
+
+</mapper>

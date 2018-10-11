@@ -1,0 +1,72 @@
+@media (min-width: 1200px){
+   .container {
+   width: 1000px !important;}
+}
+.header{width:100%;height:118px;box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.15);}
+.register{margin: 40px 0px;}
+.pull-left{font-size: 28px;line-height: 1.2;font-family: "Microsoft YaHei";color: rgb(51, 51, 51);}
+.pull-right{font-size: 14px;font-family: "Microsoft YaHei";color: rgb(51, 51, 51); }
+h3{font-size: 22px;font-family: "Microsoft YaHei";color: rgb(236, 110, 70);font-weight: bold;line-height: 1.2;}
+h4{font-size: 18px;font-family: "Microsoft YaHei";color: rgb(51, 51, 51);font-weight: bold;line-height: 1.2;}
+label{font-weight: normal;}
+.formcontrol{width: 318px;height: 38px;border:1px solid #ccc;border-radius: 2px;}
+.birthday{position: relative;}
+.fa-calendar{font-size:20px;color: #ccc;position: absolute;top: 10px;left: 310px; }
+.addr-area{width: 120px;height: 38px;border:1px solid #ccc;border-radius: 2px;}
+.telnum{width: 175px;height: 38px;border:1px solid #ccc;border-radius: 2px;}
+.telcode{width: 134px;height: 38px;border:1px solid #ccc;border-radius: 2px;}
+#idFront,#idBack,#idImage,#idImages,#licenseFront,#licenseBack,#carImage,#carImages,#insuranceImage,#insuranceImages{width: 150px;height: 150px;margin: 10px;border:1px solid #ccc;overflow:hidden;padding: 0;}  
+/*#preview{width: 150px;height: 150px;margin: 10px;border:1px solid #000;overflow:hidden;background: url(img/abnormal.png);}*/
+#imghead,#imgheads,#idImg,#idImgs,#licenseimg,#licenseimgs,#carImg,#carImgs,#insuranceImg,#insuranceImgs{filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=image);width:150px;height:150px;}
+input[type=file]{border: 1px solid red;height: 150px;width: 150px;opacity: 0;z-index:99999;margin-top: -192px; } 
+b{color: red;padding: 6px;font-size: 20px;vertical-align: top;}
+.row{border-bottom: 1px solid #ccc;}
+.rowLeft{padding-right: 70px;margin-top: 30px;margin-bottom:40px;border-right: 1px solid #ccc;}
+.rowRight{margin-top: 80px;margin-left: 10px;}
+.rowRight p{margin: 10px 20px;}
+.serviceNum{color: red;}
+.personJoin,.fleetJoin{font-size: 20px;margin-left: 20px;font-family: "Microsoft YaHei";color: rgb(51, 51, 51);line-height: 1.2;}
+.personBtn,.fleetBtn{cursor: pointer;margin-bottom: 30px;}
+.footer{text-align: center;padding: 30px 0}
+.insure-time input{width: 170px;height: 38px;border: 1px solid #ccc;border-radius: 2px;}
+.insure-time .col-sm-9>div{float: left;position: relative;}
+.insure-time .fa-calendar{position: absolute;top: 10px;left: 145px}
+.insure-time .fa-minus{color: #CCCCCC;padding: 14px 5px;}
+/*单选样式*/
+.demo--label {
+	margin: 8px 20px 0 0;
+	display: inline-block
+}
+
+.demo--radio {
+	display: none
+}
+
+.demo--radioInput {
+	background-color: #fff;
+	border: 1px solid rgba(0, 0, 0, 0.15);
+		border-radius:18px;
+	display: inline-block;
+	height: 16px;
+	margin-right: 10px;
+	margin-top: -1px;
+	vertical-align: middle;
+	width: 16px;
+	line-height: 1
+}
+
+.demo--radio:checked+ .demo--radioInput:after {
+	background-color: #43d276;
+	border-radius:18px;
+	content: "";
+	display: inline-block;
+	height: 12px;
+	margin: 1px;
+	width: 12px
+}
+
+.demo--checkbox.demo--radioInput,
+.demo--radio:checked+ .demo--checkbox.demo--radioInput:after {
+	border-radius: 0
+}
+

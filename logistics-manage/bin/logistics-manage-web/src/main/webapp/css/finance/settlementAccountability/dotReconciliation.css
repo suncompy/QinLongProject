@@ -1,0 +1,13 @@
+.tableDivs{background: #fff;margin-bottom: 10px;position: relative;display: none;}
+/*新建模态框*/
+#oilGasForm  ul{list-style: none;padding: 0;margin-left: 10px;}
+#oilGasForm ul li{float: left;min-width: 220px;}
+#oilGasForm .table-responsive{max-height: 213px;}
+#oilGasForm th{background-color: #EEF5FD;text-align: center;font-size: 14px;padding: 5px !important; border-right: 1px solid #CCC;}
+#oilGasForm tr td{padding: 0 8px!important;border-right: 1px solid #ccc;font-size: 12px;vertical-align: middle;}
+/*form h5{color:#FFAE00;margin-top: 0px !important;font-weight: normal;}*/
+/*.modal p{color:#04A9ED;margin:10px;}*/
+#oilGasForm hr{margin-top: 10px !important;margin-bottom: 10px !important;border-top: 1px dashed #D8D8D8 !important;}
+#oilGasForm label{font-weight: normal;font-size: 14px;font-family: "Microsoft YaHei";color: #666666;line-height: 1.2;}
+#oilGasForm select,#oilGasForm input[type=text]{width:140px;border: 1px solid #dde3ef;;height: 28px;margin: 5px 0;border-radius: 4px;}
+#oilGasForm .form-inline{margin-left: 10px;}

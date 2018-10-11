@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shenhesoft.logistics.manage.mapper.BranchGroupMapper" >
+	
+	<sql id="Base_Column_List" >
+	    bg.id id,bg.code code,bg.name name,bg.short_name shortName,bg.short_code shortCode,bg.ascription_id ascriptionId,bg.ascription_name ascriptionName,bg.level level,bg.responsibler responsibler, 
+	     bg.responsiblerId responsiblerId,bg.area_id areaId,bg.address address,bg.relation_train_location_id relationTrainLocationId,bg.relation_train_location_name relationTrainLocationName,
+	     bg.relation_begin_location_id relationBeginLocationId,bg.relation_begin_location relationBeginLocation,bg.comment,bg.status,bg.create_date createDate,bg.duty_paragraph dutyParagraph
+  	</sql>
+	
+	<select id="getBranchGroups" resultType="com.shenhesoft.logistics.manage.helpPojo.DotBranchDetail">
+	select 
+	<include refid="Base_Column_List" /> 
+	from tb_branch_group bg
+	left join tb_branch_group_link y on bg.id=y.row_id 	
+		<where>
+		and y.tab_name='tb_branch_group'
+        <if test="map != null">
+        	<if test="map.userId == null or map.userId != 1 " >
+        		<if test="map.sysOrgCode!=null  and map.sysOrgCode != '' and map.sysOrgCode != 'null' and map.sysOrgCode != 'undefined'">
+        		 and y.sys_org_code like CONCAT(#{map.sysOrgCode},'%')
+        		</if>
+		     </if>
+            <if test="map.id != null" >
+		       and bg.id = #{map.id,jdbcType=INTEGER}
+		      </if>
+		      <if test="map.code != null" >
+		        and bg.code = #{map.code,jdbcType=VARCHAR}
+		      </if>
+		      <if test="map.name != null" >
+		         and bg.name = #{map.name,jdbcType=VARCHAR}
+		      </if>
+		      <if test="map.shortName != null and map.shortName != '' and map.shortName != 'null' and map.shortName != 'undefined'" >
+		         and bg.short_name = #{map.shortName,jdbcType=VARCHAR}
+		      </if>
+		      <if test="map.shortCode != null and map.shortCode != '' and map.shortCode != 'null' and map.shortCode != 'undefined'" >
+		         and bg.short_code = #{map.shortCode,jdbcType=VARCHAR}
+		      </if>
+		      <if test="map.ascriptionId != null" >
+		         and bg.ascription_id = #{map.ascriptionId,jdbcType=INTEGER}
+		      </if>
+		      <if test="map.ascriptionName != null and map.ascriptionName != '' and map.ascriptionName != 'null' and map.ascriptionName != 'undefined'"  >
+		         and bg.ascription_name = #{map.ascriptionName,jdbcType=VARCHAR}
+		      </if>
+		      <if test="map.levels != null" >
+		         <foreach collection="map.levels" item="level" open="and (" close=")" separator="or">  
+                <!-- 每个遍历需要生成的串 -->  
+                    bg.level=#{level,jdbcType=TINYINT}  
+                </foreach>  
+		      </if>
+		      <if test="map.responsibler != null" >
+		         and bg.responsibler = #{map.responsibler,jdbcType=VARCHAR}
+		      </if>
+		      <if test="map.responsiblerid != null" >
+		         and bg.responsiblerId = #{map.responsiblerid,jdbcType=INTEGER}
+		      </if>
+		      <if test="map.areaId != null" >
+		         and bg.area_id = #{map.areaId,jdbcType=VARCHAR}
+		      </if>
+		      <if test="map.address != null and map.address != '' and map.address != 'null' and map.address != 'undefined'"  >
+		         and bg.address = #{map.address,jdbcType=VARCHAR}
+		      </if>
+		      <if test="map.relationTrainLocationId != null" >
+		         and bg.relation_train_location_id = #{map.relationTrainLocationId,jdbcType=INTEGER}
+		      </if>
+		      <if test="map.relationTrainLocationName != null" >
+		         and bg.relation_train_location_name = #{map.relationTrainLocationName,jdbcType=VARCHAR}
+		      </if>
+		      <if test="map.relationBeginLocationId != null" >
+		         and bg.relation_begin_location_id = #{map.relationBeginLocationId,jdbcType=INTEGER}
+		      </if>
+		      <if test="map.relationBeginLocation != null" >
+		         and bg.relation_begin_location = #{map.relationBeginLocation,jdbcType=VARCHAR}
+		      </if>
+		       <if test="map.comment != null and map.comment != '' and map.comment != 'null' and map.comment != 'undefined'"  >
+		         and bg.comment = #{map.comment,jdbcType=VARCHAR}
+		      </if>
+		      <if test="map.status != null" >
+		         and bg.status = #{map.status,jdbcType=TINYINT}
+		      </if>
+		      <if test="map.createDate != null" >
+		         and bg.create_date = #{map.createDate,jdbcType=TIMESTAMP}
+		      </if>
+		      <if test="map.notContainStatus != null" >
+		         and bg.status != #{map.notContainStatus,jdbcType=TINYINT}
+		      </if>
+            </if>
+        </where>
+         order by bg.id 
+	</select>
+	
+	<update id="updateBranchGroupBeginOrStop" >
+		update tb_branch_group bg set bg.status = #{map.status} 
+		where bg.sys_org_code like CONCAT(#{map.sysOrgCode},'%') and bg.status!=3;
+		update tb_system_user u set u.work_status=#{map.status}
+		where u.branch_group_id in (select b.id from tb_branch_group b
+		where b.sys_org_code like CONCAT(#{map.sysOrgCode},'%'));
+		<!--暂停挂靠公司  -->
+		update tb_anchored_company ac set ac.`status` = #{map.status} where branch_id = #{map.branchId}
+	</update>
+	
+	<update id="restPassWd" >
+		update tb_system_user u set u.passwd=#{map.passwd}
+		where u.id in (select b.responsiblerId from tb_branch_group b
+		where b.id =#{map.branchId} )
+	</update>
+	
+</mapper>

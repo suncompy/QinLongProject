@@ -1,0 +1,27 @@
+ .tableDivs{background: #fff;margin-bottom: 10px;position: relative;display: none;}
+.itemUl{overflow: hidden;display: inline-block;}
+.itemUl li{list-style: none;float: left;height: 24px;line-height: 24px;margin: 0 10px;}
+.itemLi span{float: left;}
+.itemLi{margin-left: 50px;height: 24px;line-height: 24px;background: #f7f7f7;padding: 0 5px;width:540px !important;}
+.lookMore{margin-left: 100px !important;}
+.lookMore a{color:#5382FC!important ;}
+.waitUl{overflow: hidden;padding: 0 !important;}
+.waitUl li{list-style: none;float: left;min-width: 200px;margin: 0 10px;}
+form ul{list-style: none;padding: 0;margin-left: 10px;}
+form ul li{float: left;min-width: 192px;}
+form .table-responsive{max-height: 213px;}
+form th{background-color: #EEF5FD;text-align: center;font-size: 14px;padding: 5px !important; border-right: 1px solid #CCC;}
+form tr td{padding: 0 8px!important;border-right: 1px solid #ccc;font-size: 12px;vertical-align: middle;}
+/*form label{font-weight: normal;font-size: 14px;font-family: "Microsoft YaHei";color: #666666;line-height: 1.2;}*/
+/*form select,form input[type=text]{width:140px;border: 1px solid #dde3ef;;height: 28px;margin: 5px 0;border-radius: 2px;}*/
+ .v-top{vertical-align: top;}
+/*form .form-group{padding:0!important;position: relative;margin: 0 15px!important;}*/
+@media (min-width: 768px){
+.addr_info{width: 200px !important;}	
+}
+@media (min-width: 992px){
+.addr_info{width: 347px !important;}
+.modal-lg{width: 930px}
+}
+.remarkInput{width: 90% !important;}
+.addImg{margin: 0 10px;cursor: pointer;}

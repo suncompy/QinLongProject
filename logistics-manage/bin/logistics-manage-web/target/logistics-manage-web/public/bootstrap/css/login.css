@@ -1,0 +1,74 @@
+
+/*body{
+	background: url(img/白云.png) 50% 0 no-repeat;
+	color: #fff;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+.lg_form{
+	width: 390px;
+	height: 325px;
+}
+.form-group{
+	margin-bottom: 8px !important;
+}
+.form-horizontal{
+ background: rgba(250,250,250,0.5);
+ padding: 20px;
+ border: 2px solid red;
+ border-radius: 10px;
+}*/
+body{
+  background: url(../img/login-bg.png) 50%  0 no-repeat;
+  /*background-size: cover;*/
+  /*background: url(img/login-bg.png) 50% 0 no-repeat;*/
+  color: #fff;
+  margin: 0;
+  padding: 0;
+}
+.lg-content .form-horizontal{
+  width: 400px;
+  background:rgba(123, 168, 208, 0.5);
+  border-radius: 10px;
+  padding-bottom: 1px;
+  margin: 10px 0 ;
+}
+.lg-content .lg-title{
+  /*margin-top: 280px;*/
+  margin-bottom: 20px;
+}
+.lg-content{
+ 
+  width: 400px;
+  margin-top:340px;
+  margin-left: 20%;
+
+
+}
+.lg-content .lg-heading{
+  display: block;
+  font-size: 20px;
+  text-align: center;
+  padding: 10px 0;
+  color:#bccad4; 
+  font-weight: bold;
+}
+.form-group{
+  padding: 0 20px;
+  margin-bottom: 20px;
+}
+.form-group a{
+    height: 34px;
+    line-height: 34px;
+    color: #f0ad4e;
+}
+
+.modal h4{display: block;font-size: 20px;text-align: center;padding: 10px 0;color: #bccad4;font-weight: bold;}
+.modal-dialog{width: 500px !important;}
+.modal .form-horizontal{width: 100%;}
+.modal .modal-body{background-color: rgb(6, 92, 150);position: relative;}
+
+.modal .glyphicon-remove-sign{color: #fff;font-size: 20px;position: absolute;top: 10px;right: 10px;}
+

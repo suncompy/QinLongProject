@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shenhesoft.logistics.manage.mapper.TbPermissionMapper" >
+  <resultMap id="BaseResultMap" type="com.shenhesoft.logistics.manage.pojo.permission.TbPermission" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="menu_id" property="menuId" jdbcType="INTEGER" />
+    <result column="menu_parent_id" property="menuParentId" jdbcType="INTEGER" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="delete_flag" property="deleteFlag" jdbcType="TINYINT" />
+    <result column="range" property="range" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, name, menu_id, menu_parent_id, description, delete_flag, range
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shenhesoft.logistics.manage.pojo.permission.TbPermissionExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_permission
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_permission
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_permission
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.shenhesoft.logistics.manage.pojo.permission.TbPermissionExample" >
+    delete from tb_permission
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.shenhesoft.logistics.manage.pojo.permission.TbPermission" >
+    insert into tb_permission (id, name, menu_id, 
+      menu_parent_id, description, delete_flag, 
+      range)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{menuId,jdbcType=INTEGER}, 
+      #{menuParentId,jdbcType=INTEGER}, #{description,jdbcType=VARCHAR}, #{deleteFlag,jdbcType=TINYINT}, 
+      #{range,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.shenhesoft.logistics.manage.pojo.permission.TbPermission" >
+    insert into tb_permission
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="menuId != null" >
+        menu_id,
+      </if>
+      <if test="menuParentId != null" >
+        menu_parent_id,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag,
+      </if>
+      <if test="range != null" >
+        range,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="menuId != null" >
+        #{menuId,jdbcType=INTEGER},
+      </if>
+      <if test="menuParentId != null" >
+        #{menuParentId,jdbcType=INTEGER},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteFlag != null" >
+        #{deleteFlag,jdbcType=TINYINT},
+      </if>
+      <if test="range != null" >
+        #{range,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.shenhesoft.logistics.manage.pojo.permission.TbPermissionExample" resultType="java.lang.Integer" >
+    select count(*) from tb_permission
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_permission
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.menuId != null" >
+        menu_id = #{record.menuId,jdbcType=INTEGER},
+      </if>
+      <if test="record.menuParentId != null" >
+        menu_parent_id = #{record.menuParentId,jdbcType=INTEGER},
+      </if>
+      <if test="record.description != null" >
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deleteFlag != null" >
+        delete_flag = #{record.deleteFlag,jdbcType=TINYINT},
+      </if>
+      <if test="record.range != null" >
+        range = #{record.range,jdbcType=TINYINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_permission
+    set id = #{record.id,jdbcType=INTEGER},
+      name = #{record.name,jdbcType=VARCHAR},
+      menu_id = #{record.menuId,jdbcType=INTEGER},
+      menu_parent_id = #{record.menuParentId,jdbcType=INTEGER},
+      description = #{record.description,jdbcType=VARCHAR},
+      delete_flag = #{record.deleteFlag,jdbcType=TINYINT},
+      range = #{record.range,jdbcType=TINYINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.shenhesoft.logistics.manage.pojo.permission.TbPermission" >
+    update tb_permission
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="menuId != null" >
+        menu_id = #{menuId,jdbcType=INTEGER},
+      </if>
+      <if test="menuParentId != null" >
+        menu_parent_id = #{menuParentId,jdbcType=INTEGER},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag = #{deleteFlag,jdbcType=TINYINT},
+      </if>
+      <if test="range != null" >
+        range = #{range,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.shenhesoft.logistics.manage.pojo.permission.TbPermission" >
+    update tb_permission
+    set name = #{name,jdbcType=VARCHAR},
+      menu_id = #{menuId,jdbcType=INTEGER},
+      menu_parent_id = #{menuParentId,jdbcType=INTEGER},
+      description = #{description,jdbcType=VARCHAR},
+      delete_flag = #{deleteFlag,jdbcType=TINYINT},
+      range = #{range,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+   <!--通过角色id 查询该id下所属的所有的权限  -->
+  <select id="selectPermissionByRoleId" parameterType="java.lang.Integer"
+   resultType="com.shenhesoft.logistics.manage.pojo.permission.TbPermission" >
+   SELECT
+		C.id,
+		C.`name`,
+		C.menu_id,
+		C.description,
+		C.delete_flag,
+		C.`range`
+	FROM
+		tb_role A,
+		tb_role_perssion B,
+		tb_permission C
+	WHERE
+		A.id = B.role_id
+	AND B.perssion_id = C.id
+	AND A.id=#{id,jdbcType=INTEGER}
+  </select>
+  
+  <select id="selectPermissionByRange" parameterType="java.lang.Byte"
+   resultType="com.shenhesoft.logistics.manage.pojo.permission.TbPermission" >
+  	SELECT    
+  	*
+    from tb_permission where `range` = #{range,jdbcType=TINYINT}
+  </select>
+  
+  <select id="selectPermissionByRoleIdAndRange" parameterType="java.util.Map"
+   resultType="com.shenhesoft.logistics.manage.pojo.permission.TbPermission">
+  	SELECT
+		C.id id,
+		C.`name` name,
+		C.menu_id menuId,
+		C.menu_parent_id menuParentId,
+		C.description description,
+		C.delete_flag deleteFlag,
+		C.`range`
+	FROM
+		tb_role A,
+		tb_role_perssion B,
+		tb_permission C
+	WHERE
+		A.id = B.role_id
+	AND B.perssion_id = C.id
+	AND A.id=#{id,jdbcType=INTEGER}
+	AND C.`range`= #{range,jdbcType=TINYINT}
+  </select>
+  
+  <select id="selectMenuParentIdById" parameterType="java.lang.Integer"
+   resultType="com.shenhesoft.logistics.manage.pojo.permission.TbPermission" >
+  	SELECT
+		C.id id,
+	FROM
+		tb_role A,
+		tb_role_perssion B,
+		tb_permission C
+	WHERE
+		A.id = B.role_id
+	AND B.perssion_id = C.id
+	AND A.id=#{id,jdbcType=INTEGER}
+	AND C.`range`= #{range,jdbcType=TINYINT}
+  </select>
+  
+  <insert id="insertPermission" parameterType="com.shenhesoft.logistics.manage.pojo.permission.TbPermission">
+  	INSERT INTO `tb_permission` (`name`, `menu_id`, `menu_parent_id`, `description`, `delete_flag`, `range`)
+  	 VALUES ( NULL, #{menuId}, #{menuParentId}, #{description}, '0', #{range});
+  </insert>
+  
+</mapper>

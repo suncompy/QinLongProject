@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shenhesoft.logistics.finance.mapper.OilGasCardMapper">
+
+	<!-- 新增油气卡打包信息表 -->
+	<insert id="addOilGasCard">
+		insert into tb_oil_gas_card_pack(id,sales_unit,branch_group_id,card_type,card_unit,purchase_id,purchase_date,account_id)
+    values(#{id},#{salesUnit},#{branchGroupId},#{cardType},#{cardUnit},#{purchaseId},#{purchaseDate},#{accountId})
+	</insert>
+	
+	<!-- 新增油气卡信息表 -->
+	<insert id="insertOilGasCard">
+		insert into tb_oil_gas_card(id,oil_gas_cards_id,card_num,card_money,card_status) 
+		values(#{id},#{oilGasCardsId},#{cardNum},#{cardMoney},#{cardStatus})
+	</insert>
+	
+	<!-- 覆盖上次导入油气卡号 -->
+	<delete id="deleteOilGasCard">
+		delete from tb_oil_gas_card where oil_gas_cards_id = #{oilGasCardsId}
+	</delete>
+		<select id="listOilGasCardNum" resultType="Map">
+		select card_num cardNum from tb_oil_gas_card where card_num #{id}
+	</select>
+	
+	<!-- 查询油气卡信息表 -->
+	<select id="queryOilGasCard" resultType="Map">
+		select a.id id,a.sales_unit salesUnit,a.branch_group_id branchGroup_id,a.card_type cardType,a.card_unit cardUnit,a.purchase_id purchaseId,a.purchase_date purchaseDate,a.audit_id auditId,a.audit_date auditDate,a.audit_status auditStatus,
+		IFNULL(count(b.id),0) cardCount,IFNULL(sum(b.card_money),0) totalMoney,
+		bg.name branchGroupName,
+		c.name purchaseName,b.card_status cardStatus,
+		d.name auditName
+		 from tb_oil_gas_card_pack a 
+			left join tb_oil_gas_card b on a.id = b.oil_gas_cards_id
+			left join tb_branch_group bg on a.branch_group_id = bg.id
+			left join tb_system_user c on a.purchase_id = c.id
+			left join tb_system_user d on a.audit_id = d.id
+			left join tb_branch_group_link y on a.id=y.row_id and y.tab_name='tb_oil_gas_card_pack'
+			where y.sys_org_code like CONCAT(#{map.sysOrgCode},'%')
+		<if test="map != null">
+		<if test="map.beginDate != null and map.beginDate !='' and map.beginDate != 'null' and map.beginDate != 'undefined' " >
+		       and date_format(a.purchase_date, '%Y-%m-%d') &gt;= date_format(#{map.beginDate}, '%Y-%m-%d')
+		    </if>
+		    <if test="map.endDate != null and map.endDate !='' and map.endDate != 'null' and map.endDate != 'undefined' " >
+		       and date_format(a.purchase_date, '%Y-%m-%d') &lt;= date_format(#{map.endDate}, '%Y-%m-%d')
+		    </if>
+		<if test="map.branchGroupName != null and map.branchGroupName != '' and map.branchGroupName != 'null' and map.branchGroupName != 'undefined'">
+		    AND bg.name like CONCAT('%',#{map.branchGroupName},'%') 
+         </if>
+         <if test="map.branchGroupId != null ">
+		    AND bg.id = #{map.branchGroupId}
+         </if> 
+		<if test="map.salesUnit != null">				  
+		    AND a.sales_unit = #{map.salesUnit}
+                </if>
+		<if test="map.cardType != null">
+		    AND a.card_type = #{map.cardType}
+                </if>
+		<if test="map.cardUnit != null">
+		    AND a.card_unit = #{map.cardUnit}
+                </if>
+		<if test="map.auditDate != null">
+		    AND a.audit_date = #{map.auditDate}
+                </if>
+		<if test="map.auditStatus != null">
+		    AND a.audit_status = #{map.auditStatus}
+                </if>
+        <if test="map.oilGasCardId != null">
+		    AND b.id = #{map.oilGasCardId}
+                </if>        
+            </if>
+        <if test="map.cardNum !=null ">
+        AND b.card_num = #{map.cardNum}
+        </if>
+    GROUP BY a.id
+		order by a.purchase_date desc
+	</select>
+	
+	<!-- 查询油气卡信息表 -->
+	<select id="queryOilGasCardById" resultType="Map">
+		select a.id id,a.sales_unit salesUnit,a.branch_group_id branchGroup_id,a.card_type cardType,a.card_unit cardUnit,a.purchase_id purchaseId,a.purchase_date purchaseDate,a.audit_id auditId,a.audit_date auditDate,a.audit_status auditStatus,a.account_id accountId,
+				IFNULL(count(b.id),0) as cardCount,IFNULL(sum(b.card_money),0) totalMoney
+				 from tb_oil_gas_card_pack a 
+					left join tb_oil_gas_card b on a.id = b.oil_gas_cards_id	
+		where a.id = #{id}
+		GROUP BY a.id
+	</select>
+	
+	<!-- 查询油气卡信息表 -->
+	<select id="queryOilGasCardByDate" resultType="Map">
+		select card_num cardNum,card_money cardMoney,card_status cardStatus from tb_oil_gas_card where oil_gas_cards_id = #{map.id}
+	</select>
+	
+	<!--查询机构名称-->
+	<select id="queryBranchGroupName" resultType="Map">
+		select id id,name branchGroupName from tb_branch_group
+	</select>
+	
+	<!--通过卡号查询油气卡金额 -->
+	<select id="queryMoney" resultType="Map">
+		select id id,card_money cardMoney,card_status cardStatus from tb_oil_gas_card where card_num = #{suppliesNum}
+	</select>
+	
+	<!-- 修改油气卡使用状态-->
+	<update id="updateOilGasCardStatus">
+		update tb_oil_gas_card set card_status = '1' where id = #{id};
+	</update>
+	
+	<!-- 修改审核状态 -->
+	<update id="updateAuditStatus">
+		update tb_oil_gas_card_pack set 
+		audit_status = #{auditStatus},
+		<if test='auditStatus == "0"'>
+			audit_date = null,
+			audit_id = null
+		</if>
+		<if test='auditStatus == "1" or auditStatus == "2"'>
+			audit_date = #{auditDate},
+			audit_id = #{auditId}
+		</if>
+		 where id = #{id};
+	</update>
+	
+	<!-- 修改结算绑定卡状态 -->
+	<update id="updatePackId">
+	update tb_oil_gas_card set sh_pack_id=#{map.shPackId},card_status=1 where id=#{map.suppliesNum}
+	</update>
+	<!-- 修改结算绑定卡状态 -->
+	<update id="delOilGasCardById">
+	update tb_oil_gas_card set sh_pack_id = null,card_status=0 where id=#{id}
+	</update>
+		<!-- 修改结算绑定卡状态 -->
+	<update id="delOilGasCardByIds">
+	update tb_oil_gas_card set sh_pack_id = null,card_status=0 where id in
+	 <foreach collection="list" index="index" item="item" open="(" separator="," close=")">   
+         #{item}   
+     </foreach>  
+	</update>
+</mapper>

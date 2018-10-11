@@ -1,0 +1,39 @@
+/*搜索css*/
+body{background: #eef5fd !important;overflow: auto;padding: 0 15px;
+}
+
+select{color: #666 !important;}
+/*位置*/
+.maxWidth label{vertical-align: middle;}
+/*上面的表单字段*/
+.container_top{background: #fff;margin-bottom: 10px;position: relative;min-width: 1300px;}
+.btn-group > .btn:first-child:not(:last-child):not(.dropdown-toggle){border-top-right-radius: 4px !important;border-bottom-right-radius: 4px !important;}
+#lookMore{font-size: 14px;}
+.project_form{   padding: 5px 5px 0 5px;font-size: 14px;font-family: "Microsoft YaHei";}
+.btn-group {margin-top: 10px;}
+.form-group{margin:0px 10px 0px 5px;display: inline-block;}
+.form-group label{font-weight: normal;}
+/*下拉框*/
+#wrap .form-group select{min-width: 130px;height: 19px;border-radius: 4px;border: 1px solid #dde3ef;  font-size: 12px;    padding-left: 5px;}
+.form-group input{width: 130px;height: 19px;border-radius: 4px;border: 1px solid #dde3ef;line-height: 19px !important;     font-size: 12px;padding-left: 5px;}
+/*日期*/
+.dataTimes{position:relative;}
+.dataTimes i{ position: absolute;color: #03A8ED;top: 4px;right: 3px;}
+.secTime{margin-left: -13px;}
+.secTime label{padding: 0 10px;}
+#wrap{position: relative;width: 90%;overflow: hidden;min-width: 1040px;}
+/*搜索按钮*/
+.btn-success:hover{border-color:#38C76D !important;color: #fff;background-color:#38C76D !important;}
+.btn-success:link,.btn-success:visited{background-color: #43CE76;color: #fff;border-color:#43CE76 ;}
+.foot .btn{display: inline-block;text-align: center;text-decoration: none !important;border-radius: 3px !important;padding: 0px 7px !important;margin-top: -3px;}
+.foot{ position: absolute; top: 4px;width: 160px;white-space:nowrap;right: 10px;}
+.foot em{display: inline-block;width: 23px; height: 23px;margin: -6px -5px;}
+.foot .search{background: url(../img/big.png) no-repeat center center;}
+#lookMore{width:80px;font-size: 14px;border: 1px solid #CCCCCC;background:#EFEFEF;margin-left:15px;padding: 0px 5px;cursor: pointer;display: inline-block;border-radius: 3px;}
+#lookMore:link,#lookMore:visited,#lookMore:active{background-color: #EEEEEE;}
+#lookMore:hover{background-color:#E5E3E3 ;}
+.foot .fa-chevron-down{color:#989595;}
+.foot .fa-chevron-up{color:#989595;}
+.showPage{display:none;}
+/*操作区*/
+.domain{margin: 10px 10px 0 10px;border: 1px solid #dde3ef;overflow: auto;}

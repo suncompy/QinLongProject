@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shenhesoft.logistics.finance.mapper.AdjustAccountMapper" >
+  <resultMap id="BaseResultMap" type="com.shenhesoft.logistics.finance.AdjustAccount" >
+    <id column="adjust_account_id" property="adjustAccountId" jdbcType="VARCHAR" />
+    <result column="adjust_code" property="adjustCode" jdbcType="VARCHAR" />
+    <result column="expenditure_account_id" property="expenditureAccountId" jdbcType="INTEGER" />
+    <result column="deposit_account_id" property="depositAccountId" jdbcType="INTEGER" />
+    <result column="adjust_money" property="adjustMoney" jdbcType="DECIMAL" />
+    <result column="payment" property="payment" jdbcType="INTEGER" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_by" property="updateBy" jdbcType="VARCHAR" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="remarks" property="remarks" jdbcType="VARCHAR" />
+    <result column="del_flag" property="delFlag" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    adjust_account_id, adjust_code, expenditure_account_id, deposit_account_id, adjust_money, 
+    payment, create_by, create_date, update_by, update_date, remarks, del_flag
+  </sql>
+  
+  <select id="getAdjustAccounts" resultType="Map" >
+	   SELECT
+			ac.adjust_account_id adjustId,
+			fac.account_name expenditureName,
+			fac.account_num expenditureAccountNum,
+			facs.account_name depositName,
+			facs.account_num expenditureAccountNum,
+			ac.payment payment,
+			u.`name` adjustName,
+			ac.create_date adjustDate,
+			ac.adjust_code adjustCode,
+			ac.adjust_money adjustMoney
+		FROM
+			tb_adjust_account AS ac
+		LEFT JOIN tb_system_user u ON ac.create_by = u.id
+		LEFT JOIN tb_finance_account fac ON ac.expenditure_account_id = fac.id
+		LEFT JOIN tb_finance_account facs ON ac.deposit_account_id = facs.id
+		left join tb_branch_group_link y on ac.adjust_account_id=y.row_id and y.tab_name='tb_adjust_account'
+		where ac.del_flag = 0 and y.sys_org_code like CONCAT(#{map.sysOrgCode},'%')
+        <if test="map != null">
+			<if test="map.adjustAccountId != null and map.adjustAccountId != '' and map.adjustAccountId != 'null' and map.adjustAccountId != 'undefined'">				  
+			    AND ac.adjust_account_id = #{map.adjustAccountId}
+            </if>
+			<if test="map.payment != null ">				  
+			    AND ac.payment = #{map.payment}
+            </if>
+			<if test="map.adjustCode != null and map.adjustCode != '' and map.adjustCode != 'null' and map.adjustCode != 'undefined'">				  
+			    AND ac.adjust_code = #{map.adjustCode}
+            </if>
+			<if test="map.deleteFlag != null">
+			    AND ac.delete_flag = #{map.deleteFlag}
+            </if>
+			<if test="map.adjustMoney != null ">				  
+			    AND ac.adjust_money = #{map.adjustMoney}
+            </if>
+            <if test="map.beginDate != null ">				  
+			    AND ac.create_date &gt;= #{map.beginDate}
+            </if>
+            <if test="map.endDate != null ">				  
+			    AND ac.create_date &lt;= #{map.endDate}
+            </if>
+         </if>
+        order by ac.create_date desc
+  </select>
+   
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_adjust_account
+    where adjust_account_id = #{adjustAccountId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from tb_adjust_account
+    where adjust_account_id = #{adjustAccountId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="addAdjustAccount" parameterType="com.shenhesoft.logistics.finance.AdjustAccount" >
+    insert into tb_adjust_account
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="adjustAccountId != null" >
+        adjust_account_id,
+      </if>
+      <if test="adjustCode != null" >
+        adjust_code,
+      </if>
+      <if test="expenditureAccountId != null" >
+        expenditure_account_id,
+      </if>
+      <if test="depositAccountId != null" >
+        deposit_account_id,
+      </if>
+      <if test="adjustMoney != null" >
+        adjust_money,
+      </if>
+      <if test="payment != null" >
+        payment,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="remarks != null" >
+        remarks,
+      </if>
+      <if test="delFlag != null" >
+        del_flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="adjustAccountId != null" >
+        #{adjustAccountId,jdbcType=VARCHAR},
+      </if>
+      <if test="adjustCode != null" >
+        #{adjustCode,jdbcType=VARCHAR},
+      </if>
+      <if test="expenditureAccountId != null" >
+        #{expenditureAccountId,jdbcType=INTEGER},
+      </if>
+      <if test="depositAccountId != null" >
+        #{depositAccountId,jdbcType=INTEGER},
+      </if>
+      <if test="adjustMoney != null" >
+        #{adjustMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="payment != null" >
+        #{payment,jdbcType=INTEGER},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarks != null" >
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        #{delFlag,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.shenhesoft.logistics.finance.AdjustAccount" >
+    update tb_adjust_account
+    <set >
+      <if test="adjustCode != null" >
+        adjust_code = #{adjustCode,jdbcType=VARCHAR},
+      </if>
+      <if test="expenditureAccountId != null" >
+        expenditure_account_id = #{expenditureAccountId,jdbcType=INTEGER},
+      </if>
+      <if test="depositAccountId != null" >
+        deposit_account_id = #{depositAccountId,jdbcType=INTEGER},
+      </if>
+      <if test="adjustMoney != null" >
+        adjust_money = #{adjustMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="payment != null" >
+        payment = #{payment,jdbcType=INTEGER},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarks != null" >
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag,jdbcType=CHAR},
+      </if>
+    </set>
+    where adjust_account_id = #{adjustAccountId,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,6 @@
+ select,input[type=text]{width:140px;border: 1px solid #DDE3EF;;height: 28px;margin: 5px 0;border-radius: 4px;}
+ .form-group{padding:0!important;position: relative;margin: 0 15px!important;}
+ .form-group span{position: absolute;top: 10px;right: 10px;}
+ .longInput{width: 290px !important;}
+#offserForm label{color: #666666;}
+ .modal_btn{padding-right: 20px;}

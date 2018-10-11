@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shenhesoft.logistics.business.mapper.BussinessHomeMapper">
+
+	<!-- 新增异常信息 -->
+	<insert id="addExceptionMsg">
+	insert into tb_exception_msg(exception_id,order_id,short_train_flag,exception_reason,exception_reason_detail,exception_source,submit_user_id,submit_date
+		,project_code,order_code,car_plate_number,cargo_name,send_company,receipt_company,node_type
+	)values(#{exceptionId},#{orderId},#{shortTrainFlag},#{exceptionReason},#{exceptionReasonDetail},#{exceptionSource},#{submitUserId},now()
+		,#{projectCode},#{orderCode},#{carPlateNumber},#{cargoName},#{sendCompany},#{receiptCompany},#{nodeType})
+	</insert>
+	
+	<!-- 检索异常列表 -->
+	<select id="getExceptionMsgs" resultType="Map">
+		select a.exception_id exceptionId,a.project_code projectCode,a.order_code orderCode,a.car_plate_number carPlateNumber,
+		a.cargo_name cargoName,a.send_company sendCompany,a.receipt_company receiptCompany,a.exception_reason exceptionReason
+		from tb_exception_msg a
+		<where>
+            <if test="map != null">
+				<if test="map.nodeType != null and map.nodeType != '' and map.nodeType != 'null' and map.nodeType != 'undefined'">				  
+			    AND a.node_type = #{map.nodeType}
+	            </if>
+				<if test="map.nodeId != null and map.nodeId != '' and map.nodeId != 'null' and map.nodeId != 'undefined'">				  
+			    AND a.node_id = #{map.nodeId}
+	            </if>
+		</if>
+        </where>
+        order by a.exception_id desc
+	</select>
+	
+	<!-- 检索异常订单列表 -->
+	<select id="getOrderExceptionByOrderId" resultType="Map">
+		select a.project_code projectCode,a.order_code orderCode,a.car_plate_number carPlateNumber,
+		a.cargo_name cargoName,a.send_company sendCompany,a.receipt_company receiptCompany 
+		from tb_order a where a.id= #{id}
+	</select>
+	
+	<select id="getMenuFourthLevel" resultType="Map">
+	select c.* from tb_menu c,tb_menu p where c.parent_id=p.id and p.delete_flag=0 and c.delete_flag=1 
+		and c.level=4 and p.url=#{id}
+    </select>
+	
+	<select id="getProjectSurvey" resultType="Map">
+select d.item_code+0 monthNo,count(o.id) orderNum
+,round(sum(IFNULL(sendNetWeight,0)),0) sendNetWeight,round(sum(IFNULL(reciveNetWeight,0)),0) reciveNetWeight
+  from tb_dict_item d
+left join (
+select a.id,create_date,project_id,project_code,
+IFNULL(container_one_send_net,0)+IFNULL(container_two_send_net,0) sendNetWeight,
+IFNULL(container_one_receipt_net,0)+IFNULL(container_two_receipt_net,0) reciveNetWeight 
+from tb_order a
+left join tb_branch_group_link y on a.id=y.row_id and y.tab_name='tb_order'
+where exception_status = 0 and delete_flag = 0 and is_cancel = 0 and y.sys_org_code like CONCAT(#{map.sysOrgCode},'%')
+union all select a.id,create_date,project_id,project_code,
+IFNULL(entruck_weight,0) sendNetWeight,IFNULL(arrive_weight,0) reciveNetWeight 
+from  tb_train_order a
+left join tb_branch_group_link y on a.id=y.row_id and y.tab_name='tb_train_order'
+where  is_exception = 0 and delete_flag = 0 and y.sys_org_code like CONCAT(#{map.sysOrgCode},'%')
+) o on DATE_FORMAT(o.create_date,'%d')+0=d.item_code and DATE_FORMAT(o.create_date,'%Y-%m') =DATE_FORMAT(NOW(),'%Y-%m')
+ <if test="map != null">
+	<if test="map.projectId != null">				  
+	    and o.project_id=#{map.projectId}
+    </if>
+    <if test="map.projectCode != null and map.projectCode != '' and map.projectCode != 'null' and map.projectCode != 'undefined'">				  
+	    and o.project_code=#{map.projectCode}
+    </if>
+ </if>                
+ where d.dic_id=4
+group by d.item_code+0
+	</select>
+	
+	<select id="trainStatusCount" resultType="Map" parameterType="map">
+	<![CDATA[
+		select a.item_name name,IFNULL(k.value,0) value
+		from tb_dict_item a
+		left join (SELECT case when status='1' then '等待承认'
+	     when status='2' then '等待装车'
+			when status='3' then '等待发运'
+			when status='4' then '在途运载'
+			when status='5' then '等待卸货'
+			else '等待回单' end as name,COUNT(status) as value from tb_train_order o
+			left join tb_branch_group_link y on o.id=y.row_id and y.tab_name='tb_train_order'
+		where status<>'0' and status <>'7'  and y.sys_org_code like CONCAT(#{sysOrgCode},'%')
+			  ]]>	
+	     <if test="branchGroupIdCount != null">
+	     and branch_id in 
+		 <foreach item="item" index="index" collection="branchGroupIdCount" 
+                        open="(" separator="," close=")">
+                       #{item}
+         </foreach>
+         </if>
+		  <if test="curMonthFlag != null">				  
+		    and (DATE_FORMAT(send_date,'%Y%m')=DATE_FORMAT(CURDATE(),'%Y%m')
+			or DATE_FORMAT(create_date,'%Y%m')=DATE_FORMAT(CURDATE(),'%Y%m')
+			or DATE_FORMAT(update_date,'%Y%m')=DATE_FORMAT(CURDATE(),'%Y%m')
+			or DATE_FORMAT(entruck_date,'%Y%m')=DATE_FORMAT(CURDATE(),'%Y%m')
+			or DATE_FORMAT(arrive_date,'%Y%m')=DATE_FORMAT(CURDATE(),'%Y%m')
+			)
+          </if>
+         	<![CDATA[
+         and is_exception = 0 and delete_flag = 0
+		GROUP BY status) k on k.name= a.item_name
+		where a.dic_id=1
+		order by a.item_sort
+	  ]]>	
+	</select>
+	
+	<select id="boxBulkStatusCount" resultType="Map" parameterType="map">
+	<![CDATA[
+		select a.item_name name,IFNULL(k.value,0) value
+		from tb_dict_item a
+		left join (SELECT case when status='1' then '等待调度'
+	     when status='2' then '等待发运'
+			when status='3' then '在途运载'
+			when status='4' then '货位引导'
+			when status='5' then '等待回单'
+			else '计费确认' end as name,COUNT(status) as value from tb_order o
+			left join tb_branch_group_link y on o.id=y.row_id and y.tab_name='tb_order'
+		where status<>'0' and status <>'7' and y.sys_org_code like CONCAT(#{sysOrgCode},'%')
+			  ]]>	
+		<if test="branchGroupIdBulkCount != null">	
+		 and branch_id in 
+		 <foreach item="item" index="index" collection="branchGroupIdBulkCount" 
+                        open="(" separator="," close=")">
+                       #{item}
+         </foreach>
+         </if>
+         <if test="curMonthFlag != null">				  
+		    and (DATE_FORMAT(create_date,'%Y%m')=DATE_FORMAT(CURDATE(),'%Y%m')
+			or DATE_FORMAT(update_date,'%Y%m')=DATE_FORMAT(CURDATE(),'%Y%m')
+			or DATE_FORMAT(take_delivery_date,'%Y%m')=DATE_FORMAT(CURDATE(),'%Y%m')
+			or DATE_FORMAT(receipter_date,'%Y%m')=DATE_FORMAT(CURDATE(),'%Y%m')
+			)
+          </if>
+         	<![CDATA[
+          and exception_status = 0 and delete_flag = 0 and is_cancel = 0
+		GROUP BY status) k on k.name= a.item_name
+		where a.dic_id=2
+		order by a.item_sort
+	  ]]>	
+	</select>
+
+	<select id="getBulkTrainSprotCount" resultType="Map" parameterType="map">
+		SELECT d.item_code+0 monthNo,count(o.id) orderNum
+		  from tb_dict_item d
+left join tb_order o on DATE_FORMAT(o.create_date,'%d')+0=d.item_code 
+and DATE_FORMAT(o.create_date,'%Y-%m') =DATE_FORMAT(NOW(),'%Y-%m') 
+and o.exception_status = 0 and o.delete_flag = 0 and o.is_cancel = 0
+and o.id in (select y.row_id from tb_branch_group_link y where y.tab_name='tb_order' and y.sys_org_code like CONCAT(#{sysOrgCode},'%'))
+		 where d.dic_id=4
+group by d.item_code+0
+	</select>
+	<!-- 新增地图标记表 -->
+	<insert id="addMapPoint">
+		insert into tb_map_point(id,project_id,order_id,lon,lat,position,car_id,car_no,remark,history_flag
+		,create_date,update_date,create_user_id,update_user_id
+		)values(#{id},#{projectId},#{orderId},#{lon},#{lat},#{position},#{carId},#{carNo},#{remark},#{historyFlag}
+		,NOW(),NOW(),#{createUserId},#{updateUserId})
+	</insert>
+	<!-- 新增地图标记表 -->
+	<insert id="addRoadInfo">
+		insert into tb_road_info(id,driver_msg,driver_id,driver_name,remark,create_time
+		)values(#{id},#{driverMsg},#{driverId},#{driverName},#{remark},now())
+	</insert>
+	<!-- 检索地图标记列表 -->
+	<select id="getRoadInfos" parameterType="map" resultType="Map">
+	select a.id,a.driver_msg driverMsg,a.driver_id driverId,a.driver_name driverName,a.remark
+	,DATE_FORMAT(a.create_time,'%Y-%m-%d %H:%i:%s') createTime
+	from tb_road_info a
+	order by a.id desc
+    </select>
+	
+	<!-- 批量新增地图标记表 -->
+	<insert id="addMapPoints">
+		insert into tb_map_point(id,project_id,order_id,lon,lat,position,car_id,car_no,remark,history_flag
+		,create_date,update_date,create_user_id,update_user_id
+		)values
+		<foreach collection="list" item="item" index="index" separator=",">
+            (#{id},#{projectId},#{orderId},#{lon},#{lat},#{position},#{carId},#{carNo},#{remark},#{historyFlag}
+            ,NOW(),NOW(),#{createUserId},#{updateUserId})
+        </foreach>
+	</insert>
+
+	<!-- 修改地图标记表 -->
+	<update id="editMapPointById">
+		update tb_map_point
+		<set>
+		<if test="historyFlag != null">
+               history_flag=#{historyFlag},
+               update_date=NOW(),
+         </if>
+         <if test="updateUserId != null">
+               update_user_id=#{updateUserId}
+         </if>
+		</set>
+		where car_id=#{carId}
+	</update>
+
+	<!-- 批量修改地图标记表 -->
+	<update id="editMapPointByIds">
+		update tb_map_point
+		<set>
+		<if test="map.historyFlag != null">
+	       history_flag=#{map.historyFlag},
+	       update_date=NOW(),
+         </if>
+        <if test="updateUserId != null">
+               update_user_id=#{map.updateUserId}
+         </if> 
+		</set>
+		where id in
+		<foreach collection="list" index="index" item="item" open="(" separator="," close=")">   
+             #{item}   
+        </foreach>
+	</update>
+
+	<!-- 查看地图标记表 -->
+	<select id="getMapPointById" resultType="Map">
+        select a.id,a.project_id projectId,a.order_id orderId,a.lon,a.lat,a.position,a.car_id carId,a.car_no carNo,a.remark 
+        from tb_map_point a
+        where a.id=#{id}
+    </select>
+	<!-- 检索地图标记列表 
+	left join tb_branch_group_link y on a.id=y.row_id and y.tab_name='tb_map_point'
+	and y.sys_org_code like CONCAT(#{map.sysOrgCode},'%')
+	-->
+	<select id="getMapPoints" resultType="Map">
+	select a.id,a.project_id projectId,b.project_code projectCode,a.order_id orderId,a.lon,a.lat,a.position,a.car_id carId,a.car_no carNo,a.remark 
+	,a.create_date createDate,a.update_date updateDate,a.create_user_id createUserId,a.update_user_id updateUserId
+	from tb_map_point a
+	left join tb_project b on b.id=a.project_id
+	left join tb_order c on c.id = a.order_id
+	left join tb_branch_group_link y on c.id=y.row_id and y.tab_name='tb_order'
+	 <where>
+	 and y.sys_org_code like CONCAT(#{map.sysOrgCode},'%')
+            <if test="map != null">
+              <if test="map.projectId != null and map.projectId != '' and map.projectId != 'null' and map.projectId != 'undefined'">				  
+		    	AND a.project_id = #{map.projectId}
+              </if>
+              <if test="map.orderId != null and map.orderId != '' and map.orderId != 'null' and map.orderId != 'undefined'">				  
+		    	AND a.order_id = #{map.orderId}
+              </if>
+              <if test="map.projectCode != null and map.projectCode != '' and map.projectCode != 'null' and map.projectCode != 'undefined'">				  
+		    	AND b.project_code = #{map.projectCode}
+              </if>
+              <if test="map.carId != null and map.carId != '' and map.carId != 'null' and map.carId != 'undefined'">				  
+		    	AND a.car_id = #{map.carId}
+              </if>
+			  <if test="map.carNo != null and map.carNo != '' and map.carNo != 'null' and map.carNo != 'undefined'">				  
+		    	AND a.car_no like #{map.carNo}
+              </if>
+              <if test="map.id != null and map.id != '' and map.id != 'null' and map.id != 'undefined'">				  
+		    	AND a.id = #{map.id}
+              </if>
+            </if>
+            and history_flag=0
+     </where>
+    </select>
+    <!-- 检索地图标记列表 -->
+	<select id="getOrderMapPointPcs" resultType="Map">
+	select DATE_FORMAT(p.create_date,'%Y-%m-%d %H:%i') createDate,DATE_FORMAT(p.update_date,'%Y-%m-%d %H:%i') updateDate,p.position,p.remark
+	from tb_order o
+	left join tb_map_point p on p.order_id=o.id
+	 <where>
+            <if test="map != null">
+              <if test="map.orderId != null and map.orderId != '' and map.orderId != 'null' and map.orderId != 'undefined'">				  
+		    	AND o.id = #{map.orderId}
+              </if>
+            </if>
+     </where>
+     order by p.id
+    </select>
+    <!-- 根据最大id，查询车号分组carrier_vehicle_id的最新运单记录 -->
+	<select id="getNewTimeOrder" resultType="Map">
+	select a.project_id projectId,a.id orderId,a.carrier_vehicle_id carId,a.car_plate_number carNo 
+	from tb_order a 
+	 <where>
+            <if test="map != null">
+              <if test="map.carId != null and map.carId != '' and map.carId != 'null' and map.carId != 'undefined'">				  
+		    	AND a.driver_id = #{map.carId}
+              </if>
+			  <if test="map.carNo != null and map.carNo != '' and map.carNo != 'null' and map.carNo != 'undefined'">				  
+		    	AND a.car_plate_number = #{map.carNo}
+              </if>
+            </if>
+     </where>
+     and exists(
+		select * from (
+		select car_plate_number,max(id) as maxId from tb_order group by car_plate_number) x
+		where x.car_plate_number=a.car_plate_number and a.id=x.maxId )
+		limit 1
+    </select>
+    
+    <select id="getTrainSprotCount" resultType="Map" parameterType="map">
+    SELECT d.item_code+0 monthNo,count(o.id) orderNum
+		  from tb_dict_item d
+left join tb_train_order o on DATE_FORMAT(o.create_date,'%d')+0=d.item_code 
+and DATE_FORMAT(o.create_date,'%Y-%m') =DATE_FORMAT(NOW(),'%Y-%m')
+		and o.is_exception = 0 and o.delete_flag = 0 
+		and o.id in (select y.row_id from tb_branch_group_link y where y.tab_name='tb_train_order' and y.sys_org_code like CONCAT(#{sysOrgCode},'%'))
+		 where d.dic_id=4
+group by d.item_code+0
+	</select>
+	<select id="getProjectCodeMax" resultType="Map" parameterType="map">
+    select max(a.project_code) projectCodeMax from tb_project a,tb_branch_group_link y 
+    where a.id=y.row_id and y.tab_name='tb_project' and  y.sys_org_code like CONCAT(#{sysOrgCode},'%')
+	</select>
+	<select id="getOrderCodeMaxByProjectId" resultType="Map" parameterType="map">
+    select max(a.order_code) orderCodeMax from tb_Order a,tb_branch_group_link y 
+    where a.id=y.row_id and y.tab_name='tb_Order' and  y.sys_org_code like CONCAT(#{sysOrgCode},'%') and a.project_id=#{projectId}
+	</select>
+	<select id="getPleaseTrainNumberMaxByProjectId" resultType="Map" parameterType="map">
+    select max(a.please_train_number) pleaseTrainNumber from tb_train_order a,tb_branch_group_link y 
+    where a.id=y.row_id and y.tab_name='tb_train_order' and  y.sys_org_code like CONCAT(#{sysOrgCode},'%') and a.project_id=#{projectId}
+	</select>
+	<select id="getPackIdMax" resultType="Map" parameterType="map">
+    select max(a.cust_check_con_id) custCheckConId from tb_customer_checking_conf a,tb_branch_group_link y 
+    where a.cust_check_con_id=y.row_id and y.tab_name='tb_customer_checking_conf' and  y.sys_org_code like CONCAT(#{sysOrgCode},'%')
+    and a.project_id=#{projectId}
+	</select>
+	<select id="getCheckIdMax" resultType="Map" parameterType="map">
+    select max(a.checkId) checkId from(
+	select b.cust_pack_id checkId from tb_customer_pack b
+	union all 
+	select c.sh_pack_id checkId from tb_short_pack c
+	union all 
+	select d.cost_pack_code checkId from tb_cost_pack d
+	) a
+	</select>
+</mapper>

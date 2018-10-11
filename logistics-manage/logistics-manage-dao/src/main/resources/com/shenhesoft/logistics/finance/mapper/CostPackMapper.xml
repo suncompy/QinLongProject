@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shenhesoft.logistics.finance.mapper.CostPackMapper">
+
+
+<!-- insert into tb_cost_pack(`sh_pack_id`,tax_rate,tax_money,`cost_pack_code`,`project_id`,`checking_status`,`cash_settle_status`,`pack_truck_num`,`send_tare`,`send_gross`,`send_net`,`cargo_price`,`cargo_unit_price`,`cash_pay_type`,`remark`,`delete_flag`,`create_date`,`create_user_id`,`modifiy_date`,`checking_audit_date`,`settle_audit_date`,`audit_id`
+		)values(#{shPackId},#{taxRate},#{taxMoney},#{costPackCode},#{projectId},#{checkingStatus},#{cashSettleStatus},#{packTruckNum},#{sendTare},#{sendGross},#{sendNet},#{cargoPrice},#{cargoUnitPrice},#{cashPayType},#{remark},#{deleteFlag},#{createDate},#{createUserId},#{modifiyDate},#{checkingAuditDate},#{settleAuditDate},#{auditId}) -->
+	<!-- 新增短驳打包信息表 -->
+	<insert id="addCostPack">
+		INSERT INTO `tb_cost_pack` (
+	`sh_pack_id`,`cost_pack_code`,`project_id`,`checking_status`,`cash_settle_status`,`invoice_status`,`pack_truck_num`,`send_tare`,`send_gross`,`tax_rate`,`send_net`,`cargo_price`,`cargo_unit_price`,`cash_pay_type`,`remark`,`delete_flag`,`create_date`,`create_user_id`,`modifiy_date`,`checking_audit_date`,
+	`settle_audit_date`,`audit_id`,`back_id`,`back_date`,`tax_money`,`besettled_money`,`settled_money`,`settle_money`,`settle_type`,`settle_date`,`settle_id`,`settle_audit_uid`,`is_histroy`,`receive_account_id`
+		)values (#{shPackId},#{costPackCode},#{projectId},#{checkingStatus},#{cashSettleStatus},#{invoiceStatus},#{packTruckNum},#{sendTare},#{sendGross},#{taxRate},#{sendNet},#{cargoPrice},#{cargoUnitPrice},#{cashPayType},#{remark},#{deleteFlag},#{createDate},#{createUserId},#{modifiyDate},#{checkingAuditDate},
+    #{settleAuditDate},#{auditId},#{backId},#{backDate},#{taxMoney},#{besettledMoney},#{settledMoney},#{settleMoney},#{settleType},#{settleDate},#{settleId},#{settleAuditUid},#{isHistroy},#{receiveAccountId})
+	</insert>
+
+	<!-- 批量新增短驳打包信息表 -->
+	<insert id="addCostPacks">
+		INSERT INTO `tb_cost_pack` (
+	`sh_pack_id`,`cost_pack_code`,`project_id`,`checking_status`,`cash_settle_status`,`invoice_status`,`pack_truck_num`,`send_tare`,`send_gross`,`tax_rate`,`send_net`,`cargo_price`,`cargo_unit_price`,`cash_pay_type`,`remark`,`delete_flag`,`create_date`,`create_user_id`,`modifiy_date`,`checking_audit_date`,
+	`settle_audit_date`,`audit_id`,`back_id`,`back_date`,`tax_money`,`besettled_money`,`settled_money`,`settle_money`,`settle_type`,`settle_date`,`settle_id`,`settle_audit_uid`,`is_histroy`,`receive_account_id`
+		)values
+<foreach collection="list" item="item" index="index" separator=",">
+    (#{shPackId},#{costPackCode},#{projectId},#{checkingStatus},#{cashSettleStatus},#{invoiceStatus},#{packTruckNum},#{sendTare},#{sendGross},#{taxRate},#{sendNet},#{cargoPrice},#{cargoUnitPrice},#{cashPayType},#{remark},#{deleteFlag},#{createDate},#{createUserId},#{modifiyDate},#{checkingAuditDate},
+    #{settleAuditDate},#{auditId},#{backId},#{backDate},#{taxMoney},#{besettledMoney},#{settledMoney},#{settleMoney},#{settleType},#{settleDate},#{settleId},#{settleAuditUid},#{isHistroy},#{receiveAccountId})
+</foreach>
+	</insert>
+
+	<!-- 修改短驳打包信息表 -->
+	<update id="editCostPackById">
+		update tb_cost_pack
+		<set>
+		<if test="projectId != null  and projectId != '' and projectId != 'null' and projectId != 'undefined'">
+               project_id=#{projectId},
+         </if>
+		<if test="checkingStatus != null">
+               checking_status=#{checkingStatus},
+         </if>
+		<if test="cashSettleStatus != null">
+               cash_settle_status=#{cashSettleStatus},
+         </if>
+		<if test="packTruckNum != null">
+               pack_truck_num=#{packTruckNum},
+         </if>
+		 <if test="remark != null and remark != '' and remark != 'null' and remark != 'undefined'">
+               remark=#{remark},
+         </if>
+		<if test="deleteFlag != null">
+               delete_flag=#{deleteFlag},
+         </if>
+		<if test="createDate != null">
+               create_date=#{createDate},
+         </if>
+		<if test="createUserId != null">
+               create_user_id=#{createUserId},
+         </if>
+		<if test="modifiyDate != null">
+               modifiy_date=#{modifiyDate},
+         </if>
+		<if test="settleType != null">
+               settle_type=#{settleType},
+         </if>
+		<if test="settleDate != null">
+               settle_date=#{settleDate},
+         </if>
+		<if test="besettledMoney != null">
+               besettled_money=#{besettledMoney},
+         </if>
+         <if test="settledMoney != null">
+               settled_money=#{settledMoney},
+         </if>
+         <if test="settleMoney != null">
+               settle_money=#{settleMoney},
+         </if>
+         <if test="invoiceStatus != null">
+               invoice_status=#{invoiceStatus},
+         </if>
+         <if test="taxMoney != null">
+               tax_money=#{taxMoney},
+         </if>
+         <if test="receiveAccountId != null">
+               receive_account_id=#{receiveAccountId},
+         </if>
+		</set>
+		where sh_pack_id=#{shPackId}
+	</update>
+
+	<!-- 批量修改短驳打包信息表 -->
+	<update id="editCostPackByIds">
+		update tb_cost_pack
+		<set>
+		<if test="map.projectId != null">
+	       project_id=#{map.projectId},
+         </if>
+		<if test="map.checkingStatus != null">
+	       checking_status=#{map.checkingStatus},
+         </if>
+         <if test="map.cashSettleStatus != null">
+	       cash_settle_status=#{map.cashSettleStatus},
+         </if>
+		<if test="map.packTruckNum != null">
+	       pack_truck_num=#{map.packTruckNum},
+         </if>
+		 <if test="map.remark != null and map.remark != '' and map.remark != 'null' and map.remark != 'undefined'">
+	       remark=#{map.remark},
+         </if>
+		<if test="map.deleteFlag != null">
+	       delete_flag=#{map.deleteFlag},
+         </if>
+		<if test="map.createDate != null">
+	       create_date=#{map.createDate},
+         </if>
+		<if test="map.createUserId != null">
+	       create_user_id=#{map.createUserId},
+         </if>
+		<if test="map.modifiyDate != null">
+	       modifiy_date=#{map.modifiyDate},
+         </if>
+		<if test="map.checkingAuditDate != null">
+	       checking_audit_date=#{map.checkingAuditDate},
+         </if>
+         <if test="map.auditId != null">
+	       audit_id=#{map.auditId},
+         </if>
+         <if test="map.backId != null">
+	      back_id=#{map.backId},
+         </if>
+         <if test="map.backDate != null">
+	       back_date=#{map.backDate},
+         </if>
+		</set>
+		where sh_pack_id in
+		<foreach collection="list" index="index" item="item" open="(" separator="," close=")">   
+             #{item}   
+        </foreach>
+	</update>
+
+	<!-- 查看短驳打包信息表 -->
+	<select id="getCostPackById" resultType="Map">
+        select a.sh_pack_id shPackId,a.cost_pack_code costPackCode,a.checking_status checkingStatus,a.cash_settle_status cashSettleStatus,a.invoice_status invoiceStatus,
+	a.pack_truck_num packTruckNum,a.send_tare sendTare,a.send_gross sendGross,a.send_net sendNet,a.cargo_price cargoPrice,a.cargo_unit_price cargoUnitPrice,a.cash_pay_type cashPayType,a.remark remark
+	,a.delete_flag deleteFlag,DATE_FORMAT(a.create_date,'%Y-%m-%d %H:%i:%s') createDate,a.create_user_id createUserId,DATE_FORMAT(a.modifiy_date,'%Y-%m-%d %H:%i:%s') modifiyDate
+	,DATE_FORMAT(a.checking_audit_date,'%Y-%m-%d %H:%i:%s') checkingAuditDate,DATE_FORMAT(a.settle_audit_date,'%Y-%m-%d %H:%i:%s') settleAuditDate,a.audit_id auditId,a.back_id backId
+	,DATE_FORMAT(a.back_date,'%Y-%m-%d %H:%i:%s') backDate,a.besettled_money besettledMoney,a.settled_money settledMoney,a.settle_money settleMoney,a.settle_type settleType
+	,DATE_FORMAT(a.settle_date,'%Y-%m-%d %H:%i:%s') settleDate,a.settle_id settleId,a.settle_audit_uid settleAuditUid,a.is_histroy isHistroy,a.receive_account_id receiveAccountId
+	,a.project_id projectId,a.cargo_price produceMoney,a.tax_rate taxRate,a.tax_money taxMoney,a.cost_pack_code costPackId
+	  from tb_cost_pack a
+	 where a.sh_pack_id=#{id}
+    </select>
+
+	<select id="getCostPackByIds" resultType="Map">
+        select DISTINCT a.sh_pack_id shPackId,a.cost_pack_code costPackCode,a.checking_status checkingStatus,a.cash_settle_status cashSettleStatus,a.invoice_status invoiceStatus,
+	a.pack_truck_num packTruckNum,a.send_tare sendTare,a.send_gross sendGross,a.send_net sendNet,a.cargo_price cargoPrice,a.cargo_unit_price cargoUnitPrice,a.cash_pay_type cashPayType,a.remark remark
+	,a.delete_flag deleteFlag,DATE_FORMAT(a.create_date,'%Y-%m-%d %H:%i:%s') createDate,a.create_user_id createUserId,DATE_FORMAT(a.modifiy_date,'%Y-%m-%d %H:%i:%s') modifiyDate
+	,DATE_FORMAT(a.checking_audit_date,'%Y-%m-%d %H:%i:%s') checkingAuditDate,DATE_FORMAT(a.settle_audit_date,'%Y-%m-%d %H:%i:%s') settleAuditDate,a.audit_id auditId,a.back_id backId
+	,DATE_FORMAT(a.back_date,'%Y-%m-%d %H:%i:%s') backDate,a.besettled_money besettledMoney,a.settled_money settledMoney,a.settle_money settleMoney,a.settle_type settleType
+	,DATE_FORMAT(a.settle_date,'%Y-%m-%d %H:%i:%s') settleDate,a.settle_id settleId,a.settle_audit_uid settleAuditUid,a.is_histroy isHistroy,a.receive_account_id receiveAccountId
+	,a.project_id projectId,a.cargo_price produceMoney,a.tax_rate taxRate,a.tax_money taxMoney,a.cost_pack_code costPackId
+	,s.pickup_place beginAddress,s.arrive_place endAddress
+	  from tb_cost_pack a
+	  left join (select o.project_id,o.pickup_place,o.arrive_place from tb_order o where o.step_select_code = '0' and o.project_id in (select p.id from tb_project p)) s on s.project_id=a.project_id
+	 where a.sh_pack_id in
+		<foreach collection="list" index="index" item="item" open="(" separator="," close=")">   
+             #{item}   
+        </foreach>
+    </select>
+	<!-- 删除短驳打包信息表 -->
+	<delete id="delCostPackById">
+		delete from tb_cost_pack where sh_pack_id = #{id}
+	</delete>	
+
+	<!-- 批量删除短驳打包信息表 -->
+    <delete id="delCostPackByIds">  
+        delete from tb_cost_pack where sh_pack_id in 
+        <foreach collection="list" index="index" item="item" open="(" separator="," close=")">   
+            #{item}   
+        </foreach>  
+    </delete>
+
+	<!-- 清空短驳打包信息表 -->
+	<delete id="delCostPacks">
+		delete from tb_cost_pack
+	</delete>	
+
+	<!-- 检索短驳打包信息表列表 -->
+	<select id="getCostPacks" resultType="Map">
+	SELECT
+		cp.sh_pack_id costPackId,
+		p.project_code projectCode,
+		cp.pack_truck_num packTruckNum,
+		p.branch_group_name branchGroupName,
+		cp.cost_pack_code costPackCode,
+		cp.cash_settle_status cashSettleStatus,
+		cp.checking_status financeStatus,
+		p.cargo_name cargoName,
+		p.cargo_price cargoUnitPrice,
+		cp.send_net sendNet,
+		cp.cargo_price cargoPrice,
+		su.`name` createUserName,
+		cp.create_date createDate,
+		s.`name` auditUserName,
+		cp.besettled_money besettledMoney,
+		(cp.tax_money+cp.cargo_price) totalMoney,
+		cp.settled_money settledMoney,
+		cp.settle_date settleDate,
+		cp.checking_audit_date checkingAuditDate
+		,cp.tax_rate taxRate
+	FROM
+		tb_cost_pack AS cp
+	LEFT JOIN tb_project AS p ON cp.project_id = p.id and p.transport_type in(1,4,6,7)  
+	LEFT JOIN tb_system_user AS su ON cp.create_user_id = su.id
+	LEFT JOIN tb_system_user AS s ON cp.audit_id = s.id
+	left join tb_branch_group_link y on cp.sh_pack_id=y.row_id and y.tab_name='tb_cost_pack'
+	where cp.delete_flag = 0 and y.sys_org_code like CONCAT(#{map.sysOrgCode},'%')
+	<if test="map.shPackId != null" >
+        and cp.sh_pack_id = #{map.shPackId,jdbcType=VARCHAR}
+      </if>
+      <if test="map.costPackCode != null" >
+        and cp.cost_pack_code = #{map.costPackCode,jdbcType=VARCHAR}
+      </if>
+      <if test="map.projectId != null and map.projectId !='' " >
+        and cp.project_id = #{map.projectId,jdbcType=INTEGER}
+      </if>
+       <if test="map.projectCode != null and map.projectCode !='' " >
+        and p.project_code = #{map.projectCode,jdbcType=VARCHAR}
+      </if>
+       <if test="map.branchGroupName != null and map.branchGroupName !='' " >
+        and p.branch_group_name = #{map.branchGroupName,jdbcType=VARCHAR}
+      </if>
+      <if test="map.checkingStatus != null" >
+        and cp.checking_status = #{map.checkingStatus,jdbcType=TINYINT}
+      </if>
+      <if test="map.cashSettleStatus != null" >
+        and cp.cash_settle_status = #{map.cashSettleStatus,jdbcType=TINYINT}
+      </if>
+      <if test="map.packTruckNum != null" >
+        and cp.pack_truck_num = #{map.packTruckNum,jdbcType=INTEGER}
+      </if>
+      <if test="map.sendTare != null" >
+        and cp.send_tare = #{map.sendTare,jdbcType=DECIMAL}
+      </if>
+      <if test="map.sendGross != null" >
+        and cp.send_gross = #{map.sendGross,jdbcType=DECIMAL}
+      </if>
+      <if test="map.sendNet != null" >
+        and cp.send_net = #{map.sendNet,jdbcType=DECIMAL}
+      </if>
+      <if test="map.cargoPrice != null" >
+        and cp.cargo_price = #{map.cargoPrice,jdbcType=DECIMAL}
+      </if>
+      <if test="map.cargoUnitPrice != null" >
+        and cp.cargo_unit_price = #{map.cargoUnitPrice,jdbcType=DECIMAL}
+      </if>
+      <if test="map.cashPayType != null" >
+        and cp.cash_pay_type = #{map.cashPayType,jdbcType=TINYINT}
+      </if>
+      <if test="map.remark != null" >
+        and cp.remark = #{map.remark,jdbcType=VARCHAR}
+      </if>
+      <if test="map.deleteFlag != null" >
+        and cp.delete_flag = #{map.deleteFlag,jdbcType=TINYINT}
+      </if>
+         <if test="map.beginDate != null and map.beginDate !='' and map.beginDate != 'null' and map.beginDate != 'undefined' " >
+	       and date_format(cp.create_date, '%Y-%m-%d') &gt;= date_format(#{map.beginDate}, '%Y-%m-%d')
+	    </if>
+	    <if test="map.endDate != null and map.endDate !='' and map.endDate != 'null' and map.endDate != 'undefined' " >
+	       and date_format(cp.create_date, '%Y-%m-%d') &lt;= date_format(#{map.endDate}, '%Y-%m-%d')
+	    </if>
+      <if test="map.createUserId != null" >
+        and cp.create_user_id = #{map.createUserId,jdbcType=INTEGER}
+      </if>
+      <if test="map.modifiyDate != null" >
+        and cp.modifiy_date = #{map.modifiyDate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="map.checkingAuditDate != null" >
+        and cp.checking_audit_date = #{map.checkingAuditDate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="map.settleAuditDate != null" >
+        and cp.settle_audit_date = #{map.settleAuditDate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="map.auditId != null" >
+        and cp.audit_id = #{map.auditId,jdbcType=INTEGER}
+      </if>
+      <if test="map.backId != null" >
+        and cp.back_id = #{map.backId,jdbcType=INTEGER}
+      </if>
+      <if test="map.backDate != null" >
+        and cp.back_date = #{map.backDate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="map.receiveAccountId != null" >
+        and cp.receive_account_id = #{map.receiveAccountId,jdbcType=INTEGER}
+      </if>
+      <if test="map.taxMoney != null" >
+        and cp.tax_money = #{map.taxMoney,jdbcType=DECIMAL}
+      </if>
+      <if test="map.besettledMoney != null" >
+        and cp.besettled_money = #{map.besettledMoney,jdbcType=DECIMAL}
+      </if>
+      <if test="map.settledMoney != null" >
+        and cp.settled_money = #{map.settledMoney,jdbcType=DECIMAL}
+      </if>
+      <if test="map.settleMoney != null" >
+        and cp.settle_money = #{map.settleMoney,jdbcType=DECIMAL}
+      </if>
+      <if test="map.settleType != null" >
+        and cp.settle_type = #{map.settleType,jdbcType=INTEGER}
+      </if>
+      <if test="map.settleDate != null" >
+        and cp.settle_date = #{map.settleDate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="map.settleId != null" >
+        and cp.settle_id = #{map.settleId,jdbcType=VARCHAR}
+      </if>
+      <if test="map.settleAuditUid != null" >
+        and cp.settle_audit_uid = #{map.settleAuditUid,jdbcType=INTEGER}
+      </if>
+      <if test="map.isHistroy != null" >
+        and cp.is_histroy = #{map.isHistroy,jdbcType=INTEGER}
+      </if>
+        order by cp.sh_pack_id desc
+	</select>
+	
+	<!--  通过打包id查询打包运单列表  -->
+	<select id="listCostPackOrderByCostPackIds" resultType="Map">
+        select tb_cost_pack_id costPackId, cost_order_fin_id costOrderFinId,order_id  orderId,delete_flag deleteFlag 
+        from tb_cost_order_finance 
+        where tb_cost_pack_id in 
+        <foreach collection="list" index="index" item="item" open="(" separator="," close=")">   
+             #{item}   
+        </foreach>
+		ORDER BY cost_order_fin_id DESC
+	</select>
+	
+	<select id="queryAuditMoney" resultType="Map">
+		select settle_money settleMoney,settled_money settledMoney,besettled_money besettledMoney,settle_type settleType,receive_account_id receiveAccountId
+    from tb_cost_pack where sh_pack_id = #{custPackId}
+	</select>
+
+	<!-- 根据打包id获取管理的订单 -->
+	<select id="getCostOrderByCostPackId" resultType="Map">
+        SELECT order_id from tb_cost_order_finance
+		where tb_cost_pack_id = #{map.shPackId} and pack_flag = 1 and delete_flag = 0
+    </select>
+    
+    <!-- 根据打包id获取管理的订单的最大最小时间  作为预付款的货款起号和止号 -->
+	<select id="getOrderMinimeByCostPackId" resultType="com.shenhesoft.logistics.business.pojo.TbOrder.TbOrder">
+		SELECT  id,project_id projectId,project_code projectCode,branch_id branchId,branch_group_name branchGroupName,order_code orderCode
+		from tb_order where create_date = (SELECT  DISTINCT MIN(create_date)
+		from tb_order where id in (
+		SELECT order_id from tb_cost_order_finance
+		where tb_cost_pack_id = #{map.shPackId} and pack_flag = 1 and delete_flag = 0))
+    </select>
+    
+    <select id="getOrderMaxTimeByCostPackId" resultType="com.shenhesoft.logistics.business.pojo.TbOrder.TbOrder">
+		SELECT  id,project_id projectId,project_code projectCode,branch_id branchId,branch_group_name branchGroupName,order_code orderCode
+		from tb_order where create_date = (SELECT  DISTINCT MAX(create_date)
+		from tb_order where id in (
+		SELECT order_id from tb_cost_order_finance
+		where tb_cost_pack_id = #{map.shPackId} and pack_flag = 1 and delete_flag = 0))
+    </select>
+</mapper>

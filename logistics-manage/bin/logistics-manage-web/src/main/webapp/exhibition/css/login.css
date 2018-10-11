@@ -1,0 +1,87 @@
+*{
+	margin: 0;
+	padding: 0;
+	font-size: 18px !important;
+  	font-family: "Microsoft YaHei" !important;
+  	color: rgb(153, 153, 153) !important;
+}
+body{
+	overflow-y: hidden;
+	background-color:#f7f6fd;
+	
+}
+.contains{
+	position: absolute;
+	background-color: #ffffff;
+	top: 50%;
+	right: 50%;
+	width: 1120px;
+	height: 400px;
+	margin-top: -200px;
+	margin-right: -560px;
+	border-top-right-radius: 10px 10px;
+	border-bottom-right-radius: 10px 10px;
+}
+/*.shandow{
+	position: absolute;
+	left: 50%;
+}*/
+.contains .logoImg,.contains .login{
+	float: left;
+	width: 50%;
+	height: 100%;
+}
+.contains .formDiv{
+	width: 350px;
+	margin: auto;
+	margin-top: 100px;
+	
+}
+
+.form-group{
+	/*border-bottom: 1px solid #DBDBDB;*/
+	padding-bottom: 10px;
+	margin-bottom: 10px;
+	text-indent: 8px;
+	
+}
+.form-group input[type="text"]{
+	background: url(../img/user.png) no-repeat;
+}
+
+.form-group input[type="password"]{
+	background: url(../img/password.png) no-repeat;
+}
+.form-control{
+	border: 0;
+	box-shadow: none;
+	border-bottom: 1px solid #DBDBDB;
+	border-radius: 0;
+	padding-left: 44px;
+}
+.btn{
+	margin-top: 50px;
+	margin-bottom: 65px;
+	 border-radius: 10px;
+	 background-color: rgb(238, 238, 238);
+}
+
+.shandow {
+  background-image: -moz-linear-gradient( 0deg, rgb(226, 242, 255) 0%, rgba(30,154,247,0) 100%);
+  background-image: -webkit-linear-gradient( 0deg, rgb(226, 242, 255) 0%, rgba(30,154,247,0) 100%);
+  background-image: -ms-linear-gradient( 0deg, rgb(226, 242, 255) 0%, rgba(30,154,247,0) 100%);
+  opacity: 0.351;
+  position: absolute;
+  left:560px;
+  top: 0px;
+  width: 80px;
+  height: 400px;
+  z-index: 8;
+}
+.submit { background: #1E9AF7; color: #fff !important; }
+.link{color:#fff !important}
+
+
+
+
+

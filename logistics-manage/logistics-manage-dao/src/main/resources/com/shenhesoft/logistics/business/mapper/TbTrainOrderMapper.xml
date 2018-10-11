@@ -1,0 +1,1199 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shenhesoft.logistics.business.mapper.TbTrainOrderMapper" >
+  <resultMap id="BaseResultMap" type="com.shenhesoft.logistics.business.pojo.trainOrder.TbTrainOrder" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="project_id" property="projectId" jdbcType="INTEGER" />
+    <result column="project_code" property="projectCode" jdbcType="VARCHAR" />
+    <result column="project_type" property="projectType" jdbcType="TINYINT" />
+    <result column="branch_id" property="branchId" jdbcType="INTEGER" />
+    <result column="branch_name" property="branchName" jdbcType="VARCHAR" />
+    <result column="begin_site" property="beginSite" jdbcType="VARCHAR" />
+    <result column="begin_place" property="beginPlace" jdbcType="VARCHAR" />
+    <result column="end_site" property="endSite" jdbcType="VARCHAR" />
+    <result column="end_place" property="endPlace" jdbcType="VARCHAR" />
+    <result column="please_car_num" property="pleaseCarNum" jdbcType="VARCHAR" />
+    <result column="please_car_type_id" property="pleaseCarTypeId" jdbcType="INTEGER" />
+    <result column="estimate_weight" property="estimateWeight" jdbcType="VARCHAR" />
+    <result column="estimate_cost" property="estimateCost" jdbcType="VARCHAR" />
+    <result column="cargo_name" property="cargoName" jdbcType="VARCHAR" />
+    <result column="cargo_specifications" property="cargoSpecifications" jdbcType="VARCHAR" />
+    <result column="advance_charge_account" property="advanceChargeAccount" jdbcType="VARCHAR" />
+    <result column="advance_charge" property="advanceCharge" jdbcType="DECIMAL" />
+    <result column="sure_car_num" property="sureCarNum" jdbcType="INTEGER" />
+    <result column="send_date" property="sendDate" jdbcType="TIMESTAMP" />
+    <result column="send_operator_id" property="sendOperatorId" jdbcType="VARCHAR" />
+    <result column="update_location_id" property="updateLocationId" jdbcType="INTEGER" />
+    <result column="type" property="type" jdbcType="TINYINT" />
+    <result column="please_train_number" property="pleaseTrainNumber" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="entruck_date" property="entruckDate" jdbcType="TIMESTAMP" />
+    <result column="lose_car_num" property="loseCarNum" jdbcType="INTEGER" />
+    <result column="is_exception" property="isException" jdbcType="TINYINT" />
+    <result column="exception_reason" property="exceptionReason" jdbcType="VARCHAR" />
+    <result column="exception_report_date" property="exceptionReportDate" jdbcType="TIMESTAMP" />
+    <result column="exception_report_person" property="exceptionReportPerson" jdbcType="VARCHAR" />
+    <result column="delete_date" property="deleteDate" jdbcType="TIMESTAMP" />
+    <result column="delete_person" property="deletePerson" jdbcType="VARCHAR" />
+    <result column="delete_reason" property="deleteReason" jdbcType="VARCHAR" />
+    <result column="artificial_report_id" property="artificialReportId" jdbcType="INTEGER" />
+    <result column="entruck_numbe" property="entruckNumbe" jdbcType="INTEGER" />
+    <result column="container_nums" property="containerNums" jdbcType="INTEGER" />
+    <result column="entruck_weight" property="entruckWeight" jdbcType="DECIMAL" />
+    <result column="arrive_weight" property="arriveWeight" jdbcType="DECIMAL" />
+    <result column="arrive_date" property="arriveDate" jdbcType="TIMESTAMP" />
+    <result column="delete_flag" property="deleteFlag" jdbcType="TINYINT" />
+    <result column="send_company" property="sendCompany" jdbcType="VARCHAR" />
+    <result column="receipt_company" property="receiptCompany" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, project_id, project_code, project_type, branch_id, branch_name, begin_site, begin_place, 
+    end_site, end_place, please_car_num, please_car_type_id, estimate_weight, estimate_cost, 
+    cargo_name, cargo_specifications, advance_charge_account, advance_charge, sure_car_num, 
+    send_date, send_operator_id, update_location_id, type, please_train_number, create_date, 
+    status, update_date, entruck_date, lose_car_num, is_exception, exception_reason, 
+    exception_report_date, exception_report_person, delete_date, delete_person, delete_reason, 
+    artificial_report_id, entruck_numbe, container_nums, entruck_weight, arrive_weight, 
+    arrive_date, delete_flag, send_company, receipt_company
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shenhesoft.logistics.business.pojo.trainOrder.TbTrainOrderExample" >
+    <!-- select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_train_order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if> -->
+    select 
+    A.id,A.project_id projectId,A.project_code projectCode,A.project_type projectType,A.branch_id branchId,A.branch_name branchName,
+    A.begin_site beginSite,A.begin_place beginPlace,A.end_site endSite,A.end_place endPlace,A.please_car_num pleaseCarNum,A.please_car_type_id pleaseCarTypeId,
+    A.estimate_weight estimateWeight,A.estimate_cost estimateCost,A.cargo_name cargoName,A.cargo_specifications cargoSpecifications,
+    A.advance_charge_account advanceChargeAccount,A.advance_charge advanceCharge,A.sure_car_num sureCarNum,A.send_date sendDate,
+    A.send_operator_id sendOperatorId,A.update_location_id updateLocationId,A.type,please_train_number pleaseTrainNumber,A.create_date createDate,
+    A.status,A.update_date updateDate,A.entruck_date entruckDate,A.lose_car_num loseCarNum,A.is_exception isException,A.exception_reason exceptionReason,
+    A.exception_report_date exceptionReportDate,A.exception_report_person exceptionReportPerson,A.delete_date deleteDate,A.delete_person deletePerson,
+    A.delete_reason deleteReason,A.artificial_report_id artificialReportId,A.entruck_numbe entruckNumbe,A.container_nums containerNums,
+    A.entruck_weight entruckWeight,A.arrive_weight arriveWeight,A.arrive_date arriveDate,A.delete_flag deleteFlag,A.send_company sendCompany,A.receipt_company receiptCompany
+    
+    from tb_train_order A left join tb_branch_group_link y on A.id=y.row_id
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_train_order
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_train_order
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.shenhesoft.logistics.business.pojo.trainOrder.TbTrainOrderExample" >
+    delete from tb_train_order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.shenhesoft.logistics.business.pojo.trainOrder.TbTrainOrder" >
+    insert into tb_train_order (id, project_id, project_code, 
+      project_type, branch_id, branch_name, 
+      begin_site, begin_place, end_site, 
+      end_place, please_car_num, please_car_type_id, 
+      estimate_weight, estimate_cost, cargo_name, 
+      cargo_specifications, advance_charge_account, 
+      advance_charge, sure_car_num, send_date, 
+      send_operator_id, update_location_id, type, 
+      please_train_number, create_date, status, 
+      update_date, entruck_date, lose_car_num, 
+      is_exception, exception_reason, exception_report_date, 
+      exception_report_person, delete_date, delete_person, 
+      delete_reason, artificial_report_id, entruck_numbe, 
+      container_nums, entruck_weight, arrive_weight, 
+      arrive_date, delete_flag, send_company, 
+      receipt_company)
+    values (#{id,jdbcType=INTEGER}, #{projectId,jdbcType=INTEGER}, #{projectCode,jdbcType=VARCHAR}, 
+      #{projectType,jdbcType=TINYINT}, #{branchId,jdbcType=INTEGER}, #{branchName,jdbcType=VARCHAR}, 
+      #{beginSite,jdbcType=VARCHAR}, #{beginPlace,jdbcType=VARCHAR}, #{endSite,jdbcType=VARCHAR}, 
+      #{endPlace,jdbcType=VARCHAR}, #{pleaseCarNum,jdbcType=VARCHAR}, #{pleaseCarTypeId,jdbcType=INTEGER}, 
+      #{estimateWeight,jdbcType=VARCHAR}, #{estimateCost,jdbcType=VARCHAR}, #{cargoName,jdbcType=VARCHAR}, 
+      #{cargoSpecifications,jdbcType=VARCHAR}, #{advanceChargeAccount,jdbcType=VARCHAR}, 
+      #{advanceCharge,jdbcType=DECIMAL}, #{sureCarNum,jdbcType=INTEGER}, #{sendDate,jdbcType=TIMESTAMP}, 
+      #{sendOperatorId,jdbcType=VARCHAR}, #{updateLocationId,jdbcType=INTEGER}, #{type,jdbcType=TINYINT}, 
+      #{pleaseTrainNumber,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT}, 
+      #{updateDate,jdbcType=TIMESTAMP}, #{entruckDate,jdbcType=TIMESTAMP}, #{loseCarNum,jdbcType=INTEGER}, 
+      #{isException,jdbcType=TINYINT}, #{exceptionReason,jdbcType=VARCHAR}, #{exceptionReportDate,jdbcType=TIMESTAMP}, 
+      #{exceptionReportPerson,jdbcType=VARCHAR}, #{deleteDate,jdbcType=TIMESTAMP}, #{deletePerson,jdbcType=VARCHAR}, 
+      #{deleteReason,jdbcType=VARCHAR}, #{artificialReportId,jdbcType=INTEGER}, #{entruckNumbe,jdbcType=INTEGER}, 
+      #{containerNums,jdbcType=INTEGER}, #{entruckWeight,jdbcType=DECIMAL}, #{arriveWeight,jdbcType=DECIMAL}, 
+      #{arriveDate,jdbcType=TIMESTAMP}, #{deleteFlag,jdbcType=TINYINT}, #{sendCompany,jdbcType=VARCHAR}, 
+      #{receiptCompany,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.shenhesoft.logistics.business.pojo.trainOrder.TbTrainOrder" >
+  <selectKey resultType="java.lang.Integer" keyProperty="id"
+			order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+    insert into tb_train_order
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="projectId != null" >
+        project_id,
+      </if>
+      <if test="projectCode != null" >
+        project_code,
+      </if>
+      <if test="projectType != null" >
+        project_type,
+      </if>
+      <if test="branchId != null" >
+        branch_id,
+      </if>
+      <if test="branchName != null" >
+        branch_name,
+      </if>
+      <if test="beginSite != null" >
+        begin_site,
+      </if>
+      <if test="beginPlace != null" >
+        begin_place,
+      </if>
+      <if test="endSite != null" >
+        end_site,
+      </if>
+      <if test="endPlace != null" >
+        end_place,
+      </if>
+      <if test="pleaseCarNum != null" >
+        please_car_num,
+      </if>
+      <if test="pleaseCarTypeId != null" >
+        please_car_type_id,
+      </if>
+      <if test="estimateWeight != null" >
+        estimate_weight,
+      </if>
+      <if test="estimateCost != null" >
+        estimate_cost,
+      </if>
+      <if test="cargoName != null" >
+        cargo_name,
+      </if>
+      <if test="cargoSpecifications != null" >
+        cargo_specifications,
+      </if>
+      <if test="advanceChargeAccount != null" >
+        advance_charge_account,
+      </if>
+      <if test="advanceCharge != null" >
+        advance_charge,
+      </if>
+      <if test="sureCarNum != null" >
+        sure_car_num,
+      </if>
+      <if test="sendDate != null" >
+        send_date,
+      </if>
+      <if test="sendOperatorId != null" >
+        send_operator_id,
+      </if>
+      <if test="updateLocationId != null" >
+        update_location_id,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="pleaseTrainNumber != null" >
+        please_train_number,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="entruckDate != null" >
+        entruck_date,
+      </if>
+      <if test="loseCarNum != null" >
+        lose_car_num,
+      </if>
+      <if test="isException != null" >
+        is_exception,
+      </if>
+      <if test="exceptionReason != null" >
+        exception_reason,
+      </if>
+      <if test="exceptionReportDate != null" >
+        exception_report_date,
+      </if>
+      <if test="exceptionReportPerson != null" >
+        exception_report_person,
+      </if>
+      <if test="deleteDate != null" >
+        delete_date,
+      </if>
+      <if test="deletePerson != null" >
+        delete_person,
+      </if>
+      <if test="deleteReason != null" >
+        delete_reason,
+      </if>
+      <if test="artificialReportId != null" >
+        artificial_report_id,
+      </if>
+      <if test="entruckNumbe != null" >
+        entruck_numbe,
+      </if>
+      <if test="containerNums != null" >
+        container_nums,
+      </if>
+      <if test="entruckWeight != null" >
+        entruck_weight,
+      </if>
+      <if test="arriveWeight != null" >
+        arrive_weight,
+      </if>
+      <if test="arriveDate != null" >
+        arrive_date,
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag,
+      </if>
+      <if test="sendCompany != null" >
+        send_company,
+      </if>
+      <if test="receiptCompany != null" >
+        receipt_company,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="projectId != null" >
+        #{projectId,jdbcType=INTEGER},
+      </if>
+      <if test="projectCode != null" >
+        #{projectCode,jdbcType=VARCHAR},
+      </if>
+      <if test="projectType != null" >
+        #{projectType,jdbcType=TINYINT},
+      </if>
+      <if test="branchId != null" >
+        #{branchId,jdbcType=INTEGER},
+      </if>
+      <if test="branchName != null" >
+        #{branchName,jdbcType=VARCHAR},
+      </if>
+      <if test="beginSite != null" >
+        #{beginSite,jdbcType=VARCHAR},
+      </if>
+      <if test="beginPlace != null" >
+        #{beginPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="endSite != null" >
+        #{endSite,jdbcType=VARCHAR},
+      </if>
+      <if test="endPlace != null" >
+        #{endPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="pleaseCarNum != null" >
+        #{pleaseCarNum,jdbcType=VARCHAR},
+      </if>
+      <if test="pleaseCarTypeId != null" >
+        #{pleaseCarTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="estimateWeight != null" >
+        #{estimateWeight,jdbcType=VARCHAR},
+      </if>
+      <if test="estimateCost != null" >
+        #{estimateCost,jdbcType=VARCHAR},
+      </if>
+      <if test="cargoName != null" >
+        #{cargoName,jdbcType=VARCHAR},
+      </if>
+      <if test="cargoSpecifications != null" >
+        #{cargoSpecifications,jdbcType=VARCHAR},
+      </if>
+      <if test="advanceChargeAccount != null" >
+        #{advanceChargeAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="advanceCharge != null" >
+        #{advanceCharge,jdbcType=DECIMAL},
+      </if>
+      <if test="sureCarNum != null" >
+        #{sureCarNum,jdbcType=INTEGER},
+      </if>
+      <if test="sendDate != null" >
+        #{sendDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sendOperatorId != null" >
+        #{sendOperatorId,jdbcType=VARCHAR},
+      </if>
+      <if test="updateLocationId != null" >
+        #{updateLocationId,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=TINYINT},
+      </if>
+      <if test="pleaseTrainNumber != null" >
+        #{pleaseTrainNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="entruckDate != null" >
+        #{entruckDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="loseCarNum != null" >
+        #{loseCarNum,jdbcType=INTEGER},
+      </if>
+      <if test="isException != null" >
+        #{isException,jdbcType=TINYINT},
+      </if>
+      <if test="exceptionReason != null" >
+        #{exceptionReason,jdbcType=VARCHAR},
+      </if>
+      <if test="exceptionReportDate != null" >
+        #{exceptionReportDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="exceptionReportPerson != null" >
+        #{exceptionReportPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteDate != null" >
+        #{deleteDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deletePerson != null" >
+        #{deletePerson,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteReason != null" >
+        #{deleteReason,jdbcType=VARCHAR},
+      </if>
+      <if test="artificialReportId != null" >
+        #{artificialReportId,jdbcType=INTEGER},
+      </if>
+      <if test="entruckNumbe != null" >
+        #{entruckNumbe,jdbcType=INTEGER},
+      </if>
+      <if test="containerNums != null" >
+        #{containerNums,jdbcType=INTEGER},
+      </if>
+      <if test="entruckWeight != null" >
+        #{entruckWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="arriveWeight != null" >
+        #{arriveWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="arriveDate != null" >
+        #{arriveDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteFlag != null" >
+        #{deleteFlag,jdbcType=TINYINT},
+      </if>
+      <if test="sendCompany != null" >
+        #{sendCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="receiptCompany != null" >
+        #{receiptCompany,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.shenhesoft.logistics.business.pojo.trainOrder.TbTrainOrderExample" resultType="java.lang.Integer" >
+    select count(*) from tb_train_order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_train_order
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.projectId != null" >
+        project_id = #{record.projectId,jdbcType=INTEGER},
+      </if>
+      <if test="record.projectCode != null" >
+        project_code = #{record.projectCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.projectType != null" >
+        project_type = #{record.projectType,jdbcType=TINYINT},
+      </if>
+      <if test="record.branchId != null" >
+        branch_id = #{record.branchId,jdbcType=INTEGER},
+      </if>
+      <if test="record.branchName != null" >
+        branch_name = #{record.branchName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.beginSite != null" >
+        begin_site = #{record.beginSite,jdbcType=VARCHAR},
+      </if>
+      <if test="record.beginPlace != null" >
+        begin_place = #{record.beginPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="record.endSite != null" >
+        end_site = #{record.endSite,jdbcType=VARCHAR},
+      </if>
+      <if test="record.endPlace != null" >
+        end_place = #{record.endPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pleaseCarNum != null" >
+        please_car_num = #{record.pleaseCarNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pleaseCarTypeId != null" >
+        please_car_type_id = #{record.pleaseCarTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.estimateWeight != null" >
+        estimate_weight = #{record.estimateWeight,jdbcType=VARCHAR},
+      </if>
+      <if test="record.estimateCost != null" >
+        estimate_cost = #{record.estimateCost,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cargoName != null" >
+        cargo_name = #{record.cargoName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cargoSpecifications != null" >
+        cargo_specifications = #{record.cargoSpecifications,jdbcType=VARCHAR},
+      </if>
+      <if test="record.advanceChargeAccount != null" >
+        advance_charge_account = #{record.advanceChargeAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.advanceCharge != null" >
+        advance_charge = #{record.advanceCharge,jdbcType=DECIMAL},
+      </if>
+      <if test="record.sureCarNum != null" >
+        sure_car_num = #{record.sureCarNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.sendDate != null" >
+        send_date = #{record.sendDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.sendOperatorId != null" >
+        send_operator_id = #{record.sendOperatorId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateLocationId != null" >
+        update_location_id = #{record.updateLocationId,jdbcType=INTEGER},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=TINYINT},
+      </if>
+      <if test="record.pleaseTrainNumber != null" >
+        please_train_number = #{record.pleaseTrainNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDate != null" >
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=TINYINT},
+      </if>
+      <if test="record.updateDate != null" >
+        update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.entruckDate != null" >
+        entruck_date = #{record.entruckDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.loseCarNum != null" >
+        lose_car_num = #{record.loseCarNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.isException != null" >
+        is_exception = #{record.isException,jdbcType=TINYINT},
+      </if>
+      <if test="record.exceptionReason != null" >
+        exception_reason = #{record.exceptionReason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.exceptionReportDate != null" >
+        exception_report_date = #{record.exceptionReportDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.exceptionReportPerson != null" >
+        exception_report_person = #{record.exceptionReportPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deleteDate != null" >
+        delete_date = #{record.deleteDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.deletePerson != null" >
+        delete_person = #{record.deletePerson,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deleteReason != null" >
+        delete_reason = #{record.deleteReason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.artificialReportId != null" >
+        artificial_report_id = #{record.artificialReportId,jdbcType=INTEGER},
+      </if>
+      <if test="record.entruckNumbe != null" >
+        entruck_numbe = #{record.entruckNumbe,jdbcType=INTEGER},
+      </if>
+      <if test="record.containerNums != null" >
+        container_nums = #{record.containerNums,jdbcType=INTEGER},
+      </if>
+      <if test="record.entruckWeight != null" >
+        entruck_weight = #{record.entruckWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="record.arriveWeight != null" >
+        arrive_weight = #{record.arriveWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="record.arriveDate != null" >
+        arrive_date = #{record.arriveDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.deleteFlag != null" >
+        delete_flag = #{record.deleteFlag,jdbcType=TINYINT},
+      </if>
+      <if test="record.sendCompany != null" >
+        send_company = #{record.sendCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="record.receiptCompany != null" >
+        receipt_company = #{record.receiptCompany,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_train_order
+    set id = #{record.id,jdbcType=INTEGER},
+      project_id = #{record.projectId,jdbcType=INTEGER},
+      project_code = #{record.projectCode,jdbcType=VARCHAR},
+      project_type = #{record.projectType,jdbcType=TINYINT},
+      branch_id = #{record.branchId,jdbcType=INTEGER},
+      branch_name = #{record.branchName,jdbcType=VARCHAR},
+      begin_site = #{record.beginSite,jdbcType=VARCHAR},
+      begin_place = #{record.beginPlace,jdbcType=VARCHAR},
+      end_site = #{record.endSite,jdbcType=VARCHAR},
+      end_place = #{record.endPlace,jdbcType=VARCHAR},
+      please_car_num = #{record.pleaseCarNum,jdbcType=VARCHAR},
+      please_car_type_id = #{record.pleaseCarTypeId,jdbcType=INTEGER},
+      estimate_weight = #{record.estimateWeight,jdbcType=VARCHAR},
+      estimate_cost = #{record.estimateCost,jdbcType=VARCHAR},
+      cargo_name = #{record.cargoName,jdbcType=VARCHAR},
+      cargo_specifications = #{record.cargoSpecifications,jdbcType=VARCHAR},
+      advance_charge_account = #{record.advanceChargeAccount,jdbcType=VARCHAR},
+      advance_charge = #{record.advanceCharge,jdbcType=DECIMAL},
+      sure_car_num = #{record.sureCarNum,jdbcType=INTEGER},
+      send_date = #{record.sendDate,jdbcType=TIMESTAMP},
+      send_operator_id = #{record.sendOperatorId,jdbcType=VARCHAR},
+      update_location_id = #{record.updateLocationId,jdbcType=INTEGER},
+      type = #{record.type,jdbcType=TINYINT},
+      please_train_number = #{record.pleaseTrainNumber,jdbcType=VARCHAR},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      status = #{record.status,jdbcType=TINYINT},
+      update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      entruck_date = #{record.entruckDate,jdbcType=TIMESTAMP},
+      lose_car_num = #{record.loseCarNum,jdbcType=INTEGER},
+      is_exception = #{record.isException,jdbcType=TINYINT},
+      exception_reason = #{record.exceptionReason,jdbcType=VARCHAR},
+      exception_report_date = #{record.exceptionReportDate,jdbcType=TIMESTAMP},
+      exception_report_person = #{record.exceptionReportPerson,jdbcType=VARCHAR},
+      delete_date = #{record.deleteDate,jdbcType=TIMESTAMP},
+      delete_person = #{record.deletePerson,jdbcType=VARCHAR},
+      delete_reason = #{record.deleteReason,jdbcType=VARCHAR},
+      artificial_report_id = #{record.artificialReportId,jdbcType=INTEGER},
+      entruck_numbe = #{record.entruckNumbe,jdbcType=INTEGER},
+      container_nums = #{record.containerNums,jdbcType=INTEGER},
+      entruck_weight = #{record.entruckWeight,jdbcType=DECIMAL},
+      arrive_weight = #{record.arriveWeight,jdbcType=DECIMAL},
+      arrive_date = #{record.arriveDate,jdbcType=TIMESTAMP},
+      delete_flag = #{record.deleteFlag,jdbcType=TINYINT},
+      send_company = #{record.sendCompany,jdbcType=VARCHAR},
+      receipt_company = #{record.receiptCompany,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.shenhesoft.logistics.business.pojo.trainOrder.TbTrainOrder" >
+    update tb_train_order
+    <set >
+      <if test="projectId != null" >
+        project_id = #{projectId,jdbcType=INTEGER},
+      </if>
+      <if test="projectCode != null" >
+        project_code = #{projectCode,jdbcType=VARCHAR},
+      </if>
+      <if test="projectType != null" >
+        project_type = #{projectType,jdbcType=TINYINT},
+      </if>
+      <if test="branchId != null" >
+        branch_id = #{branchId,jdbcType=INTEGER},
+      </if>
+      <if test="branchName != null" >
+        branch_name = #{branchName,jdbcType=VARCHAR},
+      </if>
+      <if test="beginSite != null" >
+        begin_site = #{beginSite,jdbcType=VARCHAR},
+      </if>
+      <if test="beginPlace != null" >
+        begin_place = #{beginPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="endSite != null" >
+        end_site = #{endSite,jdbcType=VARCHAR},
+      </if>
+      <if test="endPlace != null" >
+        end_place = #{endPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="pleaseCarNum != null" >
+        please_car_num = #{pleaseCarNum,jdbcType=VARCHAR},
+      </if>
+      <if test="pleaseCarTypeId != null" >
+        please_car_type_id = #{pleaseCarTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="estimateWeight != null" >
+        estimate_weight = #{estimateWeight,jdbcType=VARCHAR},
+      </if>
+      <if test="estimateCost != null" >
+        estimate_cost = #{estimateCost,jdbcType=VARCHAR},
+      </if>
+      <if test="cargoName != null" >
+        cargo_name = #{cargoName,jdbcType=VARCHAR},
+      </if>
+      <if test="cargoSpecifications != null" >
+        cargo_specifications = #{cargoSpecifications,jdbcType=VARCHAR},
+      </if>
+      <if test="advanceChargeAccount != null" >
+        advance_charge_account = #{advanceChargeAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="advanceCharge != null" >
+        advance_charge = #{advanceCharge,jdbcType=DECIMAL},
+      </if>
+      <if test="sureCarNum != null" >
+        sure_car_num = #{sureCarNum,jdbcType=INTEGER},
+      </if>
+      <if test="sendDate != null" >
+        send_date = #{sendDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sendOperatorId != null" >
+        send_operator_id = #{sendOperatorId,jdbcType=VARCHAR},
+      </if>
+      <if test="updateLocationId != null" >
+        update_location_id = #{updateLocationId,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=TINYINT},
+      </if>
+      <if test="pleaseTrainNumber != null" >
+        please_train_number = #{pleaseTrainNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="entruckDate != null" >
+        entruck_date = #{entruckDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="loseCarNum != null" >
+        lose_car_num = #{loseCarNum,jdbcType=INTEGER},
+      </if>
+      <if test="isException != null" >
+        is_exception = #{isException,jdbcType=TINYINT},
+      </if>
+      <if test="exceptionReason != null" >
+        exception_reason = #{exceptionReason,jdbcType=VARCHAR},
+      </if>
+      <if test="exceptionReportDate != null" >
+        exception_report_date = #{exceptionReportDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="exceptionReportPerson != null" >
+        exception_report_person = #{exceptionReportPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteDate != null" >
+        delete_date = #{deleteDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deletePerson != null" >
+        delete_person = #{deletePerson,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteReason != null" >
+        delete_reason = #{deleteReason,jdbcType=VARCHAR},
+      </if>
+      <if test="artificialReportId != null" >
+        artificial_report_id = #{artificialReportId,jdbcType=INTEGER},
+      </if>
+      <if test="entruckNumbe != null" >
+        entruck_numbe = #{entruckNumbe,jdbcType=INTEGER},
+      </if>
+      <if test="containerNums != null" >
+        container_nums = #{containerNums,jdbcType=INTEGER},
+      </if>
+      <if test="entruckWeight != null" >
+        entruck_weight = #{entruckWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="arriveWeight != null" >
+        arrive_weight = #{arriveWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="arriveDate != null" >
+        arrive_date = #{arriveDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag = #{deleteFlag,jdbcType=TINYINT},
+      </if>
+      <if test="sendCompany != null" >
+        send_company = #{sendCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="receiptCompany != null" >
+        receipt_company = #{receiptCompany,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.shenhesoft.logistics.business.pojo.trainOrder.TbTrainOrder" >
+    update tb_train_order
+    set project_id = #{projectId,jdbcType=INTEGER},
+      project_code = #{projectCode,jdbcType=VARCHAR},
+      project_type = #{projectType,jdbcType=TINYINT},
+      branch_id = #{branchId,jdbcType=INTEGER},
+      branch_name = #{branchName,jdbcType=VARCHAR},
+      begin_site = #{beginSite,jdbcType=VARCHAR},
+      begin_place = #{beginPlace,jdbcType=VARCHAR},
+      end_site = #{endSite,jdbcType=VARCHAR},
+      end_place = #{endPlace,jdbcType=VARCHAR},
+      please_car_num = #{pleaseCarNum,jdbcType=VARCHAR},
+      please_car_type_id = #{pleaseCarTypeId,jdbcType=INTEGER},
+      estimate_weight = #{estimateWeight,jdbcType=VARCHAR},
+      estimate_cost = #{estimateCost,jdbcType=VARCHAR},
+      cargo_name = #{cargoName,jdbcType=VARCHAR},
+      cargo_specifications = #{cargoSpecifications,jdbcType=VARCHAR},
+      advance_charge_account = #{advanceChargeAccount,jdbcType=VARCHAR},
+      advance_charge = #{advanceCharge,jdbcType=DECIMAL},
+      sure_car_num = #{sureCarNum,jdbcType=INTEGER},
+      send_date = #{sendDate,jdbcType=TIMESTAMP},
+      send_operator_id = #{sendOperatorId,jdbcType=VARCHAR},
+      update_location_id = #{updateLocationId,jdbcType=INTEGER},
+      type = #{type,jdbcType=TINYINT},
+      please_train_number = #{pleaseTrainNumber,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      entruck_date = #{entruckDate,jdbcType=TIMESTAMP},
+      lose_car_num = #{loseCarNum,jdbcType=INTEGER},
+      is_exception = #{isException,jdbcType=TINYINT},
+      exception_reason = #{exceptionReason,jdbcType=VARCHAR},
+      exception_report_date = #{exceptionReportDate,jdbcType=TIMESTAMP},
+      exception_report_person = #{exceptionReportPerson,jdbcType=VARCHAR},
+      delete_date = #{deleteDate,jdbcType=TIMESTAMP},
+      delete_person = #{deletePerson,jdbcType=VARCHAR},
+      delete_reason = #{deleteReason,jdbcType=VARCHAR},
+      artificial_report_id = #{artificialReportId,jdbcType=INTEGER},
+      entruck_numbe = #{entruckNumbe,jdbcType=INTEGER},
+      container_nums = #{containerNums,jdbcType=INTEGER},
+      entruck_weight = #{entruckWeight,jdbcType=DECIMAL},
+      arrive_weight = #{arriveWeight,jdbcType=DECIMAL},
+      arrive_date = #{arriveDate,jdbcType=TIMESTAMP},
+      delete_flag = #{deleteFlag,jdbcType=TINYINT},
+      send_company = #{sendCompany,jdbcType=VARCHAR},
+      receipt_company = #{receiptCompany,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <select id="selectTrainOrderByPage"  parameterType="map" resultType="com.shenhesoft.logistics.business.pojo.trainOrder.TbTrainOrder">
+  SELECT A.id as id,A.project_id as projectId,A.project_code as projectCode,A.project_type as projectType,A.branch_id as branchId,A.branch_name as branchName,
+  	A.begin_site as beginSite,A.begin_place as beginPlace,A.end_site as endSite,A.end_place as endPlace,A.please_car_num as pleaseCarNum,
+	A.cargo_name as cargoName,A.sure_car_num as sureCarNum,A.send_date as sendDate,A.please_train_number as pleaseTrainNumber,A.create_date as createDate,
+	A.status as status,A.update_date as updateDate,A.entruck_date as entruckDate,A.lose_car_num as loseCarNum,A.send_operator_id as sendOperatorId
+	
+	from tb_train_order A
+	
+	where 
+	
+	 A.branch_id in 
+		  <foreach item="item" index="index" collection="branchIds" 
+                        open="(" separator="," close=")">
+                       #{item}
+         </foreach>
+         and	A.is_exception = 0 and A.delete_flag = 0 and A.status != 7 and A.type = #{type,jdbcType=TINYINT}
+		 
+	order by A.id desc
+  </select>
+  
+  <select id="selectHistoryOrderByPage"  parameterType="map" resultType="com.shenhesoft.logistics.business.pojo.trainOrder.TbTrainOrder">
+  SELECT A.id as id,A.project_id as projectId,A.project_code as projectCode,A.project_type as projectType,A.branch_id as branchId,A.branch_name as branchName,
+  	A.begin_site as beginSite,A.begin_place as beginPlace,A.end_site as endSite,A.end_place as endPlace,A.please_car_num as pleaseCarNum,
+	A.cargo_name as cargoName,A.sure_car_num as sureCarNum,A.send_date as sendDate,A.please_train_number as pleaseTrainNumber,A.create_date as createDate,
+	A.status as status,A.update_date as updateDate,A.entruck_date as entruckDate,A.lose_car_num as loseCarNum,A.send_operator_id as sendOperatorId,
+	A.arrive_date as arriveDate
+	from tb_train_order A
+	where A.branch_id in 
+		  <foreach item="item" index="index" collection="branchIds" 
+                        open="(" separator="," close=")">
+                       #{item}
+         </foreach> 
+	and A.is_exception = 0 and A.delete_flag = 0 and A.status = 7 and A.type = #{type,jdbcType=TINYINT}
+	order by A.id desc
+  </select>
+  
+   <select id="selectExceptionOrderByPage"  parameterType="map" resultType="com.shenhesoft.logistics.business.pojo.trainOrder.TbTrainOrder">
+  SELECT A.id as id,A.project_id as projectId,A.project_code as projectCode,A.project_type as projectType,A.branch_id as branchId,A.branch_name as branchName,
+  	A.begin_site as beginSite,A.begin_place as beginPlace,A.end_site as endSite,A.end_place as endPlace,A.please_car_num as pleaseCarNum,
+	A.cargo_name as cargoName,A.sure_car_num as sureCarNum,A.send_date as sendDate,A.please_train_number as pleaseTrainNumber,A.create_date as createDate,
+	A.status as status,A.update_date as updateDate,A.entruck_date as entruckDate,A.lose_car_num as loseCarNum,A.exception_reason as exceptionReason,
+	A.exception_report_date as exceptionReportDate,A.exception_report_person as exceptionReportPerson,A.send_operator_id as sendOperatorId
+	
+	from tb_train_order A
+	where A.branch_id in 
+		  <foreach item="item" index="index" collection="branchIds" 
+                        open="(" separator="," close=")">
+                       #{item}
+         </foreach>
+	and A.is_exception = 1 and A.delete_flag = 0 and A.type = #{type,jdbcType=TINYINT}
+	order by A.id desc
+  </select>
+  
+   <select id="selectDeleteOrderByPage"  parameterType="map" resultType="com.shenhesoft.logistics.business.pojo.trainOrder.TbTrainOrder">
+  SELECT A.id as id,A.project_id as projectId,A.project_code as projectCode,A.project_type as projectType,A.branch_id as branchId,A.branch_name as branchName,
+  	A.begin_site as beginSite,A.begin_place as beginPlace,A.end_site as endSite,A.end_place as endPlace,A.please_car_num as pleaseCarNum,
+	A.cargo_name as cargoName,A.sure_car_num as sureCarNum,A.send_date as sendDate,A.please_train_number as pleaseTrainNumber,A.create_date as createDate,
+	A.status as status,A.update_date as updateDate,A.entruck_date as entruckDate,A.lose_car_num as loseCarNum,A.delete_reason as deleteReason,
+	A.delete_person as deletePerson,A.delete_date as deleteDate,A.send_operator_id as sendOperatorId
+	
+	from tb_train_order A
+	where A.branch_id in 
+		  <foreach item="item" index="index" collection="branchIds" 
+                        open="(" separator="," close=")">
+                       #{item}
+         </foreach> 
+	and A.is_exception = 0 and A.delete_flag = 1 and A.type = #{type,jdbcType=TINYINT}
+	order by A.id desc
+  </select>
+
+   <update id="deleteTrainOrderById" parameterType="map" >
+    update tb_train_order
+    set 
+      send_operator_id = #{sendOperatorId,jdbcType=VARCHAR},
+      sure_car_num = #{sureCarNum,jdbcType=INTEGER},
+      delete_date = #{deleteDate,jdbcType=TIMESTAMP},
+      delete_person = #{deletePerson,jdbcType=VARCHAR},
+      delete_reason = #{deleteReason,jdbcType=VARCHAR},
+      delete_flag = #{deleteFlag,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <update id="updateTrainOrderById" parameterType="map" >
+    update tb_train_order
+    set 
+      send_operator_id = #{sendOperatorId,jdbcType=VARCHAR},
+      sure_car_num = #{sureCarNum,jdbcType=INTEGER},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <update id="resetTrainOrderById" parameterType="java.lang.Integer" >
+    update tb_train_order
+    set 
+      delete_flag = 0
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+ <select id="selectHistoryLocationById"  parameterType="map" resultType="com.shenhesoft.logistics.business.pojo.historyLocation.TbHistoryLocation">
+  SELECT B.id as id,B.order_id as orderId,B.time as time,B.location as location,B.latitude as latitude,B.longitude as longitude
+	
+	from tb_train_order A,tb_history_location B
+	where  A.id = B.order_id and A.is_exception = 0 and A.delete_flag = 0 and A.type = #{type,jdbcType=TINYINT} and B.type = 2 and A.id = #{id,jdbcType=INTEGER}
+  </select>
+  
+  <update id="updateSendImgById" parameterType="map" >
+    update tb_train_order_cargo_palce
+    set 
+      send_img = #{sendImg,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <update id="updateArriveImgById" parameterType="map" >
+    update tb_train_order_cargo_palce
+    set 
+      unload_img = #{unloadImg,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <update id="deleteSendImgById" parameterType="java.lang.Integer" >
+    update tb_train_order_cargo_palce
+    set 
+      send_img = null
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <update id="deleteArriveImgById" parameterType="java.lang.Integer" >
+    update tb_train_order_cargo_palce
+    set 
+      unload_img = null
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <!-- <update id="updOrderStatusByParam" parameterType="map" >
+    update tb_train_order
+    set 
+      send_operator_id = #{sendOperatorId,jdbcType=VARCHAR},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update> -->
+  <update id="deleteTrainOrderByParam" parameterType="map" >
+    update tb_train_order
+    set 
+      delete_date = #{deleteDate,jdbcType=TIMESTAMP},
+      delete_person = #{deletePerson,jdbcType=VARCHAR},
+      delete_reason = #{deleteReason,jdbcType=VARCHAR},
+      delete_flag = #{deleteFlag,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <select id="selectAllTrainType"  resultType="com.shenhesoft.logistics.manage.pojo.trianType.TbTrainType">
+  SELECT id,train_kind as trainKind,train_kind_code as trainKindCode,train_type_code as trainTypeCode,self_weight as selfWeight,weight,volume,
+  	load_price as loadPrice,length,width,hight,remark
+	from tb_train_type 
+  </select>
+  
+    <!--查询订单的发货吨位 -->
+ 		<select id="countEntruckWeightByProjectId" parameterType="map"
+		resultType="java.math.BigDecimal">
+			SELECT
+				SUM(IFNULL(entruck_weight,0))
+			FROM
+				tb_train_order
+			where 
+						status in 
+		 <foreach item="item" index="index" collection="status" 
+                        open="(" separator="," close=")">
+                       #{item}
+         </foreach>	
+			and	
+				project_id=#{id,jdbcType=INTEGER}
+		</select>
+
+	<!--查询订单车次 -->
+	<select id="countCarCountByProjectId" parameterType="map"
+		resultType="java.lang.Integer">
+		SELECT
+			SUM(entruck_numbe)
+		FROM
+			tb_train_order
+		where 
+					status in 
+		 <foreach item="item" index="index" collection="status" 
+                        open="(" separator="," close=")">
+                       #{item}
+         </foreach>
+		and	
+			project_id=#{id,jdbcType=INTEGER}
+	</select> 
+  
+   <!--查询订单的收货吨位 -->
+	<select id="countArriveWeightByProjectId" parameterType="map"
+		resultType="java.math.BigDecimal">
+		SELECT
+			SUM(IFNULL(arrive_weight,0))
+		FROM
+			tb_train_order
+		where 
+					status in 
+		 <foreach item="item" index="index" collection="status" 
+                        open="(" separator="," close=")">
+                       #{item}
+         </foreach>	
+		and	
+			project_id=#{id,jdbcType=INTEGER}
+	</select>
+	
+	<update id="updateExceptionByParam" parameterType="map" >
+    update tb_train_order
+    set 
+      is_exception = #{isException,jdbcType=TINYINT},
+      delete_flag = #{deleteFlag,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
+ 	</update>
+  
+    <select id="selectTrainStationById" parameterType="java.lang.Integer"
+		resultType="com.shenhesoft.logistics.manage.pojo.trainStation.TbTrainStation">
+		SELECT id,station_name stationName,station_level stationLevel,responsibler,adress_code adressCode,detail_address detailAddress,
+		station_contacts stationContacts,department,station_phone stationPhone,station_fax stationFax,email,bank_account bankAccount,account_name accountName,
+		open_bank openBank,open_bank_num openBankNum,duty_paragraph dutyParagraph,bank_last_amount bankLastAmount,delete_flag deleteFlag
+		 from tb_train_station where id = #{beginCenterSiteId,jdbcType=INTEGER}
+	</select>
+	
+	 <select id="selectDetailById" parameterType="java.lang.Integer"
+		resultType="com.shenhesoft.logistics.business.helpPojo.TrainOrderDetail">
+		SELECT B.id,B.car_number as carNumber,B.car_type as carType,B.container_number1 as containerNumber1,B.container_number2 as containerNumber2,B.send_weight as sendWeight,
+		B.unload_weight as unloadWeight,B.arrive_cargo_place_name as arriveCargoPlaceName,B.arrive_cargo_site_name as arriveCargoSiteName,A.arrive_date as arriveDate
+		 from tb_train_order A,tb_train_order_cargo_palce B 
+		 where A.id = B.train_order_id and A.delete_flag = 0 and A.id = #{id,jdbcType=INTEGER}
+	</select>
+	
+	<select id="selectStockByMap" parameterType="map"
+		resultType="com.shenhesoft.logistics.business.pojo.stock.TbStock">
+		SELECT id,station_id as stationId,station_name as stationName,freight_yard_id as freightYardId,freight_yard_name as freightYardName,cargo_location_id as cargoLocationId,
+		cargo_location_name as cargoLocationName,enter_qty as enterQty,out_qty as outQty,container_num as containerNum,current_qty as currentQty,adjust_qty as adjustQty,
+		project_id as projectId,type,adjust_date as adjustDate
+		from tb_stock where station_id = #{stationId,jdbcType=INTEGER} 
+		and freight_yard_id = #{freightYardId,jdbcType=INTEGER}
+      	and cargo_location_id = #{cargoLocationId,jdbcType=INTEGER}
+     	and project_id = #{projectId,jdbcType=INTEGER}
+      	and type = #{type,jdbcType=TINYINT}
+	</select>
+	
+	<select id="selectStockList" parameterType="map"
+		resultType="com.shenhesoft.logistics.business.pojo.stock.TbStock">
+		SELECT id,station_id as stationId,station_name as stationName,freight_yard_id as freightYardId,freight_yard_name as freightYardName,cargo_location_id as cargoLocationId,
+		cargo_location_name as cargoLocationName,enter_qty as enterQty,out_qty as outQty,container_num as containerNum,current_qty as currentQty,adjust_qty as adjustQty,
+		project_id as projectId,type,adjust_date as adjustDate
+		from tb_stock where station_id =  #{stationId,jdbcType=INTEGER} 
+     	and project_id = #{projectId,jdbcType=INTEGER}
+      	and type = #{type,jdbcType=TINYINT}
+	</select>
+	<!-- ,if(c.train_kind_code is null ||c.train_type_code is null,t.car_number,CONCAT(c.train_kind_code,c.train_type_code,' ',t.car_number)) carNumber -->
+	 <!-- left JOIN tb_train_type c on c.id=o.please_car_type_id  -->
+	 <select id="listTrainOrderByCustomerCheckingConfMap" resultType="Map">
+	 	SELECT DISTINCT o.id id,o.project_id projectId,o.project_code projectCode,o.project_type projectType,o.branch_id branchId,o.branch_name branchName,o.begin_site beginSite,o.begin_place beginPlace,o.end_site endSite,o.end_place endPlace,o.please_car_num pleaseCarNum,o.please_car_type_id pleaseCarTypeId,o.estimate_weight estimateWeight,o.estimate_cost estimateCost,o.cargo_name cargoName,o.cargo_specifications cargoSpecifications,o.advance_charge_account advanceChargeAccount,o.advance_charge advanceCharge,o.sure_car_num sureCarNum,o.send_date sendDate,o.send_operator_id sendOperatorId,o.update_location_id updateLocationId,o.type type,o.please_train_number pleaseTrainNumber,o.create_date createDate,o.status status,o.update_date updateDate,o.entruck_date entruckDate,o.lose_car_num loseCarNum,o.is_exception isException,o.exception_reason exceptionReason,o.exception_report_date exceptionReportDate,o.exception_report_person exceptionReportPerson,o.delete_date deleteDate,o.delete_person deletePerson,o.delete_reason deleteReason,o.artificial_report_id artificialReportId,o.entruck_numbe entruckNumbe,o.container_nums containerNums,o.entruck_weight entruckWeight,o.arrive_weight arriveWeight,o.arrive_date arriveDate,o.delete_flag deleteFlag,o.send_company sendCompany,o.receipt_company receiptCompany
+		,IFNULL(p.train_price,0) entrustUnitprice
+		,IFNULL(p.train_price,0)*IFNULL(o.entruck_weight,0) prodectMoney
+		,round(IFNULL(p.train_price,0)*IFNULL(o.entruck_weight,0)*IFNULL(c1.tax_rate,0)/100,2) shouldTaxMoney
+		FROM tb_train_order o
+		LEFT JOIN tb_train_order_cargo_palce t on t.train_order_id=o.id
+		left join tb_project p on p.id=o.project_id
+		left join tb_customer_checking_conf c1 on c1.project_id=o.project_id
+		left join tb_branch_group_link y on o.id=y.row_id and y.tab_name='tb_train_order'
+		WHERE o.`status` IN (7) and y.sys_org_code like CONCAT(#{map.sysOrgCode},'%')
+		and o.delete_flag  = 0
+		and o.update_date is not null
+		<if test="map != null">
+		<if test="map.startDate != null" >
+		and o.update_date &gt;= str_to_date( #{map.startDate}, '%Y-%m-%d')
+		</if>
+		</if>
+		and o.update_date &lt;= DATE_SUB(str_to_date(#{map.endDate}, '%Y-%m-%d'),INTERVAL -1 DAY)
+		and o.project_id = #{map.projectId}
+		and c1.cust_check_con_id = #{map.custCheckConId}
+		and o.checkcust_flag=0
+		<if test="map != null">
+		<if test="map.packFlag != null and map.packFlag ='0' " >
+		and not exists (select cpo.order_id from tb_customer_pack_order cpo where cpo.order_id = o.id and cpo.delete_flag = 0)
+		</if>
+		</if>
+    </select>
+
+	 <select id="listTrainOrderByCustomerPackMap" resultType="Map">
+	 	SELECT DISTINCT o.id id,o.project_id projectId,o.project_code projectCode,o.project_type projectType,o.branch_id branchId,o.branch_name branchName,o.begin_site beginSite,o.begin_place beginPlace,o.end_site endSite,o.end_place endPlace,o.please_car_num pleaseCarNum,o.please_car_type_id pleaseCarTypeId,o.estimate_weight estimateWeight,o.estimate_cost estimateCost,o.cargo_name cargoName,o.cargo_specifications cargoSpecifications,o.advance_charge_account advanceChargeAccount,o.advance_charge advanceCharge,o.sure_car_num sureCarNum,o.send_date sendDate,o.send_operator_id sendOperatorId,o.update_location_id updateLocationId,o.type type,o.please_train_number pleaseTrainNumber,o.create_date createDate,o.status status,o.update_date updateDate,o.entruck_date entruckDate,o.lose_car_num loseCarNum,o.is_exception isException,o.exception_reason exceptionReason,o.exception_report_date exceptionReportDate,o.exception_report_person exceptionReportPerson,o.delete_date deleteDate,o.delete_person deletePerson,o.delete_reason deleteReason,o.artificial_report_id artificialReportId,o.entruck_numbe entruckNumbe,o.container_nums containerNums,o.entruck_weight entruckWeight,o.arrive_weight arriveWeight,o.arrive_date arriveDate,o.delete_flag deleteFlag,o.send_company sendCompany,o.receipt_company receiptCompany
+		,IFNULL(p.train_price,0) entrustUnitprice
+		,IFNULL(p.train_price,0)*IFNULL(o.entruck_weight,0) prodectMoney
+		,round(IFNULL(p.train_price,0)*IFNULL(o.entruck_weight,0)*IFNULL(c1.tax_rate,0)/100,2) shouldTaxMoney
+		FROM tb_train_order o
+		LEFT JOIN tb_train_order_cargo_palce t on t.train_order_id=o.id
+		left join tb_project p on p.id=o.project_id
+		left join tb_customer_checking_conf c1 on c1.project_id=o.project_id
+		left join tb_branch_group_link y on o.id=y.row_id and y.tab_name='tb_train_order'
+		WHERE o.`status` IN (7) and y.sys_org_code like CONCAT(#{map.sysOrgCode},'%')
+		and o.delete_flag  = 0
+		and c1.cust_check_con_id = #{map.custCheckConId}
+		and o.checkcust_flag=0
+		and exists (select cpo.order_id from tb_customer_pack_order cpo where cpo.delete_flag = 0 and cpo.order_id = o.id and cpo.cust_pack_id = #{map.custPackId})
+    </select>
+    
+    <!-- SELECT receive_account_id receiveAccountId,receive_account_name receiveAccountName,sum(deposit_amount) depositAmount from tb_advance_charge
+		WHERE project_id = #{projectId,jdbcType=INTEGER}  and type = 0 and receive_type = 1 
+		and receive_unit_id = #{beginCenterSiteId,jdbcType=INTEGER} and status = 0 -->
+    <select id="selectAccountListById" parameterType="map"
+		resultType="com.shenhesoft.logistics.finance.AdvanceCharge">
+		SELECT receiveAccountId,receiveAccountName, receiveNumber,receiveBankNumber ,receiveUnitId,receiveUnitName ,(IFNULL(depositAmounts,0)-IFNULL(purposeAmount,0)-IFNULL(cashAmount,0)) depositAmount from
+		((SELECT 
+				receive_account_id as receiveAccountId,receive_account_name as receiveAccountName,receive_number as receiveNumber,receive_bank_number as receiveBankNumber,
+				receive_unit_id as receiveUnitId,receive_unit_name as receiveUnitName,sum(deposit_amount) depositAmounts
+				from tb_advance_charge 
+				where project_id = #{projectId,jdbcType=INTEGER} and type = 0 and advance_type = 1 and status = 0 and delete_flag = 0
+				and receive_account_id = (SELECT DISTINCT receive_account_id receiveAccountId from tb_advance_charge
+											WHERE project_id = #{projectId,jdbcType=INTEGER}   and type = 0 and advance_type = 1 
+											and receive_unit_id = #{beginCenterSiteId,jdbcType=INTEGER} and status = 0 and delete_flag = 0)) a,
+		(SELECT sum(purpose_amount) purposeAmount
+				from tb_advance_charge 
+				where project_id = #{projectId,jdbcType=INTEGER} and type = 1 and advance_type = 1 and status = 0 and delete_flag = 0
+				and pay_account_id = (SELECT DISTINCT receive_account_id receiveAccountId from tb_advance_charge
+											WHERE project_id = #{projectId,jdbcType=INTEGER}   and type = 0 and advance_type = 1 
+											and receive_unit_id = #{beginCenterSiteId,jdbcType=INTEGER} and status = 0 and delete_flag = 0)) b,
+		(SELECT sum(cash_amount) cashAmount
+				from tb_advance_charge 
+				where project_id = #{projectId,jdbcType=INTEGER} and type = 3 and advance_type = 1 and status = 0 and delete_flag = 0
+				and pay_account_id = (SELECT DISTINCT receive_account_id receiveAccountId from tb_advance_charge
+											WHERE project_id = #{projectId,jdbcType=INTEGER}   and type = 0 and advance_type = 1 
+											and receive_unit_id = #{beginCenterSiteId,jdbcType=INTEGER} and status = 0 and delete_flag = 0)) c)
+	</select>
+    
+</mapper>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shenhesoft.logistics.business.mapper.ProjectCheck2Mapper">
+
+	
+	<!-- 查询油气卡信息表 -->
+	<select id="queryProjectCheck2" resultType="Map">
+		select p.id id,p.project_code projectCode,p.project_type projectType,p.transport_type transportType,p.branch_group_name branchGroupName,p.send_cargo_company_name sendCargoCompanyName,p.receive_cargo_company_name receiveCargoCompanyName,
+	   sum(sp.cash_amount) receiptCashAmount,sum(sp.supplies_amount) receiptSuppliesAmount,
+	  p.cargo_name cargoName,sum(IFNULL(oc.container_one_receipt_net,0)+IFNULL(oc.container_two_receipt_net,0)) ccontainerReceiptNet,sum((IFNULL(oc.container_two_receipt_net,0)+IFNULL(oc.container_one_receipt_net,0))*IFNULL(p.transport_price,0)) cpickUpMoney,sum((IFNULL(oc.container_one_send_net,0)+IFNULL(oc.container_two_send_net,0)-IFNULL(oc.container_one_receipt_net,0)-IFNULL(oc.container_two_receipt_net,0))*IFNULL(oc.deduction_price,0)) cdeductionMoney,
+	  sum(IFNULL(o.container_one_receipt_net,0)+IFNULL(o.container_two_receipt_net,0)) containerReceiptNet,sum((IFNULL(o.container_two_receipt_net,0)+IFNULL(o.container_one_receipt_net,0))*IFNULL(p.pick_up_price,0)) pickUpMoney,sum((IFNULL(o.container_one_send_net,0)+IFNULL(o.container_two_send_net,0)-IFNULL(o.container_one_receipt_net,0)-IFNULL(o.container_two_receipt_net,0))*IFNULL(o.deduction_price,0)) deductionMoney,
+	 	sum(IFNULL(os.container_one_receipt_net,0)+IFNULL(os.container_two_receipt_net,0)) sendContainerReceiptNet,sum((IFNULL(os.container_two_receipt_net,0)+IFNULL(os.container_one_receipt_net,0))*IFNULL(o.short_barge_cost,0)) sendUpMoney,sum((IFNULL(os.container_one_send_net,0)+IFNULL(os.container_two_send_net,0)-IFNULL(os.container_one_receipt_net,0)-IFNULL(os.container_two_receipt_net,0))*IFNULL(os.deduction_price,0)) sendDeductionMoney,
+	  sum(IFNULL(tro.entruck_weight,0)) entruckWeight,sum(IFNULL(cpt.produce_money,0)) trainProduceMoney,sum(IFNULL(tro.entruck_weight,0)-IFNULL(tro.arrive_weight,0)) entruckArriveWeight,
+		sum(if(p.transport_price=0,0,IFNULL(cpc.produce_money,0)/p.transport_price)) cpackedMoney,sum(if(p.transport_price=0,0,IFNULL(cpic.invoice_money,0)/p.transport_price)) cinvoicedWeight,sum(if(p.transport_price=0,0,IFNULL(cpc.settled_money,0)/p.transport_price)) csettledWeight,
+		sum(if(p.pick_up_price=0,0,IFNULL(cpr.produce_money,0)/p.pick_up_price)) rpackedMoney,sum(if(p.pick_up_price=0,0,IFNULL(cpir.invoice_money,0)/p.pick_up_price)) rinvoicedWeight,sum(if(p.pick_up_price=0,0,IFNULL(cpr.settled_money,0)/p.pick_up_price)) settledWeight,
+	  sum(if(o.short_barge_cost=0,0,IFNULL(cps.produce_money,0)/o.short_barge_cost)) spackedMoney,sum(if(o.short_barge_cost=0,0,IFNULL(cpis.invoice_money,0)/o.short_barge_cost)) sinvoicedWeight,sum(if(o.short_barge_cost=0,0,IFNULL(cps.settled_money,0)/o.short_barge_cost)) ssettledWeight,
+		sum(if(p.train_price=0,0,IFNULL(cpt.produce_money,0)/o.short_barge_cost)) tpackedMoney,sum(if(p.train_price=0,0,IFNULL(cpit.invoice_money,0)/p.train_price)) tinvoicedWeight,sum(if(p.train_price=0,0,IFNULL(cpt.settled_money,0)/p.train_price)) tsettledWeight
+	   ,if(p.project_type='0','集装箱','散堆装') projectTypeName
+	   ,case when p.transport_type='0' then '汽运'
+       when p.transport_type='1' then '接取'
+			 when p.transport_type='2' then '送达'
+			 when p.transport_type='3' then '火运'
+			 when p.transport_type='4' then '接取+火运'
+			 when p.transport_type='5' then '火运+送达'
+			 when p.transport_type='6' then '联运'
+      else '接取+送达' end transportTypeName
+	  from tb_project p
+	  left join tb_branch_group bg on p.branch_group_id = bg.id
+	  left join tb_order o on o.project_id = p.id and o.step_select_code = 0
+	  left join tb_order os on os.project_id = p.id and os.step_select_code = 1
+	  left join tb_order oc on oc.project_id = p.id and oc.step_select_code = 2
+	  left join tb_short_pack sp on p.id = sp.project_id
+	  left join tb_train_order tro on p.id = tro.project_id
+		left join tb_customer_pack cpt on p.id = cpt.project_id and cpt.pack_type = 3
+		left join tb_customer_pack cpc on p.id = cpc.project_id and cpc.pack_type = 0
+		left join tb_customer_pack cpr on p.id = cpr.project_id and cpr.pack_type = 1
+		left join tb_customer_pack cps on p.id = cps.project_id and cps.pack_type = 2
+	  left join tb_customer_pack_invoice cpic on cpic.cust_pack_id = cpc.cust_pack_id
+	  left join tb_customer_pack_invoice cpir on cpir.cust_pack_id = cpr.cust_pack_id
+	  left join tb_customer_pack_invoice cpis on cpis.cust_pack_id = cps.cust_pack_id
+	    left join tb_customer_pack_invoice cpit on cpit.cust_pack_id = cpt.cust_pack_id
+	    left join tb_branch_group_link y on p.id=y.row_id 
+			where 1=1 and y.tab_name="tb_project" and y.sys_org_code like CONCAT(#{map.sysOrgCode},'%')
+		<if test="map != null">
+		<if test="map.projectCode != null and map.projectCode != ''">
+		    AND p.project_code = #{map.projectCode}
+                </if>
+		<if test="map.beginSite != null and map.beginSite != ''">
+		    AND p.send_cargo_company_name = #{map.beginSite}
+                </if>
+		<if test="map.endSite != null and map.endSite != ''">
+		    AND p.receive_cargo_company_name = #{map.endSite}
+                </if>
+		<if test="map.branchGroupName != null and map.branchGroupName != ''">
+		    AND bg.name = #{map.branchGroupName}
+                </if>
+            </if>
+    group by p.id
+	</select>
+	
+</mapper>

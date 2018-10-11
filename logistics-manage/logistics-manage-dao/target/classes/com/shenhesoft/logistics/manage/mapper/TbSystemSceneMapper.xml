@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shenhesoft.logistics.manage.mapper.TbSystemSceneMapper" >
+  <resultMap id="BaseResultMap" type="com.shenhesoft.logistics.manage.pojo.systemScene.TbSystemScene" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="scene_name" property="sceneName" jdbcType="VARCHAR" />
+    <result column="branch_group_id" property="branchGroupId" jdbcType="VARCHAR" />
+    <result column="reason_type" property="reasonType" jdbcType="TINYINT" />
+    <result column="reason_scale" property="reasonScale" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, scene_name, branch_group_id, reason_type, reason_scale, remark, status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shenhesoft.logistics.manage.pojo.systemScene.TbSystemSceneExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_system_scene
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_system_scene
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_system_scene
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.shenhesoft.logistics.manage.pojo.systemScene.TbSystemSceneExample" >
+    delete from tb_system_scene
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.shenhesoft.logistics.manage.pojo.systemScene.TbSystemScene" >
+    <selectKey keyProperty="id" resultType="int">  
+            select LAST_INSERT_ID()
+     </selectKey> 
+    insert into tb_system_scene (id, scene_name, branch_group_id, 
+      reason_type, reason_scale, remark, 
+      status)
+    values (#{id,jdbcType=INTEGER}, #{sceneName,jdbcType=VARCHAR}, #{branchGroupId,jdbcType=VARCHAR}, 
+      #{reasonType,jdbcType=TINYINT}, #{reasonScale,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{status,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.shenhesoft.logistics.manage.pojo.systemScene.TbSystemScene" >
+    <selectKey keyProperty="id" resultType="int">  
+            select LAST_INSERT_ID()
+     </selectKey> 
+    insert into tb_system_scene
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="sceneName != null" >
+        scene_name,
+      </if>
+      <if test="branchGroupId != null" >
+        branch_group_id,
+      </if>
+      <if test="reasonType != null" >
+        reason_type,
+      </if>
+      <if test="reasonScale != null" >
+        reason_scale,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="sceneName != null" >
+        #{sceneName,jdbcType=VARCHAR},
+      </if>
+      <if test="branchGroupId != null" >
+        #{branchGroupId,jdbcType=VARCHAR},
+      </if>
+      <if test="reasonType != null" >
+        #{reasonType,jdbcType=TINYINT},
+      </if>
+      <if test="reasonScale != null" >
+        #{reasonScale,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.shenhesoft.logistics.manage.pojo.systemScene.TbSystemSceneExample" resultType="java.lang.Integer" >
+    select count(*) from tb_system_scene
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_system_scene
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.sceneName != null" >
+        scene_name = #{record.sceneName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.branchGroupId != null" >
+        branch_group_id = #{record.branchGroupId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reasonType != null" >
+        reason_type = #{record.reasonType,jdbcType=TINYINT},
+      </if>
+      <if test="record.reasonScale != null" >
+        reason_scale = #{record.reasonScale,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=TINYINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_system_scene
+    set id = #{record.id,jdbcType=INTEGER},
+      scene_name = #{record.sceneName,jdbcType=VARCHAR},
+      branch_group_id = #{record.branchGroupId,jdbcType=VARCHAR},
+      reason_type = #{record.reasonType,jdbcType=TINYINT},
+      reason_scale = #{record.reasonScale,jdbcType=VARCHAR},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=TINYINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.shenhesoft.logistics.manage.pojo.systemScene.TbSystemScene" >
+    update tb_system_scene
+    <set >
+      <if test="sceneName != null" >
+        scene_name = #{sceneName,jdbcType=VARCHAR},
+      </if>
+      <if test="branchGroupId != null" >
+        branch_group_id = #{branchGroupId,jdbcType=VARCHAR},
+      </if>
+      <if test="reasonType != null" >
+        reason_type = #{reasonType,jdbcType=TINYINT},
+      </if>
+      <if test="reasonScale != null" >
+        reason_scale = #{reasonScale,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.shenhesoft.logistics.manage.pojo.systemScene.TbSystemScene" >
+    update tb_system_scene
+    set scene_name = #{sceneName,jdbcType=VARCHAR},
+      branch_group_id = #{branchGroupId,jdbcType=VARCHAR},
+      reason_type = #{reasonType,jdbcType=TINYINT},
+      reason_scale = #{reasonScale,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      status = #{status,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <!-- <select id="selectAbnormalList" resultType="com.shenhesoft.logistics.manage.helpPojo.SystemSceneDetail" >
+    select A.id as id,A.scene_name as sceneName,A.reason_type as reasonType,A.reason_scale as reasonScale,
+    A.remark,B.name as branchGroupName
+    from tb_system_scene A,tb_branch_group B 
+    where A.branch_group_id = B.id and A.status = 0
+    order by A.id asc
+  </select> -->
+  <select id="selectAbnormalList"  parameterType="com.shenhesoft.logistics.manage.pojo.systemScene.TbSystemScene" resultType="com.shenhesoft.logistics.manage.pojo.systemScene.TbSystemScene" >
+    select A.id as id,A.scene_name as sceneName,A.reason_type as reasonType,A.reason_scale as reasonScale,
+    A.remark,A.branch_group_id as branchGroupId
+    from tb_system_scene A 
+    left join tb_branch_group_link y 
+    on A.id=y.row_id
+    where  A.status = 0
+    and y.tab_name='tb_system_scene'
+    <if test="map != null">
+	       and y.sys_org_code like CONCAT(#{map.sysOrgCode},'%')
+	</if>
+ <!--    <if test="branchGroupId != null and branchGroupId !='' " >
+        and A.branch_group_id like '%${branchGroupId}%'
+    </if> -->
+    order by A.id asc
+  </select>
+  
+  <update id="updateSceneById" parameterType="java.lang.Integer" >
+    update tb_system_scene
+    set status = 1
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <select id="selectAbnormalDeatilById" parameterType="java.lang.Integer" resultType="com.shenhesoft.logistics.manage.helpPojo.SystemSceneDetail" >
+    select A.id as id,A.scene_name as sceneName,A.reason_type as reasonType,A.reason_scale as reasonScale,A.branch_group_id as branchGroupId,
+    A.remark,A.branch_group_id as branchGroupId,B.id as projectId
+    from tb_system_scene A,tb_project B
+    where  A.branch_group_id = B.project_code and A.id = #{id,jdbcType=INTEGER} and A.status = 0 and B.delete_flag = 0
+  </select>
+</mapper>

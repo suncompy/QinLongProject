@@ -1,0 +1,9 @@
+.tableDivs{background: #fff;border: 1px solid #ccc;margin-bottom: 10px;position: relative;}
+.itemUl{overflow: hidden;display: inline-block;}
+.itemUl li{list-style: none;float: left;height: 24px;line-height: 24px;margin: 0 10px;}
+.itemLi span{float: left;}
+.itemLi{margin-left: 50px;height: 24px;line-height: 24px;background: #f7f7f7;padding: 0 5px;}
+.lookMore{margin-left: 100px !important;}
+.lookMore a{color:#5382FC!important ;}
+.waitUl{overflow: hidden;padding: 0 !important;}
+.waitUl li{list-style: none;float: left;min-width: 200px;margin: 0 10px;}

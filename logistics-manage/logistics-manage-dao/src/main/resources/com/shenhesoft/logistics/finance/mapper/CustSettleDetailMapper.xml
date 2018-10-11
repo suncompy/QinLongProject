@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shenhesoft.logistics.finance.mapper.CustSettleDetailMapper">
+
+	<!-- 新增客户结算明细 -->
+	<insert id="addCustSettleDetail">
+		insert into tb_cust_settle_detail(id,settle_id,apply_status,settle_org,settle_user_id,settle_account_id,apply_money,settle_model,opt_user_id,audit_user_id,audit_time
+		)values(#{id},#{settleId},#{applyStatus},#{settleOrg},#{settleUserId},#{settleAccountId},#{applyMoney},#{settleModel},#{optUserId},#{auditUserId},#{auditTime})
+	</insert>
+
+	<!-- 批量新增客户结算明细 -->
+	<insert id="addCustSettleDetails">
+		insert into tb_cust_settle_detail(id,settle_id,apply_status,settle_org,settle_user_id,settle_account_id,apply_money,settle_model,opt_user_id,audit_user_id,audit_time
+		)values
+		<foreach collection="list" item="item" index="index" separator=",">
+            (#{id},#{settleId},#{applyStatus},#{settleOrg},#{settleUserId},#{settleAccountId},#{applyMoney},#{settleModel},#{optUserId},#{auditUserId},#{auditTime})
+        </foreach>
+	</insert>
+
+	<!-- 修改客户结算明细 -->
+	<update id="editCustSettleDetailById">
+		update tb_cust_settle_detail
+		<set>
+		 <if test="settleId != null and settleId != '' and settleId != 'null' and settleId != 'undefined'">
+               settle_id=#{settleId},
+         </if>
+		<if test="applyStatus != null">
+               apply_status=#{applyStatus},
+         </if>
+		 <if test="settleOrg != null and settleOrg != '' and settleOrg != 'null' and settleOrg != 'undefined'">
+               settle_org=#{settleOrg},
+         </if>
+		<if test="settleUserId != null">
+               settle_user_id=#{settleUserId},
+         </if>
+		<if test="settleAccountId != null">
+               settle_account_id=#{settleAccountId},
+         </if>
+		<if test="applyMoney != null">
+               apply_money=#{applyMoney},
+         </if>
+		<if test="settleModel != null">
+               settle_model=#{settleModel},
+         </if>
+		<if test="optUserId != null">
+               opt_user_id=#{optUserId},
+         </if>
+		<if test="auditUserId != null">
+               audit_user_id=#{auditUserId},
+         </if>
+		<if test="auditTime != null">
+               audit_time=#{auditTime},
+         </if>
+		</set>
+		where id=#{id}
+	</update>
+
+	<!-- 批量修改客户结算明细 -->
+	<update id="editCustSettleDetailByIds">
+		update tb_cust_settle_detail
+		<set>
+		 <if test="map.settleId != null and map.settleId != '' and map.settleId != 'null' and map.settleId != 'undefined'">
+	       settle_id=#{map.settleId},
+         </if>
+		<if test="map.applyStatus != null">
+	       apply_status=#{map.applyStatus},
+         </if>
+		 <if test="map.settleOrg != null and map.settleOrg != '' and map.settleOrg != 'null' and map.settleOrg != 'undefined'">
+	       settle_org=#{map.settleOrg},
+         </if>
+		<if test="map.settleUserId != null">
+	       settle_user_id=#{map.settleUserId},
+         </if>
+		<if test="map.settleAccountId != null">
+	       settle_account_id=#{map.settleAccountId},
+         </if>
+		<if test="map.applyMoney != null">
+	       apply_money=#{map.applyMoney},
+         </if>
+		<if test="map.settleModel != null">
+	       settle_model=#{map.settleModel},
+         </if>
+		<if test="map.optUserId != null">
+	       opt_user_id=#{map.optUserId},
+         </if>
+		<if test="map.auditUserId != null">
+	       audit_user_id=#{map.auditUserId},
+         </if>
+		<if test="map.auditTime != null">
+	       audit_time=#{map.auditTime},
+         </if>
+		</set>
+		where id in
+		<foreach collection="list" index="index" item="item" open="(" separator="," close=")">   
+             #{item}   
+        </foreach>
+	</update>
+
+	<!-- 查看客户结算明细 -->
+	<select id="getCustSettleDetailById" resultType="Map">
+        select a.id id,a.settle_id settleId,a.apply_status applyStatus,a.settle_org settleOrg,a.settle_user_id settleUserId,a.settle_account_id settleAccountId,a.apply_money applyMoney,a.settle_model settleModel,a.opt_user_id optUserId,a.audit_user_id auditUserId,a.audit_time auditTime
+        from tb_cust_settle_detail a
+        where a.id=#{id}
+    </select>
+
+	<!-- 删除客户结算明细 -->
+	<delete id="delCustSettleDetailById">
+		delete from tb_cust_settle_detail where id = #{id}
+	</delete>	
+
+	<!-- 批量删除客户结算明细 -->
+    <delete id="delCustSettleDetailByIds">  
+        delete from tb_cust_settle_detail where id in 
+        <foreach collection="list" index="index" item="item" open="(" separator="," close=")">   
+            #{item}   
+        </foreach>  
+    </delete>
+
+	<!-- 清空客户结算明细 -->
+	<delete id="delCustSettleDetails">
+		delete from tb_cust_settle_detail
+	</delete>	
+
+	<!-- 检索客户结算明细列表 -->
+	<select id="getCustSettleDetails" resultType="Map">
+	select a.id id,a.settle_id settleId,a.apply_status applyStatus,a.settle_org settleOrg,a.settle_user_id settleUserId,a.settle_account_id settleAccountId,a.apply_money applyMoney,a.settle_model settleModel,a.opt_user_id optUserId,a.audit_user_id auditUserId,DATE_FORMAT(a.audit_time,'%Y-%m-%d %H:%i:%s') auditTime
+		,suc.name auditUserName
+		,sua.name optUserName
+		,sub.name settleUserName
+		,p.project_code projectCode,d.pack_id packId
+	from tb_cust_settle_detail a
+		left join tb_system_user suc on suc.id = a.audit_user_id
+		left join tb_system_user sua on sua.id = a.opt_user_id
+		left join tb_station_business sub on sub.id = a.settle_user_id and type=2
+		left join tb_cust_settle s on s.id=a.settle_id
+		left join tb_invoice d on d.invoice_id = s.invoice_id
+		left join tb_project p on p.id = d.project_id
+		left join tb_branch_group_link y on a.id=y.row_id and y.tab_name='tb_cust_settle_detail'
+		<where>
+		and y.sys_org_code like CONCAT(#{map.sysOrgCode},'%')
+            <if test="map != null">
+		<if test="map.id != null and map.id != '' and map.id != 'null' and map.id != 'undefined'">				  
+		    AND a.id = #{map.id}
+                </if>
+		<if test="map.settleId != null and map.settleId != '' and map.settleId != 'null' and map.settleId != 'undefined'">				  
+		    AND a.settle_id = #{map.settleId}
+                </if>
+		<if test="map.applyStatus != null">
+		    AND a.apply_status = #{map.applyStatus}
+                </if>
+		<if test="map.settleOrg != null and map.settleOrg != '' and map.settleOrg != 'null' and map.settleOrg != 'undefined'">				  
+		    AND a.settle_org = #{map.settleOrg}
+                </if>
+		<if test="map.settleUserId != null">
+		    AND a.settle_user_id = #{map.settleUserId}
+                </if>
+		<if test="map.settleAccountId != null">
+		    AND a.settle_account_id = #{map.settleAccountId}
+                </if>
+		<if test="map.applyMoney != null">
+		    AND a.apply_money = #{map.applyMoney}
+                </if>
+		<if test="map.settleModel != null">
+		    AND a.settle_model = #{map.settleModel}
+                </if>
+		<if test="map.optUserId != null">
+		    AND a.opt_user_id = #{map.optUserId}
+                </if>
+		<if test="map.auditUserId != null">
+		    AND a.audit_user_id = #{map.auditUserId}
+                </if>
+		<if test="map.auditTime != null">
+		    AND a.audit_time = #{map.auditTime}
+                </if>
+            </if>
+        </where>
+        order by a.id desc
+	</select>
+
+</mapper>

@@ -1,0 +1,38 @@
+body{background-color: #F8F8F8;margin: 0 30px;}
+.userInfo,.anchored-fleet,.anchored-company,.orderNum,.vehicle-info,.newsCenter{background-color: #fff;padding:20px;box-shadow: 2px 2px 5px #ccc;border-radius: 3px;margin: 20px 0;}
+ h4{font-size: 16px;font-family: "Microsoft YaHei";color: rgb(51, 51, 51);font-weight: bold;}
+ .more{padding: 10px 0;color:#666 ;text-decoration: none;}
+ img{margin-right: 10px;}
+ hr{margin: 15px 0 !important;border-top: 1px solid #ccc;}
+/*账号信息*/
+ul{list-style-type: none;margin: 0px}
+.userInfo ul li{float:left;width: 50%;}
+ul>li>label,ul>li>span{font-size: 14px;font-family: "Microsoft YaHei";font-weight: normal;}
+.userInfo .fa-user-circle-o{color: #FFB085;font-size: 25px;margin-right: 10px;}
+
+/*挂靠信息*/
+.anchored-fleet  li{width: 50%;float: left;padding-bottom: 10px}
+.anchored-fleet hr { margin-top: 0px !important;}
+.anchored-company>ul{padding: 0px;}
+.anchored-company>ul>li{border-top: 1px solid #ccc;padding-top: 18px;padding-bottom: 18px;padding-left: 40px;white-space: nowrap;}
+.anchored-company .secondary{list-style-type: none;padding: 0px}
+.anchored-company .secondary li{width: 50%;float: left;}
+/*订单数量*/
+.orderNum ul{float: right;list-style-type: none;padding: 10px;}
+.orderNum ul li{float: left;padding: 0 10px;}
+.borderRight{border-right: 1px solid #ccc}
+.fa-file-text-o{color: #4C9AEA;font-size: 25px;margin-right: 10px;}
+#line{width: 100%;height:270px; background-color: #fff;}
+.orderNum hr{margin: 0px !important;}
+.orderNum a{text-decoration: none;color: #666;}
+.orderNum .active{color: #4C88EA}
+/*车辆信息*/
+.vehicle-info img{margin-right: 10px;}
+.vehicle-info .special{color:#4c88ea;}
+.vehicle-info  li{width: 33%;float: left; padding-bottom: 10px}
+.vehicle-info hr { margin-top: 0px !important;}
+/*消息中心*/
+.newsCenter .fa-volume-down{color: #9385FF;font-size: 20px;margin-right: 10px;}
+.newsCenter ul{padding:0px;}
+.newsCenter ul li{border-top:1px solid #ccc;padding-top: 18px;padding-bottom: 18px;padding-left: 40px;font-size: 14px;font-family: "Microsoft YaHei";color: rgb(51, 51, 51);}
+.divider{height: 1px;background-color: #ccc;}

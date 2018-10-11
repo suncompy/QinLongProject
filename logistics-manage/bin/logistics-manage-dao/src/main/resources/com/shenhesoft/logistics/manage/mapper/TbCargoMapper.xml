@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shenhesoft.logistics.manage.mapper.TbCargoMapper" >
+  <resultMap id="BaseResultMap" type="com.shenhesoft.logistics.manage.pojo.cargo.TbCargo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="cargo_name" property="cargoName" jdbcType="VARCHAR" />
+    <result column="cargo_code" property="cargoCode" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, cargo_name, cargo_code
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shenhesoft.logistics.manage.pojo.cargo.TbCargoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_cargo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_cargo
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_cargo
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.shenhesoft.logistics.manage.pojo.cargo.TbCargoExample" >
+    delete from tb_cargo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.shenhesoft.logistics.manage.pojo.cargo.TbCargo" >
+    insert into tb_cargo (id, cargo_name, cargo_code
+      )
+    values (#{id,jdbcType=INTEGER}, #{cargoName,jdbcType=VARCHAR}, #{cargoCode,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.shenhesoft.logistics.manage.pojo.cargo.TbCargo" >
+    insert into tb_cargo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="cargoName != null" >
+        cargo_name,
+      </if>
+      <if test="cargoCode != null" >
+        cargo_code,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="cargoName != null" >
+        #{cargoName,jdbcType=VARCHAR},
+      </if>
+      <if test="cargoCode != null" >
+        #{cargoCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.shenhesoft.logistics.manage.pojo.cargo.TbCargoExample" resultType="java.lang.Integer" >
+    select count(*) from tb_cargo
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_cargo
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.cargoName != null" >
+        cargo_name = #{record.cargoName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cargoCode != null" >
+        cargo_code = #{record.cargoCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_cargo
+    set id = #{record.id,jdbcType=INTEGER},
+      cargo_name = #{record.cargoName,jdbcType=VARCHAR},
+      cargo_code = #{record.cargoCode,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.shenhesoft.logistics.manage.pojo.cargo.TbCargo" >
+    update tb_cargo
+    <set >
+      <if test="cargoName != null" >
+        cargo_name = #{cargoName,jdbcType=VARCHAR},
+      </if>
+      <if test="cargoCode != null" >
+        cargo_code = #{cargoCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.shenhesoft.logistics.manage.pojo.cargo.TbCargo" >
+    update tb_cargo
+    set cargo_name = #{cargoName,jdbcType=VARCHAR},
+      cargo_code = #{cargoCode,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <select id="selectCargoList"  resultType="com.shenhesoft.logistics.manage.helpPojo.TbCargoMainPoint" 
+  parameterType="com.shenhesoft.logistics.manage.pojo.cargo.TbCargoExample">
+    SELECT A.id as id,A.cargo_name as cargoName,A.cargo_code as cargoCode,B.point_name as pointName,
+		B.point_min as pointMin,B.point_max as pointMax
+	from tb_cargo A,tb_point B,tb_branch_group_link y
+	<if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    and
+	A.id = B.cargo_id  and B.type=0
+	and A.id=y.row_id 
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  
+  <select id="selectLsitCargo" resultType="com.shenhesoft.logistics.manage.pojo.cargo.TbCargo" parameterType="com.shenhesoft.logistics.manage.pojo.cargo.TbCargoExample" >
+    SELECT A.id as id,A.cargo_name as cargoName,A.cargo_code as cargoCode
+	from tb_cargo A,tb_branch_group_link y
+	where  A.id=y.row_id and y.tab_name='tb_cargo'
+    order by A.id
+  </select>
+  
+  <select id="selectMainPointDetailById"  parameterType="java.lang.Integer"
+  	resultType="com.shenhesoft.logistics.manage.helpPojo.TbCargoMainPoint" >
+   SELECT A.id as id,A.cargo_name as cargoName,A.cargo_code as cargoCode,B.point_name as pointName,
+		B.point_min as pointMin,B.point_max as pointMax,B.type
+	from tb_cargo A,tb_point B	where A.id = B.cargo_id  and B.type=0 and A.id = #{cargoId,jdbcType=INTEGER}
+  </select>
+  
+ <!--  <insert id="cargoList" parameterType="java.util.List">
+		insert into tb_point (id,point_name,point_min,point_max,type,cargo_id)
+		values
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+			(#{item.itemId,jdbcType=INTEGER},#{item.discountId,jdbcType=INTEGER},
+			0
+			)
+		</foreach>
+	</insert> -->
+	
+	<insert id="insertCargo" parameterType="com.shenhesoft.logistics.manage.pojo.cargo.TbCargo" >
+	    <selectKey resultType="java.lang.Integer" keyProperty="id"
+			order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	    insert into tb_cargo (cargo_name, cargo_code
+	      )
+	    values (#{cargoName,jdbcType=VARCHAR}, #{cargoCode,jdbcType=VARCHAR}
+	      )
+  </insert>
+  
+  <select id="selectProjectIdByCargoId"  parameterType="java.lang.Integer"
+  	resultType="java.lang.Integer" >
+   	SELECT B.id
+	from tb_cargo A,tb_project B
+	where A.id = B.cargo_id and B.cargo_id = #{id,jdbcType=INTEGER}
+  </select>
+</mapper>

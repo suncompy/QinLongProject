@@ -1,0 +1,566 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shenhesoft.logistics.finance.mapper.ShortPackMapper">
+
+	<!-- 新增短驳打包信息表 -->
+	<insert id="addShortPack">
+		insert into tb_short_pack(sh_pack_id,provide_company_id,receiver,project_id,checking_status,cash_settle_status,supplies_settle_status,pack_truck_num,payment_id,pack_truck_degree,pay_ratio,cash_pay_type,supplies_receive_type
+		,receive_user_type,receive_user_id,open_bank,bank_account,supplies_type,
+		remark,delete_flag,create_date,create_user_id,modifiy_date,freight_charge_amount,cash_amount,supplies_amount,checking_audit_date,settle_audit_date
+		)values(#{shPackId},#{provideCompanyId},#{receiver},#{projectId},#{checkingStatus},#{cashSettleStatus},#{suppliesSettleStatus},#{packTruckNum},#{paymentId},#{packTruckDegree},#{payRatio},#{cashPayType},#{suppliesReceiveType}
+		,#{receiveUserType},#{receiveUserId},#{openBank},#{bankAccount},#{suppliesType},
+		#{remark},#{deleteFlag},#{createDate},#{createUserId},#{modifiyDate},#{freightChargeAmount},#{cashAmount},#{suppliesAmount},#{checkingAuditDate},#{settleAuditDate})
+	</insert>
+
+	<!-- 批量新增短驳打包信息表 -->
+	<insert id="addShortPacks">
+		insert into tb_short_pack(sh_pack_id,provide_company_id,receiver,project_id,checking_status,cash_settle_status,supplies_settle_status,pack_truck_num,payment_id,pack_truck_degree,pay_ratio,cash_pay_type,supplies_receive_type
+		,receive_user_type,receive_user_id,open_bank,bank_account,remark,delete_flag,create_date,create_user_id,modifiy_date,freight_charge_amount,cash_amount,supplies_amount,checking_audit_date,settle_audit_date
+		)values
+		<foreach collection="list" item="item" index="index" separator=",">
+            (#{shPackId},#{provideCompanyId},#{receiver},#{projectId},#{checkingStatus},#{cashSettleStatus},#{suppliesSettleStatus},#{packTruckNum},#{paymentId},#{packTruckDegree},#{payRatio},#{cashPayType},#{suppliesReceiveType}
+            ,#{receiveUserType},#{receiveUserId},#{openBank},#{bankAccount},#{remark},#{deleteFlag},#{createDate},#{createUserId},#{modifiyDate},#{freightChargeAmount},#{cashAmount},#{suppliesAmount},#{checkingAuditDate},#{settleAuditDate})
+        </foreach>
+	</insert>
+
+	<!-- 修改短驳打包信息表 -->
+	<update id="editShortPackById">
+		update tb_short_pack
+		<set>
+		<if test="projectId != null  and projectId != '' and projectId != 'null' and projectId != 'undefined'">
+               project_id=#{projectId},
+         </if>
+		<if test="checkingStatus != null">
+               checking_status=#{checkingStatus},
+         </if>
+         <if test="provideCompanyId != null">
+               provide_company_id=#{provideCompanyId},
+         </if>
+		<if test="cashSettleStatus != null">
+               cash_settle_status=#{cashSettleStatus},
+         </if>
+         <if test="auditId != null">
+               audit_id=#{auditId},
+         </if>
+		<if test="suppliesSettleStatus != null">
+               supplies_settle_status=#{suppliesSettleStatus},
+         </if>
+		<if test="packTruckNum != null">
+               pack_truck_num=#{packTruckNum},
+         </if>
+		<if test="paymentId != null">
+               payment_id=#{paymentId},
+         </if>
+		<if test="packTruckDegree != null">
+               pack_truck_degree=#{packTruckDegree},
+         </if>
+		<if test="payRatio != null">
+               pay_ratio=#{payRatio},
+         </if>
+		<if test="cashPayType != null">
+               cash_pay_type=#{cashPayType},
+         </if>
+		<if test="suppliesReceiveType != null">
+               supplies_receive_type=#{suppliesReceiveType},
+         </if>
+		<if test="receiveUserId != null">
+               receive_user_id=#{receiveUserId},
+         </if>
+		 <if test="openBank != null and openBank != '' and openBank != 'null' and openBank != 'undefined'">
+               open_bank=#{openBank},
+         </if>
+		 <if test="bankAccount != null and bankAccount != '' and bankAccount != 'null' and bankAccount != 'undefined'">
+               bank_account=#{bankAccount},
+         </if>
+		 <if test="remark != null and remark != '' and remark != 'null' and remark != 'undefined'">
+               remark=#{remark},
+         </if>
+		<if test="deleteFlag != null">
+               delete_flag=#{deleteFlag},
+         </if>
+		<if test="createDate != null">
+               create_date=#{createDate},
+         </if>
+		<if test="createUserId != null">
+               create_user_id=#{createUserId},
+         </if>
+		<if test="modifiyDate != null">
+               modifiy_date=#{modifiyDate},
+         </if>
+		<if test="freightChargeAmount != null">
+               freight_charge_amount=#{freightChargeAmount},
+         </if>
+		<if test="cashAmount != null">
+               cash_amount=#{cashAmount},
+         </if>
+		<if test="suppliesAmount != null">
+               supplies_amount=#{suppliesAmount},
+         </if>
+		<if test="checkingAuditDate != null">
+               checking_audit_date=#{checkingAuditDate},
+         </if>
+		<if test="settleAuditDate != null">
+               settle_audit_date=#{settleAuditDate},
+         </if>
+    <if test="oilgascardId != null">
+               oilgascard_id=#{oilgascardId},
+         </if>
+		</set>
+		where sh_pack_id=#{shPackId}
+	</update>
+	
+	<!-- 存款 -->
+	<update id="editFinanceMoneyAddById"  parameterType="map">
+		update tb_finance_account
+		<set>
+		<if test="money != null">
+               account_balance=account_balance+#{money},
+        </if>
+		</set>
+		where id=#{id}
+	</update>
+	<!-- 扣款 -->
+	<update id="editFinanceMoneySubById"  parameterType="map">
+		update tb_finance_account
+		<set>
+		<if test="money != null">
+               account_balance=account_balance-#{money},
+        </if>
+		</set>
+		where id=#{id}
+	</update>
+	<!-- 批量修改短驳打包信息表 -->
+	<update id="editShortPackByIds">
+		update tb_short_pack
+		<set>
+		<if test="map.projectId != null">
+	       project_id=#{map.projectId},
+         </if>
+		<if test="map.provideCompanyId != null">
+               provide_company_id=#{map.provideCompanyId},
+         </if>
+		<if test="map.checkingStatus != null">
+	       checking_status=#{map.checkingStatus},
+         </if>
+         <if test="map.auditId != null">
+               audit_id=#{map.auditId},
+         </if>
+		<if test="map.cashSettleStatus != null">
+	       cash_settle_status=#{map.cashSettleStatus},
+         </if>
+		<if test="map.suppliesSettleStatus != null">
+	       supplies_settle_status=#{map.suppliesSettleStatus},
+         </if>
+		<if test="map.packTruckNum != null">
+	       pack_truck_num=#{map.packTruckNum},
+         </if>
+		<if test="map.paymentId != null">
+	       payment_id=#{map.paymentId},
+         </if>
+		<if test="map.packTruckDegree != null">
+	       pack_truck_degree=#{map.packTruckDegree},
+         </if>
+		<if test="map.payRatio != null">
+	       pay_ratio=#{map.payRatio},
+         </if>
+		<if test="map.cashPayType != null">
+	       cash_pay_type=#{map.cashPayType},
+         </if>
+		<if test="map.suppliesReceiveType != null">
+	       supplies_receive_type=#{map.suppliesReceiveType},
+         </if>
+		<if test="map.receiveUserId != null">
+	       receive_user_id=#{map.receiveUserId},
+         </if>
+		 <if test="map.openBank != null and map.openBank != '' and map.openBank != 'null' and map.openBank != 'undefined'">
+	       open_bank=#{map.openBank},
+         </if>
+		 <if test="map.bankAccount != null and map.bankAccount != '' and map.bankAccount != 'null' and map.bankAccount != 'undefined'">
+	       bank_account=#{map.bankAccount},
+         </if>
+		 <if test="map.remark != null and map.remark != '' and map.remark != 'null' and map.remark != 'undefined'">
+	       remark=#{map.remark},
+         </if>
+		<if test="map.deleteFlag != null">
+	       delete_flag=#{map.deleteFlag},
+         </if>
+		<if test="map.createDate != null">
+	       create_date=#{map.createDate},
+         </if>
+		<if test="map.createUserId != null">
+	       create_user_id=#{map.createUserId},
+         </if>
+		<if test="map.modifiyDate != null">
+	       modifiy_date=#{map.modifiyDate},
+         </if>
+		<if test="map.freightChargeAmount != null">
+	       freight_charge_amount=#{map.freightChargeAmount},
+         </if>
+		<if test="map.cashAmount != null">
+	       cash_amount=#{map.cashAmount},
+         </if>
+		<if test="map.suppliesAmount != null">
+	       supplies_amount=#{map.suppliesAmount},
+         </if>
+		<if test="map.checkingAuditDate != null">
+	       checking_audit_date=#{map.checkingAuditDate},
+         </if>
+		<if test="map.settleAuditDate != null">
+	       settle_audit_date=#{map.settleAuditDate},
+         </if>
+    <if test="map.oilgascardId != null">
+	       oilgascard_id=#{map.oilgascardId},
+         </if>
+    <if test="map.suppliesExecuteId != null">
+	       supplies_execute_id=#{map.suppliesExecuteId},
+         </if>
+    <if test="map.suppliesExecuteDate != null">
+	       supplies_execute_date=#{map.suppliesExecuteDate},
+         </if>
+     <if test="map.dotAccountPackId != null and map.dotAccountPackId != '' and map.dotAccountPackId != 'null' and map.dotAccountPackId != 'undefined'">
+	       dot_account_pack_id=#{map.dotAccountPackId},
+         </if>  
+          
+         <if test="map.checkingAuditor != null">
+	       checkingAuditor=#{map.checkingAuditor},
+         </if>  
+		</set>
+		where sh_pack_id in
+		<foreach collection="list" index="index" item="item" open="(" separator="," close=")">   
+             #{item}   
+        </foreach>
+	</update>
+
+	<!-- 查看短驳打包信息表 -->
+	<select id="getShortPackById" resultType="Map">
+        select a.sh_pack_id shPackId,a.project_id projectId,a.checking_status checkingStatus,a.cash_settle_status cashSettleStatus,a.supplies_settle_status suppliesSettleStatus,a.pack_truck_num packTruckNum,a.payment_id paymentId,a.pack_truck_degree packTruckDegree,a.pay_ratio payRatio,a.cash_pay_type cashPayType,a.supplies_receive_type suppliesReceiveType,a.receive_user_id receiveUserId,a.open_bank openBank,a.bank_account bankAccount,a.remark remark,a.delete_flag deleteFlag,a.create_date createDate,a.create_user_id createUserId,a.modifiy_date modifiyDate,a.freight_charge_amount freightChargeAmount,a.cash_amount cashAmount,a.supplies_amount suppliesAmount,a.checking_audit_date checkingAuditDate,a.settle_audit_date settleAuditDate,a.provide_company_id provideCompanyId
+        from tb_short_pack a
+        where a.sh_pack_id=#{id}
+    </select>
+
+	<!-- 删除短驳打包信息表 -->
+	<delete id="delShortPackById">
+		delete from tb_short_pack where sh_pack_id = #{id}
+	</delete>	
+
+	<!-- 批量删除短驳打包信息表 -->
+    <delete id="delShortPackByIds">  
+        delete from tb_short_pack where sh_pack_id in 
+        <foreach collection="list" index="index" item="item" open="(" separator="," close=")">   
+            #{item}   
+        </foreach>  
+    </delete>
+
+	<!-- 清空短驳打包信息表 -->
+	<delete id="delShortPacks">
+		delete from tb_short_pack
+	</delete>	
+
+	<!-- 检索短驳打包信息表列表 -->
+	<select id="getShortPacks" resultType="Map">
+		select a.sh_pack_id shPackId,a.project_id projectId,a.checking_status checkingStatus,a.cash_settle_status cashSettleStatus,a.supplies_settle_status suppliesSettleStatus,a.pack_truck_num packTruckNum,a.payment_id paymentId,a.pack_truck_degree packTruckDegree,a.pay_ratio payRatio,a.cash_pay_type cashPayType,a.supplies_receive_type suppliesReceiveType,a.receive_user_id receiveUserId,a.remark remark,a.delete_flag deleteFlag,DATE_FORMAT(a.create_date,'%Y-%m-%d %H:%i:%s') createDate,a.create_user_id createUserId,DATE_FORMAT(a.modifiy_date,'%Y-%m-%d %H:%i:%s') modifiyDate,a.freight_charge_amount freightChargeAmount,a.cash_amount cashAmount,a.supplies_amount suppliesAmount,DATE_FORMAT(a.checking_audit_date,'%Y-%m-%d %H:%i:%s') checkingAuditDate,DATE_FORMAT(a.settle_audit_date,'%Y-%m-%d %H:%i:%s') settleAuditDate,a.provide_company_id provideCompanyId,a.supplies_type suppliesType,a.audit_id auditId,a.settle_status settleStatus,a.supplies_execute_id suppliesExecuteId,a.supplies_execute_date suppliesExecuteDate
+		,p.project_code projectCode ,p.branch_group_name branchGroupName
+    ,c.account_name provideBankAccount,a.open_bank openBank,c.bank_num bankNum,c.account_num accountNum
+    ,a.receive_user_type receiveUserType
+    ,s.name auditName,ad.name createUserName,a.bank_account bankAccount
+    ,ss.name suppliesExecuteName
+    ,u.driver_name driverName,u.driver_phone driverPhone,u.driver_open_bank driverOpenBank,u.driver_bank_num driverBankNum,u.driver_bank_card_number driverBankCardNumber
+    ,case when a.receive_user_type=1 then u.phone else t.phone end receiveUserPhone
+    ,case when a.receive_user_type=1 then u.name else t.name end receiveUserName
+    ,case when a.payment_id=0 then '全额现金' when a.payment_id=1 then '全额油卡' 
+    	when a.payment_id=2 then '全额气卡' else '钱卡混合' end paymentName
+	,case when a.supplies_type =0 then '油卡'
+			when a.supplies_type =1 then '气卡' else '-' end suppliesTypeName
+			,cs.company_name companyNameSend,cr.company_name companyNameRecieve
+		,clu.name checkingAuditorName,a.receiver
+		from tb_short_pack a
+   LEFT JOIN tb_project p ON a.project_id = p.id
+   left join tb_finance_account c on a.provide_company_id = c.id
+   left join tb_system_user s on a.audit_id = s.id
+   left join tb_system_user ss on a.supplies_execute_id = ss.id
+   left join tb_login_user lu on lu.id=a.receive_user_id
+   left join tb_system_user clu on clu.id=a.checkingAuditor
+   left join tb_user_information u on u.id=lu.information_id
+   left join tb_car_team t on t.id=a.receive_user_id
+   left join tb_system_user ad on ad.id=a.create_user_id
+   left join tb_customer cs on cs.id=p.send_cargo_company_id and cs.status=0 
+   left join tb_customer cr on cr.id=p.receive_cargo_company_id and cr.status=0 
+   left join tb_branch_group_link y on a.sh_pack_id=y.row_id and y.tab_name='tb_short_pack'
+		where a.delete_flag = 0  and y.sys_org_code like CONCAT(#{map.sysOrgCode},'%')
+        <if test="map != null">
+        <if test="map.branchGroupIdBulkTrainSport != null">
+		    and p.branch_group_id in 
+		 	<foreach item="item" index="index" collection="map.branchGroupIdCount" 
+                   open="(" separator="," close=")">
+                  #{item}
+         	</foreach>
+        </if>
+        <if test="map.sendCargoCompanyId != null">
+        and cs.id=#{map.sendCargoCompanyId}
+        </if>
+        <if test="map.receiveCargoCompanyId != null">
+        and cr.id=#{map.receiveCargoCompanyId}
+        </if>
+		<if test="map.shPackId != null and map.shPackId != '' and map.shPackId != 'null' and map.shPackId != 'undefined'">				  
+		    AND a.sh_pack_id = #{map.shPackId}
+                </if>
+		<if test="map.projectId != null and map.projectId != '' and map.projectId != 'null' and map.projectId != 'undefined'">
+		    AND a.project_id = #{map.projectId}
+                </if>
+                <if test="map.projectCode != null and map.projectCode != '' and map.projectCode != 'null' and map.projectCode != 'undefined'">
+		    AND p.project_code like CONCAT('%',#{map.projectCode},'%') 
+         </if> 
+        <if test="map.branchGroupName != null and map.branchGroupName != '' and map.branchGroupName != 'null' and map.branchGroupName != 'undefined'">
+		    AND p.branch_group_name like CONCAT('%',#{map.branchGroupName},'%') 
+         </if> 
+         <if test="map.beginDate != null and map.beginDate !='' and map.beginDate != 'null' and map.beginDate != 'undefined' " >
+		       and date_format(a.create_date, '%Y-%m-%d') &gt;= date_format(#{map.beginDate}, '%Y-%m-%d')
+		    </if>
+		    <if test="map.endDate != null and map.endDate !='' and map.endDate != 'null' and map.endDate != 'undefined' " >
+		       and date_format(a.create_date, '%Y-%m-%d') &lt;= date_format(#{map.endDate}, '%Y-%m-%d')
+		    </if>
+		  <if test="map.beginDateCheck != null and map.beginDateCheck !='' and map.beginDateCheck != 'null' and map.beginDateCheck != 'undefined' " >
+		       and date_format(a.checking_audit_date, '%Y-%m-%d') &gt;= date_format(#{map.beginDateCheck}, '%Y-%m-%d')
+		    </if>
+		    <if test="map.endDateCheck != null and map.endDateCheck !='' and map.endDateCheck != 'null' and map.endDateCheck != 'undefined' " >
+		       and date_format(a.checking_audit_date, '%Y-%m-%d') &lt;= date_format(#{map.endDateCheck}, '%Y-%m-%d')
+		    </if>
+		  <if test="map.beginDateSettle != null and map.beginDateSettle !='' and map.beginDateSettle != 'null' and map.beginDateSettle != 'undefined' " >
+		       and date_format(a.settle_audit_date, '%Y-%m-%d') &gt;= date_format(#{map.beginDateSettle}, '%Y-%m-%d')
+		    </if>
+		    <if test="map.endDateSettle != null and map.endDateSettle !='' and map.endDateSettle != 'null' and map.endDateSettle != 'undefined' " >
+		       and date_format(a.settle_audit_date, '%Y-%m-%d') &lt;= date_format(#{map.endDateSettle}, '%Y-%m-%d')
+		    </if>   
+		  <if test="map.beginDateOilgas != null and map.beginDateOilgas !='' and map.beginDateOilgas != 'null' and map.beginDateOilgas != 'undefined' " >
+		       and date_format(a.supplies_execute_date, '%Y-%m-%d') &gt;= date_format(#{map.beginDateOilgas}, '%Y-%m-%d')
+		    </if>
+		    <if test="map.endDateOilgas != null and map.endDateOilgas !='' and map.endDateOilgas != 'null' and map.endDateOilgas != 'undefined' " >
+		       and date_format(a.supplies_execute_date, '%Y-%m-%d') &lt;= date_format(#{map.endDateOilgas}, '%Y-%m-%d')
+		    </if>     
+		<if test="map.checkingStatus != null">
+		    AND a.checking_status = #{map.checkingStatus}
+                </if>
+          <if test="map.queryFrom != null and map.queryFrom == 'app'">
+		    AND a.checking_status in(0,2)
+                </if>         
+          <if test="map.cashSettleStatus !=null">      
+        <choose>
+		    <when test="map.cashSettleStatus ==2" >
+		        and ((a.cash_settle_status =2 and a.supplies_settle_status =1) or(a.payment_id=0 and a.cash_settle_status =2) 
+		        or(a.payment_id in(1,2) and a.supplies_settle_status =1))
+		    </when>
+		    <otherwise>          
+		        and ((a.payment_id=0 and a.cash_settle_status &lt;&gt; 2) or (a.payment_id in(1,2) and a.supplies_settle_status &lt;&gt; 1)
+		         or(a.payment_id=3 and (a.cash_settle_status &lt;&gt; 2 or a.supplies_settle_status &lt;&gt; 1)))
+		    </otherwise>  
+		</choose>   
+		</if>     
+		<if test="map.suppliesSettleStatus != null and map.suppliesSettleStatus == 2">
+		    AND a.supplies_settle_status &lt;&gt; #{map.suppliesSettleStatus}
+                </if>
+         <if test="map.suppliesSettleStatus != null and map.suppliesSettleStatus != 2">
+		    AND a.supplies_settle_status = #{map.suppliesSettleStatus}
+                </if>       
+		<if test="map.packTruckNum != null">
+		    AND a.pack_truck_num = #{map.packTruckNum}
+                </if>
+		<if test="map.paymentId != null">
+		    AND a.payment_id = #{map.paymentId}
+                </if>
+		<if test="map.packTruckDegree != null">
+		    AND a.pack_truck_degree = #{map.packTruckDegree}
+                </if>
+		<if test="map.payRatio != null">
+		    AND a.pay_ratio = #{map.payRatio}
+                </if>
+		<if test="map.cashPayType != null">
+		    AND a.cash_pay_type = #{map.cashPayType}
+                </if>
+		<if test="map.suppliesReceiveType != null">
+		    AND a.supplies_receive_type = #{map.suppliesReceiveType}
+                </if>
+		<if test="map.receiveUserId != null">
+		    AND a.receive_user_id = #{map.receiveUserId}
+                </if>
+		<if test="map.openBank != null and map.openBank != '' and map.openBank != 'null' and map.openBank != 'undefined'">				  
+		    AND a.open_bank = #{map.openBank}
+                </if>
+		<if test="map.bankAccount != null and map.bankAccount != '' and map.bankAccount != 'null' and map.bankAccount != 'undefined'">				  
+		    AND a.bank_account = #{map.bankAccount}
+                </if>
+		<if test="map.remark != null and map.remark != '' and map.remark != 'null' and map.remark != 'undefined'">				  
+		    AND a.remark = #{map.remark}
+                </if>
+		<if test="map.deleteFlag != null">
+		    AND a.delete_flag = #{map.deleteFlag}
+                </if>
+		<if test="map.createUserId != null">
+		    AND a.create_user_id = #{map.createUserId}
+                </if>
+		<if test="map.modifiyDate != null">
+		    AND a.modifiy_date = #{map.modifiyDate}
+                </if>
+		<if test="map.freightChargeAmount != null">
+		    AND a.freight_charge_amount = #{map.freightChargeAmount}
+                </if>
+		<if test="map.cashAmount != null">
+		    AND a.cash_amount = #{map.cashAmount}
+                </if>
+		<if test="map.suppliesAmount != null">
+		    AND a.supplies_amount = #{map.suppliesAmount}
+                </if>
+        <if test="map.dotAccountPackId != null and map.dotAccountPackId != '' and map.dotAccountPackId != 'null' and map.dotAccountPackId != 'undefined' ">
+	       AND a.dot_account_pack_id=#{map.dotAccountPackId}
+         		</if>
+        <if test="map.dotAccountPackId != null and map.dotAccountPackId == 'null' ">
+	     	and a.dot_account_pack_id is null
+         </if>
+        </if>
+        order by a.sh_pack_id desc
+	</select>
+
+	<!-- 检索网点交账列表 -->
+	<select id="getShortPackAbilitys" resultType="Map">
+		select a.sh_pack_id shPackId,a.project_id projectId,a.checking_status checkingStatus,a.cash_settle_status cashSettleStatus,a.supplies_settle_status suppliesSettleStatus,a.pack_truck_num packTruckNum,a.payment_id paymentId,a.pack_truck_degree packTruckDegree,a.pay_ratio payRatio,a.cash_pay_type cashPayType,a.supplies_receive_type suppliesReceiveType,a.receive_user_id receiveUserId,a.open_bank openBank,a.bank_account bankAccount,a.remark remark,a.delete_flag deleteFlag,DATE_FORMAT(a.create_date,'%Y-%m-%d %H:%i:%s') createDate,a.create_user_id createUserId,DATE_FORMAT(a.modifiy_date,'%Y-%m-%d %H:%i:%s') modifiyDate,a.freight_charge_amount freightChargeAmount,a.cash_amount cashAmount,a.supplies_amount suppliesAmount,DATE_FORMAT(a.checking_audit_date,'%Y-%m-%d %H:%i:%s') checkingAuditDate,DATE_FORMAT(a.settle_audit_date,'%Y-%m-%d %H:%i:%s') settleAuditDate,a.provide_company_id provideCompanyId,a.supplies_type suppliesType,a.audit_id auditId,a.settle_status settleStatus,a.supplies_execute_id suppliesExecuteId,a.supplies_execute_date suppliesExecuteDate
+		,p.project_code projectCode ,p.branch_group_name branchGroupName
+    ,c.account_name provideBankAccount
+    ,a.receive_user_type receiveUserType
+    ,s.name auditName
+    ,ss.name suppliesExecuteName
+    ,u.driver_name driverName,u.driver_phone driverPhone,u.driver_open_bank driverOpenBank,u.driver_bank_num driverBankNum,u.driver_bank_card_number driverBankCardNumber
+    ,u.name carOwner
+    ,case when a.payment_id=0 then '全额现金' when a.payment_id=1 then '全额油卡' 
+    	when a.payment_id=2 then '全额气卡' else '钱卡混合' end paymentName
+		from tb_short_pack a
+   LEFT JOIN tb_project p ON a.project_id = p.id
+   left join tb_finance_account c on a.provide_company_id = c.id
+   left join tb_system_user s on a.audit_id = s.id
+   left join tb_system_user ss on a.supplies_execute_id = ss.id
+   left join tb_user_information u on a.receive_user_id = u.id
+   left join tb_branch_group_link y on a.sh_pack_id=y.row_id and y.tab_name='tb_short_pack'
+		where a.delete_flag = 0 and a.supplies_settle_status = 1
+		and y.sys_org_code like CONCAT(#{map.sysOrgCode},'%')
+        <if test="map != null">
+        <if test="map.branchGroupIdBulkTrainSport != null">
+		    and p.branch_group_id in 
+		 	<foreach item="item" index="index" collection="map.branchGroupIdCount" 
+                   open="(" separator="," close=")">
+                  #{item}
+         	</foreach>
+        </if>
+		<if test="map.shPackId != null and map.shPackId != '' and map.shPackId != 'null' and map.shPackId != 'undefined'">				  
+		    AND a.sh_pack_id = #{map.shPackId}
+                </if>
+		<if test="map.projectId != null and map.projectId != '' and map.projectId != 'null' and map.projectId != 'undefined'">
+		    AND a.project_id = #{map.projectId}
+                </if>
+                <if test="map.projectCode != null and map.projectCode != '' and map.projectCode != 'null' and map.projectCode != 'undefined'">
+		    AND p.project_code like CONCAT('%',#{map.projectCode},'%') 
+         </if> 
+        <if test="map.branchGroupName != null and map.branchGroupName != '' and map.branchGroupName != 'null' and map.branchGroupName != 'undefined'">
+		    AND p.branch_group_name like CONCAT('%',#{map.branchGroupName},'%') 
+         </if> 
+		  <if test="map.beginDateCheck != null and map.beginDateCheck !='' and map.beginDateCheck != 'null' and map.beginDateCheck != 'undefined' " >
+		       and date_format(a.checking_audit_date, '%Y-%m-%d') &gt;= date_format(#{map.beginDateCheck}, '%Y-%m-%d')
+		    </if>
+		    <if test="map.endDateCheck != null and map.endDateCheck !='' and map.endDateCheck != 'null' and map.endDateCheck != 'undefined' " >
+		       and date_format(a.checking_audit_date, '%Y-%m-%d') &lt;= date_format(#{map.endDateCheck}, '%Y-%m-%d')
+		    </if>
+		<if test="map.checkingStatus != null">
+		    AND a.checking_status = #{map.checkingStatus}
+                </if>
+          <if test="map.queryFrom != null and map.queryFrom == 'app'">
+		    AND a.checking_status in(0,2)
+                </if>         
+		<if test="map.cashSettleStatus != null">
+		    AND a.cash_settle_status = #{map.cashSettleStatus}
+                </if>
+		<if test="map.suppliesSettleStatus != null">
+		    AND a.supplies_settle_status = #{map.suppliesSettleStatus}
+                </if>
+		<if test="map.packTruckNum != null">
+		    AND a.pack_truck_num = #{map.packTruckNum}
+                </if>
+		<if test="map.paymentId != null">
+		    AND a.payment_id = #{map.paymentId}
+                </if>
+		<if test="map.packTruckDegree != null">
+		    AND a.pack_truck_degree = #{map.packTruckDegree}
+                </if>
+		<if test="map.payRatio != null">
+		    AND a.pay_ratio = #{map.payRatio}
+                </if>
+		<if test="map.cashPayType != null">
+		    AND a.cash_pay_type = #{map.cashPayType}
+                </if>
+		<if test="map.suppliesReceiveType != null">
+		    AND a.supplies_receive_type = #{map.suppliesReceiveType}
+                </if>
+		<if test="map.receiveUserId != null">
+		    AND a.receive_user_id = #{map.receiveUserId}
+                </if>
+		<if test="map.openBank != null and map.openBank != '' and map.openBank != 'null' and map.openBank != 'undefined'">				  
+		    AND a.open_bank = #{map.openBank}
+                </if>
+		<if test="map.bankAccount != null and map.bankAccount != '' and map.bankAccount != 'null' and map.bankAccount != 'undefined'">				  
+		    AND a.bank_account = #{map.bankAccount}
+                </if>
+		<if test="map.remark != null and map.remark != '' and map.remark != 'null' and map.remark != 'undefined'">				  
+		    AND a.remark = #{map.remark}
+                </if>
+		<if test="map.deleteFlag != null">
+		    AND a.delete_flag = #{map.deleteFlag}
+                </if>
+		<if test="map.createDate != null">
+		    AND a.create_date = #{map.createDate}
+                </if>
+		<if test="map.createUserId != null">
+		    AND a.create_user_id = #{map.createUserId}
+                </if>
+		<if test="map.modifiyDate != null">
+		    AND a.modifiy_date = #{map.modifiyDate}
+                </if>
+		<if test="map.freightChargeAmount != null">
+		    AND a.freight_charge_amount = #{map.freightChargeAmount}
+                </if>
+		<if test="map.cashAmount != null">
+		    AND a.cash_amount = #{map.cashAmount}
+                </if>
+		<if test="map.suppliesAmount != null">
+		    AND a.supplies_amount = #{map.suppliesAmount}
+                </if>
+		<if test="map.checkingAuditDate != null">
+		    AND a.checking_audit_date = #{map.checkingAuditDate}
+                </if>
+		<if test="map.settleAuditDate != null">
+		    AND a.settle_audit_date = #{map.settleAuditDate}
+                </if>
+            </if>
+        order by a.sh_pack_id desc
+	</select>
+	
+	<select id="queryOilGasCard" resultType="String">
+		select card_num cardNum from tb_oil_gas_card where card_num like concat('%',#{text},'%')
+	</select>
+	
+		<!-- 已结算使用油气卡号 -->
+	<select id="getOilGasCardUsed" resultType="Map">
+		select a.sh_pack_id shPackId,a.id id,if(card_type=0,'油卡','气卡') cardTypeName,a.card_money cardMoney,a.card_num cardNum 
+		from tb_oil_gas_card a
+		left join tb_oil_gas_card_pack b on b.id=a.oil_gas_cards_id and b.audit_status=1
+		where a.card_status=1
+		   and a.sh_pack_id =#{map.shPackId}
+		order by a.card_money desc
+	</select>
+	
+	<select id="getOilGasCardMoney" resultType="java.math.BigDecimal">
+	select SUM(oc.card_money) from tb_oil_gas_card oc where oc.oil_gas_cards_id in (
+	(
+		select op.id from tb_oil_gas_card_pack op where op.branch_group_id = (
+			select bg.id from tb_branch_group bg where bg.name =#{map.branchGroupName} 
+		) AND op.audit_status = 1 AND op.card_type = #{map.cardType} 
+	)
+	) AND oc.card_status = 0
+	</select>
+	
+</mapper>

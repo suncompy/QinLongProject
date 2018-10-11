@@ -1,0 +1,129 @@
+#deletnullModal .modal-dialog,#deletRemindModal .modal-dialog{width: 600px !important;}
+/*鏂板缓妯℃�佹*/
+.project_info .creat_content{font-size: 14px;font-family: "Microsoft YaHei";color: rgb(51, 51, 51);line-height: 1.2;}
+.project_info .form-inline{margin-left: 10px !important;}
+.modal .modal-header{padding: 5px!important;}
+.modal h5{color:#FFAE00;margin-top: 0px !important;font-weight: normal;}
+.modal p{margin:10px;word-wrap: break-word;}
+.modal hr{margin-top: 10px !important;margin-bottom: 10px !important;border-top: 1px dashed #D8D8D8 !important;}
+.modal-dialog label{font-weight: normal;font-size: 14px;font-family: "Microsoft YaHei";color: #666666;line-height: 1.2;}
+.modal-dialog select,.modal-dialog input[type=text]{width:140px;border: 1px solid #dde3ef;height: 28px;margin: 5px 0;border-radius: 4px;}
+.modal-dialog .sm-tag{width: 70px;text-align: right;}
+.modal-dialog .lg-tag{width: 84px;text-align: right;}
+.modal .form-group{padding:0!important;position: relative;margin: 0 5px!important;}
+#lookModal .modal-body{height: 700px !important;overflow: auto;}
+@media (min-width: 768px){
+.addr_info{width: 150px;}	
+
+}
+
+@media (min-width: 992px){
+.addr_info{width: 333px !important;}
+.modal-lg{width: 930px}
+}
+.modal-content .form-group span{position: absolute;top: 10px;right: 5px;}
+.cost_info label{width: 100px;text-align: right;}
+.cost_info td{vertical-align: text-top;}
+.modal table th{border-right: 1px solid #dde3ef;
+    text-align: center;
+    font-size: 14px;
+    padding: 5px !important;
+    font-weight: normal;
+    color: #333333;
+    background-color: #EEF5FD;}
+.modal table tr td{    padding:8px!important;
+    border-right: 1px solid #dde3ef;
+    font-size: 12px;
+    line-height: 10px;}
+/*.modal .table{margin-bottom: 10px !important;margin-top: 10px;}*/
+/*绛夊緟鎵胯*/
+.waitUl {overflow: hidden; padding-left: 10px !important;}
+.waitUl{margin-bottom: 10px;margin-top: 10px;}
+.waitUl li{float: left;list-style: none;min-width: 220px;height: 28px;line-height: 28px;}
+.waitUl li input,.waitUl li select{margin: 0 !important;}
+.waitUls{overflow: hidden; padding-left: 10px !important;}
+.waitUls li{float: left;list-style: none;width: 220px;height: 40px;line-height: 40px;}
+.waitUl .addBtns .btn{border: 1px solid #DDE3EF;font:12px/20px "Microsoft YaHei";padding: 0 10px !important;}
+.waitUl .addBtns img{margin:0 10px 0 0 ;}
+.v-top{vertical-align: top;}
+/*绛夊緟瑁呰溅*/
+.addBtn{text-align: right;margin-left:75px;}
+.addBtn img{margin: 0 5px;}
+.addBtns{text-align: right;margin-left:75px;}
+.addBtns img{margin: 0 5px;}
+.moreAdd{background: #FFFFFF;color:#666666;text-align: center;border-left: 1px solid #DDE3EF;border-right:1px solid #DDE3EF ;border-bottom:1px solid #DDE3EF ;height: 25px;line-height: 25px;}
+.moreAdd img{margin: 0 10px;}
+.moreAdds{background: #FFFFFF;color:#666666;text-align: center;border-left: 1px solid #DDE3EF;border-right:1px solid #DDE3EF ;border-bottom:1px solid #DDE3EF ;height: 25px;line-height: 25px;}
+.moreAdds img{margin: 0 10px;}
+.newTr td{height: 25px;}
+.lastChild td:last-child{text-align: center;}
+.loadingTable tbody{background: #FFFFFF;}
+.loadingTable thead{text-align: center !important;}
+.newTr td:first-child{text-align: center !important;}
+.bigDiv .table > tbody > tr >td{white-space: nowrap;padding: 2px;font-size: 12px;border-right: 1px solid #dde3ef !important;border-bottom: none !important;}
+.bigDiv .table> thead > tr > th{border-right: 1px solid #dde3ef !important;border-bottom: none !important;text-align: center !important;}
+.bigDivs .table > tbody > tr >td{padding: 2px;font-size: 12px;border-right: 1px solid #dde3ef !important;border-bottom: none !important;}
+.bigDivs .table> thead > tr > th{border-right: 1px solid #dde3ef !important;border-bottom: none !important;text-align: center !important;}
+/*绛夊緟鍙戣繍*/
+.firstTd{width: 80px !important;}
+.secTd{width: 114px !important;}
+.thirdTd{width: 180px !important;}
+#forwardingModal .table-responsive{max-height: 303px;} 
+.lookClass{color: #ffae00 !important;}
+.oprationClass{text-align: center;}
+.oprationClass a{margin: 0 10px;}
+.delA{color: #000000;}
+/*鍦ㄩ�旇繍杞�*/
+.localtionUl li{list-style: none;}
+.localtionDiv{overflow: auto;height: 90px;margin-left: 10px;}
+.localtionDiv1>div{padding-left: 10px;}
+.localtionDiv div{float: left;}
+.localInput{width: 240px !important;}
+#locationModal .table-responsive{max-height: 303px;}
+/*绛夊緟鍥炲崟*/
+#receiptModal .table-responsive{max-height: 303px;} 
+/* 鏌ョ湅*/
+.detailsUl {overflow: hidden; padding-left: 10px !important;}
+.detailsUl li{float: left;list-style: none;min-width: 235px;color: #666666;}
+.detailsUl li span{color: #333333;}
+.detailsUl .state span{color: #2097FF !important;}
+  .YdlocaltionUl li{list-style: none;}
+ .YdlocaltionUl li span{margin: 0 10px;}
+.selectSpan{background: none !important;border: none !important;
+appearance:none !important;
+-moz-appearance:none !important;/*?Firefox?*/
+-webkit-appearance:none !important;/*?Safari?鍜�?Chrome?*/}
+/*绛夊緟鍗歌揣*/
+.allocate{text-align: center;}
+.allocate button{border-radius: 10px;background-color: rgb(0, 180, 255);width: 160px;padding: 17px 25px;margin: 120px auto;border: 1px solid #00B4FF;}
+.allocate span{font-size: 18px;font-family: "Microsoft YaHei";color: rgb(255, 254, 254);}
+#unloadingModal .table-responsive{max-height: 220px;} 
+/*鍥剧墖棰勮*/
+.user_addpic{padding: 10px 0;}
+.preview{width:200px;height:139px;overflow:hidden;margin-left: 10px;margin-top: 5px;}
+#imghead {filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=image);}
+.preview img{width:100%;height: 100%;}
+.preview{float: left;}
+.picbox{background: #FFFFFF;background:url(../../../img/updownBg.png) #fff no-repeat center center;float: left;}
+.testFile{display: inline-block;height: 152px;width: 200px;opacity: 0;}
+.sureBtns {background: #04a9ed !important;color: #FFFFFF !important;}
+
+.demo--checkbox:checked+ .demo--checkboxInput:after {
+    background: url(../img/checks.png) no-repeat center center;
+    border-radius: 3px;
+    content: "";
+    display: inline-block;
+    height: 11px;
+    margin:0px !important;
+    width: 10px;
+}
+.checkDiv{margin-top: 5px;}
+.checkDiv .demo--checkboxInput {  
+    margin-top: -2px !important;
+}
+/*鐭俊鍛婄煡*/
+.modal textarea{border: 1px solid #DDE3EF;width: 90%;}
+#msgForm p{text-indent: 5em;color: #333;}
+#msgForm b{color: #4040FF;}
+#msgForm .tips{display: none;}
+#nullModal .modal-dialog {margin-top:180px !important;};

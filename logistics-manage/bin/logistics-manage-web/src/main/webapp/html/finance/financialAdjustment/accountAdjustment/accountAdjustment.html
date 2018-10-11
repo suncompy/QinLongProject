@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>账户调整</title>
+		<link rel="stylesheet" href="../../../../public/bootstrap/css/bootstrap.css" />
+		<link rel="stylesheet" href="../../../../public/public.css" />
+		<link rel="stylesheet" href="../../../../public/bootstrap/css/font-awesome.css" />
+		<script type="text/javascript" src="../../../../public/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="../../../../public/bootstrap/js/bootstrap.js"></script>
+		<script type="text/javascript" src="../../../../js/public.js"></script>
+		<script type="text/javascript" src="../../../../public/bootstrap/My97DatePicker/WdatePicker.js"></script>
+		<script type="text/javascript" src="../../../../public/jquery.validate.js"></script>
+		<script type="text/javascript" src="../../../../public/layer-v3.1.1/layer/layer.js"></script>
+		<script type="text/javascript" src="../../../../js/finance/accountAdjustment/accountAdjustment.js"></script>
+	</head>
+
+	<body>
+		<!-- 账户调整搜索 -->
+		<div class="form project_form container_top">
+			<form class="form-inline maxWidth">
+				<div id="wrap">
+					<div class="form-group">
+						<label>站点名称：</label>
+						<select></select>
+					</div>
+					<div class="form-group">
+						<label>站点级别：</label>
+						<select></select>
+					</div>
+
+					<div class="form-group">
+						<label>负责人：</label>
+						<select></select>
+					</div>
+					<div class="form-group">
+						<label>联系方式：</label>
+						<input type="text" maxlength="11" />
+					</div>
+				</div>
+				<div class="foot">
+					<a class="btn btn-success" href="javascript:;"><em class="search"></em>
+						<span>搜索</span>
+					</a>
+				</div>
+			</form>
+		</div>
+		<!-- 账户调整表格 -->
+		<div class="container_top tableDiv">
+			<div class="tabbable">
+				<ul class="nav nav-tabs">
+					<li class="active">
+						<a href="accountAdjustment.html" data-toggle="tab">账户信息</a>
+					</li>
+					<li>
+						<a href="" data-toggle="tab">历史调整</a>
+					</li>
+				</ul>
+				<!--账户调整列表-->
+				<div class="tab-content">
+					<div class="tab-pane active" id="panel1">
+						<div class="domain">
+							<div class="tableBg">
+								<a href="javascript:;" class="exportBtn adjustment" id="adjustment"><span>账户调整</span></a>
+								<a href="javascript:;" class="exportBtn returnMoney" id="returnMoney"><span>还款</span></a>
+							</div>
+							<div class="table-responsive">
+								<table class="table">
+									<thead>
+										<tr class="tableTop">
+											<th> <label class="demo--label">
+											     <input class="demo--checkbox" type="checkbox"   >
+                                                 <span class="demo--checkboxInput"></span>
+	                                        </label> </th>
+											<th>转出账户</th>
+											<th>账户类型</th>
+											<th>账户余额</th>
+											<th>转入账户</th>
+											<th>账户类型</th>
+											<th>账户余额</th>
+											<th>调整类型</th>
+											<th>调整金额</th>
+											<th>调整人</th>
+											<th>调整时间</th>
+											<th>流水号</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td><label class="demo--label">
+											     <input class="demo--checkbox" type="checkbox"   >
+                                                 <span class="demo--checkboxInput"></span>
+	                                        </label></td>
+											<td>新疆秦龙矿业有限公司</td>
+											<td>日常收支</td>
+											<td>36584元</td>
+											<td>新疆秦龙矿业有限公司</td>
+											<td>日常收支</td>
+											<td>36584元</td>
+											<td>信贷</td>
+											<td>36584元</td>
+											<td>李大伟</td>
+											<td>2017.12.18 10:00</td>
+											<td>145856974123</td>
+										</tr>
+										<tr>
+											<td><label class="demo--label">
+											     <input class="demo--checkbox" type="checkbox"   >
+                                                 <span class="demo--checkboxInput"></span>
+	                                        </label></td>
+											<td>新疆秦龙矿业有限公司</td>
+											<td>日常收支</td>
+											<td>36584元</td>
+											<td>新疆秦龙矿业有限公司</td>
+											<td>日常收支</td>
+											<td>36584元</td>
+											<td>信贷</td>
+											<td>36584元</td>
+											<td>李大伟</td>
+											<td>2017.12.18 10:00</td>
+											<td>145856974123</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="row clearfix">
+							<div class="col-md-12 column paging">
+								<ul class="pagination clearfix">
+									<li>
+										<a href="javascript:;" class="newA">上一页</a>
+									</li>
+									<li>
+										<a href="javascript:;" class="newA actives">1</a>
+									</li>
+									<li>
+										<a href="javascript:;" class="newA">2</a>
+									</li>
+									<li>
+										<a href="javascript:;" class="newA">3</a>
+									</li>
+									<li>
+										<a href="javascript:;" class="newA">4</a>
+									</li>
+									<li>
+										<a href="javascript:;" class="newA">5</a>
+									</li>
+
+									<li>
+										<a href="javascript:;" class="newA">...</a>
+									</li>
+									<li>
+										<a href="javascript:;" class="newA">10</a>
+									</li>
+
+									<li>
+										<a href="javascript:;" class="newA">下一页 </a>
+									</li>
+
+									<li>
+										<a class="pageSpan">跳转到 <input type="text" id="pageInput" />页</a>
+									</li>
+									<li>
+
+									</li>
+									<li>
+										<a href="javascript:;" class="pageGo">GO</a>
+									</li>
+
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+	</body>
+
+</html>

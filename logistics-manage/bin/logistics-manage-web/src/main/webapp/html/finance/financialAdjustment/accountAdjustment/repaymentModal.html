@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>还款</title>
+		<link rel="stylesheet" href="../../../../public/bootstrap/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="../../../../public/bootstrap/css/font-awesome.css" />
+		<link rel="stylesheet" href="../../../../public/newPublic.css" />
+		<link rel="stylesheet" href="../../../../css/finance/financialAdjustment/accountAdjustment.css" />
+		<script type="text/javascript" src="../../../../public/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="../../../../public/bootstrap/js/bootstrap.js"></script>
+		<script src="../../../../public/bootstrap/My97DatePicker/WdatePicker.js"></script>
+		<script type="text/javascript" src="../../../../js/public.js"></script>
+		<!--<script type="text/javascript" src="../../../../js/finance/materialManagement/oilgasManagement.js"></script>-->
+	</head>
+	<body>
+		<form id="repayment">
+			<div class="form-inline ">
+				<div class="form-group ">
+					<label>&emsp;&emsp;贷方:</label>
+					<select></select>
+				</div>
+				<div class="form-group ">
+					<label>贷方剩余金额:</label>
+					<input type="text" class="inputbg" unselectable="on" readonly/>
+				</div>
+				<div class="form-group ">
+					<label>&emsp;&emsp;贷方:</label>
+					<select></select>
+				</div>
+				<div class="form-group ">
+					<label>借方剩余金额:</label>
+					<input type="text" maxlength="30"/>
+				</div>
+				<div class="form-group ">
+					<label>调整类型:</label>
+					<select></select>
+				</div>
+				<div class="form-group ">
+					<label>&emsp;&emsp;借款金额:</label>
+					<input type="text" class="inputbg" unselectable="on" readonly/>
+				</div>
+				<div class="form-group ">
+					<label>还款金额:</label>
+					<input type="text" class="inputbg" unselectable="on" readonly/>
+				</div>
+			</div>
+			<div class="row clearfix ">
+				<div class="col-md-12 column modal_btn">
+					<button type="button" class="btn sureBtn">确定</button>
+					<button type="button" class="btn cancleBtns" data-dismiss="modal">取消</button>
+				</div>
+			</div>
+		</form>
+	</body>
+</html>

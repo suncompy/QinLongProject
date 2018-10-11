@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>业务首页</title>
+		<link rel="stylesheet" type="text/css" href="../../public/bootstrap/css/bootstrap.min.css"/>
+		<link rel="stylesheet" type="text/css" href="../../public/bootstrap/css/font-awesome.min.css"/>
+		<link rel="stylesheet" type="text/css" href="../../css/business/businessHome.css"/>
+		<script src="../../public/jquery-3.2.1.min.js"></script>
+		<script src="../../public/bootstrap/js/bootstrap.min.js"></script>
+		<script src="../../public/bootstrap/My97DatePicker/WdatePicker.js"></script>
+		<script src="../../public/echarts.js"></script>
+		<script src="../../js/business/businessHome.js"></script>
+	</head>
+	<body>
+		<div class="container-fluit">
+			<div class=" row clearfix" >
+				<div class=" col-sm-3" >
+					<div class="cargo-count statisticsDiv" >
+						<div class="title clearfix">
+							<h4 class="pull-left">货物统计</h4>
+							<a href="businessQuery/projectQuery.html" class="more pull-right" id="jump1">查看更多>></a>
+						</div>
+						<div class="titleDiv">
+							<span>项目</span>
+							<span>本月</span>
+						</div>
+						<ul class="statisticsUl">
+							<li >
+								<span >矿石</span>
+								<span >200车</span>
+							</li>
+							<li>
+								<span>煤炭</span>
+								<span>28767吨</span>
+							</li>
+							<li>
+								<span>金刚石</span>
+								<span>287组</span>
+							</li>
+							<li>
+								<span>焦炭</span>
+								<span>27657吨</span>
+							</li>
+							<li>
+								<span>海绵</span>
+								<span>27657吨</span>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-sm-4" >
+					<div class="company-count" >
+						<div class="title clearfix">
+							<h4 class="pull-left">企业统计</h4>
+							<a href="businessQuery/projectQuery.html" class="more pull-right">查看更多>></a>
+						</div>
+						<div class="titleDivs">
+							<span>企业名称</span>
+							<span>货物</span>
+							<span>本月</span>
+						</div>
+						<ul class="statisticsUls">
+							<li>
+								<span>合肥深合软件有限公司</span>
+								<span>煤炭</span>
+								<span>200吨</span>
+							</li>
+							<li>
+								<span>合肥深合软件有限公司</span>
+								<span>煤炭</span>
+								<span>200吨</span>
+							</li>
+							<li>
+								<span>合肥深合软件有限公司</span>
+								<span>煤炭</span>
+								<span>200吨</span>
+							</li>
+							<li>
+								<span>合肥深合软件有限公司</span>
+								<span>煤炭</span>
+								<span>200吨</span>
+							</li>
+							<li>
+								<span>合肥深合软件有限公司</span>
+								<span>煤炭</span>
+								<span>200吨</span>
+							</li>
+							
+						</ul>
+					</div>
+				</div>
+				<div class=" col-sm-5" >
+					<div class="train-count" >
+						<div class="title clearfix">
+							<h4 class="pull-left">火运状态统计</h4>
+							<a href="businessQuery/waybillQuery.html" class="more pull-right">查看更多>></a>
+						</div>
+						<div id="circle"></div>
+					</div>
+				</div>
+			</div>
+		    
+		    <div class="row clearfix">
+		    	<div class="col-sm-7" >
+		    		<div class="short-count" >
+			    		<div class="title clearfix">
+							<h4 class="pull-left">短驳运输统计<span>本月</span></h4>
+							<a href="businessQuery/vehicleQuery.html" class="more pull-right">查看更多>></a>
+						</div>
+			    		<hr>
+			    		<div id="line">
+			    			
+			    		</div>
+		    		</div>
+		    	</div>
+		    	<div class="col-sm-5" >
+		    		<div class="waybill-count waybillDiv ">
+			    		<div class="title clearfix">
+							<h4 class="pull-left">运单统计</h4>
+							<a href="businessQuery/waybillQuery.html" class="more pull-right">查看更多>></a>
+						</div>
+						<hr>
+						<form class="form-inline maxWidth waybilltimeDiv pull-right">
+							<div class="form-group dataTimes">
+								<label>&emsp;日期从</label>
+								<input type="text" class="Wdate" onfocus="WdatePicker({dateFmt:'yyyy-M-d'})" />
+								<i class="fa fa-calendar-check-o " id="calendar2"></i>
+							</div>
+							<div class="form-group dataTimes">
+								<label>至</label>
+								<input type="text" class="Wdate" onfocus="WdatePicker({dateFmt:'yyyy-M-d'})" />
+								<i class="fa  fa-calendar-check-o " id="calendar2"></i>
+							</div>
+						</form>
+						<div style="clear:both"></div>
+			    		<ul class="waybillUl">
+							<li>
+								<span>210组</span>
+								<span>短驳车次</span>
+							</li>
+							<li>
+								<div class="newLine"></div>
+							</li>
+							<li>
+								<span>56894吨</span>
+								<span>短驳数量</span>
+							</li>
+							<li>
+								<div class="newLine"></div>
+							</li>
+							<li>
+								<span>210组</span>
+								<span>短驳车次</span>
+							</li>
+							<li>
+								<div class="newLine"></div>
+							</li>
+							<li>
+								<span>56894吨</span>
+								<span>短驳数量</span>
+							</li>
+						</ul>
+					</div>	
+		    	</div>
+		    </div>
+		    <div class="row">
+		    	<div class="col-sm-12">
+		    		<div class="location">
+		    			<p>车辆位置</p>
+		    			<ul>
+			    			<li><i class="fa fa-circle" aria-hidden="true"></i><span>皖A12345</span><span>2017.09.09 10:00</span>  <span> 合肥蜀山区翡翠路与习友路交口</span> </li>
+			    			<li><i class="fa fa-circle" aria-hidden="true"></i><span>皖A12345</span><span>2017.09.09 10:00</span>  <span> 合肥蜀山区翡翠路与习友路交口</span> </li>
+			    			<li><i class="fa fa-circle" aria-hidden="true"></i><span>皖A12345</span><span>2017.09.09 10:00</span>  <span> 合肥蜀山区翡翠路与习友路交口</span> </li>
+			    		</ul>
+		    		</div>
+		    		
+		    	</div>
+		    </div>
+		
+		
+		
+		</div>
+	</body>
+</html>

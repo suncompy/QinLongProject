@@ -1,0 +1,29 @@
+/*新建模态框*/
+.project_info .creat_content{font-size: 14px;font-family: "Microsoft YaHei";color: rgb(51, 51, 51);line-height: 1.2;}
+.modal .modal-header{padding: 5px!important;}
+.modal h5{color:#FFAE00;margin-top: 0px !important;font-weight: normal;}
+.modal p{color:#04A9ED;margin:10px;}
+.modal hr{margin-top: 10px !important;margin-bottom: 10px !important;border-top: 1px dashed #D8D8D8 !important;}
+.modal .modal-lg{height: 700px;overflow: auto;}
+.modal-dialog label{font-weight: normal;font-size: 14px;font-family: "Microsoft YaHei";color: #666666;line-height: 1.2;}
+.modal-dialog select,.modal-dialog input[type=text]{width:140px;border: 1px solid #DDE3EF;height: 28px;margin: 5px 0; border-radius: 2px;}
+.modal-dialog .sm-tag{width: 70px;text-align: right;}
+.modal-dialog .lg-tag{width: 84px;text-align: right;}
+.modal .form-group{padding:0!important;position: relative;}
+@media screen and (min-width:300px) and (max-width:991px){
+.remarkInput{width: 400px !important;}
+.form-group{display: inline-block;}
+}
+@media (min-width: 992px){
+.remarkInput{width: 865px !important;}
+}
+.modal-content .form-group span {
+    position: absolute;
+    top: 10px;
+    right: 5px;
+    color: #C0C0C0;
+}
+/*删除原因模态框*/
+.deletReasonModal .fa-exclamation-triangle{color:#04A9ED;font-size: 35px;margin-right: 20px;}
+.deletReasonModal span{vertical-align: middle;font-size: 20px;height: 35px;display: inline-block;}
+.deletReasonModal .delete_reason{margin-left: 30px;}

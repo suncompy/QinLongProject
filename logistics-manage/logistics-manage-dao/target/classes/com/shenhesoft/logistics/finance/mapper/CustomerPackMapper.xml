@@ -1,0 +1,480 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shenhesoft.logistics.finance.mapper.CustomerPackMapper">
+
+	<!-- 新增客户对账打包信息表 -->
+	<insert id="addCustomerPack">
+		insert into tb_customer_pack(cust_pack_id,beginAddress,endAddress,cust_check_con_id,project_id,pack_type,checking_status,settle_audit_type,pack_truck_num,pack_truck_degree,invoice_status,remark,delete_flag,
+		check_audit_id,check_audit_date,create_date,create_user_id,modifiy_date,start_date,end_date,order_count,total_weight,total_piece,produce_money,tax_money
+		)values(#{custPackId},#{beginAddress},#{endAddress},#{custCheckConId},#{projectId},#{packType},#{checkingStatus},#{settleAuditType},#{packTruckNum},#{packTruckDegree},#{invoiceStatus},#{remark},#{deleteFlag},
+		#{checkAuditId},#{checkAuditDate},#{createDate},#{createUserId},#{modifiyDate},#{startDate},#{endDate},#{orderCount},#{totalWeight},#{totalPiece},#{produceMoney},#{taxMoney})
+	</insert>
+
+	<!-- 批量新增客户对账打包信息表 -->
+	<insert id="addCustomerPacks">
+		insert into tb_customer_pack(cust_pack_id,cust_check_con_id,project_id,pack_type,checking_status,settle_audit_type,pack_truck_num,pack_truck_degree,invoice_status,remark,delete_flag,create_date,create_user_id,modifiy_date,start_date,end_date,order_count,total_weight,total_piece,produce_money,tax_money
+		)values
+		<foreach collection="list" item="item" index="index" separator=",">
+            (#{custPackId},#{custCheckConId},#{projectId},#{packType},#{checkingStatus},#{settleAuditType},#{packTruckNum},#{packTruckDegree},#{invoiceStatus},#{remark},#{deleteFlag},#{createDate},#{createUserId},#{modifiyDate},#{startDate},#{endDate},#{orderCount},#{totalWeight},#{totalPiece},#{produceMoney},#{taxMoney})
+        </foreach>
+	</insert>
+
+	<!-- 修改客户对账打包信息表 -->
+	<update id="editCustomerPackById">
+		update tb_customer_pack
+		<set>
+		<if test="checkAuditId != null and checkAuditId != '' and checkAuditId != 'null' and checkAuditId != 'undefined'">
+               check_audit_id=#{checkAuditId},
+         </if>
+         <if test="checkAuditDate != null">
+               check_audit_date=#{checkAuditDate},
+         </if>
+		 <if test="custCheckConId != null and custCheckConId != '' and custCheckConId != 'null' and custCheckConId != 'undefined'">
+               cust_check_con_id=#{custCheckConId},
+         </if>
+		<if test="projectId != null">
+               project_id=#{projectId},
+         </if>
+		<if test="packType != null">
+               pack_type=#{packType},
+         </if>
+		<if test="checkingStatus != null">
+               checking_status=#{checkingStatus},
+         </if>
+		<if test="settleAuditType != null">
+               settle_audit_type=#{settleAuditType},
+         </if>
+		<if test="packTruckNum != null">
+               pack_truck_num=#{packTruckNum},
+         </if>
+		<if test="packTruckDegree != null">
+               pack_truck_degree=#{packTruckDegree},
+         </if>
+		<if test="invoiceStatus != null">
+               invoice_status=#{invoiceStatus},
+         </if>
+		 <if test="remark != null and remark != '' and remark != 'null' and remark != 'undefined'">
+               remark=#{remark},
+         </if>
+		<if test="deleteFlag != null">
+               delete_flag=#{deleteFlag},
+         </if>
+		<if test="createDate != null">
+               create_date=#{createDate},
+         </if>
+		<if test="createUserId != null">
+               create_user_id=#{createUserId},
+         </if>
+		<if test="modifiyDate != null">
+               modifiy_date=#{modifiyDate},
+         </if>
+		<if test="startDate != null">
+               start_date=#{startDate},
+         </if>
+		<if test="endDate != null">
+               end_date=#{endDate},
+         </if>
+		<if test="orderCount != null">
+               order_count=#{orderCount},
+         </if>
+		<if test="totalWeight != null">
+               total_weight=#{totalWeight},
+         </if>
+		<if test="totalPiece != null">
+               total_piece=#{totalPiece},
+         </if>
+		<if test="produceMoney != null">
+               produce_money=#{produceMoney},
+         </if>
+		<if test="taxMoney != null">
+               tax_money=#{taxMoney},
+         </if>
+    <if test="settleType != null">
+               settle_type=#{settleType},
+         </if>
+    <if test="settleMoney != null">
+               settle_money=#{settleMoney},
+         </if>
+    <if test="settledMoney != null">
+               settled_money=#{settledMoney},
+         </if>
+    <if test="besettledMoney != null">
+               besettled_money=#{besettledMoney},
+         </if>
+    <if test="settleDate != null">
+               settle_date=#{settleDate},
+         </if>
+    <if test="settleId != null">
+               settle_id=#{settleId},
+         </if>
+    <if test="auditId != null">
+               audit_id=#{auditId},
+         </if>
+    <if test="auditDate != null">
+               audit_date=#{auditDate},
+         </if>
+    <if test="isHistroy != null">
+               is_histroy=#{isHistroy},
+         </if>
+    <if test="backDate != null">
+               back_date=#{backDate},
+         </if>
+    <if test="backId != null">
+               back_id=#{backId},
+         </if>
+    <if test="customerName != null">
+               customer_name=#{customerName},
+         </if>
+    <if test="customerUnit != null">
+               customer_unit=#{customerUnit},
+         </if>
+		</set>
+		where cust_pack_id=#{custPackId}
+	</update>
+
+	<!-- 批量修改客户对账打包信息表 -->
+	<update id="editCustomerPackByIds">
+		update tb_customer_pack
+		<set>
+		 <if test="map.checkAuditFlag != null and map.checkAuditFlag=='finace'">
+		 <if test="map.checkAuditId != null and map.checkAuditId != '' and map.checkAuditId != 'null' and map.checkAuditId != 'undefined'">
+               check_audit_id=#{map.checkAuditId},
+         </if>
+         <if test="map.checkAuditDate != null">
+               check_audit_date=#{map.checkAuditDate},
+         </if>
+         </if>
+		 <if test="map.custCheckConId != null and map.custCheckConId != '' and map.custCheckConId != 'null' and map.custCheckConId != 'undefined'">
+	       cust_check_con_id=#{map.custCheckConId},
+         </if>
+		<if test="map.projectId != null">
+	       project_id=#{map.projectId},
+         </if>
+		<if test="map.packType != null">
+	       pack_type=#{map.packType},
+         </if>
+		<if test="map.checkingStatus != null">
+	       checking_status=#{map.checkingStatus},
+         </if>
+		<if test="map.settleAuditType != null">
+	       settle_audit_type=#{map.settleAuditType},
+         </if>
+		<if test="map.packTruckNum != null">
+	       pack_truck_num=#{map.packTruckNum},
+         </if>
+		<if test="map.packTruckDegree != null">
+	       pack_truck_degree=#{map.packTruckDegree},
+         </if>
+		<if test="map.invoiceStatus != null">
+	       invoice_status=#{map.invoiceStatus},
+         </if>
+		 <if test="map.remark != null and map.remark != '' and map.remark != 'null' and map.remark != 'undefined'">
+	       remark=#{map.remark},
+         </if>
+		<if test="map.deleteFlag != null">
+	       delete_flag=#{map.deleteFlag},
+         </if>
+		<if test="map.createDate != null">
+	       create_date=#{map.createDate},
+         </if>
+		<if test="map.createUserId != null">
+	       create_user_id=#{map.createUserId},
+         </if>
+		<if test="map.modifiyDate != null">
+	       modifiy_date=#{map.modifiyDate},
+         </if>
+		<if test="map.startDate != null">
+	       start_date=#{map.startDate},
+         </if>
+		<if test="map.endDate != null">
+	       end_date=#{map.endDate},
+         </if>
+		<if test="map.orderCount != null">
+	       order_count=#{map.orderCount},
+         </if>
+		<if test="map.totalWeight != null">
+	       total_weight=#{map.totalWeight},
+         </if>
+		<if test="map.totalPiece != null">
+	       total_piece=#{map.totalPiece},
+         </if>
+		<if test="map.produceMoney != null">
+	       produce_money=#{map.produceMoney},
+         </if>
+		<if test="map.taxMoney != null">
+	       tax_money=#{map.taxMoney},
+         </if>
+    <if test="map.settleType != null">
+               settle_type=#{map.settleType},
+         </if>
+    <if test="map.settleMoney != null">
+               settle_money=#{map.settleMoney},
+         </if>
+    <if test="map.besettledMoney != null">
+               besettled_money=#{map.besettledMoney},
+         </if>
+    <if test="map.settleDate != null">
+               settle_date=#{map.settleDate},
+         </if>
+    <if test="map.settleId != null">
+               settle_id=#{map.settleId},
+         </if>
+    <if test="map.auditId != null">
+               audit_id=#{map.auditId},
+         </if>
+    <if test="map.auditDate != null">
+               audit_date=#{map.auditDate},
+         </if>
+    <if test="map.isHistroy != null">
+               is_histroy=#{map.isHistroy},
+         </if>
+		</set>
+		where cust_pack_id in
+		<foreach collection="list" index="index" item="item" open="(" separator="," close=")">   
+             #{item}   
+        </foreach>
+	</update>
+
+	<!-- 查看客户对账打包信息表 -->
+	<select id="getCustomerPackById" resultType="Map">
+        select a.cust_pack_id custPackId,a.cust_check_con_id custCheckConId,a.project_id projectId,a.pack_type packType,a.checking_status checkingStatus,a.settle_audit_type settleAuditType,a.pack_truck_num packTruckNum,a.pack_truck_degree packTruckDegree,a.invoice_status invoiceStatus,a.remark remark,a.delete_flag deleteFlag,a.create_date createDate,a.create_user_id createUserId,a.modifiy_date modifiyDate,a.start_date startDate,a.end_date endDate,a.order_count orderCount,a.total_weight totalWeight,a.total_piece totalPiece,a.produce_money produceMoney,a.tax_money taxMoney,(a.produce_money+a.tax_money) totalMoney,a.settle_money settleMoney
+        from tb_customer_pack a
+        where a.cust_pack_id=#{id}
+    </select>
+    
+    <!-- 查看客户对账打包信息表 -->
+	<select id="getCustomerPackByIds" resultType="Map">
+        select a.cust_pack_id custPackId,a.cust_check_con_id custCheckConId,a.project_id projectId,a.pack_type packType,a.checking_status checkingStatus,a.settle_audit_type settleAuditType,a.pack_truck_num packTruckNum,a.pack_truck_degree packTruckDegree,a.invoice_status invoiceStatus,a.remark remark,a.delete_flag deleteFlag,a.create_date createDate,a.create_user_id createUserId,a.modifiy_date modifiyDate,a.start_date startDate,a.end_date endDate,a.order_count orderCount,a.total_weight totalWeight,a.total_piece totalPiece,a.produce_money produceMoney,a.tax_money taxMoney,(a.produce_money+a.tax_money) totalMoney,a.settle_money settleMoney
+        ,conf.tax_rate taxRate
+        from tb_customer_pack a
+        left join tb_customer_checking_conf conf on conf.cust_check_con_id=a.cust_check_con_id
+        where a.cust_pack_id in 
+        <foreach collection="list" index="index" item="item" open="(" separator="," close=")">   
+            #{item}   
+        </foreach>  
+    </select>
+
+	<!-- 删除客户对账打包信息表 -->
+	<delete id="delCustomerPackById">
+		delete from tb_customer_pack where cust_pack_id = #{id}
+	</delete>	
+
+	<!-- 批量删除客户对账打包信息表 -->
+    <delete id="delCustomerPackByIds">  
+        delete from tb_customer_pack where cust_pack_id in 
+        <foreach collection="list" index="index" item="item" open="(" separator="," close=")">   
+            #{item}   
+        </foreach>  
+    </delete>
+
+	<!-- 清空客户对账打包信息表 -->
+	<delete id="delCustomerPacks">
+		delete from tb_customer_pack
+	</delete>	
+
+	<!-- 检索客户对账打包信息表列表 
+			,case when p.transport_type in(0) then pickupPlaceCar
+			when p.transport_type in(3,5) then beginPlance
+			when p.transport_type in(2) then pickupPlaceSend
+			when p.transport_type in(6) then p.begin_address
+			else pickupPlaceRecive end beginAddress
+		,case when p.transport_type in(0) then arrivePlaceCar
+			when p.transport_type in(3) then endPlance
+			when p.transport_type in(1) then arrivePlaceRecive
+			when p.transport_type in(6) then p.end_address
+			else arrivePlaceSend end endAddress-->
+	<select id="getCustomerPacks" resultType="Map">
+		select DISTINCT a.cust_pack_id custPackId,a.cust_check_con_id custCheckConId,a.project_id projectId,a.pack_type packType,a.checking_status checkingStatus,a.settle_audit_type settleAuditType,a.pack_truck_num packTruckNum,a.pack_truck_degree packTruckDegree,a.invoice_status invoiceStatus,a.remark remark,a.delete_flag deleteFlag,DATE_FORMAT(a.create_date,'%Y-%m-%d %H:%i:%s') createDate,a.create_user_id createUserId,DATE_FORMAT(a.modifiy_date,'%Y-%m-%d %H:%i:%s') modifiyDate,DATE_FORMAT(a.start_date,'%Y-%m-%d %H:%i:%s') startDate,DATE_FORMAT(a.end_date,'%Y-%m-%d %H:%i:%s') endDate,a.order_count orderCount,a.total_weight totalWeight,a.total_piece totalPiece,a.produce_money produceMoney,a.besettled_money besettledMoney,a.settled_money settledMoney,a.settle_type settleType,a.audit_id auditId,a.audit_date auditDate,a.settle_date settleDate,a.back_id backId,a.back_date backDate,a.customer_name customerName,a.customer_unit customerUnit,
+		p.project_code projectCode,p.branch_group_id branchGroupId,p.branch_group_name branchGroupName,p.project_type projectType,p.transport_type transportType,p.cargo_id cargoId,p.cargo_name cargoName,p.cargo_specifications cargoSpecifications,p.cargo_price cargoPrice,p.valuation_unit_name valuationUnitName,p.send_cargo_company_id sendCargoCompanyId,p.send_cargo_company_name sendCargoCompanyName,p.receive_cargo_company_id receiveCargoCompanyId,p.receive_cargo_company_name receiveCargoCompanyName,p.send_cargo_unit_id sendCargoUnitId,p.send_cargo_unit_name sendCargoUnitName,p.receive_cargo_site_id receiveCargoSiteId,p.receive_cargo_site receiveCargoSite,p.short_barge_carrier_mode shortBargeCarrierMode,p.short_barge_carrier_id shortBargeCarrierId,p.short_barge_carrier_name shortBargeCarrierName,p.send_short_barge_carrier_mode sendShortBargeCarrierMode,p.begin_center_site_id beginCenterSiteId,p.begin_center_site_name beginCenterSiteName,p.begin_site_id beginSiteId,p.begin_site_name beginSiteName,p.end_center_site_id endCenterSiteId,p.end_center_site_name endCenterSiteName,p.end_site_id endSiteId,p.end_site_name endSiteName,p.freight freight,p.material_cost materialCost,p.tarpaulin_cost tarpaulinCost,p.begin_stevedoring_cost beginStevedoringCost,p.end_stevedoring_cost endStevedoringCost,p.freight_sum freightSum,p.forwarding_site_id forwardingSiteId,p.forwarding_site_name forwardingSiteName,p.forwarding_unit_id forwardingUnitId,p.forwarding_unit_name forwardingUnitName,p.take_place takePlace,p.take_place_detail takePlaceDetail,p.receiving_department_id receivingDepartmentId,p.receiving_department_name receivingDepartmentName,p.arrive_place arrivePlace,p.arrive_place_address arrivePlaceAddress,p.pick_up_price pickUpPrice,p.train_price trainPrice,p.arrive_price arrivePrice,p.transport_price transportPrice,
+		c.receive_company_id receiveCompanyId,c.total_money totalMoney,c.invoice_money invoiceMoney,conf.tax_rate taxRate,a.tax_money taxMoney,c.audit_user_id auditUserId,c.audit_date iAuditDate,c.modifiy_date updateDate,
+		cu.account_name provideShortName,cu.tax_identification_number provideDutyParagraph,cu.name provideName,
+		cr.account_name receiveShortName,cr.tax_identification_number receiveDutyParagraph
+		,CONCAT(DATE_FORMAT(a.start_date,'%Y-%m-%d'),'~',DATE_FORMAT(a.end_date,'%Y-%m-%d')) checkDate,
+		suc.name auditUserName,
+		sua.name createUserName,pk.name packer,
+		sub.name backName,
+		sud.name auditName
+		,DATE_FORMAT(a.check_audit_date,'%Y-%m-%d %H:%i:%s') checkAuditDate,chk.name checkAuditName
+		,a.beginAddress beginAddress
+		,a.endAddress endAddress
+			,p.transport_type
+		from tb_customer_pack a
+		left join tb_branch_group_link y on a.cust_pack_id=y.row_id and y.tab_name='tb_customer_pack'
+		left join tb_customer_checking_conf conf on conf.cust_check_con_id=a.cust_check_con_id
+		left join tb_project p on a.project_id = p.id
+		left join tb_customer_pack_invoice c on a.cust_pack_id = c.cust_pack_id
+		left join tb_finance_account cu on cu.id = c.provide_company_id
+		left join tb_finance_account cr on cr.id = c.receive_company_id
+		left join tb_system_user suc on suc.id = c.audit_user_id
+		left join tb_system_user sua on sua.id = c.create_user_id
+		left join tb_system_user pk on pk.id = a.create_user_id
+		left join tb_system_user sub on sub.id = a.back_id
+		left join tb_system_user sud on sud.id = a.audit_id
+		left join tb_system_user chk on chk.id = a.check_audit_id 
+		LEFT JOIN (
+select a.cust_check_con_id
+,max(a.arrivePlaceRecive) arrivePlaceRecive
+,max(a.arrivePlaceSend) arrivePlaceSend
+,max(a.arrivePlaceCar) arrivePlaceCar
+,max(a.pickupPlaceRecive) pickupPlaceRecive
+,max(a.pickupPlaceSend) pickupPlaceSend
+,max(a.pickupPlaceCar) pickupPlaceCar
+,max(beginPlance) beginPlance
+,max(endPlance) endPlance
+from(
+select c.cust_check_con_id
+,max(if(step_select_code=0,o.arrive_place,'')) arrivePlaceRecive
+,max(if(step_select_code=1,o.arrive_place,'')) arrivePlaceSend
+,max(if(step_select_code=2,o.arrive_place,'')) arrivePlaceCar
+,max(if(step_select_code=0,o.pickup_place,'')) pickupPlaceRecive
+,max(if(step_select_code=1,o.pickup_place,'')) pickupPlaceSend
+,max(if(step_select_code=2,o.pickup_place,'')) pickupPlaceCar
+,'' beginPlance
+,'' endPlance
+from tb_order o
+left join tb_project p on p.id=o.project_id
+left join tb_customer_checking_conf c on c.project_id=o.project_id and o.receipter_date is not null and STR_TO_DATE(o.receipter_date,'%Y-%m-%d') &lt;=c.end_date
+where  o.checkcust_flag=0 
+<if test="map != null">
+<if test="map.stepSelectCode != null" >
+and step_select_code=#{map.stepSelectCode}
+</if>
+</if>
+group by c.cust_check_con_id
+<if test="map != null">
+<if test="map.stepSelectCode == null or map.stepSelectCode == 3 " >
+UNION ALL
+select c1.cust_check_con_id
+,'' arrivePlaceRecive
+,'' arrivePlaceSend
+,'' arrivePlaceCar
+,'' pickupPlaceRecive
+,'' pickupPlaceSend
+,'' pickupPlaceCar
+,max(begin_place) beginPlance
+,max(end_place) endPlance
+from tb_train_order t
+left join tb_project p on p.id=t.project_id
+left join tb_customer_checking_conf c1 on c1.project_id=t.project_id
+where  t.checkcust_flag=0
+group by c1.cust_check_con_id
+</if>
+</if>
+) a
+group by a.cust_check_con_id) b
+on b.cust_check_con_id = a.cust_check_con_id
+		<where>
+		and y.sys_org_code like CONCAT(#{map.sysOrgCode},'%')
+            <if test="map != null">
+            <if test="map.branchGroupIdBulkTrainSport != null">
+			    and p.branch_group_id in 
+			 	<foreach item="item" index="index" collection="map.branchGroupIdCount" 
+	                   open="(" separator="," close=")">
+	                  #{item}
+	         	</foreach>
+	        </if>
+		<if test="map.custPackId != null and map.custPackId != '' and map.custPackId != 'null' and map.custPackId != 'undefined'">				  
+		    AND a.cust_pack_id = #{map.custPackId}
+                </if>
+		<if test="map.custCheckConId != null and map.custCheckConId != '' and map.custCheckConId != 'null' and map.custCheckConId != 'undefined'">				  
+		    AND a.cust_check_con_id = #{map.custCheckConId}
+                </if>
+		<if test="map.projectId != null">
+		    AND a.project_id = #{map.projectId}
+                </if>
+		<if test="map.packType != null">
+		    AND a.pack_type = #{map.packType}
+                </if>
+		<if test="map.checkingStatus != null">
+		    AND a.checking_status = #{map.checkingStatus}
+                </if>
+		<if test="map.settleAuditType != null">
+		    AND a.settle_audit_type = #{map.settleAuditType}
+                </if>
+		<if test="map.packTruckNum != null">
+		    AND a.pack_truck_num = #{map.packTruckNum}
+                </if>
+		<if test="map.packTruckDegree != null">
+		    AND a.pack_truck_degree = #{map.packTruckDegree}
+                </if>
+		<if test="map.invoiceStatus != null">
+		    AND a.invoice_status = #{map.invoiceStatus}
+                </if>
+		<if test="map.remark != null and map.remark != '' and map.remark != 'null' and map.remark != 'undefined'">				  
+		    AND a.remark = #{map.remark}
+                </if>
+		<if test="map.deleteFlag != null">
+		    AND a.delete_flag = #{map.deleteFlag}
+                </if>
+		<if test="map.createDate != null">
+		    AND a.create_date = #{map.createDate}
+                </if>
+		<if test="map.createUserId != null">
+		    AND a.create_user_id = #{map.createUserId}
+                </if>
+		<if test="map.modifiyDate != null">
+		    AND a.modifiy_date = #{map.modifiyDate}
+                </if>
+		<if test="map.startDate != null">
+		    AND a.start_date = #{map.startDate}
+                </if>
+		<if test="map.endDate != null">
+		    AND a.end_date = #{map.endDate}
+                </if>
+		<if test="map.orderCount != null">
+		    AND a.order_count = #{map.orderCount}
+                </if>
+		<if test="map.totalWeight != null">
+		    AND a.total_weight = #{map.totalWeight}
+                </if>
+		<if test="map.totalPiece != null">
+		    AND a.total_piece = #{map.totalPiece}
+                </if>
+		<if test="map.produceMoney != null">
+		    AND a.produce_money = #{map.produceMoney}
+                </if>
+		<if test="map.taxMoney != null">
+		    AND a.tax_money = #{map.taxMoney}
+                </if>
+    <if test="map.desettledMoney != null">
+        AND a.besettled_money = #{map.desettledMoney}
+                </if>
+    <if test="map.settledMoney != null">
+        AND a.settled_money = #{map.settledMoney}
+                </if>
+    <if test="map.settleMoney != null">
+        AND a.settle_money = #{map.settleMoney}
+                </if>
+    <if test="map.settleType != null">
+        AND a.settle_type = #{map.settleType}
+                </if>
+    <if test="map.auditId != null">
+        AND a.audit_id = #{map.auditId}
+                </if>
+    <if test="map.auditDate != null">
+        AND a.audit_date = #{map.auditDate}
+                </if>
+    <if test="map.settleDate != null">
+        AND a.settle_date = #{map.settleDate}
+                </if>
+     <if test="map.custPackIds != null">
+            and a.cust_pack_id in 
+        <foreach collection="map.custPackIds" index="index" item="item" open="(" separator="," close=")">   
+            #{item}   
+        </foreach>
+        </if>           
+            </if>
+        </where>
+        order by a.cust_pack_id desc
+	</select>
+	
+	<select id="queryAuditMoney" resultType="Map">
+		select settle_money settleMoney,settled_money settledMoney,besettled_money besettledMoney,settle_type settleType
+    from tb_customer_pack where cust_pack_id = #{custPackId}
+	</select>
+
+	<update id="updateCustomerPackInvoice">
+		
+	</update>
+	
+</mapper>

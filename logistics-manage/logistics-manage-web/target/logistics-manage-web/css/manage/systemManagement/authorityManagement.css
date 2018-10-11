@@ -1,0 +1,18 @@
+.modal .modal-body{padding: 20px 30px;}
+.modal .modal-header{padding: 5px!important;}
+.modal ul{list-style: none;padding: 0px;}
+.modal-dialog label{font-weight: normal;font-size: 14px;font-family: "Microsoft YaHei";color: #666666;line-height: 1.2;}
+.modal-dialog select,.modal-dialog input[type=text]{width:140px;border: 1px solid #DDE3EF;height: 28px;margin: 5px 0; border-radius: 2px;}
+.modal label{font-weight: normal;}
+.modal dd .demo--label{width: 35px !important;}
+.modal .form-group{margin-left: 0;margin-right: 20px;}
+dt{color: #999;}
+dd,dt{margin-left: 30px;font-weight: normal;}
+.checks{width: 50px;}
+.authority input{margin-right: 10px;}
+#addRoleModal dd div{float: left;min-width: 225px;}
+#roleDetail dd div{float: left;min-width: 225px;}
+/*删除原因模态框*/
+.deletReasonModal .fa-exclamation-triangle{color:#04A9ED;font-size: 35px;margin-right: 20px;}
+.deletReasonModal span{vertical-align: middle;font-size: 20px;height: 35px;display: inline-block;}
+.deletReasonModal .delete_reason{margin-left: 30px;}

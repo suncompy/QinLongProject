@@ -1,0 +1,43 @@
+
+.statistics{ margin:20px 0;overflow: hidden;}
+.statisticsDiv{float: left;margin-right: 20px;border: 1px solid #dde3ef;background: #FFFFFF;}
+.statisticsDiv h4{margin: 10px 20px;}
+.timeDiv{margin-left: 142px;margin-right: 20px;}
+.statisticsDiv .form-group{margin: 0 !important;}
+.statisticsDiv .form-group label{margin: 0 10px;}
+.titleDiv{height: 40px;line-height: 40px;background: #eef5fd;margin: 10px 20px 0px 20px;border: 1px solid #dde3ef;overflow: hidden;}
+.titleDiv span:nth-child(1){font-size: 18px;display: inline-block;width: 79%;padding-left: 30px;}
+.titleDiv span:nth-child(2){font-size: 18px;display: inline-block;color: #04a9ed;  width: 20%;text-align: center;}
+.statisticsUl{
+	  scrollbar-shadow-color: #999; 
+	border-left: 1px solid #dde3ef;border-right:1px solid #dde3ef;border-bottom:1px solid #dde3ef;;margin: 0 20px 20px 20px;overflow: auto;height: 182px;}
+.statisticsUl li{list-style: none;padding: 8px 0;}
+.statisticsUl li span:nth-child(1){width: 79%; display: inline-block;padding-left: 30px;}
+.statisticsUl li span:nth-child(2){width: 20%; display: inline-block;text-align: center;}
+.statisticsDiv ::-webkit-scrollbar{width:5px;}
+.statisticsDiv ::-webkit-scrollbar-track{background-color:#FFFFFF;}
+.statisticsDiv ::-webkit-scrollbar-thumb{background-color:#dde3ef;}
+.statisticsDiv ::-webkit-scrollbar-thumb:hover {background-color:#dde3ef}
+.statisticsDiv ::-webkit-scrollbar-thumb:active {background-color:#dde3ef} 
+.statisticsUl,.statisticsUls{
+	scrollbar-arrow-color: #0000;
+            /*滚动条滑块按钮的颜色*/
+            scrollbar-face-color: #dde3ef;
+            /*滚动条整体颜色*/
+            scrollbar-highlight-color: #dde3ef;
+            /*滚动条阴影*/
+            scrollbar-shadow-color: #dde3ef;
+            /*滚动条轨道颜色*/
+            scrollbar-track-color: #FFFFFF;
+}
+  
+ .titleDivs{height: 40px;line-height: 40px;background: #eef5fd;margin: 10px 20px 0px 20px;border: 1px solid #dde3ef;overflow: hidden;}
+.titleDivs span{font-size: 18px;display: inline-block;}
+.titleDivs span:nth-child(1){width: 50% !important;padding-left: 30px;}
+.titleDivs span:nth-child(2){width: 30%;}
+.titleDivs span:nth-child(3){color: #04a9ed;text-align:center;width: 18%;}
+.statisticsUls{	border-left: 1px solid #dde3ef;border-right:1px solid #dde3ef;border-bottom:1px solid #dde3ef;;margin: 0 20px 20px 20px;overflow: auto;height: 182px;}
+.statisticsUls li{list-style: none;padding: 8px 0;}
+.statisticsUls li span:nth-child(1){width: 50% !important; display: inline-block;padding-left: 30px;}
+.statisticsUls li span:nth-child(2){width: 30%; display: inline-block;}
+.statisticsUls li span:nth-child(3){width: 18%; display: inline-block;text-align: center;}

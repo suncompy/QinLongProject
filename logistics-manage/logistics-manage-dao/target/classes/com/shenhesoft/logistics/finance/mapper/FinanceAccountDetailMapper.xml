@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shenhesoft.logistics.finance.mapper.FinanceAccountDetailMapper">
+
+	<!-- 新增账户流水详情表 -->
+	<insert id="addFinanceAccountDetail" useGeneratedKeys="true" keyProperty="id">
+		insert into tb_finance_account_detail(pay_account_id,deposit_account_id,money,operate_id,pay_date,statement_num,deposit_account_type)
+ 		values(#{payAccountId},#{depositAccountId},#{money},#{operateId},#{payDate},#{statementNum},#{depositAccountType})
+	</insert>
+
+	<!-- 检索账户流水详情列表 -->
+	<select id="getFinanceAccountDetail" resultType="Map">
+	select d.name operateName,a.id,a.money,a.payDate,a.statementNum,IFNULL(a.payAccountName,'-') payAccountName,IFNULL(a.payName,'-') payName
+		,IFNULL(a.depositAccountName,'-') depositAccountName,IFNULL(a.depositName,'-') depositName from (
+			select a.id,a.money money,a.pay_date payDate,a.statement_num statementNum,a.operate_id operate_id,
+					b.accountName payAccountName,b.name payName,c.accountName depositAccountName,c.name depositName
+					from tb_finance_account_detail a 
+					left join 
+						(	select a.id id,a.account_name accountName,b.name name from tb_finance_account a
+							left join tb_branch_group b on a.choose_account_id = b.id where a.account_kind = '2'
+						union
+							select a.id id,a.account_name accountName,b.company_name name from tb_finance_account a
+							left join tb_customer b on a.choose_account_id = b.id where a.account_kind = '0'
+						union
+							select a.id id,a.account_name accountName,b.station_name name from tb_finance_account a
+							left join tb_train_station b on a.choose_account_id = b.id where a.account_kind = '1'
+						) b on a.pay_account_id = b.id 
+					left join 
+						(	select a.id id,a.account_name accountName,b.name name from tb_finance_account a
+							left join tb_branch_group b on a.choose_account_id = b.id where a.account_kind = '2'
+						union
+							select a.id id,a.account_name accountName,b.company_name name from tb_finance_account a
+							left join tb_customer b on a.choose_account_id = b.id where a.account_kind = '0'
+						union
+							select a.id id,a.account_name accountName,b.station_name name from tb_finance_account a
+							left join tb_train_station b on a.choose_account_id = b.id where a.account_kind = '1'		
+						) c on a.deposit_account_id = c.id where a.deposit_account_type is null
+			union
+			select a.id,a.money money,a.pay_date payDate,a.statement_num statementNum,a.operate_id operate_id,
+					b.accountName payAccountName,b.name payName,c.accountName depositAccountName,c.name depositName from tb_finance_account_detail a 
+					left join 
+						(	select a.id id,a.account_name accountName,b.name name from tb_finance_account a
+							left join tb_branch_group b on a.choose_account_id = b.id where a.account_kind = '2'
+						union
+							select a.id id,a.account_name accountName,b.company_name name from tb_finance_account a
+							left join tb_customer b on a.choose_account_id = b.id where a.account_kind = '0'
+						union
+							select a.id id,a.account_name accountName,b.station_name name from tb_finance_account a
+							left join tb_train_station b on a.choose_account_id = b.id where a.account_kind = '1'
+						) b on a.pay_account_id = b.id 
+					left join 
+						(select id id,name name,bank_card_number accountName from tb_user_information) c 
+					on a.deposit_account_id = c.id where a.deposit_account_type = 3	
+			) a   
+left join tb_system_user d on a.operate_id = d.id
+left join tb_branch_group_link y on a.id=y.row_id and y.tab_name='tb_finance_account_detail'
+where y.sys_org_code like CONCAT(#{map.sysOrgCode},'%')
+	<if test="map != null">
+		  <if test="map.beginDate != null and map.beginDate !='' and map.beginDate != 'null' and map.beginDate != 'undefined' " >
+		       and date_format(a.payDate, '%Y-%m-%d') &gt;= date_format(#{map.beginDate}, '%Y-%m-%d')
+		    </if>
+		    <if test="map.endDate != null and map.endDate !='' and map.endDate != 'null' and map.endDate != 'undefined' " >
+		       and date_format(a.payDate, '%Y-%m-%d') &lt;= date_format(#{map.endDate}, '%Y-%m-%d')
+		    </if>
+	</if>    
+	</select>
+
+</mapper>

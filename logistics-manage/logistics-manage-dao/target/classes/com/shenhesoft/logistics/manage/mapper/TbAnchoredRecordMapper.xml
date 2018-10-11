@@ -1,0 +1,637 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shenhesoft.logistics.manage.mapper.TbAnchoredRecordMapper">
+
+
+
+<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value}
+									and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	
+	<select id="selectAnchoredCarTeams" parameterType="java.lang.Integer"
+		resultType="com.shenhesoft.logistics.manage.helpPojo.CarTeamDetail">
+		select
+		A.id recordId,
+		A.user_name name,
+		A.`status` `status`,
+		B.type type,
+		C.name changerName,
+		C.phone phone,
+		A.anchored_reason reason,
+		A.anchored_date anchoredDate
+
+		from tb_anchore_record as A,tb_login_user
+		as B,tb_car_team as C
+
+		where A.anchored_id = #{id,jdbcType =INTEGER}
+		and
+		A.user_id = B.id
+		and B.car_team_id = C.id
+		and B.type = 1 and
+		A.delete_flag != 1
+		and status != 2
+		and
+		A.type = 3
+	</select>
+
+
+	<select id="selectAnchoredDrivers" parameterType="java.lang.Integer"
+		resultType="com.shenhesoft.logistics.manage.helpPojo.CarTeamDetail">
+		select
+		A.id recordId,
+		A.user_name name,
+		A.`status` `status`,
+		B.type type,
+		C.name
+		changerName,
+		C.phone phone,
+		A.anchored_reason reason,
+		A.anchored_date
+		anchoredDate
+
+		from tb_anchore_record as A,tb_login_user as
+		B,tb_user_information as C
+
+		where A.anchored_id = #{id,jdbcType
+		=INTEGER}
+		and A.user_id = B.id
+		and B.information_id = C.id
+		and B.type = 0
+		and A.delete_flag != 1
+		and status != 2
+		and A.type = 2
+	</select>
+
+
+
+
+	<select id="selectRecordById" parameterType="java.lang.Integer"
+		resultType="com.shenhesoft.logistics.manage.pojo.anchord.TbAnchoreRecord">
+
+		select
+		id, anchored_id anchoredId,type,
+		anchored_name anchoredName,
+		anchored_phone anchoredPhone, anchored_date anchoredDate, user_id userId,
+		user_name userName,
+		status, anchored_reason anchoredReason
+		from
+		tb_anchore_record
+		where id = #{id,jdbcType =INTEGER}
+	</select>
+
+
+	<insert id="insertSelective"
+		parameterType="com.shenhesoft.logistics.manage.pojo.anchord.TbAnchoreRecord">
+		<selectKey keyProperty="id" resultType="int">  
+            select LAST_INSERT_ID()
+        </selectKey> 
+		insert into tb_anchore_record
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="anchoredId != null">
+				anchored_id,
+			</if>
+			<if test="anchoredName != null">
+				anchored_name,
+			</if>
+			<if test="anchoredPhone != null">
+				anchored_phone,
+			</if>
+			anchored_date,
+			<if test="userId != null">
+				user_id,
+			</if>
+			<if test="userName != null">
+				user_name,
+			</if>
+			<if test="status != null">
+				status,
+			</if>
+			<if test="anchoredReason != null">
+				anchored_reason,
+			</if>
+			<if test="type != null">
+				type,
+			</if>
+			<if test="operator != null">
+				operator,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="anchoredId != null">
+				#{anchoredId,jdbcType=INTEGER},
+			</if>
+			<if test="anchoredName != null">
+				#{anchoredName,jdbcType=VARCHAR},
+			</if>
+			<if test="anchoredPhone != null">
+				#{anchoredPhone,jdbcType=VARCHAR},
+			</if>
+			now(),
+			<if test="userId != null">
+				#{userId,jdbcType=INTEGER},
+			</if>
+			<if test="userName != null">
+				#{userName,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=TINYINT},
+			</if>
+			<if test="anchoredReason != null">
+				#{anchoredReason,jdbcType=VARCHAR},
+			</if>
+			<if test="type != null">
+				#{type,jdbcType=TINYINT},
+			</if>
+			<if test="operator != null">
+				#{operator,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+
+	<update id="updateAnchordRelate" parameterType="java.util.Map">
+
+		delete from tb_user_anchored_company
+		where user_id = #{userId,jdbcType=INTEGER}
+		and anchored_company_id =
+		#{anchoredId,jdbcType=INTEGER}
+
+	</update>
+
+	<update id="updateAnchordRelateStop" parameterType="java.util.Map">
+		update
+		tb_user_anchored_company
+		set is_stop = 1
+		where
+		user_id = #{userId,jdbcType=INTEGER}
+		and
+		anchored_company_id = #{anchoredId,jdbcType=INTEGER}
+	</update>
+
+	<update id="updateAnchordRelateStart" parameterType="java.util.Map">
+		update
+		tb_user_anchored_company
+		set is_stop = 0
+		where
+		user_id = #{userId,jdbcType=INTEGER}
+		and
+		anchored_company_id = #{anchoredId,jdbcType=INTEGER}
+	</update>
+
+	<select id="selectRejectCarTeamRecord" parameterType="java.lang.Integer"
+		resultType="com.shenhesoft.logistics.manage.helpPojo.CarTeamDetail">
+
+		select
+		B.id userId,
+		A.id recordId,
+		A.anchored_id anchoredId,
+		A.user_id userId,
+		A.anchored_name name,
+		A.user_name userName,
+		A.`status` `status`,
+		B.type type,
+		C.name changerName,
+		C.phone phone,
+		A.anchored_reason reason,
+		A.anchored_date anchoredDate
+
+		from tb_anchore_record as A,tb_login_user as B,tb_car_team as C
+
+		where A.anchored_id = #{id,jdbcType =INTEGER}
+		and A.user_id = B.id
+		and B.car_team_id = C.id
+		and B.type = 3
+		and status = 2
+	</select>
+
+
+	<select id="selectRejectDriverRecord" parameterType="java.lang.Integer"
+		resultType="com.shenhesoft.logistics.manage.helpPojo.CarTeamDetail">
+
+		select
+		B.id userId,
+		A.id recordId,
+		A.anchored_id anchoredId,
+		A.anchored_name name,
+		A.user_name userName,
+		A.`status` `status`,
+		B.type type,
+		C.name
+		changerName,
+		C.phone phone,
+		A.anchored_reason reason,
+		A.anchored_date
+		anchoredDate,
+		( select name from tb_system_user where id = A.operator) as operateName
+
+		from tb_anchore_record as A,tb_login_user as B,tb_user_information as
+		C
+
+		where A.anchored_id = #{id,jdbcType =INTEGER}
+		and A.user_id = B.id
+		and B.information_id = C.id
+		and B.type = 0
+		and status = 2
+
+	</select>
+
+	<select id="selectApplyRecordByMap" parameterType="java.lang.Integer"
+		resultType="java.lang.String">
+		select
+		DATE_FORMAT(anchored_date,   '%Y-%m-%d %H:%i') anchoredDate
+		from
+		tb_anchore_record
+		where anchored_id = #{anchoredId,jdbcType =INTEGER}
+		and status = #{status,jdbcType =INTEGER}
+		and user_id = #{userId,jdbcType =INTEGER}
+		order by anchored_date desc
+		limit 1
+	</select>
+
+
+	<insert id="insertAnchoredRelate" parameterType="java.util.Map">
+		insert into
+		tb_user_anchored_company(user_id,anchored_company_id,anchored_date,type,is_stop)
+		values(#{userId,jdbcType =INTEGER}, #{anchoredCompanyId,jdbcType
+		=INTEGER},
+		now(),#{type,jdbcType =TINYINT}, 0
+		)
+	</insert>
+
+	<update id="updateRecordDelete" parameterType="java.lang.Integer">
+		update tb_anchore_record set delete_flag = 1
+		where id = #{id,jdbcType =INTEGER}
+	</update>
+
+
+
+	<insert id="insertNewNotice"
+		parameterType="com.shenhesoft.logistics.manage.pojo.notice.TbNotice">
+		insert into tb_notice(user_id,content,create_date)
+		values(#{userId,jdbcType =INTEGER}, #{content,jdbcType =INTEGER},
+		now()
+		)
+	</insert>
+
+
+		<delete id="deleteBatch" parameterType="java.util.List">
+			
+			delete from tb_anchore_record where id 
+			in 
+			<foreach collection="list" item="id" open="(" close=")" separator=",">
+				#{id,jdbcType =INTEGER}
+			</foreach>
+		
+		</delete>
+
+	 <select id="selectAnchoredCarTeamsExample" parameterType="com.shenhesoft.logistics.manage.search.VehicleSearch"
+		resultType="com.shenhesoft.logistics.manage.helpPojo.CarTeamDetail">
+		select null recordId,tmp.uid userId,info.plate_number name,ct.car_item_name type,tmp.isStop status,info.driver_name `changerName`,info.driver_phone phone,tmp.anchoredDate anchoredDate from (
+		select u1.id uid,u1.information_id informationId,c.anchoredDate,c.carTeamId,c.isStop from tb_login_user u1 ,
+		(select lu.car_team_id carTeamId,uac.type type,uac.anchored_date anchoredDate,uac.is_stop isStop from tb_user_anchored_company as uac LEFT JOIN tb_login_user lu ON uac.user_id = lu.id
+		where uac.type = 1
+		<if test="companyId != null and companyId !='' " >
+	        and uac.anchored_company_id = #{companyId,jdbcType=INTEGER}
+	    </if>
+	    ) c
+		 where u1.car_team_id = c.carTeamId AND u1.type = 0 
+		 ) tmp 
+		LEFT JOIN tb_user_information info ON tmp.informationId = info.id 
+		<!-- LEFT JOIN tb_anchore_record ar ON ar.user_id = tmp.uid  -->
+		LEFT JOIN tb_car_team ct ON tmp.carTeamId=ct.id
+		 <if test="userName != null  and userName !='' " >
+	       and ct.car_item_name like '%${userName}%'
+	    </if>
+	     <if test="phone != null  and phone !='' " >
+	       and ct.phone like '%${phone}%'
+	    </if>
+	     <if test="userType != null " >
+	       and tmp.type = #{userType,jdbcType=TINYINT}
+	    </if>
+	    <if test="beginDate != null and beginDate !='' " >
+	       and date_format(tmp.anchored_date, '%Y-%m-%d') >= date_format(#{beginDate,jdbcType=TIMESTAMP}, '%Y-%m-%d')
+	    </if>
+	    <if test="endDate != null and endDate !='' " >
+	       and date_format(tmp.anchored_date, '%Y-%m-%d') &lt;= date_format(#{endDate,jdbcType=TIMESTAMP}, '%Y-%m-%d')
+	    </if>
+		UNION ALL
+		select ar.id recordId,tmp.uid userId,info.plate_number name,"个人" type,tmp.isStop status,info.driver_name `changerName`,info.driver_phone phone,tmp.anchoredDate anchoredDate from (
+		select uac.user_id uid ,lu.information_id informationId,uac.type type,uac.anchored_date anchoredDate,uac.is_stop isStop from tb_user_anchored_company as uac LEFT JOIN tb_login_user lu ON uac.user_id = lu.id
+		where uac.type = 0
+		<if test="companyId != null and companyId !='' " >
+	        and uac.anchored_company_id = #{companyId,jdbcType=INTEGER}
+	    </if>
+		 ) tmp LEFT JOIN tb_user_information info ON tmp.informationId = info.id
+		 LEFT JOIN tb_anchore_record ar ON ar.user_id = tmp.uid where ar.`status`=1 AND ar.type=2 AND ar.delete_flag = 0
+		 and tmp.type = 0
+		  <if test="userName != null  and userName !='' " >
+	       and info.plate_number like '%${userName}%'
+	    </if>
+	     <if test="phone != null  and phone !='' " >
+	       and info.driver_phone like '%${phone}%'
+	    </if>
+	     <if test="userType != null " >
+	       and tmp.type = #{userType,jdbcType=TINYINT}
+	    </if>
+	    <if test="companyId != null and companyId !=''  " >
+	       AND ar.anchored_id = #{companyId,jdbcType=INTEGER}
+	    </if>
+	     
+	    <if test="beginDate != null and beginDate !='' " >
+	       and date_format(tmp.anchored_date, '%Y-%m-%d') >= date_format(#{beginDate,jdbcType=TIMESTAMP}, '%Y-%m-%d')
+	    </if>
+	    <if test="endDate != null and endDate !='' " >
+	       and date_format(tmp.anchored_date, '%Y-%m-%d') &lt;= date_format(#{endDate,jdbcType=TIMESTAMP}, '%Y-%m-%d')
+	    </if>
+	</select> 
+	
+	<!-- <select id="selectAnchoredCarTeamsExample" parameterType="com.shenhesoft.logistics.manage.search.VehicleSearch"
+		resultType="com.shenhesoft.logistics.manage.helpPojo.CarTeamDetail">
+		select ar.id recordId,tmp.uid userId,ct.car_item_name name,tmp.type type,tmp.isStop status,ct.`name` `changerName`,ct.phone phone,tmp.anchoredDate anchoredDate from (
+		select uac.user_id uid ,lu.car_team_id carTeamId,uac.type type,uac.anchored_date anchoredDate,uac.is_stop isStop from tb_user_anchored_company as uac LEFT JOIN tb_login_user lu ON uac.user_id = lu.id
+		where uac.type = 1 
+		<if test="companyId != null and companyId !='' " >
+	        and uac.anchored_company_id = #{companyId,jdbcType=INTEGER}
+	    </if>
+		 ) tmp LEFT JOIN tb_car_team ct ON tmp.carTeamId = ct.id
+		 LEFT JOIN tb_anchore_record ar ON ar.user_id = tmp.uid where ar.`status`=1 AND ar.type=3 AND ar.delete_flag = 0
+		 and tmp.type = 1
+		 <if test="userName != null  and userName !='' " >
+	       and ct.car_item_name like '%${userName}%'
+	    </if>
+	     <if test="phone != null  and phone !='' " >
+	       and ct.phone like '%${phone}%'
+	    </if>
+	     <if test="userType != null " >
+	       and tmp.type = #{userType,jdbcType=TINYINT}
+	    </if>
+	    <if test="beginDate != null and beginDate !='' " >
+	       and date_format(tmp.anchored_date, '%Y-%m-%d') >= date_format(#{beginDate,jdbcType=TIMESTAMP}, '%Y-%m-%d')
+	    </if>
+	    <if test="endDate != null and endDate !='' " >
+	       and date_format(tmp.anchored_date, '%Y-%m-%d') &lt;= date_format(#{endDate,jdbcType=TIMESTAMP}, '%Y-%m-%d')
+	    </if>
+		UNION ALL
+		select ar.id recordId,tmp.uid userId,info.plate_number name,tmp.type type,tmp.isStop status,info.driver_name `changerName`,info.driver_phone phone,tmp.anchoredDate anchoredDate from (
+		select uac.user_id uid ,lu.information_id informationId,uac.type type,uac.anchored_date anchoredDate,uac.is_stop isStop from tb_user_anchored_company as uac LEFT JOIN tb_login_user lu ON uac.user_id = lu.id
+		where uac.type = 0
+		<if test="companyId != null and companyId !='' " >
+	        and uac.anchored_company_id = #{companyId,jdbcType=INTEGER}
+	    </if>
+		 ) tmp LEFT JOIN tb_user_information info ON tmp.informationId = info.id
+		 LEFT JOIN tb_anchore_record ar ON ar.user_id = tmp.uid where ar.`status`=1 AND ar.type=2 AND ar.delete_flag = 0
+		 and tmp.type = 0
+		  <if test="userName != null  and userName !='' " >
+	       and info.plate_number like '%${userName}%'
+	    </if>
+	     <if test="phone != null  and phone !='' " >
+	       and info.driver_phone like '%${phone}%'
+	    </if>
+	     <if test="userType != null " >
+	       and tmp.type = #{userType,jdbcType=TINYINT}
+	    </if>
+	    <if test="beginDate != null and beginDate !='' " >
+	       and date_format(tmp.anchored_date, '%Y-%m-%d') >= date_format(#{beginDate,jdbcType=TIMESTAMP}, '%Y-%m-%d')
+	    </if>
+	    <if test="endDate != null and endDate !='' " >
+	       and date_format(tmp.anchored_date, '%Y-%m-%d') &lt;= date_format(#{endDate,jdbcType=TIMESTAMP}, '%Y-%m-%d')
+	    </if>
+	</select> -->
+	
+		 
+	<select id="selectAnchoredDriversByExample" parameterType="com.shenhesoft.logistics.manage.search.VehicleSearch"
+		resultType="com.shenhesoft.logistics.manage.helpPojo.CarTeamDetail">
+		select
+			A.id recordId,
+			A.user_name name,
+			A.`status` `status`,
+			B.type type,
+			C.name changerName,
+			C.phone phone,
+			A.anchored_reason reason,
+			A.anchored_date anchoredDate
+	
+			from tb_anchore_record as A,tb_login_user
+			as B,tb_car_team as C
+			where A.user_id = B.id
+			and B.car_team_id = C.id
+			and  A.delete_flag = 0
+			and A.status = 3
+			and A.type = 3 
+			<if test="companyId != null and companyId !='' " >
+		        and A.anchored_id = #{companyId,jdbcType=INTEGER}
+		    </if>
+		    <if test="userName != null  and userName !='' " >
+		       and A.user_name like '%${userName}%'
+		    </if>
+		     <if test="phone != null  and phone !='' " >
+		       and C.phone like '%${phone}%'
+		    </if>
+		     <if test="userType != null  " >
+		       and B.type = #{userType,jdbcType=TINYINT}
+		    </if>
+		   <if test="beginDate != null and beginDate !='' " >
+		       and date_format(A.anchored_date, '%Y-%m-%d') >= date_format(#{beginDate,jdbcType=TIMESTAMP}, '%Y-%m-%d')
+		    </if>
+		    <if test="endDate != null and endDate !='' " >
+		       and date_format(A.anchored_date, '%Y-%m-%d') &lt;= date_format(#{endDate,jdbcType=TIMESTAMP}, '%Y-%m-%d')
+		    </if>
+		union ALL
+			select
+			A.id recordId,
+			A.user_name name,
+			A.`status` `status`,
+			B.type type,
+			C.name
+			changerName,
+			C.phone phone,
+			A.anchored_reason reason,
+			A.anchored_date anchoredDate
+	
+			from tb_anchore_record as A,tb_login_user as
+			B,tb_user_information as C
+			where A.user_id = B.id
+			and B.information_id = C.id
+			and A.delete_flag = 0
+			and A.status = 3
+			and A.type = 2
+			<if test="companyId != null and companyId !='' " >
+		        and A.anchored_id = #{companyId,jdbcType=INTEGER}
+		    </if>
+		    <if test="userName != null  and userName !='' " >
+		       and A.user_name like '%${userName}%'
+		    </if>
+		     <if test="phone != null  and phone !='' " >
+		       and C.phone like '%${phone}%'
+		    </if>
+		    <if test="userType != null  " >
+		       and B.type = #{userType,jdbcType=TINYINT}
+		    </if>
+		    <if test="beginDate != null and beginDate !='' " >
+		       and date_format(A.anchored_date, '%Y-%m-%d') >= date_format(#{beginDate,jdbcType=TIMESTAMP}, '%Y-%m-%d')
+		    </if>
+		    <if test="endDate != null and endDate !='' " >
+		       and date_format(A.anchored_date, '%Y-%m-%d') &lt;= date_format(#{endDate,jdbcType=TIMESTAMP}, '%Y-%m-%d')
+		    </if>
+	</select>
+	
+	<select id="selectRejectCarTeamRecordByExample" parameterType="com.shenhesoft.logistics.manage.search.VehicleSearch"
+		resultType="com.shenhesoft.logistics.manage.helpPojo.CarTeamDetail">
+		select
+			B.id userId,
+			A.id recordId,
+			A.anchored_id anchoredId,
+			A.anchored_name name,
+			A.user_name userName,
+			A.`status` `status`,
+			B.type type,
+			C.name changerName,
+			C.phone phone,
+			A.anchored_reason reason,
+			A.anchored_date anchoredDate,
+			( select name from tb_system_user where id = A.operator) as operateName
+			
+			from tb_anchore_record as A,tb_login_user as B,tb_car_team as C
+	
+			where A.user_id = B.id
+			and B.car_team_id = C.id
+			and A.status = 2
+			<if test="companyId != null and companyId !='' " >
+		        and A.anchored_id = #{companyId,jdbcType=INTEGER}
+		    </if>
+		    <if test="userName != null  and userName !='' " >
+		       and A.user_name like '%${userName}%'
+		    </if>
+		     <if test="phone != null  and phone !='' " >
+		       and C.phone like '%${phone}%'
+		    </if>
+		     <if test="userType != null  " >
+		       and B.type = #{userType,jdbcType=TINYINT}
+		    </if>
+		   <if test="beginDate != null and beginDate !='' " >
+		       and date_format(A.anchored_date, '%Y-%m-%d') >= date_format(#{beginDate,jdbcType=TIMESTAMP}, '%Y-%m-%d')
+		    </if>
+		    <if test="endDate != null and endDate !='' " >
+		       and date_format(A.anchored_date, '%Y-%m-%d') &lt;= date_format(#{endDate,jdbcType=TIMESTAMP}, '%Y-%m-%d')
+		    </if>
+		union ALL
+		select
+			B.id userId,
+			A.id recordId,
+			A.anchored_id anchoredId,
+			A.anchored_name name,
+			A.user_name userName,
+			A.`status` `status`,
+			B.type type,
+			C.name
+			changerName,
+			C.phone phone,
+			A.anchored_reason reason,
+			A.anchored_date
+			anchoredDate,
+			( select name from tb_system_user where id = A.operator) as operateName
+	
+			from tb_anchore_record as A,tb_login_user as B,tb_user_information as
+			C
+	
+			where A.user_id = B.id
+			and B.information_id = C.id
+			and A.status = 2
+			<if test="companyId != null and companyId !='' " >
+		        and A.anchored_id = #{companyId,jdbcType=INTEGER}
+		    </if>
+		    <if test="userName != null  and userName !='' " >
+		       and A.user_name like '%${userName}%'
+		    </if>
+		     <if test="phone != null  and phone !='' " >
+		       and C.phone like '%${phone}%'
+		    </if>
+		    <if test="userType != null  " >
+		       and B.type = #{userType,jdbcType=TINYINT}
+		    </if>
+		    <if test="beginDate != null and beginDate !='' " >
+		       and date_format(A.anchored_date, '%Y-%m-%d') >= date_format(#{beginDate,jdbcType=TIMESTAMP}, '%Y-%m-%d')
+		    </if>
+		    <if test="endDate != null and endDate !='' " >
+		       and date_format(A.anchored_date, '%Y-%m-%d') &lt;= date_format(#{endDate,jdbcType=TIMESTAMP}, '%Y-%m-%d')
+		    </if>
+	</select>
+	
+	
+	
+	<select id="selectRejectDriverRecordByExample" parameterType="com.shenhesoft.logistics.manage.pojo.anchord.TbCarTeamExample"
+		resultType="com.shenhesoft.logistics.manage.helpPojo.CarTeamDetail">
+		select
+		B.id userId,
+		A.id recordId,
+		A.anchored_id anchoredId,
+		A.anchored_name name,
+		A.user_name userName,
+		A.`status` `status`,
+		B.type type,
+		C.name
+		changerName,
+		C.phone phone,
+		A.anchored_reason reason,
+		A.anchored_date
+		anchoredDate,
+		( select name from tb_system_user where id = A.operator) as operateName
+
+		from tb_anchore_record as A,tb_login_user as B,tb_user_information as
+		C
+
+		<if test="_parameter != null" >
+	      <include refid="Example_Where_Clause" />
+	    </if>
+		and A.user_id = B.id
+		and B.information_id = C.id
+		and B.type = 0
+		and status = 2
+		<if test="orderByClause != null" >
+	      order by ${orderByClause}
+	    </if>
+	</select>
+	
+	<insert id="insertNoticeByApp"
+		parameterType="map">
+		insert into tb_notice(user_id,content,create_date)
+		values(#{driverId,jdbcType =INTEGER}, #{content,jdbcType = VARCHAR},
+		now()
+		)
+	</insert>
+	
+</mapper>

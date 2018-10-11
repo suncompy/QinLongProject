@@ -1,0 +1,38 @@
+.modal .modal-body{padding: 20px 30px;}
+.modal .modal-header{padding: 5px!important;}
+.modal-dialog label{font-weight: normal;font-size: 14px;font-family: "Microsoft YaHei";color: #666666;line-height: 1.2;}
+.modal-dialog select,.modal-dialog input[type=text]{width:137px;border: 1px solid #DDE3EF;height: 28px;margin: 5px 0; border-radius: 2px;}
+textarea{border: 1px solid #DDE3EF;}
+.modal .form-group{margin-left: 0;margin-right: 20px;}
+.modal form{margin-bottom: 10px;}
+.modal .form-inline{position: relative;}
+.remarkInput{width: 86% !important;}
+/*.modal_btn{margin-top: 10px;margin-bottom: 0;}*/
+b{color:#4040FF}
+p{padding-left: 75px;}
+.v-top{vertical-align: top;}
+.checks{width: 50px;}
+.right-label{float: left;width: 72px;height: 105px;}
+.field{color: #999;;}
+.relationClass{overflow: hidden;}
+.relationClass label{float: left;height: 30px;line-height: 40px;}
+.relationClass ul{list-style: none;margin:0}
+#relationUl{float: left;padding-left: 0 !important;}
+.addImg{cursor: pointer;margin:0 10px;}
+.reduceImg{cursor: pointer;}
+/*删除原因模态框*/
+.deletReasonModal .fa-exclamation-triangle{color:#04A9ED;font-size: 35px;margin-right: 20px;}
+.deletReasonModal span{vertical-align: middle;font-size: 20px;height: 35px;display: inline-block;}
+.deletReasonModal .delete_reason{margin-left: 30px;}
+/*开始*/
+.startModal .fa-question-circle{color:#04A9ED;font-size: 45px;margin-right: 20px;}
+.startModal span{vertical-align: middle;font-size: 20px;height: 50px;display: inline-block;}
+.startModal .modal-body .body-content {text-align: center;padding-top: 20px;}
+.startModal b{color: red;}
+/*暂停*/
+.pauseModal .fa-question-circle{color:#04A9ED;font-size: 45px;margin-right: 20px;}
+.pauseModal span{vertical-align: middle;font-size: 20px;height: 50px;display: inline-block;}
+.pauseModal .modal-body .body-content {text-align: center;padding-top: 20px;}
+.pauseModal b{color: red;}
+/*导出*/
+.exportModal b{color: red;}

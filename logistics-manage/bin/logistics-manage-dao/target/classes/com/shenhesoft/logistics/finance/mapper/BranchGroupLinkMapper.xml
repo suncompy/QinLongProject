@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shenhesoft.logistics.finance.mapper.BranchGroupLinkMapper">
+
+	<!-- 新增短驳打包信息表 -->
+	<insert id="addBranchGroupLink">
+		insert into tb_branch_group_link(id,row_id,tab_name,tab_comment,sys_org_code
+		)values(#{id},#{rowId},#{tabName},#{tabComment},#{sysOrgCode})
+	</insert>
+
+	<!-- 检索短驳打包信息表列表 -->
+	<select id="getBranchGroupLinks" resultType="Map">
+		select a.id,a.row_id rowId,a.tab_name tabName,a.tab_comment tabComment,sys_org_code sysOrgCode
+		from tb_branch_group_link a
+        <if test="map != null">
+			<if test="map.tabName != null and map.tabName != '' and map.tabName != 'null' and map.tabName != 'undefined'">				  
+			    AND a.tab_name = #{map.tabName}
+	        </if>
+			<if test="map.rowId != null and map.rowId != '' and map.rowId != 'null' and map.rowId != 'undefined'">
+			    AND a.row_id = #{map.rowId}
+	        </if>
+		</if>
+        order by a.id desc
+	</select>
+	
+	<!-- 检索短驳打包信息表列表 -->
+	<select id="getSysOrgCode" resultType="Map">
+		select sys_org_code sysOrgCode from tb_branch_group where id in(select branch_group_id from tb_system_user where id=#{id})
+	</select>
+	
+	<select id="getSysOrgCodeByBranchId" resultType="Map">
+		select sys_org_code sysOrgCode from tb_branch_group where id=#{id}
+	</select>
+	
+</mapper>

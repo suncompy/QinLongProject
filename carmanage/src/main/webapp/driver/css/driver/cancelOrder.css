@@ -1,0 +1,8 @@
+body{background-color: #F8F8F8;margin: 0 30px;}
+h4{font-size: 16px;font-family: "Microsoft YaHei";color: rgb(51, 51, 51);font-weight: bold;margin: 0px}
+label{margin:0;font-size: 14px;font-family: "Microsoft YaHei";font-weight: normal;vertical-align: top;}
+ul{list-style-type: none;padding: 0;}
+ul li{float: left;width: 33%;padding:10px 0 10px 50px;}
+hr{margin-top: 20px;margin-bottom: 20px;border: 0;border-top: 1px solid #ccc;}
+.completeOrder{background-color: #fff;padding:20px;box-shadow: 2px 2px 5px #ccc;border-radius: 3px;margin: 20px 0;}
+.read-more{color: #666;}

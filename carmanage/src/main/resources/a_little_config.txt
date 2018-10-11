@@ -1,0 +1,4 @@
+jdbcUrl = jdbc:mysql://47.92.31.25/logistics?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull
+user = root
+password =root
+devMode = true

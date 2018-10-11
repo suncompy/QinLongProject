@@ -1,0 +1,692 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shenhesoft.logistics.manage.mapper.TbTrainStationMapper" >
+  <resultMap id="BaseResultMap" type="com.shenhesoft.logistics.manage.pojo.trainStation.TbTrainStation" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="station_name" property="stationName" jdbcType="VARCHAR" />
+    <result column="station_level" property="stationLevel" jdbcType="TINYINT" />
+    <result column="parent_id" property="parentId" jdbcType="INTEGER" />
+    <result column="responsibler" property="responsibler" jdbcType="VARCHAR" />
+    <result column="adress_code" property="adressCode" jdbcType="VARCHAR" />
+    <result column="detail_address" property="detailAddress" jdbcType="VARCHAR" />
+    <result column="station_contacts" property="stationContacts" jdbcType="VARCHAR" />
+    <result column="department" property="department" jdbcType="VARCHAR" />
+    <result column="station_phone" property="stationPhone" jdbcType="VARCHAR" />
+    <result column="station_fax" property="stationFax" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="bank_account" property="bankAccount" jdbcType="VARCHAR" />
+    <result column="account_name" property="accountName" jdbcType="VARCHAR" />
+    <result column="open_bank" property="openBank" jdbcType="VARCHAR" />
+    <result column="open_bank_num" property="openBankNum" jdbcType="VARCHAR" />
+    <result column="duty_paragraph" property="dutyParagraph" jdbcType="VARCHAR" />
+    <result column="bank_last_amount" property="bankLastAmount" jdbcType="DECIMAL" />
+    <result column="delete_flag" property="deleteFlag" jdbcType="TINYINT" />
+    <result column="relation_place" property="relationPlace" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id,station_name, station_level, parent_id, responsibler, adress_code, detail_address, 
+    station_contacts, department, station_phone, station_fax, email, bank_account, account_name, 
+    open_bank, open_bank_num, duty_paragraph, bank_last_amount, delete_flag, relation_place
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shenhesoft.logistics.manage.pojo.trainStation.TbTrainStationExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_train_station
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_train_station
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_train_station
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.shenhesoft.logistics.manage.pojo.trainStation.TbTrainStationExample" >
+    delete from tb_train_station
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.shenhesoft.logistics.manage.pojo.trainStation.TbTrainStation" >
+    insert into tb_train_station (id, station_name, station_level, 
+      parent_id, responsibler, adress_code, 
+      detail_address, station_contacts, department, 
+      station_phone, station_fax, email, 
+      bank_account, account_name, open_bank, 
+      open_bank_num, duty_paragraph, bank_last_amount, 
+      delete_flag,relation_place)
+    values (#{id,jdbcType=INTEGER}, #{stationName,jdbcType=VARCHAR}, #{stationLevel,jdbcType=TINYINT}, 
+      #{parentId,jdbcType=INTEGER}, #{responsibler,jdbcType=VARCHAR}, #{adressCode,jdbcType=VARCHAR}, 
+      #{detailAddress,jdbcType=VARCHAR}, #{stationContacts,jdbcType=VARCHAR}, #{department,jdbcType=VARCHAR}, 
+      #{stationPhone,jdbcType=VARCHAR}, #{stationFax,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{bankAccount,jdbcType=VARCHAR}, #{accountName,jdbcType=VARCHAR}, #{openBank,jdbcType=VARCHAR}, 
+      #{openBankNum,jdbcType=VARCHAR}, #{dutyParagraph,jdbcType=VARCHAR}, #{bankLastAmount,jdbcType=DECIMAL}, 
+      #{deleteFlag,jdbcType=TINYINT}, #{relationPlace,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.shenhesoft.logistics.manage.pojo.trainStation.TbTrainStation" >
+  <selectKey resultType="java.lang.Integer" keyProperty="id"
+			order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+    insert into tb_train_station
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="stationName != null" >
+        station_name,
+      </if>
+      <if test="stationLevel != null" >
+        station_level,
+      </if>
+      <if test="parentId != null" >
+        parent_id,
+      </if>
+      <if test="responsibler != null" >
+        responsibler,
+      </if>
+      <if test="adressCode != null" >
+        adress_code,
+      </if>
+      <if test="detailAddress != null" >
+        detail_address,
+      </if>
+      <if test="stationContacts != null" >
+        station_contacts,
+      </if>
+      <if test="department != null" >
+        department,
+      </if>
+      <if test="stationPhone != null" >
+        station_phone,
+      </if>
+      <if test="stationFax != null" >
+        station_fax,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="bankAccount != null" >
+        bank_account,
+      </if>
+      <if test="accountName != null" >
+        account_name,
+      </if>
+      <if test="openBank != null" >
+        open_bank,
+      </if>
+      <if test="openBankNum != null" >
+        open_bank_num,
+      </if>
+      <if test="dutyParagraph != null" >
+        duty_paragraph,
+      </if>
+      <if test="bankLastAmount != null" >
+        bank_last_amount,
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag,
+      </if>
+      <if test="relationPlace != null" >
+        relation_place,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="stationName != null" >
+        #{stationName,jdbcType=VARCHAR},
+      </if>
+      <if test="stationLevel != null" >
+        #{stationLevel,jdbcType=TINYINT},
+      </if>
+      <if test="parentId != null" >
+        #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="responsibler != null" >
+        #{responsibler,jdbcType=VARCHAR},
+      </if>
+      <if test="adressCode != null" >
+        #{adressCode,jdbcType=VARCHAR},
+      </if>
+      <if test="detailAddress != null" >
+        #{detailAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="stationContacts != null" >
+        #{stationContacts,jdbcType=VARCHAR},
+      </if>
+      <if test="department != null" >
+        #{department,jdbcType=VARCHAR},
+      </if>
+      <if test="stationPhone != null" >
+        #{stationPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="stationFax != null" >
+        #{stationFax,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="bankAccount != null" >
+        #{bankAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="accountName != null" >
+        #{accountName,jdbcType=VARCHAR},
+      </if>
+      <if test="openBank != null" >
+        #{openBank,jdbcType=VARCHAR},
+      </if>
+      <if test="openBankNum != null" >
+        #{openBankNum,jdbcType=VARCHAR},
+      </if>
+      <if test="dutyParagraph != null" >
+        #{dutyParagraph,jdbcType=VARCHAR},
+      </if>
+      <if test="bankLastAmount != null" >
+        #{bankLastAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="deleteFlag != null" >
+        #{deleteFlag,jdbcType=TINYINT},
+      </if>
+      <if test="relationPlace != null" >
+        #{relationPlace,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.shenhesoft.logistics.manage.pojo.trainStation.TbTrainStationExample" resultType="java.lang.Integer" >
+    select count(*) from tb_train_station
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_train_station
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.stationName != null" >
+        station_name = #{record.stationName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stationLevel != null" >
+        station_level = #{record.stationLevel,jdbcType=TINYINT},
+      </if>
+      <if test="record.parentId != null" >
+        parent_id = #{record.parentId,jdbcType=INTEGER},
+      </if>
+      <if test="record.responsibler != null" >
+        responsibler = #{record.responsibler,jdbcType=VARCHAR},
+      </if>
+      <if test="record.adressCode != null" >
+        adress_code = #{record.adressCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.detailAddress != null" >
+        detail_address = #{record.detailAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stationContacts != null" >
+        station_contacts = #{record.stationContacts,jdbcType=VARCHAR},
+      </if>
+      <if test="record.department != null" >
+        department = #{record.department,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stationPhone != null" >
+        station_phone = #{record.stationPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stationFax != null" >
+        station_fax = #{record.stationFax,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null" >
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bankAccount != null" >
+        bank_account = #{record.bankAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.accountName != null" >
+        account_name = #{record.accountName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.openBank != null" >
+        open_bank = #{record.openBank,jdbcType=VARCHAR},
+      </if>
+      <if test="record.openBankNum != null" >
+        open_bank_num = #{record.openBankNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dutyParagraph != null" >
+        duty_paragraph = #{record.dutyParagraph,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bankLastAmount != null" >
+        bank_last_amount = #{record.bankLastAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.deleteFlag != null" >
+        delete_flag = #{record.deleteFlag,jdbcType=TINYINT},
+      </if>
+      <if test="record.relationPlace != null" >
+        relation_place = #{record.relationPlace,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_train_station
+    set id = #{record.id,jdbcType=INTEGER},
+      station_name = #{record.stationName,jdbcType=VARCHAR},
+      station_level = #{record.stationLevel,jdbcType=TINYINT},
+      parent_id = #{record.parentId,jdbcType=INTEGER},
+      responsibler = #{record.responsibler,jdbcType=VARCHAR},
+      adress_code = #{record.adressCode,jdbcType=VARCHAR},
+      detail_address = #{record.detailAddress,jdbcType=VARCHAR},
+      station_contacts = #{record.stationContacts,jdbcType=VARCHAR},
+      department = #{record.department,jdbcType=VARCHAR},
+      station_phone = #{record.stationPhone,jdbcType=VARCHAR},
+      station_fax = #{record.stationFax,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
+      bank_account = #{record.bankAccount,jdbcType=VARCHAR},
+      account_name = #{record.accountName,jdbcType=VARCHAR},
+      open_bank = #{record.openBank,jdbcType=VARCHAR},
+      open_bank_num = #{record.openBankNum,jdbcType=VARCHAR},
+      duty_paragraph = #{record.dutyParagraph,jdbcType=VARCHAR},
+      bank_last_amount = #{record.bankLastAmount,jdbcType=DECIMAL},
+      delete_flag = #{record.deleteFlag,jdbcType=TINYINT},
+      relation_place = #{record.relationPlace,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.shenhesoft.logistics.manage.pojo.trainStation.TbTrainStation" >
+    update tb_train_station
+    <set >
+      <if test="stationName != null" >
+        station_name = #{stationName,jdbcType=VARCHAR},
+      </if>
+      <if test="stationLevel != null" >
+        station_level = #{stationLevel,jdbcType=TINYINT},
+      </if>
+      <if test="parentId != null" >
+        parent_id = #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="responsibler != null" >
+        responsibler = #{responsibler,jdbcType=VARCHAR},
+      </if>
+      <if test="adressCode != null" >
+        adress_code = #{adressCode,jdbcType=VARCHAR},
+      </if>
+      <if test="detailAddress != null" >
+        detail_address = #{detailAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="stationContacts != null" >
+        station_contacts = #{stationContacts,jdbcType=VARCHAR},
+      </if>
+      <if test="department != null" >
+        department = #{department,jdbcType=VARCHAR},
+      </if>
+      <if test="stationPhone != null" >
+        station_phone = #{stationPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="stationFax != null" >
+        station_fax = #{stationFax,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="bankAccount != null" >
+        bank_account = #{bankAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="accountName != null" >
+        account_name = #{accountName,jdbcType=VARCHAR},
+      </if>
+      <if test="openBank != null" >
+        open_bank = #{openBank,jdbcType=VARCHAR},
+      </if>
+      <if test="openBankNum != null" >
+        open_bank_num = #{openBankNum,jdbcType=VARCHAR},
+      </if>
+      <if test="dutyParagraph != null" >
+        duty_paragraph = #{dutyParagraph,jdbcType=VARCHAR},
+      </if>
+      <if test="bankLastAmount != null" >
+        bank_last_amount = #{bankLastAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag = #{deleteFlag,jdbcType=TINYINT},
+      </if>
+      <if test="relationPlace != null" >
+        relation_place = #{relationPlace,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.shenhesoft.logistics.manage.pojo.trainStation.TbTrainStation" >
+    update tb_train_station
+    set station_name = #{stationName,jdbcType=VARCHAR},
+      station_level = #{stationLevel,jdbcType=TINYINT},
+      parent_id = #{parentId,jdbcType=INTEGER},
+      responsibler = #{responsibler,jdbcType=VARCHAR},
+      adress_code = #{adressCode,jdbcType=VARCHAR},
+      detail_address = #{detailAddress,jdbcType=VARCHAR},
+      station_contacts = #{stationContacts,jdbcType=VARCHAR},
+      department = #{department,jdbcType=VARCHAR},
+      station_phone = #{stationPhone,jdbcType=VARCHAR},
+      station_fax = #{stationFax,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      bank_account = #{bankAccount,jdbcType=VARCHAR},
+      account_name = #{accountName,jdbcType=VARCHAR},
+      open_bank = #{openBank,jdbcType=VARCHAR},
+      open_bank_num = #{openBankNum,jdbcType=VARCHAR},
+      duty_paragraph = #{dutyParagraph,jdbcType=VARCHAR},
+      bank_last_amount = #{bankLastAmount,jdbcType=DECIMAL},
+      delete_flag = #{deleteFlag,jdbcType=TINYINT},
+      relation_place = #{relationPlace,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <select id="selectTrainStationByPage"  parameterType="com.shenhesoft.logistics.manage.pojo.trainStation.TbTrainStationExample" resultType="com.shenhesoft.logistics.manage.pojo.trainStation.TbTrainStation">
+		<!-- select  <include refid="Base_Column_List"/> from tb_train_station 
+		 <if test="_parameter != null" >
+	      <include refid="Example_Where_Clause" />
+	    </if>
+		<if test="orderByClause != null" >
+	      order by ${orderByClause}
+	    </if> -->
+	    
+	    select
+		A.id id, A.station_name stationName, A.station_level stationLevel,
+		A.parent_id parentId,A.responsibler responsibler,
+		A.adress_code adressCode, A.detail_address detailAddress, A.station_contacts stationContacts, A.department department,
+		A.station_phone stationPhone,A.station_fax stationFax,A.email email,A.bank_account bankAccount,
+		A.account_name accountName,A.open_bank openBank,A.open_bank_num openBankNum,A.duty_paragraph dutyParagraph,
+		A.bank_last_amount bankLastAmount,A.delete_flag deleteFlag,A.relation_place relationPlace
+		from
+		tb_train_station as A,tb_branch_group_link y
+		
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+			AND
+		</if>
+		 A.delete_flag = 0 and A.id=y.row_id 
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+  </select>
+  
+    <select id="selectTrainStationByIs" resultType="com.shenhesoft.logistics.manage.helpPojo.TbTrainStationHelp" parameterType="java.lang.Integer">
+		select 
+			 id, station_name stationName, station_level stationLevel, responsibler, adress_code adressCode, 
+			detail_address detailAddress, station_contacts stationContacts, 
+    		department, station_phone stationPhone, station_fax stationFax, email, bank_account bankAccount,
+    		account_name accountName, open_bank openBank, 
+    		open_bank_num openBankNum, duty_paragraph dutyParagraph,parent_id parentId,relation_place relationPlace
+			 from tb_train_station where id = #{id,jdbcType=INTEGER}
+ 	 </select>
+  
+  
+   <update id="updateTbTrainStationById" parameterType="com.shenhesoft.logistics.manage.helpPojo.TbTrainStationHelp" >
+    update tb_train_station
+    <set >
+      <if test="stationName != null" >
+        station_name = #{stationName,jdbcType=VARCHAR},
+      </if>
+      <if test="stationLevel != null" >
+        station_level = #{stationLevel,jdbcType=TINYINT},
+      </if>
+      <if test="parentId != null" >
+        parent_id = #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="responsibler != null" >
+        responsibler = #{responsibler,jdbcType=VARCHAR},
+      </if>
+      <if test="adressCode != null" >
+        adress_code = #{adressCode,jdbcType=VARCHAR},
+      </if>
+      <if test="detailAddress != null" >
+        detail_address = #{detailAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="stationContacts != null" >
+        station_contacts = #{stationContacts,jdbcType=VARCHAR},
+      </if>
+      <if test="department != null" >
+        department = #{department,jdbcType=VARCHAR},
+      </if>
+      <if test="stationPhone != null" >
+        station_phone = #{stationPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="stationFax != null" >
+        station_fax = #{stationFax,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="bankAccount != null" >
+        bank_account = #{bankAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="accountName != null" >
+        account_name = #{accountName,jdbcType=VARCHAR},
+      </if>
+      <if test="openBank != null" >
+        open_bank = #{openBank,jdbcType=VARCHAR},
+      </if>
+      <if test="openBankNum != null" >
+        open_bank_num = #{openBankNum,jdbcType=VARCHAR},
+      </if>
+      <if test="dutyParagraph != null" >
+        duty_paragraph = #{dutyParagraph,jdbcType=VARCHAR},
+      </if>
+      <if test="bankLastAmount != null" >
+        bank_last_amount = #{bankLastAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag = #{deleteFlag,jdbcType=TINYINT},
+      </if>
+      <if test="relationPlace != null" >
+        relation_place = #{relationPlace,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  	<delete id="deleteBatch" parameterType="java.util.List">
+			delete from tb_train_station where id 
+			in 
+			<foreach collection="list" item="id" open="(" close=")" separator=",">
+				#{id,jdbcType =INTEGER}
+			</foreach>
+	</delete>
+  
+    <select id="selectIsFreightYardDeleteById" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+		select  
+		count(*)
+		from tb_freight_yard
+		where train_station_id in
+		<foreach collection="list" item="id" open="(" close=")" separator=",">
+				#{id,jdbcType =INTEGER}
+		</foreach>
+		and is_isolated = 0 and delete_flag = 0
+  	</select>
+  	
+  	
+  	  <select id="selectIsContainerDeleteById" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+		select  
+		count(*)
+		from tb_container
+		where train_location_id in
+		<foreach collection="list" item="id" open="(" close=")" separator=",">
+				#{id,jdbcType =INTEGER}
+		</foreach>
+  	</select>
+  	
+  	  <select id="selectIsStationBusinessDeleteById" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+		select  
+		count(*)
+		from tb_station_business
+		where relate_id in
+		<foreach collection="list" item="id" open="(" close=")" separator=",">
+				#{id,jdbcType =INTEGER}
+		</foreach>
+		and type = 1
+  	</select>
+  	
+  	 <select id="selectChildrenStationById" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+		select  
+		count(*)
+		from tb_train_station
+		where parent_id in
+		<foreach collection="list" item="id" open="(" close=")" separator=",">
+				#{id,jdbcType =INTEGER}
+		</foreach>
+		and delete_flag = 0
+  	</select>
+  	
+  	<select id="selectProjectByStationId" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+		SELECT 
+		count(id) 
+		from tb_project 
+		where receive_cargo_site_id in 
+		<foreach collection="list" item="id" open="(" close=")" separator=",">
+				#{id,jdbcType =INTEGER}
+		</foreach>
+		or 
+		forwarding_site_id in 
+		<foreach collection="list" item="id" open="(" close=")" separator=",">
+				#{id,jdbcType =INTEGER}
+		</foreach>
+		or 
+		begin_site_id in 
+		<foreach collection="list" item="id" open="(" close=")" separator=",">
+				#{id,jdbcType =INTEGER}
+		</foreach>
+		or 
+		end_site_id in 
+		<foreach collection="list" item="id" open="(" close=")" separator=",">
+				#{id,jdbcType =INTEGER}
+		</foreach>
+  	</select>
+  	
+  	 <select id="getParentsById" resultType="com.shenhesoft.logistics.manage.pojo.trainStation.TbTrainStation" parameterType="java.util.Map">
+  	 	select A.id,A.station_name stationName from tb_train_station A left join tb_branch_group_link y 
+  	 	on A.id=y.row_id
+		where  1=1
+		and y.tab_name='tb_train_station'
+		and y.sys_org_code like CONCAT(#{sysOrgCode},'%')
+		and A.delete_flag = 0
+		<if test="level != null">
+			and
+  	 		A.station_level =  #{level,jdbcType =INTEGER}	
+		</if>
+		<if test="NoLevel != null">
+			and
+			A.station_level != #{NoLevel,jdbcType =INTEGER}	
+		</if>
+		
+  	 </select>
+  	 <!-- 根据上级站点id查询上级站点名称  -->
+  	<select id="selectStationNameByParentId" resultType="java.lang.String" parameterType="java.lang.Integer">
+  	 	select station_name stationName from tb_train_station 
+  	 	where id =  #{parentId,jdbcType =INTEGER}
+  	 	
+  	 </select>
+  
+  	 <!-- 修改集装箱位置  -->
+  	  <update id="updateContainNumLocation" parameterType="map" >
+    update tb_container
+    set train_location_id = #{trainLocationId,jdbcType=INTEGER}
+    where container_id = #{containerId,jdbcType=VARCHAR} and id in (
+	    		select row_id from tb_branch_group_link where tab_name = 'tb_container' and sys_org_code like CONCAT(#{sysOrgCode},'%')
+	    	  )
+  </update>
+  
+  <select id="listTrainStationByArea"  resultType="com.shenhesoft.logistics.manage.pojo.trainStation.TbTrainStation">
+    select
+	   	DISTINCT
+	    ts.id,ts.station_name stationName,ts.station_level stationLevel,ts.parent_id parentId,ts.responsibler responsibler,ts.adress_code adressCode,ts.detail_address detailAddress,ts.
+    	station_contacts stationContacts,ts.department department,ts.station_phone stationPhone,ts.station_fax stationFax,ts.email,ts.bank_account bankAccount,ts.account_name accountName,ts.
+    	open_bank openBank,ts.open_bank_num openBankNum,ts.duty_paragraph dutyParagraph,ts.bank_last_amount bankLastAmount,ts.delete_flag deleteFlag,ts.relation_place relationPlace
+    from tb_train_station ts
+    left join tb_branch_group_link y on ts.id=y.row_id
+    <where>
+		and y.tab_name='tb_train_station'
+		and y.sys_org_code like CONCAT(#{map.sysOrgCode},'%')
+       <if test="map.areas != null" >
+              <foreach collection="map.areas" item="area" open="and (" close=")" separator="or">  
+              <!-- 每个遍历需要生成的串 -->  
+                 <!--  address_code LIKE CONCAT('%',#{area,jdbcType=TINYINT},'%')  -->
+              	ts.adress_code = #{area,jdbcType=TINYINT}
+              </foreach>
+       </if>
+       <if test="map.stationId!=null">
+       		and ts.id=#{map.stationId,jdbcType=INTEGER}
+       </if>
+    </where>  
+  </select>
+  
+  
+</mapper>

@@ -1,0 +1,30 @@
+.add_border{border-bottom: 1px solid #CCCCCC;padding:0px 0px 20px!important;}
+.container_top{font-size: 14px;/*min-width: 1300px;*/}
+/*#distributionBtn{display: inline-block;height: 22px;background: #03a8ed;color: #FFFFFF;padding: 0 20px;}*/
+.project_info .creat_content{font-size: 14px;font-family: "Microsoft YaHei";color: rgb(51, 51, 51);line-height: 1.2;}
+.modal .modal-header{padding: 5px!important;}
+/*.modal-dialog{width: 1000px !important;}*/
+.modal h5{color:#FFAE00;margin-top: 0px !important;font-weight: normal;}
+.modal p{color:#04A9ED;margin:10px;}
+.modal hr{margin-top: 10px !important;margin-bottom: 10px !important;border-top: 1px dashed #D8D8D8 !important;}
+.modal .modal-lg{height: 700px;overflow: auto;}
+.modal-dialog label{font-weight: normal;font-size: 14px;font-family: "Microsoft YaHei";color: #666666;line-height: 1.2;}
+.modal-dialog select,.modal-dialog input[type=text]{width:140px;border: 1px solid #dde3ef;height: 28px;margin: 5px 0;}
+.modal-dialog .sm-tag{width: 70px;text-align: right;}
+.modal-dialog .lg-tag{width: 84px;text-align: right;}
+.modal .form-group{padding:0!important;position: relative;margin: 0 5px!important;}
+@media (min-width: 768px){
+.addr_info{width: 150px;}	
+
+}
+
+@media (min-width: 992px){
+.addr_info{width: 333px !important;}
+.modal-lg{width: 930px}
+}
+ .modal-content .form-group span{position: absolute;top: 10px;right: 5px;}
+.cost_info label{width: 100px;text-align: right;}
+.cost_info td{vertical-align: text-top;}
+
+.waitUl {overflow: hidden; padding-left: 10px !important;}
+.waitUl li{float: left;list-style: none;width: 20%;margin: 10px 0 0 0;}

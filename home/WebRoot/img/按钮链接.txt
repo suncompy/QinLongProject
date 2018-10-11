@@ -1,0 +1,3 @@
+1.物流管理后台：http://139.196.100.149:8081/logistics-manage-web/html/index.do
+2.车辆管理平台：http://139.196.100.149:8081/logistics-carmanage-web/index.do
+3.项目展示平台：http://139.196.100.149:8081/logistics-project-web/

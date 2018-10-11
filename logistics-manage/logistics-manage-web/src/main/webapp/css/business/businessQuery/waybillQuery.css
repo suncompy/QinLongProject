@@ -1,0 +1,15 @@
+
+.statistics{ overflow: hidden;}
+.statisticsDiv{float: left;margin-right: 24px;margin-top:10px;border: 1px solid #dde3ef;background: #FFFFFF;width: 587px;height: 347px;}
+.waybillDiv{float: left;border: 1px solid #dde3ef;background: #FFFFFF;width: 25%;height: 347px;min-width: 450px;margin-top: 10px;}
+.waybillDiv h4{margin: 10px 20px;}
+.statisticsDiv h4{margin: 10px 20px;}
+.timeDiv{text-align: right;margin-right: 20px;}
+.aaybilltimeDiv{text-align: right;margin-right: 30px;}
+.statisticsDiv .form-group{margin: 0 !important;}
+.statisticsDiv .form-group label{margin: 0 10px;}
+.waybillUl li{list-style: none;text-align: center;margin: 10px 0;}
+.waybillUl{margin-top: 20px;}
+.waybillUl li span:nth-child(1){font-size: 18px;width: 80px;display: inline-block;}
+.waybillUl li span:nth-child(2){margin-left: 20px;color: #666666;width: 80px;display: inline-block;}
+.newLine{display: inline-block;color: red;border: 1px dashed #CCCCCC;width: 59px;}

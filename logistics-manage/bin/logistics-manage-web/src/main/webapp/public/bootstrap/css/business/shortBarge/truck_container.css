@@ -1,0 +1,13 @@
+.add_border{border-bottom: 1px solid #CCCCCC;padding:0px 0px 20px!important;}
+.container_top{font-size: 12px;}
+.padding_class{padding-right: 0 !important;}
+.padding_left_class{padding-left: 0;}
+.address_input{margin: 10px 0 !important;padding-left: 0 !important;}
+.address_input input{width:80% !important;}
+.lineClass{height: 150px;}
+.newRow{margin: 10px 0;}
+/*运单新增*/
+/*#myModal .modal-dialog{width: 900px !important;}*/
+#myModal .modal-body select{width: 100px;border: 1px solid #CCCCCC;border-radius: 5px;height: 24px;}
+#myModal .modal-body input{width: 100px;border: 1px solid #CCCCCC;border-radius: 5px;height: 24px;}
+#wraps{border: 1px solid red;}

@@ -1,0 +1,21 @@
+jdbc.driver=com.mysql.jdbc.Driver
+jdbc.url=jdbc:mysql://192.168.0.88:3306/logistics?useUnicode=true&autoReconnect=true&characterEncoding=utf8&allowMultiQueries=true&useSSL=false
+jdbc.username=root
+jdbc.password=shenhesoft#123
+jdbc.validationQuery=select 'X'
+
+
+
+jdbc.driver=com.mysql.jdbc.Driver
+jdbc.url=jdbc:mysql://localhost:3306/logistics?useUnicode=true&autoReconnect=true&characterEncoding=utf8&allowMultiQueries=true&useSSL=false
+jdbc.username=root
+jdbc.password=root
+jdbc.validationQuery=select 'X'
+
+
+
+jdbc.driver=com.mysql.jdbc.Driver
+jdbc.url=jdbc:mysql://139.196.100.149:785/logistics_20180109?useUnicode=true&autoReconnect=true&characterEncoding=utf8&allowMultiQueries=true&useSSL=false
+jdbc.username=root
+jdbc.password=shenhesoft123
+jdbc.validationQuery=select 'X'

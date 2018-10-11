@@ -1,0 +1,571 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shenhesoft.logistics.business.mapper.TbTrainOrderCargoPalceMapper" >
+  <resultMap id="BaseResultMap" type="com.shenhesoft.logistics.business.pojo.trainOrderCargoPalce.TbTrainOrderCargoPalce" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="train_order_id" property="trainOrderId" jdbcType="INTEGER" />
+    <result column="cargo_place_id" property="cargoPlaceId" jdbcType="INTEGER" />
+    <result column="cargo_place_name" property="cargoPlaceName" jdbcType="VARCHAR" />
+    <result column="cargo_site_id" property="cargoSiteId" jdbcType="INTEGER" />
+    <result column="cargo_site_name" property="cargoSiteName" jdbcType="VARCHAR" />
+    <result column="car_type_id" property="carTypeId" jdbcType="INTEGER" />
+    <result column="car_type" property="carType" jdbcType="VARCHAR" />
+    <result column="car_number" property="carNumber" jdbcType="VARCHAR" />
+    <result column="container_number1" property="containerNumber1" jdbcType="VARCHAR" />
+    <result column="container_number2" property="containerNumber2" jdbcType="VARCHAR" />
+    <result column="send_weight" property="sendWeight" jdbcType="DECIMAL" />
+    <result column="con_send_weight2" property="conSendWeight2" jdbcType="DECIMAL" />
+    <result column="unload_weight" property="unloadWeight" jdbcType="DECIMAL" />
+    <result column="con_unload_weight2" property="conUnloadWeight2" jdbcType="DECIMAL" />
+    <result column="send_img" property="sendImg" jdbcType="VARCHAR" />
+    <result column="unload_img" property="unloadImg" jdbcType="VARCHAR" />
+    <result column="arrive_cargo_place_id" property="arriveCargoPlaceId" jdbcType="INTEGER" />
+    <result column="arrive_cargo_place_name" property="arriveCargoPlaceName" jdbcType="VARCHAR" />
+    <result column="arrive_cargo_site_id" property="arriveCargoSiteId" jdbcType="INTEGER" />
+    <result column="arrive_cargo_site_name" property="arriveCargoSiteName" jdbcType="VARCHAR" />
+    <result column="arrive_unload_time" property="arriveUnloadTime" jdbcType="TIMESTAMP" />
+    <result column="delete_flag" property="deleteFlag" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, train_order_id, cargo_place_id, cargo_place_name, cargo_site_id, cargo_site_name, 
+    car_type_id, car_type, car_number, container_number1, container_number2, send_weight, 
+    con_send_weight2, unload_weight, con_unload_weight2, send_img, unload_img, arrive_cargo_place_id, 
+    arrive_cargo_place_name, arrive_cargo_site_id, arrive_cargo_site_name, arrive_unload_time, 
+    delete_flag
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shenhesoft.logistics.business.pojo.trainOrderCargoPalce.TbTrainOrderCargoPalceExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_train_order_cargo_palce
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_train_order_cargo_palce
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_train_order_cargo_palce
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.shenhesoft.logistics.business.pojo.trainOrderCargoPalce.TbTrainOrderCargoPalceExample" >
+    delete from tb_train_order_cargo_palce
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.shenhesoft.logistics.business.pojo.trainOrderCargoPalce.TbTrainOrderCargoPalce" >
+    insert into tb_train_order_cargo_palce (id, train_order_id, cargo_place_id, 
+      cargo_place_name, cargo_site_id, cargo_site_name, 
+      car_type_id, car_type, car_number, 
+      container_number1, container_number2, send_weight, 
+      con_send_weight2, unload_weight, con_unload_weight2, 
+      send_img, unload_img, arrive_cargo_place_id, 
+      arrive_cargo_place_name, arrive_cargo_site_id, 
+      arrive_cargo_site_name, arrive_unload_time, 
+      delete_flag)
+    values (#{id,jdbcType=INTEGER}, #{trainOrderId,jdbcType=INTEGER}, #{cargoPlaceId,jdbcType=INTEGER}, 
+      #{cargoPlaceName,jdbcType=VARCHAR}, #{cargoSiteId,jdbcType=INTEGER}, #{cargoSiteName,jdbcType=VARCHAR}, 
+      #{carTypeId,jdbcType=INTEGER}, #{carType,jdbcType=VARCHAR}, #{carNumber,jdbcType=VARCHAR}, 
+      #{containerNumber1,jdbcType=VARCHAR}, #{containerNumber2,jdbcType=VARCHAR}, #{sendWeight,jdbcType=DECIMAL}, 
+      #{conSendWeight2,jdbcType=DECIMAL}, #{unloadWeight,jdbcType=DECIMAL}, #{conUnloadWeight2,jdbcType=DECIMAL}, 
+      #{sendImg,jdbcType=VARCHAR}, #{unloadImg,jdbcType=VARCHAR}, #{arriveCargoPlaceId,jdbcType=INTEGER}, 
+      #{arriveCargoPlaceName,jdbcType=VARCHAR}, #{arriveCargoSiteId,jdbcType=INTEGER}, 
+      #{arriveCargoSiteName,jdbcType=VARCHAR}, #{arriveUnloadTime,jdbcType=TIMESTAMP}, 
+      #{deleteFlag,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.shenhesoft.logistics.business.pojo.trainOrderCargoPalce.TbTrainOrderCargoPalce" >
+    <selectKey keyProperty="id" resultType="int">  
+            select LAST_INSERT_ID()
+     </selectKey>
+    insert into tb_train_order_cargo_palce
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="trainOrderId != null" >
+        train_order_id,
+      </if>
+      <if test="cargoPlaceId != null" >
+        cargo_place_id,
+      </if>
+      <if test="cargoPlaceName != null" >
+        cargo_place_name,
+      </if>
+      <if test="cargoSiteId != null" >
+        cargo_site_id,
+      </if>
+      <if test="cargoSiteName != null" >
+        cargo_site_name,
+      </if>
+      <if test="carTypeId != null" >
+        car_type_id,
+      </if>
+      <if test="carType != null" >
+        car_type,
+      </if>
+      <if test="carNumber != null" >
+        car_number,
+      </if>
+      <if test="containerNumber1 != null" >
+        container_number1,
+      </if>
+      <if test="containerNumber2 != null" >
+        container_number2,
+      </if>
+      <if test="sendWeight != null" >
+        send_weight,
+      </if>
+      <if test="conSendWeight2 != null" >
+        con_send_weight2,
+      </if>
+      <if test="unloadWeight != null" >
+        unload_weight,
+      </if>
+      <if test="conUnloadWeight2 != null" >
+        con_unload_weight2,
+      </if>
+      <if test="sendImg != null" >
+        send_img,
+      </if>
+      <if test="unloadImg != null" >
+        unload_img,
+      </if>
+      <if test="arriveCargoPlaceId != null" >
+        arrive_cargo_place_id,
+      </if>
+      <if test="arriveCargoPlaceName != null" >
+        arrive_cargo_place_name,
+      </if>
+      <if test="arriveCargoSiteId != null" >
+        arrive_cargo_site_id,
+      </if>
+      <if test="arriveCargoSiteName != null" >
+        arrive_cargo_site_name,
+      </if>
+      <if test="arriveUnloadTime != null" >
+        arrive_unload_time,
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="trainOrderId != null" >
+        #{trainOrderId,jdbcType=INTEGER},
+      </if>
+      <if test="cargoPlaceId != null" >
+        #{cargoPlaceId,jdbcType=INTEGER},
+      </if>
+      <if test="cargoPlaceName != null" >
+        #{cargoPlaceName,jdbcType=VARCHAR},
+      </if>
+      <if test="cargoSiteId != null" >
+        #{cargoSiteId,jdbcType=INTEGER},
+      </if>
+      <if test="cargoSiteName != null" >
+        #{cargoSiteName,jdbcType=VARCHAR},
+      </if>
+      <if test="carTypeId != null" >
+        #{carTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="carType != null" >
+        #{carType,jdbcType=VARCHAR},
+      </if>
+      <if test="carNumber != null" >
+        #{carNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="containerNumber1 != null" >
+        #{containerNumber1,jdbcType=VARCHAR},
+      </if>
+      <if test="containerNumber2 != null" >
+        #{containerNumber2,jdbcType=VARCHAR},
+      </if>
+      <if test="sendWeight != null" >
+        #{sendWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="conSendWeight2 != null" >
+        #{conSendWeight2,jdbcType=DECIMAL},
+      </if>
+      <if test="unloadWeight != null" >
+        #{unloadWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="conUnloadWeight2 != null" >
+        #{conUnloadWeight2,jdbcType=DECIMAL},
+      </if>
+      <if test="sendImg != null" >
+        #{sendImg,jdbcType=VARCHAR},
+      </if>
+      <if test="unloadImg != null" >
+        #{unloadImg,jdbcType=VARCHAR},
+      </if>
+      <if test="arriveCargoPlaceId != null" >
+        #{arriveCargoPlaceId,jdbcType=INTEGER},
+      </if>
+      <if test="arriveCargoPlaceName != null" >
+        #{arriveCargoPlaceName,jdbcType=VARCHAR},
+      </if>
+      <if test="arriveCargoSiteId != null" >
+        #{arriveCargoSiteId,jdbcType=INTEGER},
+      </if>
+      <if test="arriveCargoSiteName != null" >
+        #{arriveCargoSiteName,jdbcType=VARCHAR},
+      </if>
+      <if test="arriveUnloadTime != null" >
+        #{arriveUnloadTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteFlag != null" >
+        #{deleteFlag,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.shenhesoft.logistics.business.pojo.trainOrderCargoPalce.TbTrainOrderCargoPalceExample" resultType="java.lang.Integer" >
+    select count(*) from tb_train_order_cargo_palce
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_train_order_cargo_palce
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.trainOrderId != null" >
+        train_order_id = #{record.trainOrderId,jdbcType=INTEGER},
+      </if>
+      <if test="record.cargoPlaceId != null" >
+        cargo_place_id = #{record.cargoPlaceId,jdbcType=INTEGER},
+      </if>
+      <if test="record.cargoPlaceName != null" >
+        cargo_place_name = #{record.cargoPlaceName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cargoSiteId != null" >
+        cargo_site_id = #{record.cargoSiteId,jdbcType=INTEGER},
+      </if>
+      <if test="record.cargoSiteName != null" >
+        cargo_site_name = #{record.cargoSiteName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.carTypeId != null" >
+        car_type_id = #{record.carTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.carType != null" >
+        car_type = #{record.carType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.carNumber != null" >
+        car_number = #{record.carNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.containerNumber1 != null" >
+        container_number1 = #{record.containerNumber1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.containerNumber2 != null" >
+        container_number2 = #{record.containerNumber2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sendWeight != null" >
+        send_weight = #{record.sendWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="record.conSendWeight2 != null" >
+        con_send_weight2 = #{record.conSendWeight2,jdbcType=DECIMAL},
+      </if>
+      <if test="record.unloadWeight != null" >
+        unload_weight = #{record.unloadWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="record.conUnloadWeight2 != null" >
+        con_unload_weight2 = #{record.conUnloadWeight2,jdbcType=DECIMAL},
+      </if>
+      <if test="record.sendImg != null" >
+        send_img = #{record.sendImg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unloadImg != null" >
+        unload_img = #{record.unloadImg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.arriveCargoPlaceId != null" >
+        arrive_cargo_place_id = #{record.arriveCargoPlaceId,jdbcType=INTEGER},
+      </if>
+      <if test="record.arriveCargoPlaceName != null" >
+        arrive_cargo_place_name = #{record.arriveCargoPlaceName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.arriveCargoSiteId != null" >
+        arrive_cargo_site_id = #{record.arriveCargoSiteId,jdbcType=INTEGER},
+      </if>
+      <if test="record.arriveCargoSiteName != null" >
+        arrive_cargo_site_name = #{record.arriveCargoSiteName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.arriveUnloadTime != null" >
+        arrive_unload_time = #{record.arriveUnloadTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.deleteFlag != null" >
+        delete_flag = #{record.deleteFlag,jdbcType=TINYINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_train_order_cargo_palce
+    set id = #{record.id,jdbcType=INTEGER},
+      train_order_id = #{record.trainOrderId,jdbcType=INTEGER},
+      cargo_place_id = #{record.cargoPlaceId,jdbcType=INTEGER},
+      cargo_place_name = #{record.cargoPlaceName,jdbcType=VARCHAR},
+      cargo_site_id = #{record.cargoSiteId,jdbcType=INTEGER},
+      cargo_site_name = #{record.cargoSiteName,jdbcType=VARCHAR},
+      car_type_id = #{record.carTypeId,jdbcType=INTEGER},
+      car_type = #{record.carType,jdbcType=VARCHAR},
+      car_number = #{record.carNumber,jdbcType=VARCHAR},
+      container_number1 = #{record.containerNumber1,jdbcType=VARCHAR},
+      container_number2 = #{record.containerNumber2,jdbcType=VARCHAR},
+      send_weight = #{record.sendWeight,jdbcType=DECIMAL},
+      con_send_weight2 = #{record.conSendWeight2,jdbcType=DECIMAL},
+      unload_weight = #{record.unloadWeight,jdbcType=DECIMAL},
+      con_unload_weight2 = #{record.conUnloadWeight2,jdbcType=DECIMAL},
+      send_img = #{record.sendImg,jdbcType=VARCHAR},
+      unload_img = #{record.unloadImg,jdbcType=VARCHAR},
+      arrive_cargo_place_id = #{record.arriveCargoPlaceId,jdbcType=INTEGER},
+      arrive_cargo_place_name = #{record.arriveCargoPlaceName,jdbcType=VARCHAR},
+      arrive_cargo_site_id = #{record.arriveCargoSiteId,jdbcType=INTEGER},
+      arrive_cargo_site_name = #{record.arriveCargoSiteName,jdbcType=VARCHAR},
+      arrive_unload_time = #{record.arriveUnloadTime,jdbcType=TIMESTAMP},
+      delete_flag = #{record.deleteFlag,jdbcType=TINYINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.shenhesoft.logistics.business.pojo.trainOrderCargoPalce.TbTrainOrderCargoPalce" >
+    update tb_train_order_cargo_palce
+    <set >
+      <if test="trainOrderId != null" >
+        train_order_id = #{trainOrderId,jdbcType=INTEGER},
+      </if>
+      <if test="cargoPlaceId != null" >
+        cargo_place_id = #{cargoPlaceId,jdbcType=INTEGER},
+      </if>
+      <if test="cargoPlaceName != null" >
+        cargo_place_name = #{cargoPlaceName,jdbcType=VARCHAR},
+      </if>
+      <if test="cargoSiteId != null" >
+        cargo_site_id = #{cargoSiteId,jdbcType=INTEGER},
+      </if>
+      <if test="cargoSiteName != null" >
+        cargo_site_name = #{cargoSiteName,jdbcType=VARCHAR},
+      </if>
+      <if test="carTypeId != null" >
+        car_type_id = #{carTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="carType != null" >
+        car_type = #{carType,jdbcType=VARCHAR},
+      </if>
+      <if test="carNumber != null" >
+        car_number = #{carNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="containerNumber1 != null" >
+        container_number1 = #{containerNumber1,jdbcType=VARCHAR},
+      </if>
+      <if test="containerNumber2 != null" >
+        container_number2 = #{containerNumber2,jdbcType=VARCHAR},
+      </if>
+      <if test="sendWeight != null" >
+        send_weight = #{sendWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="conSendWeight2 != null" >
+        con_send_weight2 = #{conSendWeight2,jdbcType=DECIMAL},
+      </if>
+      <if test="unloadWeight != null" >
+        unload_weight = #{unloadWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="conUnloadWeight2 != null" >
+        con_unload_weight2 = #{conUnloadWeight2,jdbcType=DECIMAL},
+      </if>
+      <if test="sendImg != null" >
+        send_img = #{sendImg,jdbcType=VARCHAR},
+      </if>
+      <if test="unloadImg != null" >
+        unload_img = #{unloadImg,jdbcType=VARCHAR},
+      </if>
+      <if test="arriveCargoPlaceId != null" >
+        arrive_cargo_place_id = #{arriveCargoPlaceId,jdbcType=INTEGER},
+      </if>
+      <if test="arriveCargoPlaceName != null" >
+        arrive_cargo_place_name = #{arriveCargoPlaceName,jdbcType=VARCHAR},
+      </if>
+      <if test="arriveCargoSiteId != null" >
+        arrive_cargo_site_id = #{arriveCargoSiteId,jdbcType=INTEGER},
+      </if>
+      <if test="arriveCargoSiteName != null" >
+        arrive_cargo_site_name = #{arriveCargoSiteName,jdbcType=VARCHAR},
+      </if>
+      <if test="arriveUnloadTime != null" >
+        arrive_unload_time = #{arriveUnloadTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag = #{deleteFlag,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.shenhesoft.logistics.business.pojo.trainOrderCargoPalce.TbTrainOrderCargoPalce" >
+    update tb_train_order_cargo_palce
+    set train_order_id = #{trainOrderId,jdbcType=INTEGER},
+      cargo_place_id = #{cargoPlaceId,jdbcType=INTEGER},
+      cargo_place_name = #{cargoPlaceName,jdbcType=VARCHAR},
+      cargo_site_id = #{cargoSiteId,jdbcType=INTEGER},
+      cargo_site_name = #{cargoSiteName,jdbcType=VARCHAR},
+      car_type_id = #{carTypeId,jdbcType=INTEGER},
+      car_type = #{carType,jdbcType=VARCHAR},
+      car_number = #{carNumber,jdbcType=VARCHAR},
+      container_number1 = #{containerNumber1,jdbcType=VARCHAR},
+      container_number2 = #{containerNumber2,jdbcType=VARCHAR},
+      send_weight = #{sendWeight,jdbcType=DECIMAL},
+      con_send_weight2 = #{conSendWeight2,jdbcType=DECIMAL},
+      unload_weight = #{unloadWeight,jdbcType=DECIMAL},
+      con_unload_weight2 = #{conUnloadWeight2,jdbcType=DECIMAL},
+      send_img = #{sendImg,jdbcType=VARCHAR},
+      unload_img = #{unloadImg,jdbcType=VARCHAR},
+      arrive_cargo_place_id = #{arriveCargoPlaceId,jdbcType=INTEGER},
+      arrive_cargo_place_name = #{arriveCargoPlaceName,jdbcType=VARCHAR},
+      arrive_cargo_site_id = #{arriveCargoSiteId,jdbcType=INTEGER},
+      arrive_cargo_site_name = #{arriveCargoSiteName,jdbcType=VARCHAR},
+      arrive_unload_time = #{arriveUnloadTime,jdbcType=TIMESTAMP},
+      delete_flag = #{deleteFlag,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <select id="selectTrainAccessStorageList" parameterType="com.shenhesoft.logistics.business.helpPojo.TrainOrderDetail" resultType="com.shenhesoft.logistics.business.helpPojo.TrainOrderDetail">
+  	SELECT A.id as projectId,A.project_code as projectCode,A.project_type as projectType,B.id as trainOrderId,B.please_train_number as pleaseTrainNumber,A.transport_type as transportType,A.branch_group_id as branchId,A.branch_group_name as branchName,
+  	A.send_cargo_company_id as sendCargoCompanyId,A.send_cargo_company_name as sendCargoCompanyName,A.receive_cargo_company_id as receiveCargoCompanyId,A.receive_cargo_company_name as receiveCargoCompanyName,
+	A.cargo_id as cargoId,A.cargo_name as cargoName,A.begin_site_name as beginSiteName,A.end_site_name as endSiteName,B.entruck_weight as entruckWeight,B.arrive_weight as arriveWeight,B.send_date as sendDate,B.arrive_date as arriveDate
+	
+	from tb_project A,tb_train_order B,tb_branch_group_link y 
+	where A.id = B.project_id and A.delete_flag = 0 and B.delete_flag = 0 and B.status in (3,4,5,6,7) 
+	and A.id=y.row_id and y.tab_name='tb_project'
+		and y.sys_org_code like CONCAT(#{sysOrgCode},'%')
+	<if test="projectCode != null and projectCode !='' " >
+        <!-- and A.project_code = #{projectCode,jdbcType=VARCHAR} -->
+        and A.project_code like '%${projectCode}%'
+    </if>
+    <if test="branchId != null " >
+        and A.branch_group_id = #{branchId,jdbcType=INTEGER}
+    </if>
+    <if test="projectType != null" >
+        and A.project_type = #{projectType,jdbcType=TINYINT}
+    </if>
+    <if test="pleaseTrainNumber != null  and pleaseTrainNumber !='' " >
+        <!-- and B.please_train_number = #{pleaseTrainNumber,jdbcType=VARCHAR} -->
+        and B.please_train_number like '%${pleaseTrainNumber}%'
+    </if>
+    <if test="cargoId != null" >
+        and A.cargo_id = #{cargoId,jdbcType=INTEGER}
+    </if>
+    <if test="sendCargoCompanyId != null" >
+        and A.send_cargo_company_id = #{sendCargoCompanyId,jdbcType=INTEGER}
+    </if>
+    <if test="receiveCargoCompanyId != null" >
+        and A.receive_cargo_company_id = #{receiveCargoCompanyId,jdbcType=INTEGER}
+    </if>
+    <if test="beginSiteName != null and beginSiteName !='' " >
+        <!-- and A.begin_site_name = #{beginSiteName,jdbcType=VARCHAR} -->
+        and A.begin_site_name like '%${beginSiteName}%'
+    </if>
+    <if test="endSiteName != null  and endSiteName !='' " >
+       <!--  and A.end_site_name = #{endSiteName,jdbcType=VARCHAR} -->
+       and A.end_site_name like '%${endSiteName}%'
+    </if>
+    <if test="newSendDate != null and newSendDate !='' " >
+        <!-- and B.send_date = #{sendDate,jdbcType=TIMESTAMP} -->
+       and date_format(B.send_date, '%Y-%m-%d') = date_format(#{newSendDate,jdbcType=TIMESTAMP}, '%Y-%m-%d')
+    </if>
+    <if test="newArriveDate != null and newArriveDate !='' " >
+      <!--   and B.arrive_date = #{arriveDate,jdbcType=TIMESTAMP} -->
+       and date_format(B.arrive_date, '%Y-%m-%d') = date_format(#{newArriveDate,jdbcType=TIMESTAMP}, '%Y-%m-%d')
+    </if>
+	order by B.id desc
+  </select>
+	
+	<select id="queryStatisticByProjectId" parameterType="java.lang.Integer" resultType="com.shenhesoft.logistics.business.helpPojo.TrainOrderDetail">
+  	SELECT A.please_train_number as pleaseTrainNumber,B.car_type as carType,B.car_number as carNumber,B.container_number1 as containerNumber1,B.container_number2 as containerNumber2,
+	A.send_date as sendDate,B.send_weight as sendWeight,B.con_send_weight2 as conSendWeight2,B.con_unload_weight2 as conUnloadWeight2,
+  	B.cargo_place_id as cargoPlaceId,B.cargo_place_name as cargoPlaceName,B.cargo_site_id as cargoSiteId,B.cargo_site_name as cargoSiteName,
+	B.arrive_unload_time as arriveUnloadTime,B.unload_weight as unloadWeight,B.arrive_cargo_place_id as arriveCargoPlaceId,B.arrive_cargo_place_name as arriveCargoPlaceName,
+	B.arrive_cargo_site_id as arriveCargoSiteId,B.arrive_cargo_site_name as arriveCargoSiteName
+	
+	from tb_train_order A,tb_train_order_cargo_palce B
+	where A.id = B.train_order_id and A.project_id = #{projectId,jdbcType=INTEGER}
+	order by A.id desc
+  </select>
+  
+  <!--查询统计的总共请车次数 和总共请车数-->
+	<select id="selectSumInfo" parameterType="java.lang.Integer"
+		resultType="com.shenhesoft.logistics.business.helpPojo.TrainOrderDetail">
+		select COUNT(please_train_number) as sumPleaseNum,SUM(sure_car_num) as sumCarNum from tb_train_order where project_id = #{projectId,jdbcType=INTEGER}
+	</select>
+</mapper>

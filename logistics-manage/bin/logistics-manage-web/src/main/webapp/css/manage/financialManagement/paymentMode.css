@@ -1,0 +1,4 @@
+.payement tr td:first-child{width: 50px !important;}
+.payement tr td:nth-child(2){width: 150px !important;}
+.modal-dialog label{font-weight: normal;font-size: 14px;font-family: "Microsoft YaHei";color: #666666;line-height: 1.2;}
+.modal-dialog select,.modal-dialog input[type=text]{width:140px;border: 1px solid #DDE3EF;;height: 28px;margin: 5px 0;border-radius: 2px;}

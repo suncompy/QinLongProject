@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shenhesoft.logistics.business.mapper.BasicDataMapper">
+
+	<!-- 获取test类型 -->
+	<!-- <select id="getTestType" resultType="Map">
+		select a.item_code id,a.item_name text 
+		from tb_dict_item a
+		where a.dic_id = '1'
+		<if test="text != null and text != ''">
+            and a.item_name like concat('%', #{text}, '%')
+        </if>
+		order by a.item_sort
+	</select> -->
+	
+	<select id="getTestType" resultType="Map">
+		select a.id id,a.container_id text 
+		from tb_container a
+		where 1=1
+			and train_location_id  is not null
+		<if test="text != null and text != ''">
+            and a.container_id like concat('%', #{text}, '%')
+        </if>
+		order by a.id
+	</select>
+	<!-- 火车车型 -->
+	<select id="getTrainType" resultType="Map">
+		select a.id id,CONCAT(IFNULL(a.train_kind_code,''),IFNULL(a.train_type_code,'')) text 
+		from tb_train_type a left join tb_branch_group_link y on a.id=y.row_id
+		where 1=1
+		and y.tab_name='tb_train_type'
+          and y.sys_org_code like CONCAT(#{map.sysOrgCode},'%')
+		 <if test="text != null and text != ''">
+            and a.train_kind_code like concat('%', #{text}, '%')
+        </if>
+		GROUP BY id,text
+		union 
+		select a.id id,CONCAT(IFNULL(a.train_kind_code,''),IFNULL(a.train_type_code,'')) text 
+		from tb_train_type a left join tb_branch_group_link y on a.id=y.row_id
+		where 1=1
+		and y.tab_name='tb_train_type'
+          and y.sys_org_code like CONCAT(#{map.sysOrgCode},'%')
+		<if test="text != null and text != ''">
+            and a.train_type_code like concat('%', #{text}, '%')
+        </if>
+		GROUP BY id,text
+		order by id
+	</select>
+	<!-- 项目 -->
+	<select id="getProjectCode" parameterType="map" resultType="Map">
+		select a.id,a.project_code text 
+		from tb_project a
+		left join tb_branch_group_link y on a.id=y.row_id and y.tab_name='tb_project'
+		where 1=1
+		<if test="sysOrgCode != null and sysOrgCode != ''">
+            and y.sys_org_code like  CONCAT(#{sysOrgCode},'%')
+        </if>
+		<if test="text != null and text != ''">
+            and a.project_code like concat('%', #{text}, '%')
+        </if>
+		order by a.id
+	</select>
+	<!-- 获取支出方账号,公司账号 -->
+	<select id="getProvideCompanyId" parameterType="map" resultType="Map">
+		select a.id,a.name text from tb_finance_account a
+		left join tb_branch_group_link y on a.id=y.row_id and y.tab_name='tb_finance_account'
+		where a.account_kind=2
+		<if test="sysOrgCode != null and sysOrgCode != ''">
+            and y.sys_org_code like CONCAT(left(#{sysOrgCode},2),'%')
+        </if>
+		<if test="text != null and text != ''">
+            and a.name like concat('%', #{text}, '%')
+        </if>
+		order by a.id
+	</select>
+	<!-- 下拉框数据 -->
+	<select id="getDims" parameterType="map" resultType="Map">
+		select a.item_code id,a.item_name text 
+		from tb_dict_item a
+		where a.dic_id = #{pid}
+		<if test="id != null and id != ''">
+            and a.item_code = #{id}
+        </if>
+         <if test="text != null and text != ''">
+            and a.item_name like concat('%', #{text}, '%')
+        </if>
+        order by a.item_sort
+	</select>
+	<!-- 集装箱号 -->
+	<select id="getSelectionsByStationId" resultType="Map">
+		select a.id id,a.container_id text 
+		from tb_container a left join tb_branch_group_link y on a.id=y.row_id
+		where 1=1
+		and y.tab_name='tb_container'
+          and y.sys_org_code like CONCAT(#{mapC.sysOrgCode},'%')
+			and a.train_location_id  is not null
+		<if test="text != null and text != ''">
+            and a.container_id like concat('%', #{text}, '%')
+        </if>
+        <if test="mapC != null">
+            and a.train_location_id =  #{mapC.trainStationId}
+            and a.status = #{mapC.status}
+            <if test="mapC.projectId == null">
+            	and a.project_id is null
+        	</if>
+        	<if test="mapC.projectId != null">
+            	and a.project_id = #{mapC.projectId}
+        	</if>
+        </if>
+		order by a.id
+	</select>
+	<!-- 未使用油气卡号 -->
+	<select id="getOilGasCardUnused" parameterType="map" resultType="Map">
+		select a.id id,CONCAT(if(b.card_type=0,'油卡','气卡'),'#',a.card_money,'#',a.card_num) text 
+		from tb_oil_gas_card_pack b,tb_oil_gas_card a 
+		left join tb_branch_group_link y on a.id=y.row_id and y.tab_name='tb_oil_gas_card'
+		where b.id=a.oil_gas_cards_id and b.audit_status=1 and a.card_status=0
+		<if test="sysOrgCode != null and sysOrgCode != ''">
+            and y.sys_org_code like CONCAT(left(#{sysOrgCode},2),'%')
+        </if>
+		<if test="cardType != null and cardType != ''">
+            and b.card_type =  #{cardType}
+        </if>
+		<if test="text != null and text != ''">
+            and CONCAT(a.card_money,'#',a.card_num) like concat('%', #{text}, '%')
+        </if>
+		order by a.card_money desc
+	</select>
+	
+	<!-- 领取人 -->
+	<select id="getReciverByFinId" resultType="Map">
+	select DISTINCT a.id,a.text from (
+		select o.driver_id id,CONCAT('车主:',o.driver_name) text,sh_order_fin_id
+				from tb_short_order_finance a,tb_order o 
+		 where o.id = a.order_id
+				and o.is_cancel = 0
+				and o.delete_flag = 0
+				and a.delete_flag = 0
+		    and o.driver_id is not null
+				GROUP BY o.driver_id,text,sh_order_fin_id
+		union all
+		select o.carTeam_id id,CONCAT('车队:',t.name) text,sh_order_fin_id
+				from tb_short_order_finance a,tb_order o,tb_car_team t
+		 where o.id = a.order_id
+		    and t.id=o.carTeam_id
+				and o.is_cancel = 0
+				and o.delete_flag = 0
+				and a.delete_flag = 0
+		    and o.carTeam_id is not null
+				GROUP BY o.carTeam_id,text,sh_order_fin_id
+		) a 
+	where 1=1
+		<if test="text != null and text != ''">
+            a.text like concat('%', #{text}, '%')
+        </if>
+        and a.sh_order_fin_id in
+		<foreach collection="list" index="index" item="item" open="(" separator="," close=")">   
+             #{item}   
+        </foreach>
+	order by id desc
+	</select>
+	<!-- 客户业务联系人 -->
+	<select id="getBizContactor" parameterType="map" resultType="Map">
+	select c.choose_account_id id,a.name text from tb_station_business a,tb_finance_account c 
+	left join tb_branch_group_link y on c.id=y.row_id and y.tab_name='tb_finance_account'
+	 where c.choose_account_id=a.relate_id 
+	   and a.type=2 
+	   <if test="sysOrgCode != null and sysOrgCode != ''">
+             and y.sys_org_code like  CONCAT(#{sysOrgCode},'%')
+        </if>
+	    <if test="customId != null">
+            and c.id= #{customId}
+        </if>
+		<if test="text != null and text != ''">
+            and a.name like concat('%', #{text}, '%')
+        </if>
+    union all
+	select c.choose_account_id id,u.name text from tb_system_user u,tb_branch_group a,tb_finance_account c
+	left join tb_branch_group_link y on c.id=y.row_id and y.tab_name='tb_finance_account'
+	 where c.choose_account_id=a.id and a.responsiblerId=u.id
+	   and a.status=0  
+	   <if test="sysOrgCode != null and sysOrgCode != ''">
+            and y.sys_org_code like CONCAT(left(#{sysOrgCode},2),'%')
+        </if> 
+	   <if test="customId != null">
+            and c.id= #{customId}
+        </if>
+		<if test="text != null and text != ''">
+            and u.name like concat('%', #{text}, '%')
+        </if>  
+	union all
+	select c.choose_account_id id,a.responsibler text from tb_train_station a,tb_finance_account c
+	left join tb_branch_group_link y on c.id=y.row_id and y.tab_name='tb_finance_account'
+	 where c.choose_account_id=a.id 
+	   and a.delete_flag=0   
+	   <if test="sysOrgCode != null and sysOrgCode != ''">
+             and y.sys_org_code like  CONCAT(#{sysOrgCode},'%')
+        </if>
+	   <if test="customId != null">
+            and c.id= #{customId}
+        </if>
+		<if test="text != null and text != ''">
+            and a.responsibler like concat('%', #{text}, '%')
+        </if> 
+		order by id desc
+	</select>
+	<!-- 发货企业和收货企业 -->
+	<select id="getCustomCompany" parameterType="map" resultType="Map">
+		select a.id,a.company_name text from tb_customer a
+		left join tb_branch_group_link y on a.id=y.row_id and y.tab_name='tb_customer'
+		where a.status=0
+		<if test="sysOrgCode != null and sysOrgCode != ''">
+            and y.sys_org_code like  CONCAT(#{sysOrgCode},'%')
+        </if>
+		<if test="text != null and text != ''">
+            and a.company_name like concat('%', #{text}, '%')
+        </if>
+		order by a.id
+	</select>
+	<!-- 登录人所在企业顶级机构 -->
+	<select id="getOrgTop" parameterType="map" resultType="Map">
+		select a.id,a.name text from tb_branch_group a
+		left join tb_branch_group_link y on a.id=y.row_id
+		where y.tab_name='tb_branch_group' and a.status=0
+		<if test="sysOrgCode != null and sysOrgCode != ''">
+            and y.sys_org_code = #{sysOrgCode}
+        </if>
+		<if test="text != null and text != ''">
+            and a.name like concat('%', #{text}, '%')
+        </if>
+		order by a.id
+	</select>
+	<!-- 登录人所在企业全部机构 -->
+	<select id="getOrgAll" parameterType="map" resultType="Map">
+		select a.id,a.name text from tb_branch_group a
+		where a.status=0 
+		<if test="sysOrgCode != null and sysOrgCode != ''">
+            and a.sys_org_code like  CONCAT(#{sysOrgCode},'%')
+        </if>
+		<if test="text != null and text != ''">
+            and a.name like concat('%', #{text}, '%')
+        </if>
+		order by a.id
+	</select>
+	<!-- 登录人所在机构本部 -->
+	<select id="getOrgBranchSelf" parameterType="map" resultType="Map">
+		select a.id,a.name text from tb_branch_group a
+		where a.status=0 
+		<if test="sysOrgCode != null and sysOrgCode != ''">
+            and a.sys_org_code = #{sysOrgCode}
+        </if>
+		<if test="text != null and text != ''">
+            and a.name like concat('%', #{text}, '%')
+        </if>
+		order by a.id
+	</select>
+	<!-- 登录人所在机构本部及其下级子孙机构 -->
+	<select id="getOrgBranchAll" parameterType="map" resultType="Map">
+		select a.id,a.name text from tb_branch_group a
+		where a.status=0 
+		<if test="sysOrgCode != null and sysOrgCode != ''">
+            and a.sys_org_code like CONCAT(#{sysOrgCode},'%')
+        </if>
+		<if test="text != null and text != ''">
+            and a.name like concat('%', #{text}, '%')
+        </if>
+		order by a.id
+	</select>
+</mapper>

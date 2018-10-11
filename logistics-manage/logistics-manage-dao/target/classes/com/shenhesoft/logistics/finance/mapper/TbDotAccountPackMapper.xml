@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shenhesoft.logistics.finance.mapper.TbDotAccountPackMapper" >
+  <resultMap id="BaseResultMap" type="com.shenhesoft.logistics.finance.TbDotAccountPack" >
+    <id column="dot_account_pack_id" property="dotAccountPackId" jdbcType="VARCHAR" />
+    <result column="project_code" property="projectCode" jdbcType="VARCHAR" />
+    <result column="branch_name" property="branchName" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="pack_truck_num" property="packTruckNum" jdbcType="INTEGER" />
+    <result column="supplies_amount" property="suppliesAmount" jdbcType="DECIMAL" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="create_user_id" property="createUserId" jdbcType="INTEGER" />
+    <result column="audit_id" property="auditId" jdbcType="INTEGER" />
+    <result column="audit_date" property="auditDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    dot_account_pack_id, project_code, branch_name, create_date, pack_truck_num, supplies_amount, 
+    status, create_user_id, audit_id, audit_date
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_dot_account_pack
+    where dot_account_pack_id = #{dotAccountPackId,jdbcType=VARCHAR}
+  </select>
+  <insert id="insert" parameterType="com.shenhesoft.logistics.finance.TbDotAccountPack" >
+    insert into tb_dot_account_pack (dot_account_pack_id, project_code, branch_name, 
+      create_date, pack_truck_num, supplies_amount, 
+      status, create_user_id, audit_id, 
+      audit_date)
+    values (#{dotAccountPackId,jdbcType=VARCHAR}, #{projectCode,jdbcType=VARCHAR}, #{branchName,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{packTruckNum,jdbcType=INTEGER}, #{suppliesAmount,jdbcType=DECIMAL}, 
+      #{status,jdbcType=INTEGER}, #{createUserId,jdbcType=INTEGER}, #{auditId,jdbcType=INTEGER}, 
+      #{auditDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.shenhesoft.logistics.finance.TbDotAccountPack" >
+    insert into tb_dot_account_pack
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="dotAccountPackId != null" >
+        dot_account_pack_id,
+      </if>
+      <if test="projectCode != null" >
+        project_code,
+      </if>
+      <if test="branchName != null" >
+        branch_name,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="packTruckNum != null" >
+        pack_truck_num,
+      </if>
+      <if test="suppliesAmount != null" >
+        supplies_amount,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createUserId != null" >
+        create_user_id,
+      </if>
+      <if test="auditId != null" >
+        audit_id,
+      </if>
+      <if test="auditDate != null" >
+        audit_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="dotAccountPackId != null" >
+        #{dotAccountPackId,jdbcType=VARCHAR},
+      </if>
+      <if test="projectCode != null" >
+        #{projectCode,jdbcType=VARCHAR},
+      </if>
+      <if test="branchName != null" >
+        #{branchName,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="packTruckNum != null" >
+        #{packTruckNum,jdbcType=INTEGER},
+      </if>
+      <if test="suppliesAmount != null" >
+        #{suppliesAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createUserId != null" >
+        #{createUserId,jdbcType=INTEGER},
+      </if>
+      <if test="auditId != null" >
+        #{auditId,jdbcType=INTEGER},
+      </if>
+      <if test="auditDate != null" >
+        #{auditDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.shenhesoft.logistics.finance.TbDotAccountPack" >
+    update tb_dot_account_pack
+    <set >
+      <if test="projectCode != null" >
+        project_code = #{projectCode,jdbcType=VARCHAR},
+      </if>
+      <if test="branchName != null" >
+        branch_name = #{branchName,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="packTruckNum != null" >
+        packTruckNum = #{packTruckNum,jdbcType=INTEGER},
+      </if>
+      <if test="suppliesAmount != null" >
+        suppliesAmount = #{suppliesAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createUserId != null" >
+        create_user_id = #{createUserId,jdbcType=INTEGER},
+      </if>
+      <if test="auditId != null" >
+        audit_id = #{auditId,jdbcType=INTEGER},
+      </if>
+      <if test="auditDate != null" >
+        audit_date = #{auditDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where dot_account_pack_id = #{dotAccountPackId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.shenhesoft.logistics.finance.TbDotAccountPack" >
+    update tb_dot_account_pack
+    set project_code = #{projectCode,jdbcType=VARCHAR},
+      branch_name = #{branchName,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      packTruckNum = #{packTruckNum,jdbcType=INTEGER},
+      suppliesAmount = #{suppliesAmount,jdbcType=DECIMAL},
+      status = #{status,jdbcType=INTEGER},
+      create_user_id = #{createUserId,jdbcType=INTEGER},
+      audit_id = #{auditId,jdbcType=INTEGER},
+      audit_date = #{auditDate,jdbcType=TIMESTAMP}
+    where dot_account_pack_id = #{dotAccountPackId,jdbcType=VARCHAR}
+  </update>
+  
+  <select id="getDotAccountPacks" resultType="Map">
+  	select dap.dot_account_pack_id dotAccountPackId, dap.project_code projectCode, dap.branch_name branchName, dap.create_date createDate, dap.pack_truck_num packTruckNum, dap.supplies_amount suppliesAmount, 
+    dap.status, dap.create_user_id createUserId, dap.audit_id auditId, dap.audit_date auditDate ,su.name createUser,sut.name auditUser
+    from tb_dot_account_pack dap
+    left join tb_branch_group_link y on dap.dot_account_pack_id=y.row_id 
+    left join tb_system_user su on dap.create_user_id  = su.id
+    left join tb_system_user sut on dap.audit_id = sut.id
+    <if test="map!=null">
+    <where>
+    	and y.tab_name='tb_dot_account_pack'
+    	<if test="map.sysOrgCode != null and map.sysOrgCode != '' and map.sysOrgCode != 'null' and map.sysOrgCode != 'undefined'" >
+       and y.sys_org_code like CONCAT(#{map.sysOrgCode},'%')
+      </if>
+      <if test="map.dotAccountPackId != null and map.dotAccountPackId != '' and map.dotAccountPackId != 'null' and map.dotAccountPackId != 'undefined'" >
+       and dap.dot_account_pack_id = #{map.dotAccountPackId,jdbcType=VARCHAR}
+      </if>
+      <if test="map.projectCode != null and map.projectCode != '' and map.projectCode != 'null' and map.projectCode != 'undefined' " >
+       and dap.project_code = #{map.projectCode,jdbcType=VARCHAR}
+      </if>
+      <if test="map.branchName != null  and map.branchName != '' and map.branchName != 'null' and map.branchName != 'undefined'" >
+       and dap.branch_name = #{map.branchName,jdbcType=VARCHAR}
+      </if>
+      <if test="map.createDate != null" >
+      and  dap.create_date = #{map.createDate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="map.packTruckNum != null" >
+      and  dap.packTruckNum = #{map.packTruckNum,jdbcType=INTEGER}
+      </if>
+      <if test="map.suppliesAmount != null" >
+      and  dap.suppliesAmount = #{map.suppliesAmount,jdbcType=DECIMAL}
+      </if>
+      <if test="map.status != null" >
+      and  dap.status = #{map.status,jdbcType=INTEGER}
+      </if>
+      <if test="map.createUserId != null" >
+      and  dap.create_user_id = #{map.createUserId,jdbcType=INTEGER}
+      </if>
+      <if test="map.auditId != null" >
+      and  dap.audit_id = #{map.auditId,jdbcType=INTEGER}
+      </if>
+      <if test="map.auditDate != null" >
+       and dap.audit_date = #{map.auditDate,jdbcType=TIMESTAMP}
+      </if>
+      </where>
+    </if>
+  </select>
+</mapper>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shenhesoft.logistics.finance.mapper.MaterialManagementMapper">
+
+	<!-- 新增油气卡信息表 -->
+	<insert id="addMaterial">
+    insert into tb_material(id,sales_unit,branch_group_id,material_name,material_type,material_unit,material_num,material_unit_price,total_money,purchase_id,purchase_date,audit_id,audit_date,audit_status,used_num,serial_number,account_id)
+ 		values(#{id},#{salesUnit},#{branchGroupId},#{materialName},#{materialType},#{materialUnit},#{materialNum},#{materialUnitPrice},#{totalMoney},#{purchaseId},#{purchaseDate},#{auditId},#{auditDate},#{auditStatus},#{usedNum},#{serialNumber},#{accountId})
+	</insert>
+	
+	<!-- 查询油气卡信息表 -->
+	<select id="queryMaterial" resultType="Map">
+		SELECT a.id id,a.sales_unit salesUnit,a.branch_group_id branchGroupId,a.material_name materialName,a.material_type materialType,a.material_unit materialUnit,a.material_num materialNum,a.material_unit_price materialUnitPrice,a.total_money totalMoney,a.purchase_id purchaseId,a.purchase_date purchaseDate,a.audit_id auditId,a.audit_date auditDate,a.audit_status auditStatus,a.used_num usedNum,a.serial_number serialNumber,
+		b.name auditName,
+		c.name purchaseName,
+		d.short_name shortName
+	  from tb_material a
+		left join tb_system_user b on a.audit_id = b.id
+		left join tb_system_user c on a.purchase_id = c.id
+	  left join tb_branch_group d on a.branch_group_id = d.id
+	  left join tb_branch_group_link y on a.id=y.row_id and y.tab_name='tb_material' 
+			where y.sys_org_code like CONCAT(#{map.sysOrgCode},'%') 
+		<if test="map != null">
+		<if test="map.beginDate != null and map.beginDate !='' and map.beginDate != 'null' and map.beginDate != 'undefined' " >
+		       and date_format(a.purchase_date, '%Y-%m-%d') &gt;= date_format(#{map.beginDate}, '%Y-%m-%d')
+		    </if>
+		    <if test="map.endDate != null and map.endDate !='' and map.endDate != 'null' and map.endDate != 'undefined' " >
+		       and date_format(a.purchase_date, '%Y-%m-%d') &lt;= date_format(#{map.endDate}, '%Y-%m-%d')
+		    </if>		
+		<if test="map.id != null">				  
+		    AND a.id = #{map.id}
+                </if>
+		<if test="map.salesUnit != null">				  
+		    AND a.sales_unit = #{map.salesUnit}
+                </if>
+		<if test="map.branchGroupId != null">
+		    AND a.branch_group_id = #{map.branchGroupId}
+                </if>
+        <if test="map.branchGroupName != null and map.branchGroupName != '' and map.branchGroupName != 'null' and map.branchGroupName != 'undefined'">
+		    AND d.name like CONCAT('%',#{map.branchGroupName},'%') 
+         </if>         
+		<if test="map.materialName != null">
+		    AND a.material_name = #{map.materialName}
+                </if>
+		<if test="map.materialType != null">
+		    AND a.material_type = #{map.materialType}
+                </if>
+		<if test="map.materialUnit != null">
+		    AND a.material_unit = #{map.materialUnit}
+                </if>
+    <if test="map.auditId != null">
+		    AND a.audit_id = #{map.auditId}
+                </if>
+		<if test="map.auditDate != null">
+		    AND a.audit_date = #{map.auditDate}
+                </if>
+		<if test="map.materialNum != null">
+		    AND a.material_num = #{map.materialNum}
+                </if>
+		<if test="map.materialUnitPrice != null">
+		    AND a.material_unit_price = #{map.materialUnitPrice}
+                </if>
+    <if test="map.totalMoney != null">
+		    AND a.total_money = #{map.totalMoney}
+                </if>
+    <if test="map.purchaseId != null">
+		    AND a.purchase_id = #{map.purchaseId}
+                </if>
+		<if test="map.purchaseDate != null">
+		    AND a.purchase_date = #{map.purchaseDate}
+                </if>
+		<if test="map.auditStatus != null">
+		    AND a.audit_status = #{map.auditStatus}
+                </if>
+    <if test="map.usedNum != null">
+		    AND a.used_num = #{map.usedNum}
+                </if>
+            </if>
+	</select>
+	
+	<!-- 修改审核状态 -->
+	<update id="updateMaterial">
+		update tb_material set 
+		audit_status = #{auditStatus},
+		<if test='auditStatus == 0'>
+			audit_date = null,
+			audit_id = null
+		</if>
+		<if test='auditStatus == 1 or auditStatus == 2'>
+			audit_date = #{auditDate},
+			audit_id = #{auditId}
+		</if>
+		 where id=#{id}
+	</update>
+	
+	<select id="queryCompanyAccount" resultType="Map">
+			select id id,account_name accountName from tb_finance_account where account_kind = 2
+	</select>
+	
+	<select id="queryMaterialById" resultType="Map">
+		select total_money totalMoney,purchase_id purchaseId,purchase_date purchaseDate,account_id accountId from tb_material where id=#{id}
+	</select>
+</mapper>

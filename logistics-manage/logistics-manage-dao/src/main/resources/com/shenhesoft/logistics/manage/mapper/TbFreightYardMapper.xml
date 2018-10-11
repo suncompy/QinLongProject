@@ -1,0 +1,588 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shenhesoft.logistics.manage.mapper.TbFreightYardMapper" >
+  <resultMap id="BaseResultMap" type="com.shenhesoft.logistics.manage.pojo.site.TbFreightYard" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="is_isolated" property="isIsolated" jdbcType="TINYINT" />
+    <result column="linkman" property="linkman" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="address_code" property="addressCode" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="freight_yard_img" property="freightYardImg" jdbcType="VARCHAR" />
+    <result column="train_station_id" property="trainStationId" jdbcType="INTEGER" />
+    <result column="delete_flag" property="deleteFlag" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, name, is_isolated, linkman, phone, address_code, address, remark, freight_yard_img, 
+    train_station_id, delete_flag
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shenhesoft.logistics.manage.pojo.site.TbFreightYardExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_freight_yard
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_freight_yard
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_freight_yard
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.shenhesoft.logistics.manage.pojo.site.TbFreightYardExample" >
+    delete from tb_freight_yard
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.shenhesoft.logistics.manage.pojo.site.TbFreightYard" >
+    insert into tb_freight_yard (id, name, is_isolated, 
+      linkman, phone, address_code, 
+      address, remark, freight_yard_img, 
+      train_station_id, delete_flag)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{isIsolated,jdbcType=TINYINT}, 
+      #{linkman,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{addressCode,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{freightYardImg,jdbcType=VARCHAR}, 
+      #{trainStationId,jdbcType=INTEGER}, #{deleteFlag,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.shenhesoft.logistics.manage.pojo.site.TbFreightYard" >
+  <selectKey resultType="java.lang.Integer" keyProperty="id"
+			order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+    insert into tb_freight_yard
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="isIsolated != null" >
+        is_isolated,
+      </if>
+      <if test="linkman != null" >
+        linkman,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="addressCode != null" >
+        address_code,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="freightYardImg != null" >
+        freight_yard_img,
+      </if>
+      <if test="trainStationId != null" >
+        train_station_id,
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="isIsolated != null" >
+        #{isIsolated,jdbcType=TINYINT},
+      </if>
+      <if test="linkman != null" >
+        #{linkman,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="addressCode != null" >
+        #{addressCode,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="freightYardImg != null" >
+        #{freightYardImg,jdbcType=VARCHAR},
+      </if>
+      <if test="trainStationId != null" >
+        #{trainStationId,jdbcType=INTEGER},
+      </if>
+      <if test="deleteFlag != null" >
+        #{deleteFlag,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.shenhesoft.logistics.manage.pojo.site.TbFreightYardExample" resultType="java.lang.Integer" >
+    select count(*) from tb_freight_yard
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_freight_yard
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isIsolated != null" >
+        is_isolated = #{record.isIsolated,jdbcType=TINYINT},
+      </if>
+      <if test="record.linkman != null" >
+        linkman = #{record.linkman,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone != null" >
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addressCode != null" >
+        address_code = #{record.addressCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null" >
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.freightYardImg != null" >
+        freight_yard_img = #{record.freightYardImg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.trainStationId != null" >
+        train_station_id = #{record.trainStationId,jdbcType=INTEGER},
+      </if>
+      <if test="record.deleteFlag != null" >
+        delete_flag = #{record.deleteFlag,jdbcType=TINYINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_freight_yard
+    set id = #{record.id,jdbcType=INTEGER},
+      name = #{record.name,jdbcType=VARCHAR},
+      is_isolated = #{record.isIsolated,jdbcType=TINYINT},
+      linkman = #{record.linkman,jdbcType=VARCHAR},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      address_code = #{record.addressCode,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      freight_yard_img = #{record.freightYardImg,jdbcType=VARCHAR},
+      train_station_id = #{record.trainStationId,jdbcType=INTEGER},
+      delete_flag = #{record.deleteFlag,jdbcType=TINYINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.shenhesoft.logistics.manage.pojo.site.TbFreightYard" >
+    update tb_freight_yard
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="isIsolated != null" >
+        is_isolated = #{isIsolated,jdbcType=TINYINT},
+      </if>
+      <if test="linkman != null" >
+        linkman = #{linkman,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="addressCode != null" >
+        address_code = #{addressCode,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="freightYardImg != null" >
+        freight_yard_img = #{freightYardImg,jdbcType=VARCHAR},
+      </if>
+      <if test="trainStationId != null" >
+        train_station_id = #{trainStationId,jdbcType=INTEGER},
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag = #{deleteFlag,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.shenhesoft.logistics.manage.pojo.site.TbFreightYard" >
+    update tb_freight_yard
+    set name = #{name,jdbcType=VARCHAR},
+      is_isolated = #{isIsolated,jdbcType=TINYINT},
+      linkman = #{linkman,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      address_code = #{addressCode,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      freight_yard_img = #{freightYardImg,jdbcType=VARCHAR},
+      train_station_id = #{trainStationId,jdbcType=INTEGER},
+      delete_flag = #{deleteFlag,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+	<select id="selectFreightYardsByPage"
+		resultType="com.shenhesoft.logistics.manage.helpPojo.TbFreightYardDetail">
+		select
+		A.id id, A.name, A.is_isolated isIsolated,
+		A.linkman,B.station_name
+		stationName,A.address_code addressCode,
+		A.phone, A.address, A.remark, A.freight_yard_img freightYardImg,
+		A.train_station_id trainStationId
+		from
+		tb_freight_yard as
+		A,tb_train_station as B
+		where
+		A.train_station_id = B.id
+		order by id desc
+	</select>
+
+
+	<select id="selectLocaltionCountByYardId" parameterType="java.lang.Integer"
+		resultType="java.lang.Integer">
+		select count(*) from tb_cargo_location where
+		freight_yard_id =
+		#{id,jdbcType=INTEGER} and delete_flag = 0
+	</select>
+
+	<delete id="deleteBatch" parameterType="java.util.List">
+		update tb_freight_yard set    delete_flag = 1
+		where id in
+		<foreach item="id" collection="list" open="(" separator=","
+			close=")">
+			#{id,jdbcType=INTEGER}
+		</foreach>
+	</delete>
+
+	<select id="selectFreightYardsById" parameterType="java.lang.Integer"
+		resultType="com.shenhesoft.logistics.manage.helpPojo.TbFreightYardDetail">
+		select
+		A.id id, A.name, A.is_isolated isIsolated,
+		A.linkman,B.station_name
+		stationName,A.address_code addressCode,
+		A.phone, A.address, A.remark, A.freight_yard_img freightYardImg,
+		A.train_station_id trainStationId
+
+		from
+		tb_freight_yard as
+		A,tb_train_station as B
+		where
+		A.train_station_id = B.id
+		and A.id
+		=#{id,jdbcType=INTEGER}
+	</select>
+	
+	<select id="selectFreightYardsByIdOfNoStation" parameterType="java.lang.Integer"
+		resultType="com.shenhesoft.logistics.manage.helpPojo.TbFreightYardDetail">
+		select
+		A.id id, A.name, A.is_isolated isIsolated,
+		A.linkman,A.address_code addressCode,
+		A.phone, A.address, A.remark, A.freight_yard_img freightYardImg,
+		A.train_station_id trainStationId
+
+		from
+		tb_freight_yard as A
+		where A.id = #{id,jdbcType=INTEGER}
+	</select>
+	
+	<select id="selectCargoLocationByfreightYardId" parameterType="java.lang.Integer"
+		resultType="com.shenhesoft.logistics.manage.pojo.CargoLocation.TbCargoLocation">
+		select
+		id,code,name,tonnage ,freight_yard_id freightYardId
+		from
+		tb_cargo_location
+		where
+		freight_yard_id =#{id,jdbcType=INTEGER} and delete_flag = 0
+	</select>
+
+
+	<update id="updateFreightYardById"
+		parameterType="com.shenhesoft.logistics.manage.pojo.site.TbFreightYard">
+		update tb_freight_yard
+		<set>
+			<if test="name != null">
+				name = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="isIsolated != null">
+				is_isolated = #{isIsolated,jdbcType=TINYINT},
+			</if>
+			<if test="linkman != null">
+				linkman = #{linkman,jdbcType=VARCHAR},
+			</if>
+			<if test="phone != null">
+				phone = #{phone,jdbcType=VARCHAR},
+			</if>
+			<if test="addressCode != null">
+				address_code = #{addressCode,jdbcType=VARCHAR},
+			</if>
+			<if test="address != null">
+				address = #{address,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				remark = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="freightYardImg != null">
+				freight_yard_img = #{freightYardImg,jdbcType=VARCHAR},
+			</if>
+			<!-- <if test="trainStationId != null">
+				train_station_id = #{trainStationId,jdbcType=INTEGER},
+			</if> -->
+			train_station_id = #{trainStationId,jdbcType=INTEGER},
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+
+
+
+	<delete id="deleteRelateBatchCargoLocation" parameterType="java.lang.Integer">
+		update  tb_cargo_location set delete_flag = 1 
+		where freight_yard_id
+		=#{id,jdbcType=INTEGER}
+	</delete>
+
+
+	<select id="selectFreightYardsByExample"
+		resultType="com.shenhesoft.logistics.manage.helpPojo.TbFreightYardDetail"
+		parameterType="com.shenhesoft.logistics.manage.pojo.site.TbFreightYardExample">
+		<!-- select
+		A.id id, A.name, A.is_isolated isIsolated,
+		A.linkman,B.station_name
+		stationName,A.address_code addressCode,
+		A.phone, A.address, A.remark, A.freight_yard_img freightYardImg,
+		A.train_station_id trainStationId
+		from
+		tb_freight_yard as
+		A,tb_train_station as B
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+			AND
+		</if>
+		A.train_station_id = B.id
+		and B.delete_flag = 0 and A.delete_flag = 0
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if> -->
+		select
+		A.id id, A.name, A.is_isolated isIsolated,
+		A.linkman,A.address_code addressCode,
+		A.phone, A.address, A.remark, A.freight_yard_img freightYardImg,
+		A.train_station_id trainStationId
+		from
+		tb_freight_yard as A,tb_branch_group_link y
+		
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+			AND
+		</if>
+		 A.delete_flag = 0 and A.id=y.row_id 
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+	
+	<select id="getAllFreightYards" resultType="com.shenhesoft.logistics.manage.helpPojo.TbFreightYardDetail">
+		select id,name,is_isolated isIsolated,linkman,phone,address,remark ,train_station_id trainStationId,
+		address_code addressCode
+		from tb_freight_yard A,tb_branch_group_link y
+		where  A.id=y.row_id and y.tab_name='tb_freight_yard'
+		and delete_flag = 0
+	</select>
+	
+	<select id="selecCargotByid" parameterType="java.lang.Integer" resultType="com.shenhesoft.logistics.manage.pojo.CargoLocation.TbCargoLocation">
+		select *
+		from tb_cargo_location 	
+		where
+		freight_yard_id = #{ids,jdbcType=INTEGER}
+	</select>
+	<!-- com.shenhesoft.logistics.manage.helpPojo.TbFreightYardDetail -->
+	<select id="getAllcargoLocationsByYardId" parameterType="java.lang.Integer" resultType="com.shenhesoft.logistics.manage.pojo.CargoLocation.TbCargoLocation">
+		select id,code,name,tonnage
+		from tb_cargo_location 	
+		where delete_flag = 0
+		and 
+		freight_yard_id = #{id,jdbcType=INTEGER}
+	</select>
+	
+	<select id="getAllFreightLocationsByYardId" parameterType="java.lang.Integer" resultType="com.shenhesoft.logistics.business.helpPojo.TbFreightLocationDetail">
+		select A.id freightId ,A.name freightName ,B.id cargoId,B.name cargoName ,B.code cargoCode from tb_freight_yard A LEFT JOIN tb_cargo_location B on B.freight_yard_id = A.id 
+		where A.delete_flag = 0 and B.delete_flag = 0
+		<if test="id  != null">
+			and  A.id = #{id,jdbcType=INTEGER}
+		</if>
+	</select>
+	
+	<!-- 查询独立货场货位 -->
+	<select id="getAllFreightYardsOfIsolate" parameterType="java.lang.Integer" resultType="com.shenhesoft.logistics.manage.pojo.site.TbFreightYard">
+		select id,name,is_isolated isIsolated,linkman,phone,address,remark ,train_station_id trainStationId,
+		address_code addressCode
+		from tb_freight_yard 
+		where delete_flag = 0 and is_isolated = 1 and train_station_id = #{trainStationId,jdbcType=INTEGER}
+	</select>
+	
+	<!-- 修改 - 如果点击删除货位 校验是否被使用 -->
+	<select id="checkCargoLocation" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+		
+		SELECT sum(a.ct) sumCt from
+			(SELECT 
+			count(id) ct
+			from tb_order 
+			where take_cargo_site_id =  #{id,jdbcType=INTEGER}
+			or 
+			distribution_cargo_site_id = #{id,jdbcType=INTEGER}
+			 
+			UNION ALL
+	
+			SELECT 
+			count(id) ct
+			from tb_train_order_cargo_palce 
+			where cargo_site_id =  #{id,jdbcType=INTEGER}
+			or 
+			arrive_cargo_site_id = #{id,jdbcType=INTEGER} 
+	
+			UNION ALL
+	
+			SELECT 
+			count(id) ct
+			from tb_stock 
+			where cargo_location_id =  #{id,jdbcType=INTEGER}
+			) a
+
+  	</select>
+  	
+  	<update id="deleteCargoLocationById" parameterType="java.lang.Integer" >
+	    update tb_cargo_location
+	    set 
+	      delete_flag = 1
+	    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <select id="checkFreightIsUseById" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+		
+		SELECT sum(a.ct) sumCt from
+			(
+			SELECT 
+			count(id) ct
+			from tb_project 
+			where receive_cargo_site_freight_yard_id =  #{id}
+			or 
+			forwarding_site_freight_yard_id = #{id}
+			or 
+			CONCAT(end_site_freight_yard,'0') = CONCAT(#{id},'0')
+			or 
+			CONCAT(begin_site_freight_yard,'0') = CONCAT(#{id},'0')
+			
+			UNION ALL
+
+			SELECT 
+			count(id) ct
+			from tb_order 
+			where take_cargo_place_id =  #{id,jdbcType=INTEGER}
+			or 
+			distribution_cargo_place_id = #{id,jdbcType=INTEGER}
+			 
+			UNION ALL
+	
+			SELECT 
+			count(id) ct
+			from tb_train_order_cargo_palce 
+			where cargo_place_id =  #{id,jdbcType=INTEGER}
+			or 
+			arrive_cargo_place_id = #{id,jdbcType=INTEGER} 
+	
+			UNION ALL
+	
+			SELECT 
+			count(id) ct
+			from tb_stock 
+			where freight_yard_id =  #{id,jdbcType=INTEGER}
+			) a
+
+  	</select>
+</mapper>

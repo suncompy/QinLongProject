@@ -1,0 +1,34 @@
+/*库存盘查*/
+.inventoryCheck .adjustModal .form-control{width: 168px;}
+.inventoryCheck .stockcheck ul{list-style-type: none;padding: 0px}
+.inventoryCheck .stockcheck li{float: left;width: 25%}
+.inventoryCheck .stockcheck .modal-content{padding-bottom:20px;}
+.inventoryCheck .stockcheck .modal-body{padding:0px;}
+.inventoryCheck .stockcheck .modal-body>div{padding-left: 20px;}
+.inventoryCheck .stockcheck .modal-body hr{border-top: 1px dashed #ccc;}
+.inventoryCheck .stockcheck .modal-body label{font-weight: normal;font-size: 14px;font-family: "Microsoft YaHei";color: rgb(51, 51, 51);line-height: 1.2;}
+
+
+
+
+/*库存计费*/
+.inventoryBilling .addBilling .form-control{width: 120px;}
+.inventoryBilling .addBilling .modal-content{padding-bottom:20px;}
+.inventoryBilling .addBilling .modal-body{padding:0px;}
+.inventoryBilling .addBilling form{padding-left: 10px;}
+/*.inventoryBilling .days{display: block}*/
+.inventoryBilling .weight,.inventoryBilling .location{display: none}
+
+.inventoryBilling .billingAdjust .modal-body ul{list-style-type: none;padding: 0px;}
+.inventoryBilling .billingAdjust .modal-body li{float: left;width: 25%;height: 50px;line-height: 30px;}
+.inventoryBilling .billingAdjust .form-control{width: 120px;}
+.inventoryBilling .billingAdjust .modal-content{padding-bottom: 20px;}
+.inventoryBilling .billingAdjust .modal-body{padding: 0px;}
+.inventoryBilling .billingAdjust .modal-body>form{padding-left: 10px;}
+
+
+
+
+
+
+

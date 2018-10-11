@@ -1,0 +1,84 @@
+*{
+	margin: 0;
+	padding: 0;
+	font-size: 18px !important;
+  	font-family: "Microsoft YaHei" !important;
+  	color: rgb(153, 153, 153) !important;
+  	font-weight: normal !important;
+}
+body{
+	overflow-y: hidden;
+	background-color:#f7f6fd;
+	
+}
+.contains{
+	background-color: #ffffff;
+	position: absolute;
+	top: 50%;
+	right: 50%;
+	width: 1120px;
+	height: 400px;
+	margin-top: -200px;
+	margin-right: -560px;
+	border-top-right-radius: 10px 10px;
+	border-bottom-right-radius: 10px 10px;
+}
+/*.shandow{
+	position: absolute;
+	left: 50%;
+}*/
+.contains .logoImg,.contains .revise{
+	float: left;
+	width: 50%;
+	height: 100%;
+}
+.contains .formDiv{
+	width: 460px;
+	margin: auto;
+	margin-top: 100px;
+}
+
+.col-sm-4,.col-sm-8{
+	padding: 0;
+}
+.form-group{
+	margin-bottom: 20px;
+	text-indent: 8px;
+	outline:none !important;	
+}
+.form-group label{
+	width: 26%;
+	text-align: right;
+}
+.form-control{
+	border: 0;
+	border-radius: 0;
+	box-shadow: none;
+	border-bottom: 1px solid #DBDBDB;
+	display: inline-block;
+	width: 71%;
+}
+
+.btn{
+	margin-left: 29%;
+	width: 71%;
+	margin-top: 40px;
+	 border-radius: 10px;
+	 background-color: rgb(238, 238, 238);
+}
+.shandow {
+  background-image: -moz-linear-gradient( 0deg, rgb(226, 242, 255) 0%, rgba(30,154,247,0) 100%);
+  background-image: -webkit-linear-gradient( 0deg, rgb(226, 242, 255) 0%, rgba(30,154,247,0) 100%);
+  background-image: -ms-linear-gradient( 0deg, rgb(226, 242, 255) 0%, rgba(30,154,247,0) 100%);
+  opacity: 0.351;
+  position: absolute;
+  left:560px;
+  top: 0px;
+  width: 80px;
+  height: 400px;
+  z-index: 8;
+}
+.submit { background: #1E9AF7; color: #fff !important; }
+
+
+

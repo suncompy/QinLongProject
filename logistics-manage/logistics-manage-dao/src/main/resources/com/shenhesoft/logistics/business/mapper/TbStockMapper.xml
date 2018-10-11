@@ -1,0 +1,524 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shenhesoft.logistics.business.mapper.TbStockMapper" >
+  <resultMap id="BaseResultMap" type="com.shenhesoft.logistics.business.pojo.stock.TbStock" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="station_id" property="stationId" jdbcType="INTEGER" />
+    <result column="station_name" property="stationName" jdbcType="VARCHAR" />
+    <result column="freight_yard_id" property="freightYardId" jdbcType="INTEGER" />
+    <result column="freight_yard_name" property="freightYardName" jdbcType="VARCHAR" />
+    <result column="cargo_location_id" property="cargoLocationId" jdbcType="INTEGER" />
+    <result column="cargo_location_name" property="cargoLocationName" jdbcType="VARCHAR" />
+    <result column="enter_qty" property="enterQty" jdbcType="DECIMAL" />
+    <result column="out_qty" property="outQty" jdbcType="DECIMAL" />
+    <result column="container_num" property="containerNum" jdbcType="INTEGER" />
+    <result column="current_qty" property="currentQty" jdbcType="DECIMAL" />
+    <result column="adjust_qty" property="adjustQty" jdbcType="DECIMAL" />
+    <result column="project_id" property="projectId" jdbcType="INTEGER" />
+    <result column="project_code" property="projectCode" jdbcType="VARCHAR" />
+    <result column="project_type" property="projectType" jdbcType="TINYINT" />
+    <result column="type" property="type" jdbcType="TINYINT" />
+    <result column="adjust_date" property="adjustDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="BaseResultMap2" type="com.shenhesoft.logistics.business.helpPojo.FreightSpace" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="station_id" property="stationId" jdbcType="INTEGER" />
+    <result column="station_name" property="stationName" jdbcType="VARCHAR" />
+    <result column="freight_yard_id" property="freightYardId" jdbcType="INTEGER" />
+    <result column="freight_yard_name" property="freightYardName" jdbcType="VARCHAR" />
+    <result column="cargo_location_id" property="cargoLocationId" jdbcType="INTEGER" />
+    <result column="cargo_location_name" property="cargoLocationName" jdbcType="VARCHAR" />
+    <result column="enter_qty" property="enterQty" jdbcType="DECIMAL" />
+    <result column="out_qty" property="outQty" jdbcType="DECIMAL" />
+    <result column="container_num" property="containerNum" jdbcType="INTEGER" />
+    <result column="current_qty" property="currentQty" jdbcType="DECIMAL" />
+    <result column="adjust_qty" property="adjustQty" jdbcType="DECIMAL" />
+    <result column="project_id" property="projectId" jdbcType="INTEGER" />
+    <result column="project_code" property="projectCode" jdbcType="VARCHAR" />
+    <result column="project_type" property="projectType" jdbcType="TINYINT" />
+    <result column="type" property="type" jdbcType="TINYINT" />
+    <result column="adjust_date" property="adjustDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, station_id, station_name, freight_yard_id, freight_yard_name, cargo_location_id, 
+    cargo_location_name, enter_qty, out_qty, container_num, current_qty, adjust_qty, 
+    project_id, project_code, project_type, type, adjust_date
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shenhesoft.logistics.business.pojo.stock.TbStockExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_stock
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_stock
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_stock
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.shenhesoft.logistics.business.pojo.stock.TbStockExample" >
+    delete from tb_stock
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.shenhesoft.logistics.business.pojo.stock.TbStock" >
+    insert into tb_stock (id, station_id, station_name, 
+      freight_yard_id, freight_yard_name, cargo_location_id, 
+      cargo_location_name, enter_qty, out_qty, 
+      container_num, current_qty, adjust_qty, 
+      project_id, project_code, project_type, 
+      type, adjust_date)
+    values (#{id,jdbcType=INTEGER}, #{stationId,jdbcType=INTEGER}, #{stationName,jdbcType=VARCHAR}, 
+      #{freightYardId,jdbcType=INTEGER}, #{freightYardName,jdbcType=VARCHAR}, #{cargoLocationId,jdbcType=INTEGER}, 
+      #{cargoLocationName,jdbcType=VARCHAR}, #{enterQty,jdbcType=DECIMAL}, #{outQty,jdbcType=DECIMAL}, 
+      #{containerNum,jdbcType=INTEGER}, #{currentQty,jdbcType=DECIMAL}, #{adjustQty,jdbcType=DECIMAL}, 
+      #{projectId,jdbcType=INTEGER}, #{projectCode,jdbcType=VARCHAR}, #{projectType,jdbcType=TINYINT}, 
+      #{type,jdbcType=TINYINT}, #{adjustDate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.shenhesoft.logistics.business.pojo.stock.TbStock" >
+    insert into tb_stock
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="stationId != null" >
+        station_id,
+      </if>
+      <if test="stationName != null" >
+        station_name,
+      </if>
+      <if test="freightYardId != null" >
+        freight_yard_id,
+      </if>
+      <if test="freightYardName != null" >
+        freight_yard_name,
+      </if>
+      <if test="cargoLocationId != null" >
+        cargo_location_id,
+      </if>
+      <if test="cargoLocationName != null" >
+        cargo_location_name,
+      </if>
+      <if test="enterQty != null" >
+        enter_qty,
+      </if>
+      <if test="outQty != null" >
+        out_qty,
+      </if>
+      <if test="containerNum != null" >
+        container_num,
+      </if>
+      <if test="currentQty != null" >
+        current_qty,
+      </if>
+      <if test="adjustQty != null" >
+        adjust_qty,
+      </if>
+      <if test="projectId != null" >
+        project_id,
+      </if>
+      <if test="projectCode != null" >
+        project_code,
+      </if>
+      <if test="projectType != null" >
+        project_type,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="adjustDate != null" >
+        adjust_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="stationId != null" >
+        #{stationId,jdbcType=INTEGER},
+      </if>
+      <if test="stationName != null" >
+        #{stationName,jdbcType=VARCHAR},
+      </if>
+      <if test="freightYardId != null" >
+        #{freightYardId,jdbcType=INTEGER},
+      </if>
+      <if test="freightYardName != null" >
+        #{freightYardName,jdbcType=VARCHAR},
+      </if>
+      <if test="cargoLocationId != null" >
+        #{cargoLocationId,jdbcType=INTEGER},
+      </if>
+      <if test="cargoLocationName != null" >
+        #{cargoLocationName,jdbcType=VARCHAR},
+      </if>
+      <if test="enterQty != null" >
+        #{enterQty,jdbcType=DECIMAL},
+      </if>
+      <if test="outQty != null" >
+        #{outQty,jdbcType=DECIMAL},
+      </if>
+      <if test="containerNum != null" >
+        #{containerNum,jdbcType=INTEGER},
+      </if>
+      <if test="currentQty != null" >
+        #{currentQty,jdbcType=DECIMAL},
+      </if>
+      <if test="adjustQty != null" >
+        #{adjustQty,jdbcType=DECIMAL},
+      </if>
+      <if test="projectId != null" >
+        #{projectId,jdbcType=INTEGER},
+      </if>
+      <if test="projectCode != null" >
+        #{projectCode,jdbcType=VARCHAR},
+      </if>
+      <if test="projectType != null" >
+        #{projectType,jdbcType=TINYINT},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=TINYINT},
+      </if>
+      <if test="adjustDate != null" >
+        #{adjustDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.shenhesoft.logistics.business.pojo.stock.TbStockExample" resultType="java.lang.Integer" >
+    select count(*) from tb_stock
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_stock
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.stationId != null" >
+        station_id = #{record.stationId,jdbcType=INTEGER},
+      </if>
+      <if test="record.stationName != null" >
+        station_name = #{record.stationName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.freightYardId != null" >
+        freight_yard_id = #{record.freightYardId,jdbcType=INTEGER},
+      </if>
+      <if test="record.freightYardName != null" >
+        freight_yard_name = #{record.freightYardName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cargoLocationId != null" >
+        cargo_location_id = #{record.cargoLocationId,jdbcType=INTEGER},
+      </if>
+      <if test="record.cargoLocationName != null" >
+        cargo_location_name = #{record.cargoLocationName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.enterQty != null" >
+        enter_qty = #{record.enterQty,jdbcType=DECIMAL},
+      </if>
+      <if test="record.outQty != null" >
+        out_qty = #{record.outQty,jdbcType=DECIMAL},
+      </if>
+      <if test="record.containerNum != null" >
+        container_num = #{record.containerNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.currentQty != null" >
+        current_qty = #{record.currentQty,jdbcType=DECIMAL},
+      </if>
+      <if test="record.adjustQty != null" >
+        adjust_qty = #{record.adjustQty,jdbcType=DECIMAL},
+      </if>
+      <if test="record.projectId != null" >
+        project_id = #{record.projectId,jdbcType=INTEGER},
+      </if>
+      <if test="record.projectCode != null" >
+        project_code = #{record.projectCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.projectType != null" >
+        project_type = #{record.projectType,jdbcType=TINYINT},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=TINYINT},
+      </if>
+      <if test="record.adjustDate != null" >
+        adjust_date = #{record.adjustDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_stock
+    set id = #{record.id,jdbcType=INTEGER},
+      station_id = #{record.stationId,jdbcType=INTEGER},
+      station_name = #{record.stationName,jdbcType=VARCHAR},
+      freight_yard_id = #{record.freightYardId,jdbcType=INTEGER},
+      freight_yard_name = #{record.freightYardName,jdbcType=VARCHAR},
+      cargo_location_id = #{record.cargoLocationId,jdbcType=INTEGER},
+      cargo_location_name = #{record.cargoLocationName,jdbcType=VARCHAR},
+      enter_qty = #{record.enterQty,jdbcType=DECIMAL},
+      out_qty = #{record.outQty,jdbcType=DECIMAL},
+      container_num = #{record.containerNum,jdbcType=INTEGER},
+      current_qty = #{record.currentQty,jdbcType=DECIMAL},
+      adjust_qty = #{record.adjustQty,jdbcType=DECIMAL},
+      project_id = #{record.projectId,jdbcType=INTEGER},
+      project_code = #{record.projectCode,jdbcType=VARCHAR},
+      project_type = #{record.projectType,jdbcType=TINYINT},
+      type = #{record.type,jdbcType=TINYINT},
+      adjust_date = #{record.adjustDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.shenhesoft.logistics.business.pojo.stock.TbStock" >
+    update tb_stock
+    <set >
+      <if test="stationId != null" >
+        station_id = #{stationId,jdbcType=INTEGER},
+      </if>
+      <if test="stationName != null" >
+        station_name = #{stationName,jdbcType=VARCHAR},
+      </if>
+      <if test="freightYardId != null" >
+        freight_yard_id = #{freightYardId,jdbcType=INTEGER},
+      </if>
+      <if test="freightYardName != null" >
+        freight_yard_name = #{freightYardName,jdbcType=VARCHAR},
+      </if>
+      <if test="cargoLocationId != null" >
+        cargo_location_id = #{cargoLocationId,jdbcType=INTEGER},
+      </if>
+      <if test="cargoLocationName != null" >
+        cargo_location_name = #{cargoLocationName,jdbcType=VARCHAR},
+      </if>
+      <if test="enterQty != null" >
+        enter_qty = #{enterQty,jdbcType=DECIMAL},
+      </if>
+      <if test="outQty != null" >
+        out_qty = #{outQty,jdbcType=DECIMAL},
+      </if>
+      <if test="containerNum != null" >
+        container_num = #{containerNum,jdbcType=INTEGER},
+      </if>
+      <if test="currentQty != null" >
+        current_qty = #{currentQty,jdbcType=DECIMAL},
+      </if>
+      <if test="adjustQty != null" >
+        adjust_qty = #{adjustQty,jdbcType=DECIMAL},
+      </if>
+      <if test="projectId != null" >
+        project_id = #{projectId,jdbcType=INTEGER},
+      </if>
+      <if test="projectCode != null" >
+        project_code = #{projectCode,jdbcType=VARCHAR},
+      </if>
+      <if test="projectType != null" >
+        project_type = #{projectType,jdbcType=TINYINT},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=TINYINT},
+      </if>
+      <if test="adjustDate != null" >
+        adjust_date = #{adjustDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.shenhesoft.logistics.business.pojo.stock.TbStock" >
+    update tb_stock
+    set station_id = #{stationId,jdbcType=INTEGER},
+      station_name = #{stationName,jdbcType=VARCHAR},
+      freight_yard_id = #{freightYardId,jdbcType=INTEGER},
+      freight_yard_name = #{freightYardName,jdbcType=VARCHAR},
+      cargo_location_id = #{cargoLocationId,jdbcType=INTEGER},
+      cargo_location_name = #{cargoLocationName,jdbcType=VARCHAR},
+      enter_qty = #{enterQty,jdbcType=DECIMAL},
+      out_qty = #{outQty,jdbcType=DECIMAL},
+      container_num = #{containerNum,jdbcType=INTEGER},
+      current_qty = #{currentQty,jdbcType=DECIMAL},
+      adjust_qty = #{adjustQty,jdbcType=DECIMAL},
+      project_id = #{projectId,jdbcType=INTEGER},
+      project_code = #{projectCode,jdbcType=VARCHAR},
+      project_type = #{projectType,jdbcType=TINYINT},
+      type = #{type,jdbcType=TINYINT},
+      adjust_date = #{adjustDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <!-- 通过项目id获取总的入库 和总的出库 还有 总的库存 和库存调整吨位 -->
+    <!--查询入库吨位 -->
+ 		<select id="selectEnterQtyByProjectId" parameterType="map"
+	resultType="java.math.BigDecimal">
+	SELECT
+		SUM(enter_qty)
+	FROM
+		tb_stock
+	where
+		type=#{type,jdbcType=TINYINT}
+	and	
+		project_id=#{id,jdbcType=INTEGER}
+	</select>
+	<!--查询出库吨位 -->
+	<select id="selectOutQtyByProjectId" parameterType="map"
+	resultType="java.math.BigDecimal">
+	SELECT
+		SUM(out_qty)
+	FROM
+		tb_stock
+	where
+		type=#{type,jdbcType=TINYINT}
+	and
+		project_id=#{id,jdbcType=INTEGER}
+	</select>
+	<!--查询库存吨位 -->
+	<select id="selectCurrentQtyByProjectId" parameterType="map"
+	resultType="java.math.BigDecimal">
+	SELECT
+		SUM(current_qty)
+	FROM
+		tb_stock
+	where
+		type=#{type,jdbcType=TINYINT}
+	and	
+		project_id=#{id,jdbcType=INTEGER}
+	</select>
+	<!--查询调整吨位 -->
+	<select id="selectAdjustQtyByProjectId" parameterType="map"
+	resultType="java.math.BigDecimal">
+	SELECT
+		SUM(adjust_qty)
+	FROM
+		tb_stock
+	where
+		type=#{type,jdbcType=TINYINT}
+	and
+		project_id=#{id,jdbcType=INTEGER}
+	</select>
+  
+  <!--查询站点有库存的项目  -->
+  <select id="selectProjectId" resultType="java.lang.Integer">
+	 select distinct project_id from tb_stock where current_qty !=0
+  </select>
+  
+  <select id="selectByProjectId" parameterType="java.lang.Integer"  resultMap="BaseResultMap2">
+   select 
+   <include refid="Base_Column_List" />
+    from tb_stock
+    where project_id = #{id,jdbcType=INTEGER}
+  </select>
+  
+ 	 <!--  获取去重的站点 -->
+	 <select id="distinctStationId" parameterType="java.lang.Integer"  resultType="java.lang.Integer">
+	  SELECT DISTINCT
+		station_id
+	 FROM
+		tb_stock
+	 WHERE
+		project_id = #{id,jdbcType=INTEGER}
+	 AND
+		current_qty !=0		
+  </select>
+	
+	<!--   根据站点获取去重的货场 -->
+	<select id="distinctFreightYard" parameterType="map"  resultType="java.lang.Integer">
+	  	SELECT DISTINCT
+			freight_yard_id
+		FROM
+			tb_stock
+		WHERE
+			project_id = #{projectId,jdbcType=INTEGER}
+		AND 
+			station_id = #{id,jdbcType=INTEGER}
+		AND
+			current_qty <![CDATA[!= ]]> 0		
+   </select>
+	
+	<!--   根据去重的货场获取货位 -->
+  	<select id="selectCargoLocation" parameterType="map"  resultMap="BaseResultMap2">
+	  	SELECT 
+	<include refid="Base_Column_List" />
+		FROM
+			tb_stock
+		WHERE
+			project_id = #{projectId,jdbcType=INTEGER}
+		AND 
+			freight_yard_id = #{id,jdbcType=INTEGER}
+		AND
+			current_qty !=0	
+   </select>
+  
+</mapper>

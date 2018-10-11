@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shenhesoft.logistics.finance.mapper.ShPackOrderMapper">
+
+	<!-- 新增短驳打包-运单中间表 -->
+	<insert id="addShPackOrder">
+		insert into tb_sh_pack_order(sh_pack_order_id,sh_pack_id,order_id,delete_flag,sh_order_fin_id
+		)values(#{shPackOrderId},#{shPackId},#{orderId},#{deleteFlag},#{shOrderFinId})
+	</insert>
+
+	<!-- 批量新增短驳打包-运单中间表 -->
+	<insert id="addShPackOrders">
+		insert into tb_sh_pack_order(sh_pack_order_id,sh_pack_id,order_id,delete_flag,sh_order_fin_id
+		)values
+		<foreach collection="list" item="item" index="index" separator=",">
+            (#{shPackOrderId},#{shPackId},#{orderId},#{deleteFlag},#{shOrderFinId})
+        </foreach>
+	</insert>
+
+	<!-- 修改短驳打包-运单中间表 -->
+	<update id="editShPackOrderById">
+		update tb_sh_pack_order
+		<set>
+		 <if test="shPackId != null and shPackId != '' and shPackId != 'null' and shPackId != 'undefined'">
+               sh_pack_id=#{shPackId},
+         </if>
+		<if test="orderId != null">
+               order_id=#{orderId},
+         </if>
+		<if test="deleteFlag != null">
+               delete_flag=#{deleteFlag},
+         </if>
+		 <if test="shOrderFinId != null and shOrderFinId != '' and shOrderFinId != 'null' and shOrderFinId != 'undefined'">
+               sh_order_fin_id=#{shOrderFinId},
+         </if>
+		</set>
+		where sh_pack_order_id=#{shPackOrderId}
+	</update>
+
+	<!-- 批量修改短驳打包-运单中间表 -->
+	<update id="editShPackOrderByIds">
+		update tb_sh_pack_order
+		<set>
+		 <if test="map.shPackId != null and map.shPackId != '' and map.shPackId != 'null' and map.shPackId != 'undefined'">
+	       sh_pack_id=#{map.shPackId},
+         </if>
+		<if test="orderId != null">
+	       order_id=#{map.orderId},
+         </if>
+		<if test="deleteFlag != null">
+	       delete_flag=#{map.deleteFlag},
+         </if>
+		 <if test="map.shOrderFinId != null and map.shOrderFinId != '' and map.shOrderFinId != 'null' and map.shOrderFinId != 'undefined'">
+	       sh_order_fin_id=#{map.shOrderFinId},
+         </if>
+		</set>
+		where sh_pack_order_id in
+		<foreach collection="list" index="index" item="item" open="(" separator="," close=")">   
+             #{item}   
+        </foreach>
+	</update>
+
+	<!-- 查看短驳打包-运单中间表 -->
+	<select id="getShPackOrderById" resultType="Map">
+        select a.sh_pack_order_id shPackOrderId,a.sh_pack_id shPackId,a.order_id orderId,a.delete_flag deleteFlag,a.sh_order_fin_id shOrderFinId
+        from tb_sh_pack_order a
+        where a.sh_pack_order_id=#{id}
+    </select>
+
+	<!-- 删除短驳打包-运单中间表 -->
+	<delete id="delShPackOrderById">
+		delete from tb_sh_pack_order where sh_pack_order_id = #{id}
+	</delete>	
+
+	<!-- 批量删除短驳打包-运单中间表 -->
+    <delete id="delShPackOrderByIds">  
+        delete from tb_sh_pack_order where sh_pack_order_id in 
+        <foreach collection="list" index="index" item="item" open="(" separator="," close=")">   
+            #{item}   
+        </foreach>  
+    </delete>
+
+	<!-- 清空短驳打包-运单中间表 -->
+	<delete id="delShPackOrders">
+		delete from tb_sh_pack_order
+	</delete>	
+
+	<!-- 检索短驳打包-运单中间表列表 -->
+	<select id="getShPackOrders" resultType="Map">
+		select a.sh_pack_order_id shPackOrderId,a.sh_pack_id shPackId,a.order_id orderId,a.delete_flag deleteFlag,a.sh_order_fin_id shOrderFinId
+		from tb_sh_pack_order a
+		left join tb_branch_group_link y on a.sh_pack_order_id=y.row_id and y.tab_name='tb_sh_pack_order'
+		<where>
+		and y.sys_org_code like CONCAT(#{map.sysOrgCode},'%')
+            <if test="map != null">
+		<if test="map.shPackOrderId != null and map.shPackOrderId != '' and map.shPackOrderId != 'null' and map.shPackOrderId != 'undefined'">				  
+		    AND a.sh_pack_order_id = #{map.shPackOrderId}
+                </if>
+		<if test="map.shPackId != null and map.shPackId != '' and map.shPackId != 'null' and map.shPackId != 'undefined'">				  
+		    AND a.sh_pack_id = #{map.shPackId}
+                </if>
+		<if test="map.orderId != null">
+		    AND a.order_id = #{map.orderId}
+                </if>
+		<if test="map.deleteFlag != null">
+		    AND a.delete_flag = #{map.deleteFlag}
+                </if>
+		<if test="map.shOrderFinId != null and map.shOrderFinId != '' and map.shOrderFinId != 'null' and map.shOrderFinId != 'undefined'">				  
+		    AND a.sh_order_fin_id = #{map.shOrderFinId}
+                </if>
+            </if>
+        </where>
+        order by a.sh_pack_order_id desc
+	</select>
+	<!--  通过打包id查询打包运单中间表列表  -->
+	<select id="listShPackOrderByShPackIds" resultType="Map">
+		select a.sh_pack_order_id shPackOrderId,a.sh_pack_id shPackId,a.order_id orderId,a.delete_flag deleteFlag,a.sh_order_fin_id shOrderFinId
+		from tb_sh_pack_order a
+		where a.sh_pack_id in
+		<foreach collection="list" index="index" item="item" open="(" separator="," close=")">   
+             #{item}   
+        </foreach>
+        order by a.sh_pack_order_id desc
+	</select>
+
+</mapper>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>火运运单</title>
+		<link rel="stylesheet" href="public/bootstrap/css/bootstrap.css" />
+		<link rel="stylesheet" href="public/bootstrap/css/font-awesome.min.css" />
+		<link rel="stylesheet" href="css/show.css" />
+		<script type="text/javascript" src="public/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="public/bootstrap/js/bootstrap.js"></script>
+		<script type="text/javascript" src="js/public.js"></script>
+		<script type="text/javascript" src="public/bootstrap/My97DatePicker/WdatePicker.js"></script>
+		
+	</head>
+
+	<body>
+		<!--头部-->
+		<div class="head"></div>
+		<!--中间-->
+		<div class="container">
+			<div class="box box-primary table-responsive" >
+				<div class="box-header with-border">
+					<h4 class="box-title">火运运单列表</h4>
+				</div>
+				<form class="form-inline maxWidth">
+					<div id="wrap">
+						<div class="form-group dataTimes">
+							<label>时间从：</label>
+							<input id="d244" type="text" class="Wdate" onfocus="WdatePicker({dateFmt:'yyyy-M-d'})" />
+							<i class="fa fa-calendar"></i></span>
+						</div>
+						<div class="form-group dataTimes secTime">
+							<label>至</label>
+							<input id="d244" type="text" class="Wdate" onfocus="WdatePicker({dateFmt:'yyyy-M-d'})" />
+							<i class="fa fa-calendar"></i></span>
+						</div>
+						<div class="form-group">
+							<input type="text" class="waybillNumber" placeholder="请输入运单编号" />
+						</div>
+						<div class="form-group">
+							<button type="button" class="searchBtn">查询</button>
+							<button type="button" class="exportBtn">导出</button>
+						</div>
+					</div>
+				</form>
+				<div class="table-responsive" id='tabHeight'>
+					<table class="table table-striped dataTable no-footer" cellspacing="0" width="100%">
+						<thead>
+							<tr>
+								<th>项目编号</th>
+								<th>项目类型</th>
+								<th>请车单号</th>
+								<th>联运模式</th>
+								<th>分支机构</th>
+								<th>发货企业</th>
+								<th>收货企业</th>
+								<th>货位品名</th>
+								<th>车型</th>
+								<th>车号</th>
+								<th>始发站点</th>
+								<th>装载吨位</th>
+								<th>装载货场</th>
+								<th>装载货位</th>
+								<th>发送时间</th>
+								<th>到达站点</th>
+								<th>到货吨位</th>
+								<th>到达货场</th>
+								<th>到达货位</th>
+								<th>到达时间</th>
+								<th>耗损</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>QL20180310151309 </td>
+								<td>散装箱 </td>
+								<td>PLC201803101531199015</td>
+								<td>联运</td>
+								<td>库尔勒项目部</td>
+								<td>巴州敦德矿业有限公司</td>
+								<td>宝钢集团新疆八一钢铁有限公司</td>
+								<td>铁精粉</td>
+								<td>C65</td>
+								<td>多号 </td>
+								<td>乌鲁木齐营业厅</td>
+								<td>90.0T</td>
+								<td>八钢工业站货场  </td>
+								<td>01号 货一线 </td>
+								<td>2018-03-10 15:32</td>
+								<td>巴伦台营业厅</td>
+								<td>88.0T</td>
+								<td>巴伦台主业货场 </td>
+								<td>01号 货一线 </td>
+								<td> 2018-03-10 15:33  </td>								
+								<td>2.0T </td>
+							</tr>
+                            <tr>
+								<td>QL20180310151309 </td>
+								<td>散装箱 </td>
+								<td>PLC201803101531199015</td>
+								<td>联运</td>
+								<td>库尔勒项目部</td>
+								<td>巴州敦德矿业有限公司</td>
+								<td>宝钢集团新疆八一钢铁有限公司</td>
+								<td>铁精粉</td>
+								<td>C65</td>
+								<td>多号 </td>
+								<td>乌鲁木齐营业厅</td>
+								<td>90.0T</td>
+								<td>八钢工业站货场  </td>
+								<td>01号 货一线 </td>
+								<td>2018-03-10 15:32</td>
+								<td>巴伦台营业厅</td>
+								<td>88.0T</td>
+								<td>巴伦台主业货场 </td>
+								<td>01号 货一线 </td>
+								<td> 2018-03-10 15:33  </td>								
+								<td>2.0T </td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="container paginationul paginationuls">
+				<ul class="pagination">
+					<li>
+						<a href="#">上一页</a>
+					</li>
+					<li>
+						<a href="#" class="click">01</a>
+					</li>
+					<li>
+						<a href="#">02</a>
+					</li>
+					<li>
+						<a href="#">03</a>
+					</li>
+					<li>
+						<a href="#">04</a>
+					</li>
+					<li>
+						<a href="#">05</a>
+					</li>
+					<li>
+						<a href="#">下一页</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<!--底部-->
+		<div class='foot'></div>
+
+	</body>
+
+</html>

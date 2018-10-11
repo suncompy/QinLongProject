@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shenhesoft.logistics.manage.mapper.TbTrainTypeMapper">
+
+  <resultMap id="BaseResultMap" type="com.shenhesoft.logistics.manage.pojo.trianType.TbTrainType">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="train_kind" jdbcType="VARCHAR" property="trainKind" />
+    <result column="train_kind_code" jdbcType="VARCHAR" property="trainKindCode" />
+    <result column="train_type_code" jdbcType="VARCHAR" property="trainTypeCode" />
+    <result column="self_weight" jdbcType="REAL" property="selfWeight" />
+    <result column="weight" jdbcType="REAL" property="weight" />
+    <result column="volume" jdbcType="INTEGER" property="volume" />
+    <result column="load_price" jdbcType="REAL" property="loadPrice" />
+    <result column="length" jdbcType="VARCHAR" property="length" />
+    <result column="width" jdbcType="VARCHAR" property="width" />
+    <result column="hight" jdbcType="VARCHAR" property="hight" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+  
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, train_kind, train_kind_code, train_type_code, self_weight, weight, volume, load_price, 
+    length, width, hight, remark
+  </sql>
+  <select id="selectByExample" parameterType="com.shenhesoft.logistics.manage.pojo.trianType.TbTrainTypeExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_train_type
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_train_type
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tb_train_type
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.shenhesoft.logistics.manage.pojo.trianType.TbTrainTypeExample">
+    delete from tb_train_type
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.shenhesoft.logistics.manage.pojo.trianType.TbTrainType">
+    insert into tb_train_type (id, train_kind, train_kind_code, 
+      train_type_code, self_weight, weight, 
+      volume, load_price, length, 
+      width, hight, remark
+      )
+    values (#{id,jdbcType=INTEGER}, #{trainKind,jdbcType=VARCHAR}, #{trainKindCode,jdbcType=VARCHAR}, 
+      #{trainTypeCode,jdbcType=VARCHAR}, #{selfWeight,jdbcType=REAL}, #{weight,jdbcType=REAL}, 
+      #{volume,jdbcType=INTEGER}, #{loadPrice,jdbcType=REAL}, #{length,jdbcType=VARCHAR}, 
+      #{width,jdbcType=VARCHAR}, #{hight,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.shenhesoft.logistics.manage.pojo.trianType.TbTrainType">
+  <selectKey resultType="java.lang.Integer" keyProperty="id"
+			order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+    insert into tb_train_type
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="trainKind != null">
+        train_kind,
+      </if>
+      <if test="trainKindCode != null">
+        train_kind_code,
+      </if>
+      <if test="trainTypeCode != null">
+        train_type_code,
+      </if>
+      <if test="selfWeight != null">
+        self_weight,
+      </if>
+      <if test="weight != null">
+        weight,
+      </if>
+      <if test="volume != null">
+        volume,
+      </if>
+      <if test="loadPrice != null">
+        load_price,
+      </if>
+      <if test="length != null">
+        length,
+      </if>
+      <if test="width != null">
+        width,
+      </if>
+      <if test="hight != null">
+        hight,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="trainKind != null">
+        #{trainKind,jdbcType=VARCHAR},
+      </if>
+      <if test="trainKindCode != null">
+        #{trainKindCode,jdbcType=VARCHAR},
+      </if>
+      <if test="trainTypeCode != null">
+        #{trainTypeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="selfWeight != null">
+        #{selfWeight,jdbcType=REAL},
+      </if>
+      <if test="weight != null">
+        #{weight,jdbcType=REAL},
+      </if>
+      <if test="volume != null">
+        #{volume,jdbcType=INTEGER},
+      </if>
+      <if test="loadPrice != null">
+        #{loadPrice,jdbcType=REAL},
+      </if>
+      <if test="length != null">
+        #{length,jdbcType=VARCHAR},
+      </if>
+      <if test="width != null">
+        #{width,jdbcType=VARCHAR},
+      </if>
+      <if test="hight != null">
+        #{hight,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.shenhesoft.logistics.manage.pojo.trianType.TbTrainTypeExample" resultType="java.lang.Integer">
+    select count(*) from tb_train_type
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tb_train_type
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.trainKind != null">
+        train_kind = #{record.trainKind,jdbcType=VARCHAR},
+      </if>
+      <if test="record.trainKindCode != null">
+        train_kind_code = #{record.trainKindCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.trainTypeCode != null">
+        train_type_code = #{record.trainTypeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.selfWeight != null">
+        self_weight = #{record.selfWeight,jdbcType=REAL},
+      </if>
+      <if test="record.weight != null">
+        weight = #{record.weight,jdbcType=REAL},
+      </if>
+      <if test="record.volume != null">
+        volume = #{record.volume,jdbcType=INTEGER},
+      </if>
+      <if test="record.loadPrice != null">
+        load_price = #{record.loadPrice,jdbcType=REAL},
+      </if>
+      <if test="record.length != null">
+        length = #{record.length,jdbcType=VARCHAR},
+      </if>
+      <if test="record.width != null">
+        width = #{record.width,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hight != null">
+        hight = #{record.hight,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null">
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tb_train_type
+    set id = #{record.id,jdbcType=INTEGER},
+      train_kind = #{record.trainKind,jdbcType=VARCHAR},
+      train_kind_code = #{record.trainKindCode,jdbcType=VARCHAR},
+      train_type_code = #{record.trainTypeCode,jdbcType=VARCHAR},
+      self_weight = #{record.selfWeight,jdbcType=REAL},
+      weight = #{record.weight,jdbcType=REAL},
+      volume = #{record.volume,jdbcType=INTEGER},
+      load_price = #{record.loadPrice,jdbcType=REAL},
+      length = #{record.length,jdbcType=VARCHAR},
+      width = #{record.width,jdbcType=VARCHAR},
+      hight = #{record.hight,jdbcType=VARCHAR},
+      remark = #{record.remark,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.shenhesoft.logistics.manage.pojo.trianType.TbTrainType">
+    update tb_train_type
+    <set>
+      <if test="trainKind != null">
+        train_kind = #{trainKind,jdbcType=VARCHAR},
+      </if>
+      <if test="trainKindCode != null">
+        train_kind_code = #{trainKindCode,jdbcType=VARCHAR},
+      </if>
+      <if test="trainTypeCode != null">
+        train_type_code = #{trainTypeCode,jdbcType=VARCHAR},
+      </if>
+      <if test="selfWeight != null">
+        self_weight = #{selfWeight,jdbcType=REAL},
+      </if>
+      <if test="weight != null">
+        weight = #{weight,jdbcType=REAL},
+      </if>
+      <if test="volume != null">
+        volume = #{volume,jdbcType=INTEGER},
+      </if>
+      <if test="loadPrice != null">
+        load_price = #{loadPrice,jdbcType=REAL},
+      </if>
+      <if test="length != null">
+        length = #{length,jdbcType=VARCHAR},
+      </if>
+      <if test="width != null">
+        width = #{width,jdbcType=VARCHAR},
+      </if>
+      <if test="hight != null">
+        hight = #{hight,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.shenhesoft.logistics.manage.pojo.trianType.TbTrainType">
+    update tb_train_type
+    set train_kind = #{trainKind,jdbcType=VARCHAR},
+      train_kind_code = #{trainKindCode,jdbcType=VARCHAR},
+      train_type_code = #{trainTypeCode,jdbcType=VARCHAR},
+      self_weight = #{selfWeight,jdbcType=REAL},
+      weight = #{weight,jdbcType=REAL},
+      volume = #{volume,jdbcType=INTEGER},
+      load_price = #{loadPrice,jdbcType=REAL},
+      length = #{length,jdbcType=VARCHAR},
+      width = #{width,jdbcType=VARCHAR},
+      hight = #{hight,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  
+    <select id="selectTrainTypeByPage" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+     <include refid="Base_Column_List" />
+     from tb_train_type
+  	</select>
+  
+  
+  <delete id="deleteBatch" parameterType="java.util.List">
+  	delete from tb_train_type where id in 
+  	  <foreach item="id" collection="list" open="(" separator="," close=")">
+            #{id,jdbcType=INTEGER}
+        </foreach>
+  </delete>
+  
+   
+    <select id="selectIsFreightYardDeleteById" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+		select  
+		count(*)
+		from tb_freight_yard
+		where train_station_id in
+		<foreach collection="list" item="id" open="(" close=")" separator=",">
+				#{id,jdbcType =INTEGER}
+		</foreach>
+  	</select>
+  	
+  	
+  	 <select id="selectTrainTypeByExample" resultMap="BaseResultMap"  parameterType="com.shenhesoft.logistics.manage.pojo.trianType.TbTrainTypeExample">
+		  	 
+		  	 select 
+		     <include refid="Base_Column_List" />
+		     from tb_train_type
+		  	 <if test="_parameter != null" >
+		      <include refid="Example_Where_Clause" />
+		    </if>
+		    <if test="orderByClause != null" >
+		      order by ${orderByClause}
+		    </if>
+  	 </select>
+  	 
+  	 <select id="selectTrainTypeList" resultMap="BaseResultMap" >
+		  	select A.id as id,A.train_kind as trainKind,A.train_kind_code as trainKindCode,A.train_type_code as trainTypeCode,
+		    A.self_weight as selfWeight,A.weight,A.volume,A.load_price as loadPrice,A.length,A.width,A.hight,A.remark
+		    from tb_train_type A 
+		    left join tb_branch_group_link y 
+		    on A.id=y.row_id
+		    where  1=1
+		    and y.tab_name='tb_train_type'
+		    <if test="map != null">
+			       and y.sys_org_code like CONCAT(#{map.sysOrgCode},'%')
+			</if>
+		    order by A.id asc
+  	 </select>
+  	
+  
+</mapper>

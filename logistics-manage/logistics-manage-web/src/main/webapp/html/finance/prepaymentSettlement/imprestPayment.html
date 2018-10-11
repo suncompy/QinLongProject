@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>预付款存入</title>
+		<link rel="stylesheet" href="../../../public/bootstrap/css/bootstrap.css" />
+		<link rel="stylesheet" href="../../../public/bootstrap/css/font-awesome.css" />
+		<link rel="stylesheet" href="../../../css/finance/prepaymentSettlement/imprestPayment.css" />
+		<link rel="stylesheet" href="../../../public/public.css" />
+		<script type="text/javascript" src="../../../public/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="../../../public/bootstrap/js/bootstrap.js"></script>
+		<script src="../../../public/bootstrap/My97DatePicker/WdatePicker.js"></script>
+		<script type="text/javascript" src="../../../js/public.js"></script>
+		<script type="text/javascript" src="../../../js/finance/prepaymentSettlement/imprestPayment.js"></script>
+	</head>
+
+	<body>
+		<!-- 预付款存入表单 -->
+		<div class="form project_form container_top">
+			<form class="form-inline maxWidth">
+				<div id="wrap">
+					<div class="form-group">
+						<label>项目编号：</label>
+						<select></select>
+					</div>
+					<div class="form-group">
+						<label>分支机构：</label>
+						<select></select>
+					</div>
+					<div class="form-group">
+						<label>项目类型：</label>
+						<select></select>
+					</div>
+					<div class="form-group">
+						<label>运单编号：</label>
+						<select></select>
+					</div>
+
+					<div class="form-group">
+						<label>货物品名：</label>
+						<select></select>
+					</div>
+					<div class="form-group">
+						<label>发货企业：</label>
+						<select></select>
+					</div>
+					<div class="form-group">
+						<label>收货企业：</label>
+						<select></select>
+					</div>
+					<div class="form-group">
+						<label>&emsp;&emsp;货场：</label>
+						<select></select>
+					</div>
+
+					<div class="form-group">
+						<label>&emsp;&emsp;货位：</label>
+						<select></select>
+					</div>
+
+					<div class="form-group">
+						<label>计费模式：</label>
+						<select></select>
+					</div>
+
+				</div>
+				<div class="foot">
+					<a class="btn btn-success" href="#"><em class="search"></em>
+						<span>搜索</span>
+					</a>
+					<div id="lookMore"></div>
+				</div>
+			</form>
+		</div>
+		<!-- 预付款存入表格 -->
+		<div class="container_top tableDiv">
+			<div class="tabbable" id="tabs-529262">
+				<ul class="nav nav-tabs">
+					<li class="active">
+						<a href="#panel1" data-toggle="tab">存入明细</a>
+					</li>
+				</ul>
+				<div class="tab-content">
+					<!--存入明细表格开始-->
+					<div class="tab-pane active" id="panel1">
+						<div class="domain">
+							<div class="tableBg">
+								<a href="#" class="exportBtn advancePayment" id="imprestPayment"><span>预付款存入</span></a>
+								<a href="#" class="exportBtn advancePayment" id="imprestPurpose"><span>抵用</span></a>
+								<a href="#" class="exportBtn submissionAudit" id='accountDetails'><span>提交审核</span></a>
+								<a href="#" class="exportBtn antiAudit" id='backaccountDetails'><span>反审核</span></a>
+							</div>
+							<div class="table-responsive">
+								<table class="table">
+									<thead>
+										<tr class="tableTop">
+											<th><label class="demo--label">
+											     <input class="demo--checkbox" type="checkbox"   >
+                                                 <span class="demo--checkboxInput"></span>
+	                                        </label> </th>
+											<th>序号</th>
+											<th>日期</th>
+											<th>分支机构</th>
+											<th>项目编号</th>
+											<th>预付款类型</th>
+											<th>状态</th>
+											<th>流水号</th>
+											<th>收款单位</th>
+											<th>收款账户</th>
+											<th>收款账号</th>
+											<th>收款行号</th>
+											<th>支付方式</th>
+											<th>存入金额</th>
+											<th>收款经办人</th>
+											<th>操作人</th>
+											<th>客户凭证</th>
+											<th>更新时间</th>
+											<th>备注</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td><label class="demo--label">
+											     <input class="demo--checkbox" type="checkbox"   >
+                                                 <span class="demo--checkboxInput"></span>
+	                                        </label></td>
+											<td>1</td>
+											<td>2017.09.09</td>
+											<td>XX机构</td>
+											<td>
+												<a href="#">J00001</a>
+											</td>
+											<td>存入</td>
+											<td></td>
+											<td>123456789123456789</td>
+											<td>XX单位</td>
+											<td>王大锤</td>
+											<td>1234 1234 1234 1234 123 </td>
+											<td>123451234512</td>
+											<td>转账</td>
+											<td>1000元</td>
+											<td>王大锤</td>
+											<td>王大锤</td>
+											<td>1234567892214</td>
+											<td>2017.12.12 20:00</td>
+											<td></td>
+										</tr>
+										<tr>
+											<td><label class="demo--label">
+											     <input class="demo--checkbox" type="checkbox"   >
+                                                 <span class="demo--checkboxInput"></span>
+	                                        </label></td>
+											<td>1</td>
+											<td>2017.09.09</td>
+											<td>XX机构</td>
+											<td>
+												<a href="#">J00001</a>
+											</td>
+											<td>抵用</td>
+											<td></td>
+											<td>123456789123456789</td>
+											<td>XX单位</td>
+											<td>王大锤</td>
+											<td>1234 1234 1234 1234 123 </td>
+											<td>123451234512</td>
+											<td>转账</td>
+											<td>1000元</td>
+											<td>王大锤</td>
+											<td>王大锤</td>
+											<td>1234567892214</td>
+											<td>2017.12.12 20:00</td>
+											<td></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="row clearfix">
+							<div class="col-md-12 column paging">
+								<ul class="pagination clearfix">
+									<li>
+										<a href="#" class="newA">上一页</a>
+									</li>
+									<li>
+										<a href="#" class="newA actives">1</a>
+									</li>
+									<li>
+										<a href="#" class="newA">2</a>
+									</li>
+									<li>
+										<a href="#" class="newA">3</a>
+									</li>
+									<li>
+										<a href="#" class="newA">4</a>
+									</li>
+									<li>
+										<a href="#" class="newA">5</a>
+									</li>
+
+									<li>
+										<a href="#" class="newA">...</a>
+									</li>
+									<li>
+										<a href="#" class="newA">10</a>
+									</li>
+
+									<li>
+										<a href="#" class="newA">下一页 </a>
+									</li>
+
+									<li>
+										<a class="pageSpan">跳转到 <input type="text" id="pageInput" />页</a>
+									</li>
+									<li>
+
+									</li>
+									<li>
+										<a href="#" class="pageGo">GO</a>
+									</li>
+
+								</ul>
+							</div>
+						</div>
+					</div>
+					<!--存入明细表格结束-->
+				</div>
+			</div>
+		</div>
+
+		<!--预付款存入模态框-->
+		<div class="modal fade imprestPaymentModal" id="imprestPaymentModal" tabindex="-1" role="dialog" data-backdrop="static">
+			<div class="modal-dialog modal-lg" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">预付款存入</h4>
+						<span data-dismiss="modal" aria-label="Close"></span>
+					</div>
+					<div class="modal-body">
+						<form id="depositForm">
+							<div class="form-inline ">
+								<h5>基本信息</h5>
+								<div class="form-group ">
+									<label>项目编号：</label>
+									<select></select>
+								</div>
+								<div class="form-group ">
+									<label>分支机构：</label>
+									<input type="text" class="inputbg" unselectable="on" readonly/>
+								</div>
+
+							</div>
+							<hr/>
+							<div class="form-inline ">
+								<h5>存入信息</h5>
+								<div class="form-group ">
+									<label>账户种类：</label>
+									<select></select>
+								</div>
+								<div class="form-group ">
+									<label>收款单位：</label>
+									<select></select>
+								</div>
+								<div class="form-group ">
+									<label>&emsp;收款账户：</label>
+									<select></select>
+								</div>
+								<div class="form-group ">
+									<label>收款经办人：</label>
+									<select></select>
+								</div>
+								<div class="form-group ">
+									<label>收款账号：</label>
+									<input type="text" class="inputbg" unselectable="on" readonly/>
+								</div>
+								<div class="form-group ">
+									<label>收款行号：</label>
+									<input type="text" class="inputbg" unselectable="on" readonly/>
+								</div>
+								<div class="form-group ">
+									<label>纳税识别号：</label>
+									<input type="text" class="inputbg inputLenth" unselectable="on" readonly/>
+								</div>
+							</div>
+							<hr/>
+							<div class="form-inline ">
+								<h5>支出信息</h5>
+								<div class="form-group ">
+									<label>账户种类：</label>
+									<select></select>
+								</div>
+								<div class="form-group ">
+									<label>支出单位：</label>
+									<select></select>
+								</div>
+								<div class="form-group ">
+									<label>&emsp;支出账户：</label>
+									<select></select>
+								</div>
+								<div class="form-group ">
+									<label>支出经办人：</label>
+									<select></select>
+								</div>
+								<div class="form-group ">
+									<label>支出账号：</label>
+									<input type="text" class="inputbg" unselectable="on" readonly/>
+								</div>
+								<div class="form-group ">
+									<label>支出行号：</label>
+									<input type="text" class="inputbg" unselectable="on" readonly/>
+								</div>
+								<div class="form-group ">
+									<label>纳税识别号：</label>
+									<input type="text" class="inputbg inputLenth" unselectable="on" readonly/>
+								</div>
+								<div class="form-group ">
+									<label>&emsp;预付类型：</label>
+									<select></select>
+								</div>
+								<div class="form-group ">
+									<label>支付方式：</label>
+									<select></select>
+								</div>
+								<div class="form-group ">
+									<label>&emsp;&emsp;金额：</label>
+									<input type="text" class="inputbg" unselectable="on" readonly/>
+								</div>
+							</div>
+							<div class="row clearfix ">
+								<div class="col-md-12 column modal_btn">
+									<button type="button" class="btn sureBtn">存入</button>
+									<button type="button" class="btn cancleBtn" data-dismiss="modal">取消</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--抵用模态框-->
+		<div class="modal fade imprestPaymentModal" id="imprestPurposeModal" tabindex="-1" role="dialog" data-backdrop="static">
+			<div class="modal-dialog modal-lg" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">预付款抵用</h4>
+						<span data-dismiss="modal" aria-label="Close"></span>
+					</div>
+					<div class="modal-body">
+						<form id="depositForms">
+							<div class="form-inline ">
+								<h5>基本信息</h5>
+								<div class="form-group ">
+									<label>项目编号：</label>
+									<input type="text" class="inputbg" unselectable="on" readonly/>
+								</div>
+								<div class="form-group ">
+									<label>账户类型：</label>
+									<select></select>
+								</div>
+								<div class="form-group ">
+									<label>选择账户：</label>
+									<select></select>
+								</div>
+								<div class="form-group ">
+									<label>票据名称：</label>
+									<select id='changeName'>
+										<option class="trainS">货物费用</option>
+										<option class="goodS">火运费用</option>
+									</select>
+								</div>
+								<!--火运费用-->
+								<div class="trainMoney">
+									<div class="form-group">
+										<label>请车单号：</label>
+										<select></select>
+									</div>
+									<div class="form-group ">
+										<label>&emsp;装车数：</label>
+										<select></select>
+									</div>
+									<div class="form-group ">
+										<label>&emsp;&emsp;张数：</label>
+										<input type="text" class="inputbg" unselectable="on" readonly/>
+									</div>
+									<div class="form-group ">
+										<label>作废张数：</label>
+										<input type="text" class="inputbg" unselectable="on" readonly/>
+									</div>
+									<div class="form-group ">
+										<label>&emsp;&emsp;起号：</label>
+										<input type="text" class="inputbg" unselectable="on" readonly/>
+									</div>
+									<div class="form-group ">
+										<label>&emsp;&emsp;止号：</label>
+										<input type="text" class="inputbg" unselectable="on" readonly/>
+									</div>
+								</div>
+								<!--货物费用-->
+								<div class="goodsMoney">
+									<div class="form-group ">
+										<label>对账单号：</label>
+										<select></select>
+									</div>
+									<div class="form-group ">
+										<label>货物品名：</label>
+										<input type="text" class="inputbg" unselectable="on" readonly/>
+									</div>
+									<div class="form-group ">
+										<label>&emsp;&emsp;吨数：</label>
+										<input type="text" class="inputbg" unselectable="on" readonly/>
+									</div>
+									<div class="form-group ">
+										<label>&emsp;总金额：</label>
+										<input type="text" class="inputbg" unselectable="on" readonly/>
+									</div>
+								</div>
+
+							</div>
+							<hr/>
+
+							<div class="form-inline ">
+								<h5>存入信息</h5>
+								<div class="form-group ">
+									<label>抵用金额：</label>
+									<input type="text" class="inputbg" unselectable="on" readonly/>
+								</div>
+							</div>
+							<div class="row clearfix ">
+								<div class="col-md-12 column modal_btn">
+									<button type="button" class="btn sureBtn">存入</button>
+									<button type="button" class="btn cancleBtn" data-dismiss="modal">取消</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!--抵用详情框-->
+		<div class="modal fade" id="detailModal" tabindex="-1" role="dialog" data-backdrop="static">
+			<div class="modal-dialog modal-lg" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">详情</h4>
+						<span data-dismiss="modal" aria-label="Close"></span>
+					</div>
+					<div class="modal-body">
+						<form id="detailForm">
+							<div class="form-inline ">
+								<h5>基本信息</h5>
+								<div class="form-group ">
+									<label>&emsp;项目信息：</label>
+									<input type="text" class="inputbg" unselectable="on" readonly/>
+								</div>
+								<div class="form-group ">
+									<label>分支机构：</label>
+									<input type="text" class="inputbg" unselectable="on" readonly/>
+								</div>
+								<div class="form-group ">
+									<label id="changLabel">&emsp;流水号：</label>
+									<input id='ticketName' type="text" class="inputbg" unselectable="on" readonly value="火运费用"/>
+								</div>
+								<div class="form-group ">
+									<label>&emsp;&emsp;状态：</label>
+									<input type="text" class="inputbg" unselectable="on" readonly/>
+								</div>
+								<div class="form-group ">
+									<label>&emsp;&emsp;操作人：</label>
+									<input type="text" class="inputbg" unselectable="on" readonly/>
+								</div>
+								<div class="form-group ">
+									<label>操作时间：</label>
+									<input type="text" class="inputbg" unselectable="on" readonly/>
+								</div>
+								<div class="form-group ">
+									<label>&emsp;审核人：</label>
+									<input type="text" class="inputbg" unselectable="on" readonly/>
+								</div>
+								<div class="form-group ">
+									<label>审核时间：</label>
+									<input type="text" class="inputbg" unselectable="on" readonly/>
+								</div>
+								
+							<hr/>
+							<!--存入-->
+							<div id='receInfo'>
+                            <div class="form-inline" >
+								<h5>收款信息</h5>
+								<div class="form-group ">
+									<label>&emsp;收款单位：</label>
+									<input type="text" class="inputbg" unselectable="on" readonly/>
+								</div>
+								<div class="form-group ">
+									<label>收款账户：</label>
+									<input type="text" class="inputbg" unselectable="on" readonly/>
+								</div>
+								<div class="form-group ">
+									<label>收款账号：</label>
+									<input type="text" class="inputbg" unselectable="on" readonly/>
+								</div>
+								<div class="form-group ">
+									<label>收款行号：</label>
+									<input type="text" class="inputbg" unselectable="on" readonly/>
+								</div>
+								<div class="form-group ">
+									<label>收款经办人：</label>
+									<input type="text" class="inputbg" unselectable="on" readonly/>
+								</div>
+							</div>
+							<div class="form-inline ">
+								<h5>存入信息</h5>
+								<div class="form-group ">
+									<label>&emsp;支出账户：</label>
+									<input type="text" class="inputbg" unselectable="on" readonly/>
+								</div>
+								<div class="form-group ">
+									<label>支出方式：</label>
+									<input type="text" class="inputbg" unselectable="on" readonly/>
+								</div>
+								<div class="form-group ">
+									<label>预约类型：</label>
+									<input type="text" class="inputbg" unselectable="on" readonly/>
+								</div>
+								<div class="form-group ">
+									<label>&emsp;&emsp;金额：</label>
+									<input type="text" class="inputbg" unselectable="on" readonly/>
+								</div>
+							</div>
+							</div>
+							<!--抵用-->
+							<div id='serveModal'>
+                   
+							<div class="form-inline ">
+								<h5>抵用信息</h5>
+								<div class="form-group ">
+									<label>&emsp;收款单位：</label>
+									<input type="text" class="inputbg" unselectable="on" readonly/>
+								</div>
+								<div class="form-group ">
+									<label>收款账户：</label>
+									<input type="text" class="inputbg" unselectable="on" readonly/>
+								</div>
+								<div class="form-group hideGoods">
+									<label>&emsp;&emsp;金额：</label>
+									<input type="text" class="inputbg" unselectable="on" readonly/>
+								</div>
+								<!--火运费用-->
+								
+									<div class="form-group  hideTrain">
+									<label>货物品名：</label>
+									<input type="text" class="inputbg" unselectable="on" readonly/>
+								</div>
+								<div class="form-group hideTrain">
+									<label>&emsp;&emsp;吨数：</label>
+									<input type="text" class="inputbg" unselectable="on" readonly/>
+								</div>
+								
+							</div>
+							<hr />
+							<div class="form-inline hideTrain">
+								<h5>抵用金额</h5>
+								<div class="form-group ">
+									<label>抵用金额：</label>
+									<input type="text" class="inputbg" unselectable="on" readonly/>
+								</div>
+							</div>
+								<div class="form-inline hideGoods">
+								<h5>其他信息</h5>
+								<div class="form-group ">
+									<label>&emsp;&emsp;&emsp;起号：</label>
+									<input type="text" class="inputbg" unselectable="on" readonly/>
+								</div>
+								<div class="form-group ">
+									<label>&emsp;&emsp;止号：</label>
+									<input type="text" class="inputbg" unselectable="on" readonly/>
+								</div>
+								<div class="form-group ">
+									<label>&emsp;&emsp;张数：</label>
+									<input type="text" class="inputbg" unselectable="on" readonly/>
+								</div>
+								<div class="form-group ">
+									<label>作废张数：</label>
+									<input type="text" class="inputbg" unselectable="on" readonly/>
+								</div>
+							</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- 未选择数据提醒模态框 -->
+		<div class="modal fade deletRemindModal" tabindex="-1" role="dialog" id="nullModal" data-backdrop="static">
+			<div class="modal-dialog " role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">提示</h4>
+						<span data-dismiss="modal" aria-label="Close"></span>
+					</div>
+					<div class="modal-body">
+						<div class="body-content">
+							<i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+							<span>请选择一条要操作的数据</span>
+						</div>
+						<div class="row clearfix ">
+							<div class="col-md-12 column modal_btn">
+								<button type="button" class="btn sureBtn">确定</button>
+								<button type="button" class="btn cancleBtn" data-dismiss="modal">取消</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 提醒模态框 -->
+		<div class="modal fade deletRemindModal" tabindex="-1" role="dialog" id="deltialModal" data-backdrop="static">
+			<div class="modal-dialog " role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">提示</h4>
+						<span data-dismiss="modal" aria-label="Close"></span>
+					</div>
+					<div class="modal-body">
+						<div class="body-content">
+							<div><span>您已选择</span><b class="errnums">13</b> <span id="msgSpan"></span></div>
+						</div>
+						<div class="row clearfix ">
+							<div class="col-md-12 column modal_btn">
+								<button type="button" class="btn sureBtn">确定</button>
+								<button type="button" class="btn cancleBtn" data-dismiss="modal">取消</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</body>
+
+</html>

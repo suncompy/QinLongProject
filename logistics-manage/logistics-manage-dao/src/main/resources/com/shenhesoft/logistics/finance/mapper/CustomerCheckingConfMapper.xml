@@ -1,0 +1,504 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shenhesoft.logistics.finance.mapper.CustomerCheckingConfMapper">
+
+	<!-- 新增客户对账设置表 -->
+	<insert id="addCustomerCheckingConf">
+		insert into tb_customer_checking_conf(cust_check_con_id,project_id,start_date,end_date,checking_status,delete_flag,create_date,create_user_id,modifiy_date
+		,order_count,previous_order_count,total_weight,total_piece,produce_money,tax_money,bus_checking_status,bus_order_count,bus_order_money,receive_checking_status
+		,tax_rate,receive_order_count,receive_order_money,train_checking_status,train_order_count,train_order_money,deli_checking_status,deli_order_count,deli_order_money
+		)values(#{custCheckConId},#{projectId},#{startDate},#{endDate},#{checkingStatus},#{deleteFlag},#{createDate},#{createUserId},#{modifiyDate}
+		,#{orderCount},#{previousOrderCount},#{totalWeight},#{totalPiece},#{produceMoney},#{taxMoney},#{busCheckingStatus},#{busOrderCount},#{busOrderMoney},#{receiveCheckingStatus}
+		,#{taxRate},#{receiveOrderCount},#{receiveOrderMoney},#{trainCheckingStatus},#{trainOrderCount},#{trainOrderMoney},#{deliCheckingStatus},#{deliOrderCount},#{deliOrderMoney})
+	</insert>
+
+	<!-- 批量新增客户对账设置表 -->
+	<insert id="addCustomerCheckingConfs">
+		insert into tb_customer_checking_conf(cust_check_con_id,project_id,start_date,end_date,checking_status,delete_flag,create_date,create_user_id,modifiy_date,order_count,previous_order_count,total_weight,total_piece,produce_money,tax_money,bus_checking_status,bus_order_count,bus_order_money,receive_checking_status,receive_order_count,receive_order_money,train_checking_status,train_order_count,train_order_money,deli_checking_status,deli_order_count,deli_order_money
+		)values
+		<foreach collection="list" item="item" index="index" separator=",">
+            (#{custCheckConId},#{projectId},#{startDate},#{endDate},#{checkingStatus},#{deleteFlag},#{createDate},#{createUserId},#{modifiyDate},#{orderCount},#{previousOrderCount},#{totalWeight},#{totalPiece},#{produceMoney},#{taxMoney},#{busCheckingStatus},#{busOrderCount},#{busOrderMoney},#{receiveCheckingStatus},#{receiveOrderCount},#{receiveOrderMoney},#{trainCheckingStatus},#{trainOrderCount},#{trainOrderMoney},#{deliCheckingStatus},#{deliOrderCount},#{deliOrderMoney})
+        </foreach>
+	</insert>
+
+	<!-- 修改客户对账设置表 -->
+	<update id="editCustomerCheckingConfById">
+		update tb_customer_checking_conf
+		<set>
+		<if test="projectId != null">
+               project_id=#{projectId},
+         </if>
+		<if test="startDate != null">
+               start_date=#{startDate},
+         </if>
+		<if test="endDate != null">
+               end_date=#{endDate},
+         </if>
+		<if test="checkingStatus != null">
+               checking_status=#{checkingStatus},
+         </if>
+		<if test="deleteFlag != null">
+               delete_flag=#{deleteFlag},
+         </if>
+		<if test="createDate != null">
+               create_date=#{createDate},
+         </if>
+		<if test="createUserId != null">
+               create_user_id=#{createUserId},
+         </if>
+		<if test="modifiyDate != null">
+               modifiy_date=#{modifiyDate},
+         </if>
+		<if test="orderCount != null">
+               order_count=#{orderCount},
+         </if>
+		<if test="previousOrderCount != null">
+               previous_order_count=#{previousOrderCount},
+         </if>
+		<if test="totalWeight != null">
+               total_weight=#{totalWeight},
+         </if>
+		<if test="totalPiece != null">
+               total_piece=#{totalPiece},
+         </if>
+		<if test="produceMoney != null">
+               produce_money=#{produceMoney},
+         </if>
+		<if test="taxMoney != null">
+               tax_money=#{taxMoney},
+         </if>
+		<if test="busCheckingStatus != null">
+               bus_checking_status=#{busCheckingStatus},
+         </if>
+		<if test="busOrderCount != null">
+               bus_order_count=#{busOrderCount},
+         </if>
+		<if test="busOrderMoney != null">
+               bus_order_money=#{busOrderMoney},
+         </if>
+		<if test="receiveCheckingStatus != null">
+               receive_checking_status=#{receiveCheckingStatus},
+         </if>
+		<if test="receiveOrderCount != null">
+               receive_order_count=#{receiveOrderCount},
+         </if>
+		<if test="receiveOrderMoney != null">
+               receive_order_money=#{receiveOrderMoney},
+         </if>
+		<if test="trainCheckingStatus != null">
+               train_checking_status=#{trainCheckingStatus},
+         </if>
+		<if test="trainOrderCount != null">
+               train_order_count=#{trainOrderCount},
+         </if>
+		<if test="trainOrderMoney != null">
+               train_order_money=#{trainOrderMoney},
+         </if>
+		<if test="deliCheckingStatus != null">
+               deli_checking_status=#{deliCheckingStatus},
+         </if>
+		<if test="deliOrderCount != null">
+               deli_order_count=#{deliOrderCount},
+         </if>
+		<if test="deliOrderMoney != null">
+               deli_order_money=#{deliOrderMoney},
+         </if>
+		</set>
+		where cust_check_con_id=#{custCheckConId}
+	</update>
+
+	<!-- 批量修改客户对账设置表 -->
+	<update id="editCustomerCheckingConfByIds">
+		update tb_customer_checking_conf
+		<set>
+		<if test="map.projectId != null">
+	       project_id=#{map.projectId},
+         </if>
+		<if test="map.startDate != null">
+	       start_date=#{map.startDate},
+         </if>
+		<if test="map.endDate != null">
+	       end_date=#{map.endDate},
+         </if>
+		<if test="map.checkingStatus != null">
+	       checking_status=#{map.checkingStatus},
+         </if>
+		<if test="map.deleteFlag != null">
+	       delete_flag=#{map.deleteFlag},
+         </if>
+		<if test="map.createDate != null">
+	       create_date=#{map.createDate},
+         </if>
+		<if test="map.createUserId != null">
+	       create_user_id=#{map.createUserId},
+         </if>
+		<if test="map.modifiyDate != null">
+	       modifiy_date=#{map.modifiyDate},
+         </if>
+		<if test="map.orderCount != null">
+	       order_count=#{map.orderCount},
+         </if>
+		<if test="map.previousOrderCount != null">
+	       previous_order_count=#{map.previousOrderCount},
+         </if>
+		<if test="map.totalWeight != null">
+	       total_weight=#{map.totalWeight},
+         </if>
+		<if test="map.totalPiece != null">
+	       total_piece=#{map.totalPiece},
+         </if>
+		<if test="map.produceMoney != null">
+	       produce_money=#{map.produceMoney},
+         </if>
+		<if test="map.taxMoney != null">
+	       tax_money=#{map.taxMoney},
+         </if>
+		<if test="map.busCheckingStatus != null">
+	       bus_checking_status=#{map.busCheckingStatus},
+         </if>
+		<if test="map.busOrderCount != null">
+	       bus_order_count=#{map.busOrderCount},
+         </if>
+		<if test="map.busOrderMoney != null">
+	       bus_order_money=#{map.busOrderMoney},
+         </if>
+		<if test="map.receiveCheckingStatus != null">
+	       receive_checking_status=#{map.receiveCheckingStatus},
+         </if>
+		<if test="map.receiveOrderCount != null">
+	       receive_order_count=#{map.receiveOrderCount},
+         </if>
+		<if test="map.receiveOrderMoney != null">
+	       receive_order_money=#{map.receiveOrderMoney},
+         </if>
+		<if test="map.trainCheckingStatus != null">
+	       train_checking_status=#{map.trainCheckingStatus},
+         </if>
+		<if test="map.trainOrderCount != null">
+	       train_order_count=#{map.trainOrderCount},
+         </if>
+		<if test="map.trainOrderMoney != null">
+	       train_order_money=#{map.trainOrderMoney},
+         </if>
+		<if test="map.deliCheckingStatus != null">
+	       deli_checking_status=#{map.deliCheckingStatus},
+         </if>
+		<if test="map.deliOrderCount != null">
+	       deli_order_count=#{map.deliOrderCount},
+         </if>
+		<if test="map.deliOrderMoney != null">
+	       deli_order_money=#{map.deliOrderMoney},
+         </if>
+		</set>
+		where cust_check_con_id in
+		<foreach collection="list" index="index" item="item" open="(" separator="," close=")">   
+             #{item}   
+        </foreach>
+	</update>
+
+	<!-- 查看客户对账设置表 -->
+	<select id="getCustomerCheckingConfById" resultType="Map">
+        select a.cust_check_con_id custCheckConId,a.project_id projectId,a.start_date startDate,a.end_date endDate,a.checking_status checkingStatus,a.delete_flag deleteFlag,a.create_date createDate,a.create_user_id createUserId,a.modifiy_date modifiyDate,a.order_count orderCount,a.previous_order_count previousOrderCount,a.total_weight totalWeight,a.total_piece totalPiece,a.produce_money produceMoney,a.tax_money taxMoney,a.bus_checking_status busCheckingStatus,a.bus_order_count busOrderCount,a.bus_order_money busOrderMoney,a.receive_checking_status receiveCheckingStatus,a.receive_order_count receiveOrderCount,a.receive_order_money receiveOrderMoney,a.train_checking_status trainCheckingStatus,a.train_order_count trainOrderCount,a.train_order_money trainOrderMoney,a.deli_checking_status deliCheckingStatus,a.deli_order_count deliOrderCount,a.deli_order_money deliOrderMoney
+        from tb_customer_checking_conf a
+        where a.cust_check_con_id=#{id}
+    </select>
+
+	<!-- 删除客户对账设置表 -->
+	<delete id="delCustomerCheckingConfById">
+		delete from tb_customer_checking_conf where cust_check_con_id = #{id}
+	</delete>	
+
+	<!-- 批量删除客户对账设置表 -->
+    <delete id="delCustomerCheckingConfByIds">  
+        delete from tb_customer_checking_conf where cust_check_con_id in 
+        <foreach collection="list" index="index" item="item" open="(" separator="," close=")">   
+            #{item}   
+        </foreach>  
+    </delete>
+
+	<!-- 清空客户对账设置表 -->
+	<delete id="delCustomerCheckingConfs">
+		delete from tb_customer_checking_conf
+	</delete>	
+
+	<!-- 检索客户对账设置表列表 -->
+	<select id="getCustomerCheckingConfs" resultType="Map">	
+select DISTINCT a.cust_check_con_id custCheckConId,a.project_id projectId,DATE_FORMAT(a.start_date,'%Y-%m-%d %H:%i:%s') startDate,DATE_FORMAT(a.end_date,'%Y-%m-%d %H:%i:%s') endDate,a.checking_status checkingStatus,a.delete_flag deleteFlag,DATE_FORMAT(a.create_date,'%Y-%m-%d %H:%i:%s') createDate,a.create_user_id createUserId,DATE_FORMAT(a.modifiy_date,'%Y-%m-%d %H:%i:%s') modifiyDate,a.order_count orderCount,a.previous_order_count previousOrderCount
+,a.bus_order_count busOrderCount,a.bus_order_money busOrderMoney
+,a.receive_order_count receiveOrderCount,a.receive_order_money receiveOrderMoney
+,a.train_order_count trainOrderCount,a.train_order_money trainOrderMoney
+,a.deli_order_count deliOrderCount,a.deli_order_money deliOrderMoney,p.project_code projectCode,p.branch_group_id branchGroupId,p.branch_group_name branchGroupName,p.project_type projectType,p.transport_type transportType,p.cargo_id cargoId,p.cargo_name cargoName,p.cargo_specifications cargoSpecifications,p.cargo_price cargoPrice,p.valuation_unit_name valuationUnitName,p.send_cargo_company_id sendCargoCompanyId,p.send_cargo_company_name sendCargoCompanyName,p.receive_cargo_company_id receiveCargoCompanyId,p.receive_cargo_company_name receiveCargoCompanyName,p.send_cargo_unit_id sendCargoUnitId,p.send_cargo_unit_name sendCargoUnitName,p.receive_cargo_site_id receiveCargoSiteId,p.receive_cargo_site receiveCargoSite,p.short_barge_carrier_mode shortBargeCarrierMode,p.short_barge_carrier_id shortBargeCarrierId,p.short_barge_carrier_name shortBargeCarrierName,p.send_short_barge_carrier_mode sendShortBargeCarrierMode,p.begin_center_site_id beginCenterSiteId,p.begin_center_site_name beginCenterSiteName,p.begin_site_id beginSiteId,p.begin_site_name beginSiteName,p.end_center_site_id endCenterSiteId,p.end_center_site_name endCenterSiteName,p.end_site_id endSiteId,p.end_site_name endSiteName,p.freight freight,p.material_cost materialCost,p.tarpaulin_cost tarpaulinCost,p.begin_stevedoring_cost beginStevedoringCost,p.end_stevedoring_cost endStevedoringCost,p.freight_sum freightSum,p.forwarding_site_id forwardingSiteId,p.forwarding_site_name forwardingSiteName,p.forwarding_unit_id forwardingUnitId,p.forwarding_unit_name forwardingUnitName,p.take_place takePlace,p.take_place_detail takePlaceDetail,p.receiving_department_id receivingDepartmentId,p.receiving_department_name receivingDepartmentName,p.arrive_place arrivePlace,p.arrive_place_address arrivePlaceAddress,p.pick_up_price pickUpPrice,p.train_price trainPrice,p.arrive_price arrivePrice,p.transport_price transportPrice
+		,CONCAT(DATE_FORMAT(a.start_date,'%Y-%m-%d'),'~',DATE_FORMAT(a.end_date,'%Y-%m-%d')) checkDate
+,IFNULL(b.totalCarNum,0) totalCarNum,u.name createUserName
+,IFNULL(b.reciveOrderNum,0)+IFNULL(b.sendOrderNum,0)+IFNULL(b.carOrderNum,0)+IFNULL(b.trainOrderNum,0) totalOrder
+,IFNULL(b.totalNetWeight,0) totalWeight
+,IFNULL(b.totalPieceNum,0) totalPiece
+,IFNULL(b.reciveOrderNum,0) reciveOrderNum
+,IFNULL(b.sendOrderNum,0) sendOrderNum
+,IFNULL(b.carOrderNum,0) carOrderNum
+,IFNULL(b.trainOrderNum,0) trainOrderNum
+,IFNULL(b.produceMoney,0) produceMoney,round(IFNULL(b.taxMoney,0),2) taxMoney,a.tax_rate taxRate
+,if(p.transport_type &lt;&gt; 0,'-',if(a.bus_checking_status=0,'未对账','已对账')) busCheckingStatus
+,if(p.transport_type not in(1,4,6,7),'-',if(a.receive_checking_status=0,'未对账','已对账')) receiveCheckingStatus
+,if(p.transport_type not in(3,4,5,6),'-',if(a.train_checking_status=0,'未对账','已对账')) trainCheckingStatus
+,if(p.transport_type not in(2,5,6,7),'-',if(a.deli_checking_status=0,'未对账','已对账')) deliCheckingStatus
+,b.prodectMoneyCar,b.prodectMoneyRecive,b.prodectMoneySend,b.prodectMoneyTrain
+,case when p.transport_type in(0) then pickupPlaceCar
+			when p.transport_type in(3,5) then beginPlance
+			when p.transport_type in(2) then pickupPlaceSend
+			when p.transport_type in(6) then p.begin_address
+			else pickupPlaceRecive end beginAddress
+,case when p.transport_type in(0) then arrivePlaceCar
+			when p.transport_type in(3,4) then endPlance
+			when p.transport_type in(1) then arrivePlaceRecive
+			when p.transport_type in(6) then p.end_address
+			else arrivePlaceSend end endAddress
+		from tb_customer_checking_conf a 
+		left join tb_branch_group_link y on a.cust_check_con_id=y.row_id and y.tab_name='tb_customer_checking_conf'
+		left join tb_project p on a.project_id = p.id
+		left join tb_system_user u on u.id=a.create_user_id 
+LEFT JOIN (
+select a.cust_check_con_id,max(a.projectId) projectId,sum(a.totalCarNum) totalCarNum,sum(a.totalNetWeight) totalNetWeight,
+sum(a.totalPieceNum) totalPieceNum ,sum(a.reciveOrderNum) reciveOrderNum,sum(a.sendOrderNum) sendOrderNum
+,sum(a.carOrderNum) carOrderNum,sum(a.trainOrderNum) trainOrderNum,sum(a.prodectMoney) produceMoney,sum(a.shouldTaxMoney) taxMoney
+,sum(a.prodectMoneyRecive) prodectMoneyRecive,sum(a.prodectMoneySend) prodectMoneySend,sum(a.prodectMoneyCar) prodectMoneyCar,sum(a.prodectMoneyTrain) prodectMoneyTrain
+,max(a.arrivePlaceRecive) arrivePlaceRecive
+,max(a.arrivePlaceSend) arrivePlaceSend
+,max(a.arrivePlaceCar) arrivePlaceCar
+,max(a.pickupPlaceRecive) pickupPlaceRecive
+,max(a.pickupPlaceSend) pickupPlaceSend
+,max(a.pickupPlaceCar) pickupPlaceCar
+,max(beginPlance) beginPlance
+,max(endPlance) endPlance
+ from(
+select c.cust_check_con_id,max(o.project_id) projectId,count(o.carrier_vehicle_id) totalCarNum
+,sum(IFNULL(o.container_one_send_net,0)+IFNULL(o.container_two_send_net,0)) totalNetWeight
+,sum(IFNULL(o.piece_number,0)) totalPieceNum
+,sum(IF(o.step_select_code=0,1,0)) reciveOrderNum,sum(IF(o.step_select_code=1,1,0)) sendOrderNum
+,sum(IF(o.step_select_code=2,1,0)) carOrderNum,0 trainOrderNum
+,sum(IFNULL(case when step_select_code=0 then p.pick_up_price 
+          when step_select_code=1 then p.arrive_price 
+		 else p.transport_price end,0)*(IFNULL(o.container_one_send_net,0)+IFNULL(o.container_two_send_net,0))) prodectMoney
+,sum(IFNULL(case when step_select_code=0 then p.pick_up_price 
+			when step_select_code=1 then p.arrive_price 
+ else p.transport_price end,0)*(IFNULL(o.container_one_send_net,0)+IFNULL(o.container_two_send_net,0))*IFNULL(c.tax_rate,0)/100) shouldTaxMoney
+,sum(IFNULL(if(step_select_code=0,p.pick_up_price,0),0)*(IFNULL(o.container_one_send_net,0)+IFNULL(o.container_two_send_net,0))) prodectMoneyRecive
+,sum(IFNULL(if(step_select_code=1,p.arrive_price,0),0)*(IFNULL(o.container_one_send_net,0)+IFNULL(o.container_two_send_net,0))) prodectMoneySend
+,sum(IFNULL(if(step_select_code=2,p.transport_price,0),0)*(IFNULL(o.container_one_send_net,0)+IFNULL(o.container_two_send_net,0))) prodectMoneyCar
+,0 prodectMoneyTrain
+,max(if(step_select_code=0,o.arrive_place,'')) arrivePlaceRecive
+,max(if(step_select_code=1,o.arrive_place,'')) arrivePlaceSend
+,max(if(step_select_code=2,o.arrive_place,'')) arrivePlaceCar
+,max(if(step_select_code=0,o.pickup_place,'')) pickupPlaceRecive
+,max(if(step_select_code=1,o.pickup_place,'')) pickupPlaceSend
+,max(if(step_select_code=2,o.pickup_place,'')) pickupPlaceCar
+,'' beginPlance
+,'' endPlance
+from tb_order o
+left join tb_project p on p.id=o.project_id
+left join tb_customer_checking_conf c on c.project_id=o.project_id and o.receipter_date is not null and STR_TO_DATE(o.receipter_date,'%Y-%m-%d') &lt;=c.end_date
+left join tb_branch_group_link y on o.id=y.row_id and y.tab_name='tb_order'
+where  o.checkcust_flag=0 and y.sys_org_code like CONCAT(#{map.sysOrgCode},'%')
+<if test="map != null">
+<if test="map.stepSelectCode != null" >
+and step_select_code=#{map.stepSelectCode}
+</if>
+</if>
+group by c.cust_check_con_id
+<if test="map != null">
+<if test="map.stepSelectCode == null or map.stepSelectCode == 3 " >
+UNION ALL
+select c1.cust_check_con_id,max(t.project_id) projectId,sum(IFNULL(t.entruck_numbe,0)) totalCarNum
+,sum(IFNULL(t.entruck_weight,0)) totalNetWeight
+,sum(IFNULL(t.container_nums,0)) totalPieceNum
+,0 reciveOrderNum,0 sendOrderNum,0 carOrderNum,count(t.id) trainOrderNum
+,sum(IFNULL(p.train_price,0)*IFNULL(t.entruck_weight,0)) prodectMoney
+,sum(IFNULL(p.train_price,0)*IFNULL(t.entruck_weight,0)*IFNULL(c1.tax_rate,0)/100) shouldTaxMoney
+,0 prodectMoneyRecive
+,0 prodectMoneySend
+,0 prodectMoneyCar
+,sum(IFNULL(p.train_price,0)*IFNULL(t.entruck_weight,0)) prodectMoneyTrain
+,'' arrivePlaceRecive
+,'' arrivePlaceSend
+,'' arrivePlaceCar
+,'' pickupPlaceRecive
+,'' pickupPlaceSend
+,'' pickupPlaceCar
+,max(begin_place) beginPlance
+,max(end_place) endPlance
+from tb_train_order t
+left join tb_project p on p.id=t.project_id
+left join tb_customer_checking_conf c1 on c1.project_id=t.project_id
+left join tb_branch_group_link y on t.id=y.row_id and y.tab_name='tb_train_order'
+where  t.checkcust_flag=0 and y.sys_org_code like CONCAT(#{map.sysOrgCode},'%')
+group by c1.cust_check_con_id
+</if>
+</if>
+) a
+group by a.cust_check_con_id) b
+on b.cust_check_con_id = a.cust_check_con_id
+
+		<where>
+		and y.sys_org_code like CONCAT(#{map.sysOrgCode},'%')
+            <if test="map != null">
+            <if test="map.branchGroupIdBulkTrainSport != null">
+		    and p.branch_group_id in 
+		 	<foreach item="item" index="index" collection="map.branchGroupIdCount" 
+                   open="(" separator="," close=")">
+                  #{item}
+         	</foreach>
+        </if>
+		<if test="map.custCheckConId != null and map.custCheckConId != '' and map.custCheckConId != 'null' and map.custCheckConId != 'undefined'">				  
+		    AND a.cust_check_con_id = #{map.custCheckConId}
+                </if>
+		<if test="map.projectId != null and map.projectId != '' " >
+		    AND a.project_id = #{map.projectId}
+                </if>
+                <if test="map.projectCode != null and map.projectCode != '' and map.projectCode != 'null' and map.projectCode != 'undefined'">
+		    AND p.project_code like CONCAT('%',#{map.projectCode},'%') 
+         </if> 
+        <if test="map.branchGroupName != null and map.branchGroupName != '' and map.branchGroupName != 'null' and map.branchGroupName != 'undefined'">
+		    AND p.branch_group_name like CONCAT('%',#{map.branchGroupName},'%') 
+         </if> 
+         <if test="map.beginDate != null and map.beginDate !='' and map.beginDate != 'null' and map.beginDate != 'undefined' " >
+		       and date_format(a.create_date, '%Y-%m-%d') &gt;= date_format(#{map.beginDate}, '%Y-%m-%d')
+		    </if>
+		    <if test="map.endDate != null and map.endDate !='' and map.endDate != 'null' and map.endDate != 'undefined' " >
+		       and date_format(a.create_date, '%Y-%m-%d') &lt;= date_format(#{map.endDate}, '%Y-%m-%d')
+		    </if>
+		<!-- <if test="map.startDate != null">
+		    AND a.start_date = #{map.startDate}
+                </if>
+		<if test="map.endDate != null">
+		    AND a.end_date = #{map.endDate}
+                </if> -->
+		<if test="map.checkingStatus != null">
+		    AND a.checking_status = #{map.checkingStatus}
+                </if>
+		<if test="map.deleteFlag != null">
+		    AND a.delete_flag = #{map.deleteFlag}
+                </if>
+		<if test="map.createDate != null">
+		    AND a.create_date = #{map.createDate}
+                </if>
+		<if test="map.createUserId != null">
+		    AND a.create_user_id = #{map.createUserId}
+                </if>
+		<if test="map.modifiyDate != null">
+		    AND a.modifiy_date = #{map.modifiyDate}
+                </if>
+		<if test="map.orderCount != null">
+		    AND a.order_count = #{map.orderCount}
+                </if>
+		<if test="map.previousOrderCount != null">
+		    AND a.previous_order_count = #{map.previousOrderCount}
+                </if>
+		<if test="map.totalWeight != null">
+		    AND a.total_weight = #{map.totalWeight}
+                </if>
+		<if test="map.totalPiece != null">
+		    AND a.total_piece = #{map.totalPiece}
+                </if>
+		<if test="map.produceMoney != null">
+		    AND a.produce_money = #{map.produceMoney}
+                </if>
+		<if test="map.taxMoney != null">
+		    AND a.tax_money = #{map.taxMoney}
+                </if>
+		<if test="map.busCheckingStatus != null">
+		    AND a.bus_checking_status = #{map.busCheckingStatus}
+                </if>
+		<if test="map.busOrderCount != null">
+		    AND a.bus_order_count = #{map.busOrderCount}
+                </if>
+		<if test="map.busOrderMoney != null">
+		    AND a.bus_order_money = #{map.busOrderMoney}
+                </if>
+		<if test="map.receiveCheckingStatus != null">
+		    AND a.receive_checking_status = #{map.receiveCheckingStatus}
+                </if>
+		<if test="map.receiveOrderCount != null">
+		    AND a.receive_order_count = #{map.receiveOrderCount}
+                </if>
+		<if test="map.receiveOrderMoney != null">
+		    AND a.receive_order_money = #{map.receiveOrderMoney}
+                </if>
+		<if test="map.trainCheckingStatus != null">
+		    AND a.train_checking_status = #{map.trainCheckingStatus}
+                </if>
+		<if test="map.trainOrderCount != null">
+		    AND a.train_order_count = #{map.trainOrderCount}
+                </if>
+		<if test="map.trainOrderMoney != null">
+		    AND a.train_order_money = #{map.trainOrderMoney}
+                </if>
+		<if test="map.deliCheckingStatus != null">
+		    AND a.deli_checking_status = #{map.deliCheckingStatus}
+                </if>
+		<if test="map.deliOrderCount != null">
+		    AND a.deli_order_count = #{map.deliOrderCount}
+                </if>
+		<if test="map.deliOrderMoney != null">
+		    AND a.deli_order_money = #{map.deliOrderMoney}
+                </if>
+            </if>
+            <if test="map.custCheckConIds != null">
+            and a.cust_check_con_id in 
+        <foreach collection="map.custCheckConIds" index="index" item="item" open="(" separator="," close=")">   
+            #{item}   
+        </foreach>
+        </if>
+        </where>
+        order by a.cust_check_con_id desc
+	</select>
+
+    <!-- 检索客户对账设置表列表 -->
+	<select id="getCustomerCheckingApp" resultType="Map">
+		select a.cust_check_con_id checkId,DATE_FORMAT(a.modifiy_date,'%Y-%m-%d %H:%i:%s') modifiyDate
+,a.produce_money produceMoney,a.tax_money taxMoney
+		,CONCAT(DATE_FORMAT(a.start_date,'%Y-%m-%d'),'~',DATE_FORMAT(a.end_date,'%Y-%m-%d')) checkDate
+    ,9 packType,a.order_count orderCount
+		from tb_customer_checking_conf a 
+		left join tb_project p on a.project_id = p.id
+		left join tb_branch_group_link y on a.cust_check_con_id=y.row_id and y.tab_name='tb_customer_checking_conf'
+		<where>
+		and y.sys_org_code like CONCAT(#{map.sysOrgCode},'%')
+            <if test="map != null">
+            <if test="map.branchGroupIdBulkTrainSport != null">
+		    and p.branch_group_id in 
+		 	<foreach item="item" index="index" collection="map.branchGroupIdCount" 
+                   open="(" separator="," close=")">
+                  #{item}
+         	</foreach>
+         	</if>
+         	<if test="map.queryFrom != null and map.queryFrom == 'app'">
+		    AND a.checking_status in(0,1)
+                </if>   
+        </if>
+        </where>
+UNION ALL
+select a.cust_pack_id checkId,DATE_FORMAT(a.modifiy_date,'%Y-%m-%d %H:%i:%s') modifiyDate
+,a.produce_money produceMoney,a.tax_money taxMoney
+,CONCAT(DATE_FORMAT(a.start_date,'%Y-%m-%d'),'~',DATE_FORMAT(a.end_date,'%Y-%m-%d')) checkDate
+,a.pack_type packType,a.order_count orderCount
+		from tb_customer_pack a
+		left join tb_project p on a.project_id = p.id
+		left join tb_branch_group_link y on a.cust_pack_id=y.row_id and y.tab_name='tb_customer_pack'
+		<where>
+		and y.sys_org_code like CONCAT(#{map.sysOrgCode},'%')
+           <if test="map != null">
+            <if test="map.branchGroupIdBulkTrainSport != null">
+		    and p.branch_group_id in 
+		 	<foreach item="item" index="index" collection="map.branchGroupIdCount" 
+                   open="(" separator="," close=")">
+                  #{item}
+         	</foreach>
+        	</if>
+        	<if test="map.queryFrom != null and map.queryFrom == 'app'">
+		    AND a.checking_status in(0,1)
+                </if> 
+        	
+        </if>
+        </where>
+        </select>
+</mapper>

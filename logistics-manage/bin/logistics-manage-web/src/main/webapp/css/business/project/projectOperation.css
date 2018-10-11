@@ -1,0 +1,10 @@
+/*.ss li{float: left;margin: 10px;list-style: none;}*/
+/*.depot{float: left;border-right: 1px solid #ccc}*/
+.depot{margin: 20px}
+#depot_table  {border-radius: 5px;border: 2px solid #dde3ef; border-collapse:collapse;border-spacing:0; margin-left: 20px;margin-right: 20px}
+#depot_table td{border:1px solid #eef5fd;font-family: "Microsoft YaHei"; font-size:14px;padding:10px 5px;overflow:hidden;word-break:normal;}
+#depot_table th{border:1px solid #dde3ef;font-family: "Microsoft YaHei";text-align: center; line-height: 1.375;background: #EEF5FD;font-size:16px;font-weight:normal;padding:10px 5px;overflow:hidden;word-break:normal;}
+
+#depot_table td dl{text-align: center;margin-bottom: 0px !important}
+#depot_table td dl dt{ font-size: 12px;font-family: "Microsoft YaHei";color: rgb(153, 153, 153);line-height: 1.833;}
+#depot_table td dl dd{ font-size: 16px;font-family: "Microsoft YaHei";color: rgb(51, 51, 51);line-height: 1.375;}

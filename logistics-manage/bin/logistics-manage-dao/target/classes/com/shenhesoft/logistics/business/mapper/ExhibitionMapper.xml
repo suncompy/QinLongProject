@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shenhesoft.logistics.business.mapper.ExhibitionMapper">
+
+	<!-- 检索项目展示最新项目列表 -->
+	<select id="getExhibitionTops" resultType="Map">
+		select 'img/logo.png' logo,p.project_code projectCode,case when p.principal=0 then p.receive_cargo_company_name else send_cargo_company_name end client
+		,p.cargo_name cargoName,p.cargo_specifications cargoSpecifications
+		,if(p.valuation_unit_name=0,'件','吨') valuationUnitName
+		,p.short_barge_carrier_name shortBargeCarrierName,t.shortBargeName
+		,DATE_FORMAT(p.create_date,'%Y-%m-%d %H:%i') createDate
+		  from tb_project p
+		  LEFT JOIN (select b.project_id projectId,group_concat(b.short_barge_name order by b.short_barge_name separator ",") as shortBargeName
+from tb_short_barge b
+group by b.project_id) t on t.projectId = p.id
+		  where 1=1
+		<if test="map != null">
+		<if test="map.projectCode != null and map.projectCode != '' and map.projectCode != 'null' and map.projectCode != 'undefined'">
+		  and p.project_code like CONCAT('%',#{map.projectCode},'%')
+		</if>
+		<if test="map.cusId != null ">
+		  and (p.send_cargo_company_id = #{map.cusId} or p.receive_cargo_company_id = #{map.cusId} or p.send_cargo_unit_id = #{map.cusId} or p.receiving_department_id = #{map.cusId})
+		</if>
+        </if>
+		order by p.create_date desc limit 3
+	</select>
+	<!-- 检索项目展示项目列表 -->
+	<select id="getExhibitionNotTops" resultType="Map">
+		select 'img/logo.png' logo,p.project_code projectCode,case when p.principal=0 then p.receive_cargo_company_name else send_cargo_company_name end client
+		,p.cargo_name cargoName,p.cargo_specifications cargoSpecifications
+		,if(p.valuation_unit_name=0,'件','吨') valuationUnitName
+		,p.short_barge_carrier_name shortBargeCarrierName,t.shortBargeName
+		,DATE_FORMAT(p.create_date,'%Y-%m-%d %H:%i') createDate
+		  from tb_project p
+		  LEFT JOIN (select b.project_id projectId,group_concat(b.short_barge_name order by b.short_barge_name separator ",") as shortBargeName
+from tb_short_barge b
+group by b.project_id) t on t.projectId = p.id
+		where 1=1
+		<if test="map != null">
+		<if test="map.projectCode != null and map.projectCode != '' and map.projectCode != 'null' and map.projectCode != 'undefined'">
+		  and p.project_code like CONCAT('%',#{map.projectCode},'%')
+		</if>
+		<if test="map.cusId != null ">
+		  and (p.send_cargo_company_id = #{map.cusId} or p.receive_cargo_company_id = #{map.cusId} or p.send_cargo_unit_id = #{map.cusId} or p.receiving_department_id = #{map.cusId})
+		</if>
+		</if>
+		and id not in (select k.id from (select id from tb_project order by create_date desc limit 3) k)
+		order by p.create_date desc
+	</select>
+
+</mapper>

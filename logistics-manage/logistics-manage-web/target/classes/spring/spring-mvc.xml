@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:context="http://www.springframework.org/schema/context"
+  xmlns:task="http://www.springframework.org/schema/task" xmlns:aop="http://www.springframework.org/schema/aop"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd 
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd 
+        http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.2.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd">
+
+	<context:component-scan base-package="com.shenhesoft.logistics.**">
+	    <context:include-filter type="annotation"
+	      expression="org.springframework.stereotype.Controller" />
+	    <context:include-filter type="annotation"
+	      expression="org.springframework.web.bind.annotation.ControllerAdvice" />
+	</context:component-scan>
+	<context:property-placeholder location="classpath:properties/*.properties" file-encoding="UTF-8"/>
+  	<mvc:annotation-driven conversion-service="conversionService">
+    <!-- 改写@ResponseBody的返回值, 此处禁用Jackson序列化空对象报异常的特性 -->
+    <mvc:message-converters>
+      <!-- 把ByteArray加在Json前面 -->
+      <bean class="org.springframework.http.converter.ByteArrayHttpMessageConverter" />
+      <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+	       	 <property name="objectMapper">
+	          <bean class="com.shenhesoft.logistics.common.page.JacksonObjectMapper"></bean>
+	        </property>
+	        <property name="supportedMediaTypes">
+	          <list>
+	            <value>text/html;charset=UTF-8</value>
+	            <value>text/plain;charset=UTF-8</value>
+	            <value>application/json;charset=UTF-8</value>
+	          </list>
+	        </property>
+      </bean>
+      <!-- 阿里baba fastjson自带json处理   -->
+      <bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
+           <property name="features">
+               <array>
+                		<!-- 下面配置，默认是false -->
+                   <value>WriteMapNullValue</value>
+                   <value>WriteNullNumberAsZero</value>
+                   <value>WriteNullListAsEmpty</value>
+                   <value>WriteNullStringAsEmpty</value>
+                   <value>WriteNullBooleanAsFalse</value>
+                	<value>WriteDateUseDateFormat</value> 
+               </array>
+           </property>
+       </bean>
+    </mvc:message-converters>
+    <mvc:argument-resolvers>
+      <bean
+        class="com.shenhesoft.logistics.common.annotation.RequestJsonParamMethodArgumentResolver" />
+    </mvc:argument-resolvers>
+  	</mvc:annotation-driven>  
+  	  
+	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping" />  
+	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">  
+    	<property name="messageConverters">  
+        <list>  
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter">  
+                <property name="supportedMediaTypes">  
+                    <list>  
+                        <value>text/html; charset=UTF-8</value>  
+                        <value>application/json;charset=UTF-8</value>  
+                    </list>  
+                </property>  
+            </bean>  
+            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">  
+                <property name="supportedMediaTypes">  
+                    <list>  
+                        <value>text/html; charset=UTF-8</value> 
+                        <value>text/plain;charset=UTF-8</value> 
+                        <value>application/json;charset=UTF-8</value>  
+                    </list>  
+                </property>  
+            </bean>  
+        </list>  
+	    </property>  
+	</bean>  
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+  	<mvc:default-servlet-handler />
+  	<aop:aspectj-autoproxy proxy-target-class="true" />
+	<!--  创建convertion-Service ，并注入dateConvert-->
+    <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+        <property name="converters">
+            <set>
+                <ref bean="dateConvert"/>
+            </set>
+        </property>
+    </bean>
+    <!--  创建自定义日期转换规则 -->   
+    <bean id="dateConvert" class="com.shenhesoft.logistics.manage.web.utils.DateConvert"/>
+	
+	<!-- 定义文件上传解析器 -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!--  设定默认编码 -->
+		<property name="defaultEncoding" value="UTF-8"></property>
+		<!-- 设定文件上传的最大值5MB，5*1024*1024 -->
+		<property name="maxUploadSize" value="5242880000"></property><!-- 5G -->
+    	<property name="maxInMemorySize" value="40960"></property>
+	</bean>
+	
+	<!-- spring系统启动以后，加载该类，查询所有数据 -->
+	<bean class="com.shenhesoft.logistics.listener.InitDataListener" />  
+</beans>

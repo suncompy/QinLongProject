@@ -1,0 +1,15 @@
+body{background-color: #F8F8F8;margin: 0 30px;}
+/*.row { margin-right: 0px;margin-left: 0px;}*/
+.btn-link{font-size:20px;color:#3F3F4D;position: absolute;top:0px;right: 0px;z-index: 999999 }
+h4{font-size: 16px;font-family: "Microsoft YaHei";color: rgb(51, 51, 51);font-weight: bold;/*margin: 0 0 20px;*/margin: 0px}
+label{margin-bottom: 0px;font-weight: normal;s}
+ul{list-style-type: none;padding: 0px;}
+ul li{float: left;width: 100%;/*padding-top: 20px;*/padding-top: 20px}
+hr{/*margin-top: 10px;margin-bottom: 10px;*/border: 0;border-top: 1px dashed #ccc;}
+.detail,.track{background-color: #fff;padding:20px;box-shadow: 2px 2px 5px #ccc;border-radius: 3px;margin: 20px 0;}
+.col-sm-3,.col-sm-4,.col-sm-5,.col-sm-12{padding: 0px;}
+.state,.distance{color: #4C88EA}
+
+.fa-circle{color:#20A65B }
+.track ul{list-style-type: none;counter-reset:count;}
+.track ul li:before{content:"•";;color:#094;font-size: 20px}

@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>三方应收款管理</title>
+		<link rel="stylesheet" href="../../../public/bootstrap/css/bootstrap.css" />
+		<link rel="stylesheet" href="../../../public/bootstrap/css/font-awesome.css" />
+		<link rel="stylesheet" href="../../../css/finance/receivablesSettlement/threePartiesReceivables.css" />
+		<link rel="stylesheet" href="../../../public/public.css" />
+		<script type="text/javascript" src="../../../public/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="../../../public/bootstrap/js/bootstrap.js"></script>
+		<script type="text/javascript" src="../../../js/public.js"></script>
+		<script type="text/javascript" src="../../../js/finance/receivablesSettlement/threePartiesReceivables.js"></script>
+	</head>
+
+	<body>
+		<!-- 三方应收款管理 -->
+		<div class="form project_form container_top">
+			<form class="form-inline maxWidth">
+				<div id="wrap">
+					<div class="form-group">
+						<label>项目编号：</label>
+						<select></select>
+					</div>
+					<div class="form-group">
+						<label>分支机构：</label>
+						<select></select>
+					</div>
+					<div class="form-group">
+						<label>项目类型：</label>
+						<select></select>
+					</div>
+					<div class="form-group">
+						<label>运单编号：</label>
+						<select></select>
+					</div>
+
+					<div class="form-group">
+						<label>货物品名：</label>
+						<select></select>
+					</div>
+					<div class="form-group">
+						<label>发货企业：</label>
+						<select></select>
+					</div>
+					<div class="form-group">
+						<label>收货企业：</label>
+						<select></select>
+					</div>
+					<div class="form-group">
+						<label>&emsp;&emsp;货场：</label>
+						<select></select>
+					</div>
+
+					<div class="form-group">
+						<label>&emsp;&emsp;货位：</label>
+						<select></select>
+					</div>
+
+					<div class="form-group">
+						<label>计费模式：</label>
+						<select></select>
+					</div>
+
+				</div>
+				<div class="foot">
+					<a class="btn btn-success" href="#"><em class="search"></em>
+						<span>搜索</span>
+					</a>
+					<div id="lookMore"></div>
+				</div>
+			</form>
+		</div>
+		<div class="container_top tableDiv">
+			<div class="tabbable" id="tabs-529262">
+				<ul class="nav nav-tabs">
+					<li class="active">
+						<a href="#panel1" data-toggle="tab">收款管理</a>
+					</li>
+				</ul>
+				<div class="tab-content">
+					<!--收款管理表格开始-->
+					<div class="tab-pane active" id="panel1">
+						<div class="domain">
+							<div class="tableBg">
+								<a href="#" class="exportBtn newReceipts" id="addbtn"><span>新增收款</span></a>
+								<a href="#" class="exportBtn financialAudit" id='accountDetails'><span>财务审核</span></a>
+								<a href="#" class="exportBtn antiAudit" id='backaccountDetails'><span>反审核</span></a>
+							</div>
+							<div class="table-responsive">
+								<table class="table">
+									<thead>
+										<tr class="tableTop">
+											<th><label class="demo--label">
+											     <input class="demo--checkbox" type="checkbox"   >
+                                                 <span class="demo--checkboxInput"></span>
+	                                        </label> </th>
+											<th>项目编号</th>
+											<th>分支机构</th>
+											<th>对账单号</th>
+											<th>状态</th>
+											<th>贷款类型</th>
+											<th>三方企业</th>
+											<th>金额</th>
+											<th>发货企业</th>
+											<th>收货企业</th>
+											<th>货物品名</th>
+											<th>起始日期</th>
+											<th>终止日期</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td><label class="demo--label">
+											     <input class="demo--checkbox" type="checkbox"   >
+                                                 <span class="demo--checkboxInput"></span>
+	                                        </label></td>
+											<td>
+												<a href="#">J0001</a>
+											</td>
+											<td>XX分支</td>
+											<td>CSAC-1345321234</td>
+											<td>审核中</td>
+											<td>贷款</td>
+											<td>新疆钢铁有限公司</td>
+											<td>100000元</td>
+											<td>新疆钢铁有限公司</td>
+											<td>新疆钢铁有限公司</td>
+											<td>煤炭</td>
+											<td>2017.12.12 20:00</td>
+											<td>2017.12.12 20:00</td>
+										</tr>
+										<tr>
+											<td><label class="demo--label">
+											     <input class="demo--checkbox" type="checkbox"   >
+                                                 <span class="demo--checkboxInput"></span>
+	                                        </label></td>
+											<td>
+												<a href="#">J0001</a>
+											</td>
+											<td>XX分支</td>
+											<td>CSAC-1345321234</td>
+											<td>审核中</td>
+											<td>贷款</td>
+											<td>新疆钢铁有限公司</td>
+											<td>100000元</td>
+											<td>新疆钢铁有限公司</td>
+											<td>新疆钢铁有限公司</td>
+											<td>煤炭</td>
+											<td>2017.12.12 20:00</td>
+											<td>2017.12.12 20:00</td>
+										</tr>
+										<tr>
+											<td><label class="demo--label">
+											     <input class="demo--checkbox" type="checkbox"   >
+                                                 <span class="demo--checkboxInput"></span>
+	                                        </label></td>
+											<td>
+												<a href="#">J0001</a>
+											</td>
+											<td>XX分支</td>
+											<td>CSAC-1345321234</td>
+											<td>审核中</td>
+											<td>贷款</td>
+											<td>新疆钢铁有限公司</td>
+											<td>100000元</td>
+											<td>新疆钢铁有限公司</td>
+											<td>新疆钢铁有限公司</td>
+											<td>煤炭</td>
+											<td>2017.12.12 20:00</td>
+											<td>2017.12.12 20:00</td>
+										</tr>
+										<tr>
+											<td><label class="demo--label">
+											     <input class="demo--checkbox" type="checkbox"   >
+                                                 <span class="demo--checkboxInput"></span>
+	                                        </label></td>
+											<td>
+												<a href="#">J0001</a>
+											</td>
+											<td>XX分支</td>
+											<td>CSAC-1345321234</td>
+											<td>审核中</td>
+											<td>贷款</td>
+											<td>新疆钢铁有限公司</td>
+											<td>100000元</td>
+											<td>新疆钢铁有限公司</td>
+											<td>新疆钢铁有限公司</td>
+											<td>煤炭</td>
+											<td>2017.12.12 20:00</td>
+											<td>2017.12.12 20:00</td>
+										</tr>
+										<tr>
+											<td><label class="demo--label">
+											     <input class="demo--checkbox" type="checkbox"   >
+                                                 <span class="demo--checkboxInput"></span>
+	                                        </label></td>
+											<td>
+												<a href="#">J0001</a>
+											</td>
+											<td>XX分支</td>
+											<td>CSAC-1345321234</td>
+											<td>审核中</td>
+											<td>贷款</td>
+											<td>新疆钢铁有限公司</td>
+											<td>100000元</td>
+											<td>新疆钢铁有限公司</td>
+											<td>新疆钢铁有限公司</td>
+											<td>煤炭</td>
+											<td>2017.12.12 20:00</td>
+											<td>2017.12.12 20:00</td>
+										</tr>
+										<tr>
+											<td><label class="demo--label">
+											     <input class="demo--checkbox" type="checkbox"   >
+                                                 <span class="demo--checkboxInput"></span>
+	                                        </label></td>
+											<td>
+												<a href="#">J0001</a>
+											</td>
+											<td>XX分支</td>
+											<td>CSAC-1345321234</td>
+											<td>审核中</td>
+											<td>贷款</td>
+											<td>新疆钢铁有限公司</td>
+											<td>100000元</td>
+											<td>新疆钢铁有限公司</td>
+											<td>新疆钢铁有限公司</td>
+											<td>煤炭</td>
+											<td>2017.12.12 20:00</td>
+											<td>2017.12.12 20:00</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="row clearfix">
+							<div class="col-md-12 column paging">
+								<ul class="pagination clearfix">
+									<li>
+										<a href="#" class="newA">上一页</a>
+									</li>
+									<li>
+										<a href="#" class="newA actives">1</a>
+									</li>
+									<li>
+										<a href="#" class="newA">2</a>
+									</li>
+									<li>
+										<a href="#" class="newA">3</a>
+									</li>
+									<li>
+										<a href="#" class="newA">4</a>
+									</li>
+									<li>
+										<a href="#" class="newA">5</a>
+									</li>
+
+									<li>
+										<a href="#" class="newA">...</a>
+									</li>
+									<li>
+										<a href="#" class="newA">10</a>
+									</li>
+
+									<li>
+										<a href="#" class="newA">下一页 </a>
+									</li>
+
+									<li>
+										<a class="pageSpan">跳转到 <input type="text" id="pageInput" />页</a>
+									</li>
+									<li>
+
+									</li>
+									<li>
+										<a href="#" class="pageGo">GO</a>
+									</li>
+
+								</ul>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		</div>
+
+		<!-- 详情 -->
+		<div class="modal fade" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="myModalLabel" id="detailModal">
+			<div class="modal-dialog modal-lg detailModal" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title" id="myModalLabel">详情</h4>
+						<span data-dismiss="modal" aria-label="Close"></span>
+					</div>
+					<div class="modal-body">
+						<div class="project_info">
+							<h5>项目信息</h5>
+							<ul class="waitUl">
+								<li>项目编号：<span>J00001</span></li>
+								<li>分支机构：<span>XX分支</span></li>
+								<li>对账单号：<span>DSAC-1234531435</span></li>
+								<li>状态：<span>审核中</span></li>
+								<li>三方企业：<span>新疆钢铁有限公司</span></li>
+								<li>&emsp;&emsp;金额：<span>100000元</span></li>
+							</ul>
+						</div>
+						<hr />
+						<div class="project_info">
+							<h5>详细信息</h5>
+							<ul class="waitUl">
+								<li>发货企业：<span>新疆钢铁有限公司</span></li>
+								<li>&emsp;&emsp;&emsp;始发地：<span>安徽合肥</span></li>
+								<li>收货企业：<span>新疆钢铁有限公司</span></li>
+								<li>&emsp;&emsp;&emsp;运抵地：<span>安徽合肥</span></li>
+								<li>起始日期：<span>2017.01.01</span></li>
+								<li>&emsp;&emsp;终止日期：<span>2017.01.01</span></li>
+								<li>获取品名：<span>煤炭</span></li>
+								<li>&emsp;&emsp;运单总数：<span>4</span></li>
+								<li>&emsp;总净重：<span>100吨</span></li>
+								<li>&emsp;&emsp;&emsp;总件数：<span>4</span></li>
+								<li>产生金额：<span>100000元</span></li>
+								<li>&emsp;&emsp;补齐项目：<span></span></li>
+								<li>补齐金额：<span></span></li>
+								<li>&emsp;&emsp;应开税额：<span></span></li>
+								<li>&emsp;&emsp;汽运：<span>已对账</span></li>
+								<li>汽运对账金额：<span>100000元</span></li>
+								<li>&emsp;&emsp;接取：<span>100000元</span></li>
+								<li>接取对账金额：<span>100000元</span></li>
+								<li>&emsp;&emsp;火运：<span>100000元</span></li>
+								<li>火运对账金额：<span>100000元</span></li>
+								<li>&emsp;&emsp;送达：<span>已对账</span></li>
+								<li>送达对账金额：<span>100000元</span></li>
+								<li>&emsp;对账人：<span>王大锤</span></li>
+								<li>&emsp;&emsp;对账时间：<span>2017.12.12 20:00</span></li>
+								<li class="remarkLi">&emsp;备注：<span style="color: red;">汽运/汽运对账金额   到   送达对账金额，这些数据不是固定的，根据前面获取的数据，
+例如汽运短驳，就只显示汽运/汽运对账金额，其他不显示</span></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		</div>
+		<!-- 新增 -->
+		<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" id="addmodal">
+			<div class="modal-dialog modal-lg detailModal" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title" id="myModalLabel">新增收款</h4>
+						<span data-dismiss="modal" aria-label="Close"></span>
+					</div>
+					<div class="modal-body">
+						<h5>项目信息</h5>
+						<form id="threeForm">
+							<div class="project_info">
+								<div class="form-inline">
+									<div class="form-group">
+										<label>&emsp;项目编号：</label>
+										<select></select>
+									</div>
+									<div class="form-group">
+										<label>&emsp;运单编号：</label>
+										<select></select>
+									</div>
+								</div>
+							</div>
+							<div class="project_info">
+								<div class="form-inline">
+									<div class="form-group">
+										<label>&emsp;三方企业：</label>
+										<select></select>
+									</div>
+									<div class="form-group">
+										<label>&emsp;银行账户：</label>
+										<input type="text" unselectable="on" class="inputbg" readonly="readonly">
+									</div>
+									<div class="form-group">
+										<label>&emsp;银行账号：</label>
+										<input type="text" unselectable="on" class="inputbg" readonly="readonly">
+									</div>
+									<div class="form-group">
+										<label>&emsp;银行行号：</label>
+										<input type="text" unselectable="on" class="inputbg" readonly="readonly">
+									</div>
+								</div>
+
+							</div>
+							<hr />
+							<div class="project_info">
+									<h5>收款信息</h5>
+								<div class="form-inline">
+									<div class="form-group">
+										<label>收款经办人：</label>
+										<select></select>
+									</div>
+									<div class="form-group">
+										<label>&emsp;收款单位：</label>
+										<select></select>
+									</div>
+									<div class="form-group">
+										<label>&emsp;收款账户：</label>
+										<input type="text" unselectable="on" class="inputbg" readonly="readonly">
+									</div>
+									<div class="form-group">
+										<label>&emsp;收款帐号：</label>
+										<input type="text" unselectable="on" class="inputbg" readonly="readonly">
+									</div>
+									<div class="form-group">
+										<label>&emsp;收款行号：</label>
+										<input type="text" unselectable="on" class="inputbg" readonly="readonly">
+									</div>
+									<div class="form-group">
+										<label>&emsp;贷款类型：</label>
+										<select></select>
+									</div>
+									<div class="form-group">
+										<label>收款单位凭证字号：</label>
+										<input type="text" maxlength="30" id="gatheringInput">
+									</div>
+								</div>
+							</div>
+							<div class="row clearfix ">
+								<div class="col-md-12 column modal_btn">
+									<button type="button" class="btn sureBtn">存入</button>
+									<button type="button" class="btn cancleBtn" data-dismiss="modal">取消</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 未选择数据提醒模态框 -->
+				<div class="modal fade deletRemindModal" tabindex="-1" role="dialog" id="nullModal" data-backdrop="static">
+					<div class="modal-dialog " role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h4 class="modal-title">提示</h4>
+								<span data-dismiss="modal" aria-label="Close"></span>
+							</div>
+							<div class="modal-body">
+								<div class="body-content">
+									<i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+									<span>请选择一条要操作的数据</span>
+								</div>
+								<div class="row clearfix ">
+									<div class="col-md-12 column modal_btn">
+										<button type="button" class="btn sureBtn">确定</button>
+										<button type="button" class="btn cancleBtn" data-dismiss="modal">取消</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- 提醒模态框 -->
+				<div class="modal fade deletRemindModal" tabindex="-1" role="dialog" id="deltialModal" data-backdrop="static">
+					<div class="modal-dialog " role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h4 class="modal-title">提示</h4>
+								<span data-dismiss="modal" aria-label="Close"></span>
+							</div>
+							<div class="modal-body">
+								<div class="body-content">
+									<div><span>您已选择</span><b class="errnums">13</b> <span id="msgSpan"></span></div>
+								</div>
+								<div class="row clearfix ">
+									<div class="col-md-12 column modal_btn">
+										<button type="button" class="btn sureBtn">确定</button>
+										<button type="button" class="btn cancleBtn" data-dismiss="modal">取消</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+	</body>
+
+</html>

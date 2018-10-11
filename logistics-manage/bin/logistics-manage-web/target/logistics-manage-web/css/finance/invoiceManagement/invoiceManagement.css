@@ -1,0 +1,10 @@
+.modal-dialog select,.modal-dialog input[type=text]{width:140px;border: 1px solid #DDE3EF;;height: 28px;margin: 5px 0;border-radius: 2px;}
+.modal-dialog .form-group{position: relative;}
+.modal-dialog .form-group span{position: absolute;top: 10px ;right: 10px;}
+@media screen and (min-width:300px) and (max-width:991px){
+	.form-inline .form-group {
+    display: inline-block;
+    margin-bottom: 0;
+    vertical-align: middle;
+}
+}

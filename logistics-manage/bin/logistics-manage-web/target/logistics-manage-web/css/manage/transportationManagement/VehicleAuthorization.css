@@ -1,0 +1,8 @@
+.modal .fa-question-circle{color:#04A9ED;font-size: 45px;margin-right: 20px;}
+.modal span{vertical-align: middle;font-size: 20px;height: 50px;display: inline-block;}
+.modal .modal-body .body-content {text-align: center;padding-top: 20px;}
+.modal b{color: red;}
+/*删除原因模态框*/
+.deletReasonModal .fa-exclamation-triangle{color:#04A9ED;font-size: 35px;margin-right: 20px;}
+.deletReasonModal span{vertical-align: middle;font-size: 20px;height: 35px;display: inline-block;}
+.deletReasonModal .delete_reason{margin-left: 30px;}

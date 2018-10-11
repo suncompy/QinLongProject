@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shenhesoft.logistics.finance.mapper.CustSettleMapper">
+
+	<!-- 新增客户结算表 -->
+	<insert id="addCustSettle">
+		insert into tb_cust_settle(id,pay_deposit_org,pay_deposit_type,settle_status,invoice_id,settled_money,setting_money,update_time,create_time
+		)values(#{id},#{payDepositOrg},#{payDepositType},#{settleStatus},#{invoiceId},#{settledMoney},#{settingMoney},now(),now())
+	</insert>
+
+	<!-- 批量新增客户结算表 -->
+	<insert id="addCustSettles">
+		insert into tb_cust_settle(id,pay_deposit_org,pay_deposit_type,settle_status,invoice_id,settled_money,setting_money,update_time,create_time
+		)values
+		<foreach collection="list" item="item" index="index" separator=",">
+            (#{id},#{payDepositOrg},#{payDepositType},#{settleStatus},#{invoiceId},#{settledMoney},#{settingMoney},#{updateTime},#{createTime})
+        </foreach>
+	</insert>
+
+	<!-- 修改客户结算表 -->
+	<update id="editCustSettleById">
+		update tb_cust_settle
+		<set>
+		 <if test="payDepositOrg != null and payDepositOrg != '' and payDepositOrg != 'null' and payDepositOrg != 'undefined'">
+               pay_deposit_org=#{payDepositOrg},
+         </if>
+		 <if test="payDepositType != null and payDepositType != '' and payDepositType != 'null' and payDepositType != 'undefined'">
+               pay_deposit_type=#{payDepositType},
+         </if>
+		<if test="settleStatus != null">
+               settle_status=#{settleStatus},
+         </if>
+		 <if test="invoiceId != null and invoiceId != '' and invoiceId != 'null' and invoiceId != 'undefined'">
+               invoice_id=#{invoiceId},
+         </if>
+		<if test="settledMoney != null">
+               settled_money=#{settledMoney},
+         </if>
+		<if test="settingMoney != null">
+               setting_money=#{settingMoney},
+         </if>
+		<if test="updateTime != null">
+               update_time=now(),
+         </if>
+		</set>
+		where id=#{id}
+	</update>
+
+	<!-- 批量修改客户结算表 -->
+	<update id="editCustSettleByIds">
+		update tb_cust_settle
+		<set>
+		 <if test="map.payDepositOrg != null and map.payDepositOrg != '' and map.payDepositOrg != 'null' and map.payDepositOrg != 'undefined'">
+	       pay_deposit_org=#{map.payDepositOrg},
+         </if>
+		 <if test="map.payDepositType != null and map.payDepositType != '' and map.payDepositType != 'null' and map.payDepositType != 'undefined'">
+	       pay_deposit_type=#{map.payDepositType},
+         </if>
+		<if test="map.settleStatus != null">
+	       settle_status=#{map.settleStatus},
+         </if>
+		 <if test="map.invoiceId != null and map.invoiceId != '' and map.invoiceId != 'null' and map.invoiceId != 'undefined'">
+	       invoice_id=#{map.invoiceId},
+         </if>
+		<if test="map.settledMoney != null">
+	       settled_money=#{map.settledMoney},
+         </if>
+		<if test="map.settingMoney != null">
+	       setting_money=#{map.settingMoney},
+         </if>
+		<if test="map.updateTime != null">
+	       update_time=now(),
+         </if>
+		</set>
+		where id in
+		<foreach collection="list" index="index" item="item" open="(" separator="," close=")">   
+             #{item}   
+        </foreach>
+	</update>
+
+	<!-- 查看客户结算表 -->
+	<select id="getCustSettleById" resultType="Map">
+        select a.id id,a.pay_deposit_org payDepositOrg,a.pay_deposit_type payDepositType,a.settle_status settleStatus,a.invoice_id invoiceId,a.settled_money settledMoney,a.setting_money settingMoney,DATE_FORMAT(a.update_time,'%Y-%m-%d %H:%i:%s') updateTime,DATE_FORMAT(a.create_time,'%Y-%m-%d %H:%i:%s') createTime
+        from tb_cust_settle a
+        where a.id=#{id}
+    </select>
+
+	<!-- 删除客户结算表 -->
+	<delete id="delCustSettleById">
+		delete from tb_cust_settle where id = #{id}
+	</delete>	
+
+	<!-- 批量删除客户结算表 -->
+    <delete id="delCustSettleByIds">  
+        delete from tb_cust_settle where id in 
+        <foreach collection="list" index="index" item="item" open="(" separator="," close=")">   
+            #{item}   
+        </foreach>  
+    </delete>
+
+	<!-- 清空客户结算表 -->
+	<delete id="delCustSettles">
+		delete from tb_cust_settle
+	</delete>	
+
+	<!-- 检索客户结算表列表 -->
+	<select id="getCustSettles" resultType="Map">
+	select a.id id,a.pay_deposit_org payDepositOrg,a.pay_deposit_type payDepositType,a.settle_status settleStatus,a.invoice_id invoiceId,a.settled_money settledMoney,a.setting_money settingMoney,DATE_FORMAT(a.update_time,'%Y-%m-%d %H:%i:%s') updateTime,DATE_FORMAT(b.create_date,'%Y-%m-%d %H:%i:%s') createTime
+	,k.account_num accountNo,b.provide_company_id provideCompanyId,b.provide_company_name provideCompanyName,b.receive_company_name receiveCompanyName,b.total_money totalMoney,b.pack_id packId,p.project_code projectCode,c.order_count totalOrder
+	,IFNULL(o.auditingMoney,0) auditingMoney,IFNULL(o.auditedMoney,0) auditedMoney
+	from tb_cust_settle a
+	left join tb_invoice b on b.invoice_id=a.invoice_id
+	left join tb_customer_pack c on b.pack_id =c.cust_pack_id
+	left join tb_project p on p.id=b.project_id
+  	left join tb_finance_account k on k.id=b.provide_company_id
+	left join (select d.settle_id,sum(if(d.apply_status in(1,2),d.apply_money,0)) auditingMoney
+			,sum(if(d.apply_status=2,d.apply_money,0)) auditedMoney from tb_cust_settle_detail d
+			group by d.settle_id) o on o.settle_id=a.id
+	left join tb_branch_group_link y on a.id=y.row_id and y.tab_name='tb_cust_settle'		
+		<where>
+		and y.sys_org_code like CONCAT(#{map.sysOrgCode},'%')
+            <if test="map != null">
+            <choose>  
+	            <when test="map.historyed !=null ">  
+	            	and a.settle_status =2 
+					<if test="map.beginDate != null and map.beginDate !='' and map.beginDate != 'null' and map.beginDate != 'undefined' " >
+				       and date_format(a.update_time, '%Y-%m-%d') &gt;= date_format(#{map.beginDate}, '%Y-%m-%d')
+				    </if>
+				    <if test="map.endDate != null and map.endDate !='' and map.endDate != 'null' and map.endDate != 'undefined' " >
+				       and date_format(a.update_time, '%Y-%m-%d') &lt;= date_format(#{map.endDate}, '%Y-%m-%d')
+				    </if>
+	            </when >  
+	            <otherwise> 
+	              and a.settle_status in(0,1)
+	              	<if test="map.beginDate != null and map.beginDate !='' and map.beginDate != 'null' and map.beginDate != 'undefined' " >
+				       and date_format(a.create_time, '%Y-%m-%d') &gt;= date_format(#{map.beginDate}, '%Y-%m-%d')
+				    </if>
+				    <if test="map.endDate != null and map.endDate !='' and map.endDate != 'null' and map.endDate != 'undefined' " >
+				       and date_format(a.create_time, '%Y-%m-%d') &lt;= date_format(#{map.endDate}, '%Y-%m-%d')
+				    </if>
+	            </otherwise>  
+        	</choose>  
+            		 <if test="map.projectCode != null and map.projectCode != '' and map.projectCode != 'null' and map.projectCode != 'undefined'">
+		    AND p.project_code like CONCAT('%',#{map.projectCode},'%') 
+         </if> 
+        <if test="map.branchGroupName != null and map.branchGroupName != '' and map.branchGroupName != 'null' and map.branchGroupName != 'undefined'">
+		    AND p.branch_group_name like CONCAT('%',#{map.branchGroupName},'%') 
+         </if> 
+		<if test="map.id != null and map.id != '' and map.id != 'null' and map.id != 'undefined'">				  
+		    AND a.id = #{map.id}
+                </if>
+		<if test="map.payDepositOrg != null and map.payDepositOrg != '' and map.payDepositOrg != 'null' and map.payDepositOrg != 'undefined'">				  
+		    AND a.pay_deposit_org = #{map.payDepositOrg}
+                </if>
+		<if test="map.payDepositType != null and map.payDepositType != '' and map.payDepositType != 'null' and map.payDepositType != 'undefined'">				  
+		    AND a.pay_deposit_type = #{map.payDepositType}
+                </if>
+		<if test="map.settleStatus != null">
+		    AND a.settle_status = #{map.settleStatus}
+                </if>
+		<if test="map.invoiceId != null and map.invoiceId != '' and map.invoiceId != 'null' and map.invoiceId != 'undefined'">				  
+		    AND a.invoice_id = #{map.invoiceId}
+                </if>
+		<if test="map.settledMoney != null">
+		    AND a.settled_money = #{map.settledMoney}
+                </if>
+		<if test="map.settingMoney != null">
+		    AND a.setting_money = #{map.settingMoney}
+                </if>
+            </if>
+        </where>
+        order by a.id desc
+	</select>
+
+</mapper>

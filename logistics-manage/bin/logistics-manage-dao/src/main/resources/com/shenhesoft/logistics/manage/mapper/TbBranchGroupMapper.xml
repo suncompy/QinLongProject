@@ -1,0 +1,773 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shenhesoft.logistics.manage.mapper.TbBranchGroupMapper" >
+  <resultMap id="BaseResultMap" type="com.shenhesoft.logistics.manage.pojo.branchgroup.TbBranchGroup" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="short_name" property="shortName" jdbcType="VARCHAR" />
+    <result column="short_code" property="shortCode" jdbcType="VARCHAR" />
+    <result column="ascription_id" property="ascriptionId" jdbcType="INTEGER" />
+    <result column="ascription_name" property="ascriptionName" jdbcType="VARCHAR" />
+    <result column="level" property="level" jdbcType="TINYINT" />
+    <result column="responsibler" property="responsibler" jdbcType="VARCHAR" />
+    <result column="responsiblerId" property="responsiblerid" jdbcType="INTEGER" />
+    <result column="area_id" property="areaId" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="relation_train_location_id" property="relationTrainLocationId" jdbcType="INTEGER" />
+    <result column="relation_train_location_name" property="relationTrainLocationName" jdbcType="VARCHAR" />
+    <result column="relation_begin_location_id" property="relationBeginLocationId" jdbcType="INTEGER" />
+    <result column="relation_begin_location" property="relationBeginLocation" jdbcType="VARCHAR" />
+    <result column="comment" property="comment" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="sys_org_code" property="sysOrgCode" jdbcType="VARCHAR"/>
+  </resultMap>
+  <resultMap id="BaseResultMap2" type="com.shenhesoft.logistics.manage.helpPojo.DotBranchDetail" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="short_name" property="shortName" jdbcType="VARCHAR" />
+    <result column="short_code" property="shortCode" jdbcType="VARCHAR" />
+    <result column="ascription_id" property="ascriptionId" jdbcType="INTEGER" />
+    <result column="ascription_name" property="ascriptionName" jdbcType="VARCHAR" />
+    <result column="level" property="level" jdbcType="TINYINT" />
+    <result column="responsibler" property="responsibler" jdbcType="VARCHAR" />
+    <result column="responsiblerId" property="responsiblerid" jdbcType="INTEGER" />
+    <result column="area_id" property="areaId" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="relation_train_location_id" property="relationTrainLocationId" jdbcType="INTEGER" />
+    <result column="relation_train_location_name" property="relationTrainLocationName" jdbcType="VARCHAR" />
+    <result column="relation_begin_location_id" property="relationBeginLocationId" jdbcType="INTEGER" />
+    <result column="relation_begin_location" property="relationBeginLocation" jdbcType="VARCHAR" />
+    <result column="comment" property="comment" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="duty_paragraph" property="dutyParagraph" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, code, name, short_name, short_code, ascription_id, ascription_name, level, responsibler, 
+    responsiblerId, area_id, address, relation_train_location_id, relation_train_location_name, 
+    relation_begin_location_id, relation_begin_location, comment, status, create_date,sys_org_code
+  </sql>
+  <sql id="Base_Column_List2" >
+    id, code, name, short_name, short_code, ascription_id, ascription_name, level, responsibler, 
+    responsiblerId, area_id, address, relation_train_location_id, relation_train_location_name, 
+    relation_begin_location_id, relation_begin_location, comment, status, create_date,duty_paragraph
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shenhesoft.logistics.manage.pojo.branchgroup.TbBranchGroupExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_branch_group
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_branch_group
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_branch_group
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.shenhesoft.logistics.manage.pojo.branchgroup.TbBranchGroupExample" >
+    delete from tb_branch_group
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.shenhesoft.logistics.manage.pojo.branchgroup.TbBranchGroup" >
+     <selectKey keyProperty="id" resultType="int">  
+            select LAST_INSERT_ID()
+     </selectKey> 
+    insert into tb_branch_group (id, code, name, 
+      short_name, short_code, ascription_id, 
+      ascription_name, level, responsibler, 
+      responsiblerId, area_id, address, 
+      relation_train_location_id, relation_train_location_name, 
+      relation_begin_location_id, relation_begin_location, 
+      comment, status, create_date
+      )
+    values (#{id,jdbcType=INTEGER}, #{code,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{shortName,jdbcType=VARCHAR}, #{shortCode,jdbcType=VARCHAR}, #{ascriptionId,jdbcType=INTEGER}, 
+      #{ascriptionName,jdbcType=VARCHAR}, #{level,jdbcType=TINYINT}, #{responsibler,jdbcType=VARCHAR}, 
+      #{responsiblerid,jdbcType=INTEGER}, #{areaId,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{relationTrainLocationId,jdbcType=INTEGER}, #{relationTrainLocationName,jdbcType=VARCHAR}, 
+      #{relationBeginLocationId,jdbcType=INTEGER}, #{relationBeginLocation,jdbcType=VARCHAR}, 
+      #{comment,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, #{createDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.shenhesoft.logistics.manage.pojo.branchgroup.TbBranchGroup" >
+     <selectKey keyProperty="id" resultType="int">  
+            select LAST_INSERT_ID()
+     </selectKey> 
+    insert into tb_branch_group
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="code != null" >
+        code,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="shortName != null" >
+        short_name,
+      </if>
+      <if test="shortCode != null" >
+        short_code,
+      </if>
+      <if test="ascriptionId != null" >
+        ascription_id,
+      </if>
+      <if test="ascriptionName != null" >
+        ascription_name,
+      </if>
+      <if test="level != null" >
+        level,
+      </if>
+      <if test="responsibler != null" >
+        responsibler,
+      </if>
+      <if test="responsiblerid != null" >
+        responsiblerId,
+      </if>
+      <if test="areaId != null" >
+        area_id,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="relationTrainLocationId != null" >
+        relation_train_location_id,
+      </if>
+      <if test="relationTrainLocationName != null" >
+        relation_train_location_name,
+      </if>
+      <if test="relationBeginLocationId != null" >
+        relation_begin_location_id,
+      </if>
+      <if test="relationBeginLocation != null" >
+        relation_begin_location,
+      </if>
+      <if test="comment != null" >
+        comment,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="shortName != null" >
+        #{shortName,jdbcType=VARCHAR},
+      </if>
+      <if test="shortCode != null" >
+        #{shortCode,jdbcType=VARCHAR},
+      </if>
+      <if test="ascriptionId != null" >
+        #{ascriptionId,jdbcType=INTEGER},
+      </if>
+      <if test="ascriptionName != null" >
+        #{ascriptionName,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null" >
+        #{level,jdbcType=TINYINT},
+      </if>
+      <if test="responsibler != null" >
+        #{responsibler,jdbcType=VARCHAR},
+      </if>
+      <if test="responsiblerid != null" >
+        #{responsiblerid,jdbcType=INTEGER},
+      </if>
+      <if test="areaId != null" >
+        #{areaId,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="relationTrainLocationId != null" >
+        #{relationTrainLocationId,jdbcType=INTEGER},
+      </if>
+      <if test="relationTrainLocationName != null" >
+        #{relationTrainLocationName,jdbcType=VARCHAR},
+      </if>
+      <if test="relationBeginLocationId != null" >
+        #{relationBeginLocationId,jdbcType=INTEGER},
+      </if>
+      <if test="relationBeginLocation != null" >
+        #{relationBeginLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="comment != null" >
+        #{comment,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.shenhesoft.logistics.manage.pojo.branchgroup.TbBranchGroupExample" resultType="java.lang.Integer" >
+    select count(*) from tb_branch_group
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_branch_group
+    <set >
+      <if test="map.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.code != null" >
+        code = #{record.code,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shortName != null" >
+        short_name = #{record.shortName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shortCode != null" >
+        short_code = #{record.shortCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ascriptionId != null" >
+        ascription_id = #{record.ascriptionId,jdbcType=INTEGER},
+      </if>
+      <if test="record.ascriptionName != null" >
+        ascription_name = #{record.ascriptionName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.level != null" >
+        level = #{record.level,jdbcType=TINYINT},
+      </if>
+      <if test="record.responsibler != null" >
+        responsibler = #{record.responsibler,jdbcType=VARCHAR},
+      </if>
+      <if test="record.responsiblerid != null" >
+        responsiblerId = #{record.responsiblerid,jdbcType=INTEGER},
+      </if>
+      <if test="record.areaId != null" >
+        area_id = #{record.areaId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null" >
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.relationTrainLocationId != null" >
+        relation_train_location_id = #{record.relationTrainLocationId,jdbcType=INTEGER},
+      </if>
+      <if test="record.relationTrainLocationName != null" >
+        relation_train_location_name = #{record.relationTrainLocationName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.relationBeginLocationId != null" >
+        relation_begin_location_id = #{record.relationBeginLocationId,jdbcType=INTEGER},
+      </if>
+      <if test="record.relationBeginLocation != null" >
+        relation_begin_location = #{record.relationBeginLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.comment != null" >
+        comment = #{record.comment,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=TINYINT},
+      </if>
+      <if test="record.createDate != null" >
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_branch_group
+    set id = #{record.id,jdbcType=INTEGER},
+      code = #{record.code,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      short_name = #{record.shortName,jdbcType=VARCHAR},
+      short_code = #{record.shortCode,jdbcType=VARCHAR},
+      ascription_id = #{record.ascriptionId,jdbcType=INTEGER},
+      ascription_name = #{record.ascriptionName,jdbcType=VARCHAR},
+      level = #{record.level,jdbcType=TINYINT},
+      responsibler = #{record.responsibler,jdbcType=VARCHAR},
+      responsiblerId = #{record.responsiblerid,jdbcType=INTEGER},
+      area_id = #{record.areaId,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      relation_train_location_id = #{record.relationTrainLocationId,jdbcType=INTEGER},
+      relation_train_location_name = #{record.relationTrainLocationName,jdbcType=VARCHAR},
+      relation_begin_location_id = #{record.relationBeginLocationId,jdbcType=INTEGER},
+      relation_begin_location = #{record.relationBeginLocation,jdbcType=VARCHAR},
+      comment = #{record.comment,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=TINYINT},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.shenhesoft.logistics.manage.pojo.branchgroup.TbBranchGroup" >
+    update tb_branch_group
+    <set >
+      <if test="code != null" >
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="shortName != null" >
+        short_name = #{shortName,jdbcType=VARCHAR},
+      </if>
+      <if test="shortCode != null" >
+        short_code = #{shortCode,jdbcType=VARCHAR},
+      </if>
+      <if test="ascriptionId != null" >
+        ascription_id = #{ascriptionId,jdbcType=INTEGER},
+      </if>
+      <if test="ascriptionName != null" >
+        ascription_name = #{ascriptionName,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null" >
+        level = #{level,jdbcType=TINYINT},
+      </if>
+      <if test="responsibler != null" >
+        responsibler = #{responsibler,jdbcType=VARCHAR},
+      </if>
+      <if test="responsiblerid != null" >
+        responsiblerId = #{responsiblerid,jdbcType=INTEGER},
+      </if>
+      <if test="areaId != null" >
+        area_id = #{areaId,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+        relation_train_location_id = #{relationTrainLocationId,jdbcType=INTEGER},
+      <if test="relationTrainLocationName != null" >
+        relation_train_location_name = #{relationTrainLocationName,jdbcType=VARCHAR},
+      </if>
+      <if test="relationBeginLocationId != null" >
+        relation_begin_location_id = #{relationBeginLocationId,jdbcType=INTEGER},
+      </if>
+      <if test="relationBeginLocation != null" >
+        relation_begin_location = #{relationBeginLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="comment != null" >
+        comment = #{comment,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dutyParagraph != null" >
+        duty_paragraph = #{dutyParagraph,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.shenhesoft.logistics.manage.pojo.branchgroup.TbBranchGroup" >
+    update tb_branch_group
+    set code = #{code,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      short_name = #{shortName,jdbcType=VARCHAR},
+      short_code = #{shortCode,jdbcType=VARCHAR},
+      ascription_id = #{ascriptionId,jdbcType=INTEGER},
+      ascription_name = #{ascriptionName,jdbcType=VARCHAR},
+      level = #{level,jdbcType=TINYINT},
+      responsibler = #{responsibler,jdbcType=VARCHAR},
+      responsiblerId = #{responsiblerid,jdbcType=INTEGER},
+      area_id = #{areaId,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      relation_train_location_id = #{relationTrainLocationId,jdbcType=INTEGER},
+      relation_train_location_name = #{relationTrainLocationName,jdbcType=VARCHAR},
+      relation_begin_location_id = #{relationBeginLocationId,jdbcType=INTEGER},
+      relation_begin_location = #{relationBeginLocation,jdbcType=VARCHAR},
+      comment = #{comment,jdbcType=VARCHAR},
+      status = #{status,jdbcType=TINYINT},
+      create_date = #{createDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+   <!-- 获取所属分支 -->
+  <select id="selectBranchGroupByCusId"  resultMap="BaseResultMap" 
+  parameterType="java.lang.Integer" >
+      SELECT
+		C.id id,
+		C.`name` name
+	FROM
+		tb_customer A,
+		tb_customer_branch_group B,
+		tb_branch_group C
+	WHERE
+		A.id= #{id,jdbcType=INTEGER}
+	AND
+		A.id=B.customer_id
+	AND 
+		C.id=B.branch_group_id
+  </select>
+  
+   <select id="selectDotBranchDetailByExample" resultMap="BaseResultMap2" parameterType="com.shenhesoft.logistics.manage.pojo.branchgroup.TbBranchGroupExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_branch_group
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  
+   <select id="selectDotBranchDetailById" resultMap="BaseResultMap2" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List2" />
+    from tb_branch_group
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  
+  <!-- 根据当前登录的用户查询该用户下的所有分支机构 -->
+  <select id="selectDotBranchByUid" resultMap="BaseResultMap">
+	select g1.* from tb_system_user user,tb_branch_group g1 where 
+	user.branch_group_id = g1.id 
+	and `user`.id = #{map.id,jdbcType=INTEGER}
+	and g1.status = #{map.status,jdbcType=INTEGER}
+	<!-- UNION ALL
+	select g2.* from tb_branch_group g2 where 
+	g2.ascription_id=(
+	select g1.id from tb_system_user user,tb_branch_group g1 where 
+	user.branch_group_id = g1.id 
+	and `user`.id= #{id,jdbcType=INTEGER}
+	and g1.status=1)
+	and g2.status=1
+	UNION ALL
+	select g3.* from tb_branch_group g3 where 
+	g3.ascription_id in(select g2.id from tb_branch_group g2 where 
+	g2.ascription_id=(select g1.id from tb_system_user user,tb_branch_group g1 where 
+	user.branch_group_id = g1.id 
+	and `user`.id= #{id,jdbcType=INTEGER}
+	and g1.status=1)
+	and g2.status=1)
+	and g3.status=1 -->
+  </select>
+  
+  <!-- 根据当前登录的用户查询该用户下的所有id -->
+  <select id="selectDotBranchIdsByUid" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+	select g1.id from tb_system_user user,tb_branch_group g1 where 
+	user.branch_group_id = g1.id 
+	and `user`.id= #{id,jdbcType=INTEGER}
+	and g1.status=0
+	UNION ALL
+	select g2.id from tb_branch_group g2 where 
+	g2.ascription_id=(
+	select g1.id from tb_system_user user,tb_branch_group g1 where 
+	user.branch_group_id = g1.id 
+	and `user`.id= #{id,jdbcType=INTEGER}
+	and g1.status=0)
+	and g2.status=0
+	UNION ALL
+	select g3.id from tb_branch_group g3 where 
+	g3.ascription_id in(select g2.id from tb_branch_group g2 where 
+	g2.ascription_id=(select g1.id from tb_system_user user,tb_branch_group g1 where 
+	user.branch_group_id = g1.id 
+	and `user`.id= #{id,jdbcType=INTEGER}
+	and g1.status=0)
+	and g2.status=0)
+	and g3.status=0
+  </select>
+  
+  <select id="getCurTopBranchByUid" resultType="Map">
+  select g1.* from tb_system_user user,tb_branch_group g1 where 
+	user.branch_group_id = g1.id 
+	and `user`.id= #{id}
+	and g1.status=0
+	 limit 1
+  </select>
+  
+  <update id="updateCompanyName" parameterType="java.lang.String">
+  	update tb_anchored_company set name = #{name,jdbcType=VARCHAR} where id = 1
+  </update>
+  
+   <select id="getAnchoredCompanys" resultType="com.shenhesoft.logistics.manage.pojo.anchoredCompany.TbAnchoredCompany" >
+	    select id, name, phone, status, create_date createDate, address, linkman
+	    from tb_anchored_company
+		<where>
+			<if test="map.id != null" >
+			 and id = #{map.id,jdbcType=INTEGER}
+			</if>
+			<if test="map.name != null and map.name != '' and map.name != 'null' and map.name != 'undefined'" >
+			 and name = #{map.name,jdbcType=VARCHAR}
+			</if>
+			<if test="map.phone != null" >
+			 and phone = #{map.phone,jdbcType=VARCHAR}
+			</if>
+			<if test="map.status != null" >
+			 and status = #{map.status,jdbcType=VARCHAR}
+			</if>
+			<if test="map.createDate != null" >
+			 and create_date = #{map.createDate,jdbcType=TIMESTAMP}
+			</if>
+			<if test="map.address != null" >
+			 and address = #{map.address,jdbcType=VARCHAR}
+			</if>
+			<if test="map.linkman != null" >
+			 and linkman = #{map.linkman,jdbcType=VARCHAR}
+			</if>
+		</where>
+  </select>
+  
+  <insert id="insertAnchoredCompany" parameterType="com.shenhesoft.logistics.manage.pojo.anchoredCompany.TbAnchoredCompany" >
+    insert into tb_anchored_company
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" > 
+        id,
+      </if> 
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="linkman != null" >
+        linkman,
+      </if>
+      <if test="branchId != null" >
+        branch_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="linkman != null" >
+        #{linkman,jdbcType=VARCHAR},
+      </if>
+      <if test="branchId != null" >
+        #{branchId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  
+  <update id="updateAnchoredCompany" parameterType="com.shenhesoft.logistics.manage.pojo.anchoredCompany.TbAnchoredCompany" >
+    update tb_anchored_company
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="linkman != null" >
+        linkman = #{linkman,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+   <delete id="deleteAnchoredCompanyByKey" parameterType="java.lang.Integer" >
+    delete from tb_anchored_company
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  
+  
+  <sql id="Base_Column_branch_List" >
+	    bg.id id,bg.code code,bg.name name,bg.short_name shortName,bg.short_code shortCode,bg.ascription_id ascriptionId,bg.ascription_name ascriptionName,bg.level level,bg.responsibler responsibler, 
+	     bg.responsiblerId responsiblerId,bg.area_id areaId,bg.address address,bg.relation_train_location_id relationTrainLocationId,bg.relation_train_location_name relationTrainLocationName,
+	     bg.relation_begin_location_id relationBeginLocationId,bg.relation_begin_location relationBeginLocation,bg.comment,bg.status,bg.create_date createDate,bg.duty_paragraph dutyParagraph
+  	</sql>
+  
+  	<select id="getDotBranchs" resultType="com.shenhesoft.logistics.manage.helpPojo.DotBranchDetail">
+	select 
+	<include refid="Base_Column_branch_List" /> 
+	from tb_branch_group bg
+	left join tb_branch_group_link y on bg.id=y.row_id 	
+		<where>
+		and y.tab_name='tb_branch_group'
+        <if test="map != null">
+        	<if test="map.userId == null or map.userId != 1 " >
+		       and y.sys_org_code like CONCAT(#{map.sysOrgCode},'%')
+		     </if>
+            <if test="map.id != null" >
+		       and bg.id = #{map.id,jdbcType=INTEGER}
+		      </if>
+		      <if test="map.code != null" >
+		        and bg.code = #{map.code,jdbcType=VARCHAR}
+		      </if>
+		      <if test="map.name != null" >
+		         and bg.name = #{map.name,jdbcType=VARCHAR}
+		      </if>
+		      <if test="map.shortName != null and map.shortName != '' and map.shortName != 'null' and map.shortName != 'undefined'" >
+		         and bg.short_name = #{map.shortName,jdbcType=VARCHAR}
+		      </if>
+		      <if test="map.shortCode != null and map.shortCode != '' and map.shortCode != 'null' and map.shortCode != 'undefined'" >
+		         and bg.short_code = #{map.shortCode,jdbcType=VARCHAR}
+		      </if>
+		      <if test="map.ascriptionId != null" >
+		         and bg.ascription_id = #{map.ascriptionId,jdbcType=INTEGER}
+		      </if>
+		      <if test="map.ascriptionName != null and map.ascriptionName != '' and map.ascriptionName != 'null' and map.ascriptionName != 'undefined'"  >
+		         and bg.ascription_name = #{map.ascriptionName,jdbcType=VARCHAR}
+		      </if>
+		      <if test="map.levels != null" >
+		         <foreach collection="map.levels" item="level" open="and (" close=")" separator="or">  
+                <!-- 每个遍历需要生成的串 -->  
+                    bg.level=#{level,jdbcType=TINYINT}  
+                </foreach>  
+		      </if>
+		      <if test="map.responsibler != null" >
+		         and bg.responsibler = #{map.responsibler,jdbcType=VARCHAR}
+		      </if>
+		      <if test="map.responsiblerid != null" >
+		         and bg.responsiblerId = #{map.responsiblerid,jdbcType=INTEGER}
+		      </if>
+		      <if test="map.areaId != null" >
+		         and bg.area_id = #{map.areaId,jdbcType=VARCHAR}
+		      </if>
+		      <if test="map.address != null and map.address != '' and map.address != 'null' and map.address != 'undefined'"  >
+		         and bg.address = #{map.address,jdbcType=VARCHAR}
+		      </if>
+		      <if test="map.relationTrainLocationId != null" >
+		         and bg.relation_train_location_id = #{map.relationTrainLocationId,jdbcType=INTEGER}
+		      </if>
+		      <if test="map.relationTrainLocationName != null" >
+		         and bg.relation_train_location_name = #{map.relationTrainLocationName,jdbcType=VARCHAR}
+		      </if>
+		      <if test="map.relationBeginLocationId != null" >
+		         and bg.relation_begin_location_id = #{map.relationBeginLocationId,jdbcType=INTEGER}
+		      </if>
+		      <if test="map.relationBeginLocation != null" >
+		         and bg.relation_begin_location = #{map.relationBeginLocation,jdbcType=VARCHAR}
+		      </if>
+		       <if test="map.comment != null and map.comment != '' and map.comment != 'null' and map.comment != 'undefined'"  >
+		         and bg.comment = #{map.comment,jdbcType=VARCHAR}
+		      </if>
+		      <if test="map.status != null" >
+		         and bg.status = #{map.status,jdbcType=TINYINT}
+		      </if>
+		      <if test="map.createDate != null" >
+		         and bg.create_date = #{map.createDate,jdbcType=TIMESTAMP}
+		      </if>
+		      <if test="map.notContainStatus != null" >
+		         and bg.status != #{map.notContainStatus,jdbcType=TINYINT}
+		      </if>
+            </if>
+        </where>
+         order by bg.id 
+	</select>
+	
+  
+</mapper>

@@ -1,0 +1,28 @@
+.tableDivs{background: #fff;border: 1px solid #ccc;margin-bottom: 10px;position: relative;}
+
+
+/*新建模态框*/
+.packModal ul{list-style: none;padding: 0;}
+.packModal ul li{float: left;width: 25%;}
+.modal .table-responsive{max-height: 213px;}
+.modal th{background-color: #EEF5FD;text-align: center;font-size: 14px;padding: 5px !important; border-right: 1px solid #CCC;}
+.modal tr td{padding: 0 8px!important;border-right: 1px solid #ccc;font-size: 12px;vertical-align: middle;}
+.modal .modal-header{padding: 5px!important;}
+.modal h5{color:#FFAE00;margin-top: 0px !important;font-weight: normal;}
+.modal p{color:#04A9ED;margin:10px;}
+.modal hr{margin-top: 10px !important;margin-bottom: 10px !important;border-top: 1px dashed #D8D8D8 !important;}
+.modal .modal-body{max-height: 700px;overflow: auto;}
+.modal form{margin-bottom: 10px;}
+.modal-dialog label{font-weight: normal;font-size: 14px;font-family: "Microsoft YaHei";color: #666666;line-height: 1.2;}
+.modal-dialog select,.modal-dialog input[type=text]{width:120px;border: 1px solid #dde3ef;;height: 28px;margin: 5px 0;border-radius: 2px;}
+.modal-dialog textarea{border: 1px solid #dde3ef;}
+.modal .v-top{vertical-align: top;}
+.modal .form-group{padding:0!important;position: relative;margin: 0 15px!important;}
+@media (min-width: 768px){
+.addr_info{width: 200px !important;}	
+}
+@media (min-width: 992px){
+.addr_info{width: 347px !important;}
+.modal-lg{width: 930px}
+}
+.remarkInput{width: 90% !important;}

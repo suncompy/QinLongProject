@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shenhesoft.logistics.manage.mapper.TbCargoLocationMapper" >
+  <resultMap id="BaseResultMap" type="com.shenhesoft.logistics.manage.pojo.CargoLocation.TbCargoLocation" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="code" property="code" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="tonnage" property="tonnage" jdbcType="REAL" />
+    <result column="freight_yard_id" property="freightYardId" jdbcType="INTEGER" />
+    <result column="delete_flag" property="deleteFlag" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, code, name, tonnage, freight_yard_id, delete_flag
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shenhesoft.logistics.manage.pojo.CargoLocation.TbCargoLocationExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_cargo_location
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_cargo_location
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_cargo_location
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.shenhesoft.logistics.manage.pojo.CargoLocation.TbCargoLocationExample" >
+    delete from tb_cargo_location
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.shenhesoft.logistics.manage.pojo.CargoLocation.TbCargoLocation" >
+    insert into tb_cargo_location (id, code, name, 
+      tonnage, freight_yard_id, delete_flag
+      )
+    values (#{id,jdbcType=INTEGER}, #{code,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{tonnage,jdbcType=REAL}, #{freightYardId,jdbcType=INTEGER}, #{deleteFlag,jdbcType=TINYINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.shenhesoft.logistics.manage.pojo.CargoLocation.TbCargoLocation" >
+    insert into tb_cargo_location
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="code != null" >
+        code,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="tonnage != null" >
+        tonnage,
+      </if>
+      <if test="freightYardId != null" >
+        freight_yard_id,
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="tonnage != null" >
+        #{tonnage,jdbcType=REAL},
+      </if>
+      <if test="freightYardId != null" >
+        #{freightYardId,jdbcType=INTEGER},
+      </if>
+      <if test="deleteFlag != null" >
+        #{deleteFlag,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.shenhesoft.logistics.manage.pojo.CargoLocation.TbCargoLocationExample" resultType="java.lang.Integer" >
+    select count(*) from tb_cargo_location
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_cargo_location
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.code != null" >
+        code = #{record.code,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tonnage != null" >
+        tonnage = #{record.tonnage,jdbcType=REAL},
+      </if>
+      <if test="record.freightYardId != null" >
+        freight_yard_id = #{record.freightYardId,jdbcType=INTEGER},
+      </if>
+      <if test="record.deleteFlag != null" >
+        delete_flag = #{record.deleteFlag,jdbcType=TINYINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_cargo_location
+    set id = #{record.id,jdbcType=INTEGER},
+      code = #{record.code,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      tonnage = #{record.tonnage,jdbcType=REAL},
+      freight_yard_id = #{record.freightYardId,jdbcType=INTEGER},
+      delete_flag = #{record.deleteFlag,jdbcType=TINYINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.shenhesoft.logistics.manage.pojo.CargoLocation.TbCargoLocation" >
+    update tb_cargo_location
+    <set >
+      <if test="code != null" >
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="tonnage != null" >
+        tonnage = #{tonnage,jdbcType=REAL},
+      </if>
+      <if test="freightYardId != null" >
+        freight_yard_id = #{freightYardId,jdbcType=INTEGER},
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag = #{deleteFlag,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.shenhesoft.logistics.manage.pojo.CargoLocation.TbCargoLocation" >
+    update tb_cargo_location
+    set code = #{code,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      tonnage = #{tonnage,jdbcType=REAL},
+      freight_yard_id = #{freightYardId,jdbcType=INTEGER},
+      delete_flag = #{deleteFlag,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <resultMap id="cargoLocationPlan"  type="com.shenhesoft.logistics.business.helpPojo.CargoLocationPlan">
+  	<id property="cargoLocaionId" column="cargoLocaionId"/>  
+    <result property="cargoLocationName" column="cargoLocationName"/>  
+      
+    <collection property="stocks" column="cargoLocaionId" ofType="com.shenhesoft.logistics.business.pojo.stock.TbStock">  
+        <id property="id" column="stoId"/>  
+        <result property="projectCode" column="projectCode"/>  
+        <result property="currentQty" column="currentQty"/>  
+        <result property="containerNum" column="containerNum"/>
+        <result column="project_type" property="projectType" jdbcType="TINYINT" />
+    </collection>
+    
+  </resultMap>
+  
+  <select id="getCargoLocationPlans" parameterType="java.lang.Integer" resultMap="cargoLocationPlan">
+  	SELECT
+		tmp.cargoLocaionId,
+		tmp.cargoLocationName,
+		sto.id stoId,
+		sto.project_id projectId,
+		sto.project_code projectCode,
+		sto.current_qty currentQty,
+		sto.container_num containerNum,
+		sto.project_type
+	FROM
+		(
+			SELECT
+				c.id cargoLocaionId,
+				c.`name` cargoLocationName
+			FROM
+				tb_freight_yard fy
+			LEFT JOIN tb_cargo_location c ON fy.id = c.freight_yard_id
+			WHERE
+				fy.id = #{freightYardId,jdbcType=INTEGER}
+			AND fy.delete_flag = 0
+			AND c.delete_flag = 0
+		) tmp
+	LEFT JOIN tb_stock sto ON tmp.cargoLocaionId = sto.cargo_location_id
+  </select>
+  
+</mapper>

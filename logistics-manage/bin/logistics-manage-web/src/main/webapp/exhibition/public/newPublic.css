@@ -1,0 +1,94 @@
+.form-group {
+    margin: 0px 10px 0px 5px;
+}
+form h5 {
+      color: #FFAE00;
+    margin-top: 0px !important;
+    font-weight: normal;
+  
+}
+form h5 {
+    font-size: 16px;
+    font-family: "Microsoft YaHei";
+    /* color: rgb(51, 51, 51); */
+    /* font-weight: bold; */
+    line-height: 1.2;
+}
+.form-group {
+    margin: 0px 10px 0px 5px;
+}
+form{margin: 15px;}
+form .form-group{margin-left: 15px;}
+form label {
+    font-weight: normal;
+    font-size: 14px;
+    font-family: "Microsoft YaHei";
+    color: #666666;
+    line-height: 1.2;
+}
+form table th {
+    background-color: #EEF5FD;
+    font-weight: normal;
+}
+table > tbody > tr > td, .table > tfoot > tr > td {
+    vertical-align: middle !important;
+    border-top: 1px solid #dde3ef !important;
+}
+form tr td {
+    padding: 0 8px!important;
+    border-right: 1px solid #DDE3EF;
+    font-size: 12px;
+    vertical-align: middle;
+}
+
+form th {
+    background-color: #EEF5FD;
+    text-align: center;
+    font-size: 14px;
+    padding: 5px !important;
+    border-right: 1px solid #DDE3EF;
+}
+.table {
+    white-space: nowrap;
+    border: 1px solid #dde3ef;
+    margin-bottom: 0 !important;
+    }
+    
+.modal_btn {
+    text-align: right;
+    margin: 20px 0 10px 0;
+}
+
+ .btn {
+    border-radius: 0 !important;
+    padding: 4px 15px !important;
+}
+
+.sureBtn, .sureBtn:hover, .sureBtn:visited {
+    background: #04a9ed !important;
+    color: #FFFFFF !important;
+    margin-right: 20px;
+    }
+    
+.layui-layer-setwin .layui-layer-close1 {
+    /* background-position: 1px -40px; */
+    cursor: pointer;
+    background-position:0px !important;
+}
+form .form-inline {margin-left: 10px;}
+form .form-group{display: inline-block;}
+#showMask{ display: none; position: absolute; top: 0%; left: 0%; width: 100%; height: 100%; background-color: black; z-index:1200; -moz-opacity: 0.5; opacity:.50; filter: alpha(opacity=50);}
+.inputbg{background: #eff6ff;}
+.abnormalUl{overflow: hidden; padding-left: 10px !important;}
+.abnormalUl li{float: left;list-style: none;margin: 10px 0 0 0;min-width: 32%;}
+.dataTimes i {
+    position: absolute;
+    color: #03A8ED;
+    top: 9px;
+    right: 3px;
+}
+.dataTimes {
+    position: relative;
+    font-size: 18px;
+ 
+}

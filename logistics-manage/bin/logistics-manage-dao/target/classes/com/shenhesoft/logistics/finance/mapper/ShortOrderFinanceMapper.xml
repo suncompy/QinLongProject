@@ -1,0 +1,417 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shenhesoft.logistics.finance.mapper.ShortOrderFinanceMapper">
+
+	<!-- 新增短驳运单财务表 -->
+	<insert id="addShortOrderFinance">
+		insert into tb_short_order_finance(sh_order_fin_id,project_id,order_id,finance_status,arrears_item,add_user_id,add_date,pack_flag,delete_flag,short_barge_cost,buckle_figure,subsidy,should_pay_figure,billing_date,finance_audit_date,complete_date,unusual_date,unusual_user_id,unusual_reason,create_date,create_user_id,modifiy_date
+		)values(#{shOrderFinId},#{projectId},#{orderId},#{financeStatus},#{arrearsItem},#{addUserId},#{addDate},#{packFlag},#{deleteFlag},#{shortBargeCost},#{buckleFigure},#{subsidy},#{shouldPayFigure},#{billingDate},#{financeAuditDate},#{completeDate},#{unusualDate},#{unusualUserId},#{unusualReason},#{createDate},#{createUserId},#{modifiyDate})
+	</insert>
+
+	<!-- 批量新增短驳运单财务表 -->
+	<insert id="addShortOrderFinances">
+		insert into tb_short_order_finance(sh_order_fin_id,project_id,order_id,finance_status,arrears_item,add_user_id,add_date,pack_flag,delete_flag,short_barge_cost,buckle_figure,subsidy,should_pay_figure,billing_date,finance_audit_date,complete_date,unusual_date,unusual_user_id,unusual_reason,create_date,create_user_id,modifiy_date
+		)values
+		<foreach collection="list" item="item" index="index" separator=",">
+            (#{shOrderFinId},#{projectId},#{orderId},#{financeStatus},#{arrearsItem},#{addUserId},#{addDate},#{packFlag},#{deleteFlag},#{shortBargeCost},#{buckleFigure},#{subsidy},#{shouldPayFigure},#{billingDate},#{financeAuditDate},#{completeDate},#{unusualDate},#{unusualUserId},#{unusualReason},#{createDate},#{createUserId},#{modifiyDate})
+        </foreach>
+	</insert>
+
+	<!-- 修改短驳运单财务表 -->
+	<update id="editShortOrderFinanceById">
+		update tb_short_order_finance
+		<set>
+		 <if test="projectId != null">
+               project_id=#{projectId},
+         </if>
+		<if test="orderId != null">
+               order_id=#{orderId},
+         </if>
+		<if test="financeStatus != null">
+               finance_status=#{financeStatus},
+         </if>
+		 <if test="arrearsItem != null and arrearsItem != '' and arrearsItem != 'null' and arrearsItem != 'undefined'">
+               arrears_item=#{arrearsItem},
+         </if>
+		<if test="addUserId != null">
+               add_user_id=#{addUserId},
+         </if>
+		<if test="addDate != null">
+               add_date=#{addDate},
+         </if>
+		<if test="packFlag != null">
+               pack_flag=#{packFlag},
+         </if>
+		<if test="deleteFlag != null">
+               delete_flag=#{deleteFlag},
+         </if>
+		<if test="shortBargeCost != null">
+               short_barge_cost=#{shortBargeCost},
+         </if>
+		<if test="buckleFigure != null">
+               buckle_figure=#{buckleFigure},
+         </if>
+		<if test="subsidy != null">
+               subsidy=#{subsidy},
+         </if>
+		<if test="shouldPayFigure != null">
+               should_pay_figure=#{shouldPayFigure},
+         </if>
+		<if test="billingDate != null">
+               billing_date=#{billingDate},
+         </if>
+		<if test="financeAuditDate != null">
+               finance_audit_date=#{financeAuditDate},
+         </if>
+		<if test="completeDate != null">
+               complete_date=#{completeDate},
+         </if>
+		<if test="unusualDate != null">
+               unusual_date=#{unusualDate},
+         </if>
+		<if test="unusualUserId != null">
+               unusual_user_id=#{unusualUserId},
+         </if>
+		 <if test="unusualReason != null and unusualReason != '' and unusualReason != 'null' and unusualReason != 'undefined'">
+               unusual_reason=#{unusualReason},
+         </if>
+		<if test="createDate != null">
+               create_date=#{createDate},
+         </if>
+		<if test="createUserId != null">
+               create_user_id=#{createUserId},
+         </if>
+		<if test="modifiyDate != null">
+               modifiy_date=#{modifiyDate},
+         </if>
+		</set>
+		where sh_order_fin_id=#{shOrderFinId}
+	</update>
+
+	<!-- 批量修改短驳运单财务表 -->
+	<update id="editShortOrderFinanceByIds">
+		update tb_short_order_finance
+		<set>
+		 <if test="map.financeStatus != null">
+               finance_status=#{map.financeStatus},
+         </if>
+         <if test="map.billingUserId != null">
+               billing_user_id=#{map.billingUserId},
+         </if>
+		 <if test="map.billingDate != null">
+               billing_date=#{map.billingDate},
+         </if>
+         <if test="map.auditUserId != null">
+               audit_user_id=#{map.auditUserId},
+         </if>
+		 <if test="map.financeAuditDate != null">
+               finance_audit_date=#{map.financeAuditDate},
+         </if>
+         <if test="map.packFlag != null">
+               pack_flag=#{map.packFlag},
+         </if>
+		</set>
+		where sh_order_fin_id in
+		<foreach collection="list" index="index" item="item" open="(" separator="," close=")">   
+             #{item}   
+        </foreach>
+	</update>
+
+	<!-- 查看短驳运单财务表 -->
+	<select id="getShortOrderFinanceById" resultType="Map">
+        select a.sh_order_fin_id shOrderFinId,a.project_id projectId,a.order_id orderId,a.finance_status financeStatus,a.arrears_item arrearsItem,a.add_user_id addUserId,a.add_date addDate,a.pack_flag packFlag,a.delete_flag deleteFlag,a.short_barge_cost shortBargeCost,a.buckle_figure buckleFigure,a.subsidy subsidy,a.should_pay_figure shouldPayFigure,a.billing_date billingDate,a.finance_audit_date financeAuditDate,a.complete_date completeDate,a.unusual_date unusualDate,a.unusual_user_id unusualUserId,a.unusual_reason unusualReason,a.create_date createDate,a.create_user_id createUserId,a.modifiy_date modifiyDate
+        from tb_short_order_finance a
+        where a.sh_order_fin_id=#{id}
+    </select>
+
+	<!-- 删除短驳运单财务表 -->
+	<update id="delShortOrderFinanceById">
+		update tb_short_order_finance set delete_flag = 1 where sh_order_fin_id = #{id}
+	</update>	
+
+	<!-- 批量删除短驳运单财务表 -->
+    <update id="delShortOrderFinanceByIds">  
+    	update tb_short_order_finance set delete_flag = 1 where sh_order_fin_id in
+        <foreach collection="list" index="index" item="item" open="(" separator="," close=")">   
+            #{item}   
+        </foreach>  
+    </update>
+
+	<!-- 清空短驳运单财务表 -->
+	<update id="delShortOrderFinances">
+		update tb_short_order_finance set delete_flag = 1
+	</update>	
+
+	<!-- 检索短驳运单财务表列表 -->
+	<select id="getShortOrderFinances" resultType="Map">
+	<![CDATA[
+		select a.sh_order_fin_id shOrderFinId,a.project_id projectId,a.order_id orderId,a.finance_status financeStatus,a.arrears_item arrearsItem,a.add_user_id addUserId,DATE_FORMAT(a.add_date,'%Y-%m-%d %H:%i:%s') addDate,a.pack_flag packFlag,a.delete_flag deleteFlag,a.buckle_figure buckleFigure,a.should_pay_figure shouldPayFigure,DATE_FORMAT(a.billing_date,'%Y-%m-%d %H:%i:%s') billingDate,DATE_FORMAT(a.finance_audit_date,'%Y-%m-%d %H:%i:%s') financeAuditDate,DATE_FORMAT(a.complete_date,'%Y-%m-%d %H:%i:%s') completeDate,DATE_FORMAT(a.unusual_date,'%Y-%m-%d %H:%i:%s') unusualDate,a.unusual_user_id unusualUserId,a.unusual_reason unusualReason,DATE_FORMAT(a.create_date,'%Y-%m-%d %H:%i:%s') createDate,a.create_user_id createUserId,DATE_FORMAT(a.modifiy_date,'%Y-%m-%d %H:%i:%s') modifiyDate,
+		o.order_code orderCode,o.project_code projectCode,o.project_type projectType,o.transport_type transportType,o.driver_id driverId,o.user_dispatch_id userDispatchId,o.user_dispatch_name userDispatchName,o.type type,o.status status,o.exception_status exceptionStatus,o.remark remark,o.step_select_code stepSelectCode,o.step_select stepSelect,o.branch_group_name branchGroupName,o.send_company sendCompany,o.pickup_place pickupPlace,o.pickup_place_address pickupPlaceAddress,o.receipt_company receiptCompany,o.arrive_place arrivePlace,o.arrive_address arriveAddress,o.arrive_freight_yrad arriveFreightYrad,o.arrive_freight_site arriveFreightSite,o.carrier_vehicle_id carrierVehicleId,o.carrier_vehicle_name carrierVehicleName,o.car_plate_number carPlateNumber,o.car_type carType,o.driver_name driverName,o.driver_phone driverPhone,o.container_number1_id containerNumber1Id,
+		o.container_number1 containerNumber1,o.container_number2_id containerNumber2Id,o.container_number2 containerNumber2,o.cargo_name cargoName,o.specifications specifications,o.send_tare sendTare,o.send_gross sendGross,o.container_one_send_net containerOneSendNet,o.container_two_send_net containerTwoSendNet,(o.container_one_send_net+o.container_two_send_net) containerSendNet,o.test_indicators testIndicators,o.order_img orderImg,o.distribution_cargo_place distributionCargoPlace,o.distribution_cargo_site distributionCargoSite,o.receipt_tare receiptTare,o.receipt_gross receiptGross,o.container_one_receipt_net containerOneReceiptNet,o.container_two_receipt_net containerTwoReceiptNet,(o.container_one_receipt_net+o.container_two_receipt_net) containerReceiptNet,o.receipt_test_indicators receiptTestIndicators,o.arrivered_img arriveredImg,o.edit_date editDate,o.valuation_unit_type valuationUnitType,o.carTeam_id carteamId,o.place_now_id placeNowId,o.order_origin orderOrigin,
+		o.receipter_date receipterDate,o.take_cargo_place_id takeCargoPlaceId,o.take_carogo_place_name takeCarogoPlaceName,o.take_cargo_site_id takeCargoSiteId,o.take_cargo_site_name takeCargoSiteName,o.take_delivery_date takeDeliveryDate,o.distribution_cargo_place_id distributionCargoPlaceId,o.distribution_cargo_site_id distributionCargoSiteId,
+		p.pick_up_price pickUpPrice,p.train_price trainPrice,p.arrive_price arrivePrice,p.transport_price transportPrice
+		,case when a.finance_status=0 then '待确认' when a.finance_status=1 then '待计算' 
+    	when a.finance_status=2 then '待审核' else '已审核' end financeStatusName
+    	,case when a.finance_status=0 then '计费确认'  
+		else '财务审核' end financeStatusNodeName
+		,b.name billingUserName,u.name auditUserName
+		,if(IFNULL(o.containerSendNet,0)>IFNULL(o.containerReceiptNet,0),IFNULL(o.containerReceiptNet,0),IFNULL(o.containerSendNet,0)) chargedWeight
+		,o.pieceNumber
+		,IFNULL(o.transport_price2,0) shortBargeCost
+		,if(o.pieceNumber is null,if(IFNULL(o.containerSendNet,0)>IFNULL(o.containerReceiptNet,0),IFNULL(o.containerReceiptNet,0),IFNULL(o.containerSendNet,0))
+			,IFNULL(o.pieceNumber,0))*IFNULL(o.transport_price2,0) transitMoney
+		,IFNULL(o.deduction_price2,0) deductionPrice
+		,if(o.netWeightAlter>0,o.netWeightAlter,0) deductionWeight
+    ,IFNULL(o.deduction_rate2,0) deductionRate
+		,if(if(o.netWeightAlter>0,o.netWeightAlter,0)/IFNULL(o.containerSendNet,0)>IFNULL(o.deduction_rate2,0)/1000,'是','否') deductioned
+    ,if(o.netWeightAlter>0,IFNULL(o.deduction_price2,0)*o.netWeightAlter,0) deductionMoney
+		,IFNULL(o.subsidy,0) subsidy,IFNULL(o.subsidy,0)+IFNULL(a.subsidy,0) subsidyTransitMoney
+		,if(o.pieceNumber is null,if(IFNULL(o.containerSendNet,0)>IFNULL(o.containerReceiptNet,0),IFNULL(o.containerReceiptNet,0),IFNULL(o.containerSendNet,0))
+			,IFNULL(o.pieceNumber,0))*IFNULL(o.transport_price2,0)-if(if(o.netWeightAlter>0,o.netWeightAlter,0)/IFNULL(o.containerSendNet,0)>IFNULL(o.deduction_rate2,0)/1000,IFNULL(o.deduction_price2,0)*o.netWeightAlter,0)
+			+IFNULL(o.subsidy,0)+IFNULL(a.subsidy,0) payableTransitMoney
+,if(p.valuation_unit_name=0,'件','吨') unitName
+		from tb_short_order_finance a 
+		left join (select IFNULL(t.container_one_send_net,0)+IFNULL(t.container_two_send_net,0) containerSendNet
+					,IFNULL(t.container_one_receipt_net,0)+IFNULL(t.container_two_receipt_net,0) containerReceiptNet
+					,(IFNULL(t.container_one_send_net,0)+IFNULL(t.container_two_send_net,0)-(IFNULL(t.container_one_receipt_net,0)+IFNULL(t.container_two_receipt_net,0))) netWeightAlter
+				  ,if(k.valuation_unit_name=0 && k.project_type=0,if(t.container_number1 is null,0,1)+if(t.container_number2 is null,0,1),null) pieceNumber
+					,b.deduction_rate deduction_rate2,b.deduction_price deduction_price2,b.transport_price transport_price2,t.* 
+         from tb_order t
+left join tb_short_barge b on b.project_id=t.project_id and b.type=t.step_select_code+1
+ inner join tb_project k on t.project_id = k.id) o on o.id = a.order_id
+		left join tb_project p on a.project_id = p.id
+		left join tb_system_user b on b.id=a.billing_user_id
+		left join tb_system_user u on u.id=a.audit_user_id
+		left join tb_branch_group_link y on a.sh_order_fin_id=y.row_id and y.tab_name='tb_short_order_finance'
+		where o.is_cancel = 0
+		and o.delete_flag = 0
+		and a.delete_flag = 0
+		and y.sys_org_code like CONCAT(#{map.sysOrgCode},'%')
+		]]>
+        <if test="map != null">
+        <if test="map.branchGroupIdBulkTrainSport != null">
+		    and p.branch_group_id in 
+		 	<foreach item="item" index="index" collection="map.branchGroupIdCount" 
+                   open="(" separator="," close=")">
+                  #{item}
+         	</foreach>
+        </if>
+		<if test="map.shOrderFinId != null and map.shOrderFinId != '' and map.shOrderFinId != 'null' and map.shOrderFinId != 'undefined'">				  
+		    AND a.sh_order_fin_id = #{map.shOrderFinId}
+                </if>
+		<if test="map.projectId != null and map.projectId != '' and map.projectId != 'null' and map.projectId != 'undefined'">
+		    AND a.project_id = #{map.projectId}
+         </if>
+        <if test="map.projectCode != null and map.projectCode != '' and map.projectCode != 'null' and map.projectCode != 'undefined'">
+		    AND o.project_code like CONCAT('%',#{map.projectCode},'%') 
+         </if> 
+        <if test="map.branchGroupName != null and map.branchGroupName != '' and map.branchGroupName != 'null' and map.branchGroupName != 'undefined'">
+		    AND o.branch_group_name like CONCAT('%',#{map.branchGroupName},'%') 
+         </if> 
+         <if test="map.beginDate != null and map.beginDate !='' and map.beginDate != 'null' and map.beginDate != 'undefined' " >
+	       and date_format(a.create_date, '%Y-%m-%d') &gt;= date_format(#{map.beginDate}, '%Y-%m-%d')
+	    </if>
+	    <if test="map.endDate != null and map.endDate !='' and map.endDate != 'null' and map.endDate != 'undefined' " >
+	       and date_format(a.create_date, '%Y-%m-%d') &lt;= date_format(#{map.endDate}, '%Y-%m-%d')
+	    </if>
+		<if test="map.orderId != null">
+		    AND a.order_id = #{map.orderId}
+                </if>
+		<if test="map.financeStatus != null">
+		    AND a.finance_status = #{map.financeStatus}
+                </if>
+        <if test="map.queryFrom != null and map.queryFrom == 'app'">
+		    AND a.finance_status in(0,2)
+                </if>        
+		<if test="map.arrearsItem != null and map.arrearsItem != '' and map.arrearsItem != 'null' and map.arrearsItem != 'undefined'">				  
+		    AND a.arrears_item = #{map.arrearsItem}
+                </if>
+		<if test="map.addUserId != null">
+		    AND a.add_user_id = #{map.addUserId}
+                </if>
+		<if test="map.addDate != null">
+		    AND a.add_date = #{map.addDate}
+                </if>
+		<if test="map.packFlag != null">
+		    AND a.pack_flag = #{map.packFlag}
+                </if>
+		<if test="map.deleteFlag != null">
+		    AND a.delete_flag = #{map.deleteFlag}
+                </if>
+		<if test="map.shortBargeCost != null">
+		    AND a.short_barge_cost = #{map.shortBargeCost}
+                </if>
+		<if test="map.buckleFigure != null">
+		    AND a.buckle_figure = #{map.buckleFigure}
+                </if>
+		<if test="map.subsidy != null">
+		    AND a.subsidy = #{map.subsidy}
+                </if>
+		<if test="map.shouldPayFigure != null">
+		    AND a.should_pay_figure = #{map.shouldPayFigure}
+                </if>
+		<if test="map.billingDate != null">
+		    AND a.billing_date = #{map.billingDate}
+                </if>
+		<if test="map.financeAuditDate != null">
+		    AND a.finance_audit_date = #{map.financeAuditDate}
+                </if>
+		<if test="map.completeDate != null">
+		    AND a.complete_date = #{map.completeDate}
+                </if>
+		<if test="map.unusualDate != null">
+		    AND a.unusual_date = #{map.unusualDate}
+                </if>
+		<if test="map.unusualUserId != null">
+		    AND a.unusual_user_id = #{map.unusualUserId}
+                </if>
+		<if test="map.unusualReason != null and map.unusualReason != '' and map.unusualReason != 'null' and map.unusualReason != 'undefined'">				  
+		    AND a.unusual_reason = #{map.unusualReason}
+                </if>
+		<if test="map.createUserId != null">
+		    AND a.create_user_id = #{map.createUserId}
+                </if>
+		<if test="map.modifiyDate != null">
+		    AND a.modifiy_date = #{map.modifiyDate}
+                </if>
+		<if test="map.shPackId != null and map.shPackId != '' and map.shPackId != 'null' and map.shPackId != 'undefined'">
+		    and exists (select spo.sh_pack_id from tb_sh_pack_order spo where spo.sh_pack_id = #{map.shPackId} and spo.sh_order_fin_id = a.sh_order_fin_id)
+        		</if>
+            </if>
+        order by a.finance_status asc
+	</select>
+	 <!--  运单打包领取人列表  -->
+	<select id="listPackReceiveDriverByIds" resultType="Map">
+		select o.driver_name driverName,o.driver_phone driverPhone,o.driver_id driverId
+		from tb_short_order_finance a 
+		left join tb_order o on o.id = a.order_id
+		left join tb_project p on a.project_id = p.id
+		where o.is_cancel = 0
+		and o.delete_flag = 0
+		and a.delete_flag = 0
+		and sh_order_fin_id in
+		<foreach collection="list" index="index" item="item" open="(" separator="," close=")">   
+             #{item}   
+        </foreach>
+		GROUP BY driverId,driverPhone,driverName
+		ORDER BY driverId
+	</select>
+	<!-- 根据领取人-返回司机开户行信息 -->
+	<select id="getDriverBankByDriverId" resultType="Map">
+  	select DISTINCT u.id,1 receiveUserType,d.open_bank openBank,d.bank_card_number bankCardNo 
+	from tb_user_information d,tb_login_user u
+	where d.id=u.information_id
+	  and u.id =#{id}
+	union all
+	select DISTINCT d.id,0 receiveUserType,d.open_bank openBank,d.bank_card_number bankCardNo 
+	from tb_car_team d
+	where 1=1
+	  and d.id =#{id}
+	</select>
+	<!--  通过projectId查询待对账信息-接取-费用对账  -->
+	<select id="getCheckConfPickupByProjectId" parameterType="map" resultType="Map">
+	select p.id,p.project_code,p.branch_group_name branchGroupName,p.send_cargo_company_name sendCargoCompanyName
+,p.receive_cargo_company_name receiveCargoCompanyName,c.address_code pickupPlace,c.detail_address pickupAddress
+,d.adress_code arrivePlace,d.detail_address arriveAddress,p.cargo_price cargoPrice
+,IFNULL(lp.totalCarNum,0) totalCarNum,IFNULL(lp.totalWeight,0) totalWeight,IFNULL(lp.totalPiece,0) totalPiece
+from tb_project p
+left join (select a.project_id,count(a.id) totalCarNum,sum(IFNULL(a.send_gross,0)-IFNULL(a.send_tare,0)) totalWeight
+	,sum(IFNULL(a.container_one_send_net,0)+IFNULL(a.container_two_send_net,0)) sendNetWeight2
+	,sum(IFNULL(a.piece_number,0)) totalPiece
+	from tb_order a
+	where a.step_select='接取'
+	group by a.project_id) lp on lp.project_id=p.id
+left join tb_customer c on c.id=p.send_cargo_unit_id
+left join tb_train_station d on d.id=p.receive_center_cargo_site_id
+left join tb_branch_group_link y on p.id=y.row_id and y.tab_name='tb_project'
+where y.sys_org_code like CONCAT(#{sysOrgCode},'%')
+and p.id=#{id}
+order by p.id
+	</select>
+	<!--  通过projectId查询待对账信息  -->
+	<select id="getCheckConfByProjectId" parameterType="map" resultType="Map">
+select p.id,p.project_code projectCode,p.branch_group_id branchGroupId,p.branch_group_name branchGroupName
+,p.send_cargo_company_name sendCargoCompanyName,p.receive_cargo_company_name receiveCargoCompanyName
+,IFNULL(b.totalCarNum,0) totalCarNum
+,IFNULL(b.totalNetWeight,0) totalWeight
+,IFNULL(b.totalPieceNum,0) totalPiece
+,IFNULL(b.reciveOrderNum,0) reciveOrderNum
+,IFNULL(b.sendOrderNum,0) sendOrderNum
+,IFNULL(b.carOrderNum,0) carOrderNum
+,IFNULL(b.trainOrderNum,0) trainOrderNum
+,DATE_FORMAT(IFNULL(c.endDate,p.create_date),'%Y-%m-%d') startDate
+,cargo_price cargoPrice
+,case when p.transport_type in(0) then pickupPlaceCar
+			when p.transport_type in(3,5) then beginPlance
+			when p.transport_type in(2) then pickupPlaceSend
+			when p.transport_type in(6) then p.begin_address
+			else pickupPlaceRecive end beginAddress
+,case when p.transport_type in(0) then arrivePlaceCar
+			when p.transport_type in(3,4) then endPlance
+			when p.transport_type in(1) then arrivePlaceRecive
+			when p.transport_type in(6) then p.end_address
+			else arrivePlaceSend end endAddress
+from tb_project p
+left join tb_branch_group_link y on p.id=y.row_id and y.tab_name='tb_project'
+LEFT JOIN (
+select a.projectId,sum(a.totalCarNum) totalCarNum,sum(a.totalNetWeight) totalNetWeight,
+sum(a.totalPieceNum) totalPieceNum ,sum(a.reciveOrderNum) reciveOrderNum,sum(a.sendOrderNum) sendOrderNum
+,sum(a.carOrderNum) carOrderNum,sum(a.trainOrderNum) trainOrderNum 
+,max(a.arrivePlaceRecive) arrivePlaceRecive
+,max(a.arrivePlaceSend) arrivePlaceSend
+,max(a.arrivePlaceCar) arrivePlaceCar
+,max(a.pickupPlaceRecive) pickupPlaceRecive
+,max(a.pickupPlaceSend) pickupPlaceSend
+,max(a.pickupPlaceCar) pickupPlaceCar
+,max(beginPlance) beginPlance
+,max(endPlance) endPlance
+from(
+select o.project_id projectId,count(o.carrier_vehicle_id) totalCarNum
+,sum(IFNULL(o.container_one_send_net,0)+IFNULL(o.container_two_send_net,0)) totalNetWeight
+,sum(IFNULL(o.piece_number,0)) totalPieceNum
+,sum(IF(o.step_select_code=0,1,0)) reciveOrderNum,sum(IF(o.step_select_code=1,1,0)) sendOrderNum
+,sum(IF(o.step_select_code=2,1,0)) carOrderNum,0 trainOrderNum
+,max(if(step_select_code=0,o.arrive_place,'')) arrivePlaceRecive
+,max(if(step_select_code=1,o.arrive_place,'')) arrivePlaceSend
+,max(if(step_select_code=2,o.arrive_place,'')) arrivePlaceCar
+,max(if(step_select_code=0,o.pickup_place,'')) pickupPlaceRecive
+,max(if(step_select_code=1,o.pickup_place,'')) pickupPlaceSend
+,max(if(step_select_code=2,o.pickup_place,'')) pickupPlaceCar
+,'' beginPlance
+,'' endPlance
+from tb_order o
+group by o.project_id
+UNION ALL
+select t.project_id projectId,sum(IFNULL(t.entruck_numbe,0)) totalCarNum
+,sum(IFNULL(t.container_nums,0)) totalNetWeight
+,sum(IFNULL(t.arrive_weight,0)) totalPieceNum
+,0 reciveOrderNum,0 sendOrderNum,0 carOrderNum,count(t.id) trainOrderNum
+,'' arrivePlaceRecive
+,'' arrivePlaceSend
+,'' arrivePlaceCar
+,'' pickupPlaceRecive
+,'' pickupPlaceSend
+,'' pickupPlaceCar
+,max(begin_place) beginPlance
+,max(end_place) endPlance
+from tb_train_order t
+group by t.project_id
+) a
+group by a.projectId) b
+on b.projectId = p.id
+left join (select project_id,min(start_date) startDate,max(end_date) endDate from tb_customer_checking_conf where project_id=#{id}) c on c.project_id=p.id
+where p.id=#{id} and y.sys_org_code like CONCAT(#{sysOrgCode},'%')
+<choose>
+    <when test="checkFlag !=null  and  checkFlag ==0" >
+        and p.transport_type in(0)
+    </when>
+    <when test="checkFlag !=null  and  checkFlag ==1">
+        and p.transport_type in(1,4,6,7)  
+    </when>
+    <otherwise>          
+        and p.transport_type is not null   
+    </otherwise>
+</choose>
+order by p.id
+	</select>
+</mapper>

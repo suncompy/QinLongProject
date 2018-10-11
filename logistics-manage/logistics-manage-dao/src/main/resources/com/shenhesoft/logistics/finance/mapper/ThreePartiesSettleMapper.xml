@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shenhesoft.logistics.finance.mapper.ThreePartiesSettleMapper" >
+  <resultMap id="BaseResultMap" type="com.shenhesoft.logistics.finance.ThreePartiesSettle" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="three_parties_receivables_id" property="threePartiesReceivablesId" jdbcType="VARCHAR" />
+    <result column="receive_account_id" property="receiveAccountId" jdbcType="INTEGER" />
+    <result column="pay_account_id" property="payAccountId" jdbcType="INTEGER" />
+    <result column="settle_money" property="settleMoney" jdbcType="VARCHAR" />
+    <result column="settle_status" property="settleStatus" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="create_by" property="createBy" jdbcType="VARCHAR" />
+    <result column="auit_by" property="auitBy" jdbcType="VARCHAR" />
+    <result column="auit_date" property="auitDate" jdbcType="TIMESTAMP" />
+    <result column="del_flag" property="delFlag" jdbcType="CHAR" />
+  </resultMap>
+  
+   <sql id="Base_Column_List" >
+    id, three_parties_receivables_id, receive_account_id, pay_account_id, settle_money, settle_status, 
+    create_date, create_by, auit_by, auit_date, del_flag
+  </sql>
+  
+  <select id="getThreePartiesSettleById" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_three_parties_settle
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  
+   <select id="getThreePartiesSettleByIds" resultMap="BaseResultMap"  >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_three_parties_settle
+    where id in
+    <foreach collection="list" index="index" item="item" open="(" separator="," close=")">   
+            #{item}   
+    </foreach>
+  </select>
+  
+  <select id="getThreePartiesSettle" resultType="Map">
+	SELECT
+	ps.id threePartiesSettleId,
+	payAccount.account_name payAccountName,
+	payAccount.account_num payAccountNum,
+	receiveAccount.account_name receiveAccountName,
+	receiveAccount.account_num receiveAccountNum,
+	ps.settle_status settleStatus,
+	ps.settle_money settleMoney,
+	createUser.`name` createUserName,
+	auitUser.`name` auitUserName,
+	ps.auit_date auitDate
+	FROM
+	tb_three_parties_settle ps
+	LEFT JOIN tb_finance_account payAccount ON ps.pay_account_id =
+	payAccount.id
+	LEFT JOIN tb_finance_account receiveAccount ON
+	ps.receive_account_id = receiveAccount.id
+	LEFT JOIN tb_system_user
+	createUser ON ps.create_by = createUser.id
+	LEFT JOIN tb_system_user
+	auitUser ON ps.auit_by = auitUser.id
+	left join tb_branch_group_link y on ps.id=y.row_id and y.tab_name='tb_three_parties_settle'
+	where ps.del_flag = 0 and y.sys_org_code like CONCAT(#{map.sysOrgCode},'%')
+	<if test="map!=null">
+		<if test="map.threePartiesReceivablesId != null">
+			and three_parties_receivables_id = #{map.threePartiesReceivablesId}
+		</if>
+		<if test="map.receiveAccountId != null">
+			and receive_account_id = #{map.receiveAccountId}
+		</if>
+		<if test="map.payAccountId != null">
+			and pay_account_id = #{map.payAccountId}
+		</if>
+		<if test="map.settleMoney != null">
+			and settle_money = #{map.settleMoney}
+		</if>
+		<if test="map.settleStatus != null">
+			and settle_status = #{map.settleStatus}
+		</if>
+		<if test="map.createDate != null">
+			and create_date = #{map.createDate}
+		</if>
+		<if test="map.createBy != null">
+			and create_by = #{map.createBy}
+		</if>
+		<if test="map.auitBy != null">
+			and auit_by = #{map.auitBy}
+		</if>
+		<if test="map.auitDate != null">
+			and auit_date = #{map.auitDate}
+		</if>
+		<if test="map.delFlag != null">
+			and del_flag = #{map.delFlag}
+		</if>
+      </if>
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from tb_three_parties_settle
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="addThreePartiesSettle" parameterType="com.shenhesoft.logistics.finance.ThreePartiesSettle" >
+    insert into tb_three_parties_settle
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="threePartiesReceivablesId != null" >
+        three_parties_receivables_id,
+      </if>
+      <if test="receiveAccountId != null" >
+        receive_account_id,
+      </if>
+      <if test="payAccountId != null" >
+        pay_account_id,
+      </if>
+      <if test="settleMoney != null" >
+        settle_money,
+      </if>
+      <if test="settleStatus != null" >
+        settle_status,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="auitBy != null" >
+        auit_by,
+      </if>
+      <if test="auitDate != null" >
+        auit_date,
+      </if>
+      <if test="delFlag != null" >
+        del_flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="threePartiesReceivablesId != null" >
+        #{threePartiesReceivablesId,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveAccountId != null" >
+        #{receiveAccountId,jdbcType=INTEGER},
+      </if>
+      <if test="payAccountId != null" >
+        #{payAccountId,jdbcType=INTEGER},
+      </if>
+      <if test="settleMoney != null" >
+        #{settleMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="settleStatus != null" >
+        #{settleStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="auitBy != null" >
+        #{auitBy,jdbcType=VARCHAR},
+      </if>
+      <if test="auitDate != null" >
+        #{auitDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="delFlag != null" >
+        #{delFlag,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  
+  <update id="editThreePartiesSettle" parameterType="com.shenhesoft.logistics.finance.ThreePartiesSettle" >
+    update tb_three_parties_settle
+    <set >
+      <if test="threePartiesReceivablesId != null" >
+        three_parties_receivables_id = #{threePartiesReceivablesId,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveAccountId != null" >
+        receive_account_id = #{receiveAccountId,jdbcType=INTEGER},
+      </if>
+      <if test="payAccountId != null" >
+        pay_account_id = #{payAccountId,jdbcType=INTEGER},
+      </if>
+      <if test="settleMoney != null" >
+        settle_money = #{settleMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="settleStatus != null" >
+        settle_status = #{settleStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="auitBy != null" >
+        auit_by = #{auitBy,jdbcType=VARCHAR},
+      </if>
+      <if test="auitDate != null" >
+        auit_date = #{auitDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag,jdbcType=CHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <update id="editThreePartiesSettleByIds">
+    update tb_three_parties_settle
+    <set >
+      <if test="map.threePartiesReceivablesId != null" >
+        three_parties_receivables_id = #{map.threePartiesReceivablesId},
+      </if>
+      <if test="map.receiveAccountId != null" >
+        receive_account_id = #{map.receiveAccountId},
+      </if>
+      <if test="map.payAccountId != null" >
+        pay_account_id = #{map.payAccountId},
+      </if>
+      <if test="map.settleMoney != null" >
+        settle_money = #{map.settleMoney},
+      </if>
+      <if test="map.settleStatus != null" >
+        settle_status = #{map.settleStatus},
+      </if>
+      <if test="map.createDate != null" >
+        create_date = #{map.createDate},
+      </if>
+      <if test="map.createBy != null" >
+        create_by = #{map.createBy},
+      </if>
+      <if test="map.auitBy != null" >
+        auit_by = #{map.auitBy},
+      </if>
+      <if test="map.auitDate != null" >
+        auit_date = #{map.auitDate},
+      </if>
+      <if test="map.delFlag != null" >
+        del_flag = #{map.delFlag},
+      </if>
+    </set>
+    where id in 
+   	<foreach collection="list" index="index" item="item" open="(" separator="," close=")">   
+            #{item}   
+    </foreach>
+  </update>
+	
+
+</mapper>

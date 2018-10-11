@@ -1,0 +1,51 @@
+body{
+  background: url(../img/login-bg.png) 50%  0 no-repeat;
+  color: #fff;
+  margin: 0;
+  padding: 0;
+}
+.lg-content .form-horizontal{
+  width: 400px;
+  background:rgba(123, 168, 208, 0.5);
+  border-radius: 10px;
+  padding-bottom: 1px;
+  margin: 10px 0 ;
+}
+.lg-content .lg-title{
+  margin-bottom: 20px;
+}
+.lg-content{
+ 
+  width: 400px;
+  margin-top:340px;
+  margin-left: 20%;
+
+
+}
+.lg-content .lg-heading{
+  display: block;
+  font-size: 20px;
+  text-align: center;
+  padding: 20px 0;
+  color:#bccad4; 
+  font-weight: bold;
+}
+.form-group{
+  padding: 0 20px;
+  margin-bottom: 20px;
+}
+.form-group a{
+    height: 34px;
+    line-height: 34px;
+    color: #f0ad4e;
+}
+
+.modal h4{display: block;font-size: 20px;text-align: center;padding: 10px 0;color: #bccad4;font-weight: bold;}
+.modal-dialog{width: 500px !important;}
+.modal .form-horizontal{width: 100%;}
+.modal .modal-body{background-color: rgb(6, 92, 150);position: relative;}
+.modal .glyphicon-remove-sign{color: #fff;font-size: 20px;position: absolute;top: 10px;right: 10px;}
+
+.lg-index .col-sm-12{position: relative;}
+.lg-index .warning{position: absolute;color: #ff9800;top: -20px;right: 10px;}
+.modal .col-xs-4{padding-left: 0px;}

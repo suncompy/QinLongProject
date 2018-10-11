@@ -1,0 +1,27 @@
+body{ background: #eef5fd !important; overflow: auto;min-width:1055px;padding:0}
+.maxWidth .form-group select{min-width: 130px;height: 19px;border-radius: 4px;border: 1px solid #dde3ef;  font-size: 12px;    padding-left: 5px;}
+.maxWidth label{vertical-align: middle;}
+.maxWidth{position: relative;width: 90%;overflow: hidden;min-width: 1040px;}
+.maxWidth .form-group{   padding: 5px 5px 0 5px;font-size: 14px;font-family: "Microsoft YaHei";}
+.maxWidth .form-group label{font-weight: normal;}
+.maxWidth .form-group input{width: 130px;height: 19px;border-radius: 4px;border: 1px solid #dde3ef;line-height: 19px !important;     font-size: 12px;padding-left: 5px;}
+.dataTimes{position:relative;}
+.dataTimes i{ position: absolute;color: #03A8ED;top: 4px;right: 3px;}
+.secTime{margin-left: -13px;}
+.secTime label{padding: 0 10px;}
+.fa-calendar-check-o{margin-top: 5px;margin-right: 5px;}
+.btn-query{margin-bottom:5px;float:right}
+.maxWidth .btn-primary {background-color: #43ce76; border: none;border-radius: 3px !important; padding: 3px 7px !important;}
+.panel-default{margin-bottom:10px;}
+.box.box-primary{border:none;}
+.box { border-top:none !important;}
+.box-tools button{margin:0 5px;color:#000;background:none;border:1px solid #dde3ef};
+.box-tools button:hover{background-color: #43ce76; border: none;border-radius: 3px !important; padding: 3px 7px !important;}
+.modal-title {
+    font-weight: bold !important;
+    text-align: left;
+    margin-left: 10px;
+    color: #333333;
+    font-size: 18px !important;
+}
+

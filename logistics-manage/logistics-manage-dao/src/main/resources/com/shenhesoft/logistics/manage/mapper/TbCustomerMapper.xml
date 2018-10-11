@@ -1,0 +1,637 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shenhesoft.logistics.manage.mapper.TbCustomerMapper" >
+  <resultMap id="BaseResultMap" type="com.shenhesoft.logistics.manage.pojo.customer.TbCustomer" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="account" property="account" jdbcType="VARCHAR" />
+    <result column="passwd" property="passwd" jdbcType="VARCHAR" />
+    <result column="company_name" property="companyName" jdbcType="VARCHAR" />
+    <result column="short_name" property="shortName" jdbcType="VARCHAR" />
+    <result column="branch_id" property="branchId" jdbcType="INTEGER" />
+    <result column="address_code" property="addressCode" jdbcType="VARCHAR" />
+    <result column="detail_address" property="detailAddress" jdbcType="VARCHAR" />
+    <result column="company_contacts" property="companyContacts" jdbcType="VARCHAR" />
+    <result column="department" property="department" jdbcType="VARCHAR" />
+    <result column="station_phone" property="stationPhone" jdbcType="VARCHAR" />
+    <result column="station_fax" property="stationFax" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="bank_account" property="bankAccount" jdbcType="VARCHAR" />
+    <result column="account_name" property="accountName" jdbcType="VARCHAR" />
+    <result column="open_bank" property="openBank" jdbcType="VARCHAR" />
+    <result column="open_bank_num" property="openBankNum" jdbcType="VARCHAR" />
+    <result column="duty_paragraph" property="dutyParagraph" jdbcType="VARCHAR" />
+    <result column="relation_begin_location" property="relationBeginLocation" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, create_date, account, passwd, company_name, short_name, branch_id, address_code, 
+    detail_address, company_contacts, department, station_phone, station_fax, email, 
+    bank_account, account_name, open_bank, open_bank_num, duty_paragraph,relation_begin_location,status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shenhesoft.logistics.manage.pojo.customer.TbCustomerExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_customer
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_customer
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_customer
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.shenhesoft.logistics.manage.pojo.customer.TbCustomerExample" >
+    delete from tb_customer
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.shenhesoft.logistics.manage.pojo.customer.TbCustomer" >
+    <selectKey keyProperty="id" resultType="int">  
+            select LAST_INSERT_ID()
+     </selectKey>
+    insert into tb_customer (id, create_date, account, 
+      passwd, company_name, short_name, 
+      branch_id, address_code, detail_address, 
+      company_contacts, department, station_phone, 
+      station_fax, email, bank_account, 
+      account_name, open_bank, open_bank_num, 
+      duty_paragraph,relation_begin_location,status)
+      values (#{id,jdbcType=INTEGER}, #{createDate,jdbcType=TIMESTAMP}, #{account,jdbcType=VARCHAR}, 
+      #{passwd,jdbcType=VARCHAR}, #{companyName,jdbcType=VARCHAR}, #{shortName,jdbcType=VARCHAR}, 
+      #{branchId,jdbcType=INTEGER}, #{addressCode,jdbcType=VARCHAR}, #{detailAddress,jdbcType=VARCHAR}, 
+      #{companyContacts,jdbcType=VARCHAR}, #{department,jdbcType=VARCHAR}, #{stationPhone,jdbcType=VARCHAR}, 
+      #{stationFax,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{bankAccount,jdbcType=VARCHAR}, 
+      #{accountName,jdbcType=VARCHAR}, #{openBank,jdbcType=VARCHAR}, #{openBankNum,jdbcType=VARCHAR}, 
+      #{dutyParagraph,jdbcType=VARCHAR},#{relationBeginLocation,jdbcType=VARCHAR},#{status,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.shenhesoft.logistics.manage.pojo.customer.TbCustomer" >
+    <selectKey keyProperty="id" resultType="int">  
+            select LAST_INSERT_ID()
+     </selectKey>
+    insert into tb_customer
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="account != null" >
+        account,
+      </if>
+      <if test="passwd != null" >
+        passwd,
+      </if>
+      <if test="companyName != null" >
+        company_name,
+      </if>
+      <if test="shortName != null" >
+        short_name,
+      </if>
+      <if test="branchId != null" >
+        branch_id,
+      </if>
+      <if test="addressCode != null" >
+        address_code,
+      </if>
+      <if test="detailAddress != null" >
+        detail_address,
+      </if>
+      <if test="companyContacts != null" >
+        company_contacts,
+      </if>
+      <if test="department != null" >
+        department,
+      </if>
+      <if test="stationPhone != null" >
+        station_phone,
+      </if>
+      <if test="stationFax != null" >
+        station_fax,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="bankAccount != null" >
+        bank_account,
+      </if>
+      <if test="accountName != null" >
+        account_name,
+      </if>
+      <if test="openBank != null" >
+        open_bank,
+      </if>
+      <if test="openBankNum != null" >
+        open_bank_num,
+      </if>
+      <if test="dutyParagraph != null" >
+        duty_paragraph,
+      </if>
+      <if test="relationBeginLocation != null" >
+        relation_begin_location,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="account != null" >
+        #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="passwd != null" >
+        #{passwd,jdbcType=VARCHAR},
+      </if>
+      <if test="companyName != null" >
+        #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="shortName != null" >
+        #{shortName,jdbcType=VARCHAR},
+      </if>
+      <if test="branchId != null" >
+        #{branchId,jdbcType=INTEGER},
+      </if>
+      <if test="addressCode != null" >
+        #{addressCode,jdbcType=VARCHAR},
+      </if>
+      <if test="detailAddress != null" >
+        #{detailAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="companyContacts != null" >
+        #{companyContacts,jdbcType=VARCHAR},
+      </if>
+      <if test="department != null" >
+        #{department,jdbcType=VARCHAR},
+      </if>
+      <if test="stationPhone != null" >
+        #{stationPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="stationFax != null" >
+        #{stationFax,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="bankAccount != null" >
+        #{bankAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="accountName != null" >
+        #{accountName,jdbcType=VARCHAR},
+      </if>
+      <if test="openBank != null" >
+        #{openBank,jdbcType=VARCHAR},
+      </if>
+      <if test="openBankNum != null" >
+        #{openBankNum,jdbcType=VARCHAR},
+      </if>
+      <if test="dutyParagraph != null" >
+        #{dutyParagraph,jdbcType=VARCHAR},
+      </if>
+      <if test="relationBeginLocation != null" >
+        #{relationBeginLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.shenhesoft.logistics.manage.pojo.customer.TbCustomerExample" resultType="java.lang.Integer" >
+    select count(*) from tb_customer
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_customer
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.createDate != null" >
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.account != null" >
+        account = #{record.account,jdbcType=VARCHAR},
+      </if>
+      <if test="record.passwd != null" >
+        passwd = #{record.passwd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyName != null" >
+        company_name = #{record.companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shortName != null" >
+        short_name = #{record.shortName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.branchId != null" >
+        branch_id = #{record.branchId,jdbcType=INTEGER},
+      </if>
+      <if test="record.addressCode != null" >
+        address_code = #{record.addressCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.detailAddress != null" >
+        detail_address = #{record.detailAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyContacts != null" >
+        company_contacts = #{record.companyContacts,jdbcType=VARCHAR},
+      </if>
+      <if test="record.department != null" >
+        department = #{record.department,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stationPhone != null" >
+        station_phone = #{record.stationPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stationFax != null" >
+        station_fax = #{record.stationFax,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null" >
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bankAccount != null" >
+        bank_account = #{record.bankAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.accountName != null" >
+        account_name = #{record.accountName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.openBank != null" >
+        open_bank = #{record.openBank,jdbcType=VARCHAR},
+      </if>
+      <if test="record.openBankNum != null" >
+        open_bank_num = #{record.openBankNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dutyParagraph != null" >
+        duty_paragraph = #{record.dutyParagraph,jdbcType=VARCHAR},
+      </if>
+      <if test="record.relationBeginLocation != null" >
+       relation_begin_location = #{record.relationBeginLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=TINYINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_customer
+    set id = #{record.id,jdbcType=INTEGER},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      account = #{record.account,jdbcType=VARCHAR},
+      passwd = #{record.passwd,jdbcType=VARCHAR},
+      company_name = #{record.companyName,jdbcType=VARCHAR},
+      short_name = #{record.shortName,jdbcType=VARCHAR},
+      branch_id = #{record.branchId,jdbcType=INTEGER},
+      address_code = #{record.addressCode,jdbcType=VARCHAR},
+      detail_address = #{record.detailAddress,jdbcType=VARCHAR},
+      company_contacts = #{record.companyContacts,jdbcType=VARCHAR},
+      department = #{record.department,jdbcType=VARCHAR},
+      station_phone = #{record.stationPhone,jdbcType=VARCHAR},
+      station_fax = #{record.stationFax,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
+      bank_account = #{record.bankAccount,jdbcType=VARCHAR},
+      account_name = #{record.accountName,jdbcType=VARCHAR},
+      open_bank = #{record.openBank,jdbcType=VARCHAR},
+      open_bank_num = #{record.openBankNum,jdbcType=VARCHAR},
+      duty_paragraph = #{record.dutyParagraph,jdbcType=VARCHAR},
+      relation_begin_location = #{record.relationBeginLocation,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=TINYINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.shenhesoft.logistics.manage.pojo.customer.TbCustomer" >
+    update tb_customer
+    <set >
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="account != null" >
+        account = #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="passwd != null" >
+        passwd = #{passwd,jdbcType=VARCHAR},
+      </if>
+      <if test="companyName != null" >
+        company_name = #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="shortName != null" >
+        short_name = #{shortName,jdbcType=VARCHAR},
+      </if>
+      <if test="branchId != null" >
+        branch_id = #{branchId,jdbcType=INTEGER},
+      </if>
+      <if test="addressCode != null" >
+        address_code = #{addressCode,jdbcType=VARCHAR},
+      </if>
+      <if test="detailAddress != null" >
+        detail_address = #{detailAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="companyContacts != null" >
+        company_contacts = #{companyContacts,jdbcType=VARCHAR},
+      </if>
+      <if test="department != null" >
+        department = #{department,jdbcType=VARCHAR},
+      </if>
+      <if test="stationPhone != null" >
+        station_phone = #{stationPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="stationFax != null" >
+        station_fax = #{stationFax,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="bankAccount != null" >
+        bank_account = #{bankAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="accountName != null" >
+        account_name = #{accountName,jdbcType=VARCHAR},
+      </if>
+      <if test="openBank != null" >
+        open_bank = #{openBank,jdbcType=VARCHAR},
+      </if>
+      <if test="openBankNum != null" >
+        open_bank_num = #{openBankNum,jdbcType=VARCHAR},
+      </if>
+      <if test="dutyParagraph != null" >
+        duty_paragraph = #{dutyParagraph,jdbcType=VARCHAR},
+      </if>
+      <if test="relationBeginLocation != null" >
+        relation_begin_location = #{relationBeginLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.shenhesoft.logistics.manage.pojo.customer.TbCustomer" >
+    update tb_customer
+    set create_date = #{createDate,jdbcType=TIMESTAMP},
+      account = #{account,jdbcType=VARCHAR},
+      passwd = #{passwd,jdbcType=VARCHAR},
+      company_name = #{companyName,jdbcType=VARCHAR},
+      short_name = #{shortName,jdbcType=VARCHAR},
+      branch_id = #{branchId,jdbcType=INTEGER},
+      address_code = #{addressCode,jdbcType=VARCHAR},
+      detail_address = #{detailAddress,jdbcType=VARCHAR},
+      company_contacts = #{companyContacts,jdbcType=VARCHAR},
+      department = #{department,jdbcType=VARCHAR},
+      station_phone = #{stationPhone,jdbcType=VARCHAR},
+      station_fax = #{stationFax,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      bank_account = #{bankAccount,jdbcType=VARCHAR},
+      account_name = #{accountName,jdbcType=VARCHAR},
+      open_bank = #{openBank,jdbcType=VARCHAR},
+      open_bank_num = #{openBankNum,jdbcType=VARCHAR},
+      duty_paragraph = #{dutyParagraph,jdbcType=VARCHAR},
+      relation_begin_location = #{relationBeginLocation,jdbcType=VARCHAR},
+      status = #{status,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <!--  -->
+    <select id="selectCustomerInfoByExample" resultType="com.shenhesoft.logistics.manage.helpPojo.CustomerInfo"
+     parameterType="com.shenhesoft.logistics.manage.pojo.customer.TbCustomerExample" >
+    select
+	   	cu.id id,
+		cu.create_date createDate,
+		cu.account account,
+		cu.passwd passwd,
+		cu.company_name companyName,
+		cu.short_name shortName,
+		cu.branch_id branchId,
+		cu.address_code addressCode,
+		cu.detail_address detailAddress,
+		cu.company_contacts companyContacts,
+		cu.department department,
+		cu.station_phone stationPhone,
+		cu.station_fax stationFax,
+		cu.email email,
+		cu.bank_account bankAccount,
+		cu.account_name accountName,
+		cu.open_bank openBank,
+		cu.open_bank_num openBankNum,
+		cu.duty_paragraph dutyParagraph,
+		cu.relation_begin_location relationBeginLocation
+    from tb_customer cu 
+    left join tb_branch_group_link y on cu.id=y.row_id
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+
+	<select id="selectCustomerInfoByCid" resultType="com.shenhesoft.logistics.manage.helpPojo.CustomerInfo"
+     parameterType="java.lang.Integer" >
+    select
+	   	id id,
+		create_date createDate,
+		account account,
+		passwd passwd,
+		company_name companyName,
+		short_name shortName,
+		branch_id branchId,
+		address_code addressCode,
+		detail_address detailAddress,
+		company_contacts companyContacts,
+		department department,
+		station_phone stationPhone,
+		station_fax stationFax,
+		email email,
+		bank_account bankAccount,
+		account_name accountName,
+		open_bank openBank,
+		open_bank_num openBankNum,
+		duty_paragraph dutyParagraph,
+		relation_begin_location relationBeginLocation
+    from tb_customer
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  
+  	<select id="selectTbCustomerInfoById" resultType="com.shenhesoft.logistics.manage.pojo.customer.TbCustomer"
+     parameterType="java.lang.Integer" >
+    select
+	   	id id,
+		create_date createDate,
+		account account,
+		passwd passwd,
+		company_name companyName,
+		short_name shortName,
+		branch_id branchId,
+		address_code addressCode,
+		detail_address detailAddress,
+		company_contacts companyContacts,
+		department department,
+		station_phone stationPhone,
+		station_fax stationFax,
+		email email,
+		bank_account bankAccount,
+		account_name accountName,
+		open_bank openBank,
+		open_bank_num openBankNum,
+		duty_paragraph dutyParagraph,
+		relation_begin_location relationBeginLocation
+    from tb_customer
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  
+  
+  <select id="getTbCustomerByUserNamePassword" parameterType="com.shenhesoft.logistics.manage.pojo.customer.TbCustomer" resultMap="BaseResultMap">
+		select * from tb_customer c where 1=1
+		<if test="account != null">
+			and c.account = #{account,jdbcType=VARCHAR}
+		</if>
+		<if test="passwd != null">
+			and c.passwd = #{passwd,jdbcType=VARCHAR}
+		</if>
+		limit 1
+  </select>
+  
+  	<select id="listAllCustomerInfo" resultType="Map">
+    select
+	   	id id,
+		create_date createDate,
+		account account,
+		passwd passwd,
+		company_name companyName,
+		short_name shortName,
+		branch_id branchId,
+		address_code addressCode,
+		detail_address detailAddress,
+		company_contacts companyContacts,
+		department department,
+		station_phone stationPhone,
+		station_fax stationFax,
+		email email,
+		bank_account bankAccount,
+		account_name accountName,
+		open_bank openBank,
+		open_bank_num openBankNum,
+		duty_paragraph dutyParagraph,
+		relation_begin_location relationBeginLocation
+    from tb_customer
+  </select>
+
+
+	<select id="getCustomerByArea"  resultType="com.shenhesoft.logistics.manage.pojo.customer.TbCustomer">
+    select
+	   	DISTINCT
+	   	cu.id id,
+		cu.create_date createDate,
+		cu.account account,
+		cu.passwd passwd,
+		cu.company_name companyName,
+		cu.short_name shortName,
+		cu.branch_id branchId,
+		cu.address_code addressCode,
+		cu.detail_address detailAddress,
+		cu.company_contacts companyContacts,
+		cu.department department,
+		cu.station_phone stationPhone,
+		cu.station_fax stationFax,
+		cu.email email,
+		cu.bank_account bankAccount,
+		cu.account_name accountName,
+		cu.open_bank openBank,
+		cu.open_bank_num openBankNum,
+		cu.duty_paragraph dutyParagraph,
+		cu.relation_begin_location relationBeginLocation
+    from tb_customer cu
+    left join tb_branch_group_link y on cu.id=y.row_id
+    <where>
+		and cu.status=0
+		and y.tab_name='tb_customer'
+		and y.sys_org_code like CONCAT(#{map.sysOrgCode},'%')
+       <if test="map.areas != null" >
+              <foreach collection="map.areas" item="area" open="and (" close=")" separator="or">  
+              <!-- 每个遍历需要生成的串 -->  
+                 <!--  address_code LIKE CONCAT('%',#{area,jdbcType=TINYINT},'%')  -->
+              	address_code = #{area,jdbcType=TINYINT}
+              </foreach>
+       </if>
+       <if test="map.companyId!=null">
+       		and cu.id=#{map.companyId,jdbcType=INTEGER}
+       </if>
+    </where>  
+  </select>
+
+</mapper>

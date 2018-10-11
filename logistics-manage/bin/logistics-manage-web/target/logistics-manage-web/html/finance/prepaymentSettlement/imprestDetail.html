@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>预付款支抵明细</title>
+		<link rel="stylesheet" href="../../../public/bootstrap/css/bootstrap.css" />
+		<link rel="stylesheet" href="../../../public/bootstrap/css/font-awesome.css" />
+		<link rel="stylesheet" href="../../../public/public.css"/>
+		<!--<link rel="stylesheet" href="../../../css/finance/prepaymentSettlement/imprestPayment.css" />-->
+		<script type="text/javascript" src="../../../public/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="../../../public/bootstrap/js/bootstrap.js"></script>
+		<script src="../../../public/bootstrap/My97DatePicker/WdatePicker.js"></script>
+		<script type="text/javascript" src="../../../js/public.js"></script>
+		<!--<script type="text/javascript" src="../../../js/finance/prepaymentSettlement/imprestPayment.js"></script>-->
+	</head>
+	<body >
+		<!-- 预付款支抵明细表单 -->
+		<div class="form project_form container_top">
+			<form class="form-inline maxWidth">
+				<div id="wrap">
+					<div class="form-group">
+						<label>项目编号：</label>
+						<select></select>
+					</div>
+					<div class="form-group">
+						<label>分支机构：</label>
+						<select></select>
+					</div>
+					<div class="form-group">
+						<label>项目类型：</label>
+						<select></select>
+					</div>
+					<div class="form-group">
+						<label>运单编号：</label>
+						<select></select>
+					</div>
+
+					<div class="form-group">
+						<label>货物品名：</label>
+						<select></select>
+					</div>
+					<div class="form-group">
+						<label>发货企业：</label>
+						<select></select>
+					</div>
+					<div class="form-group">
+						<label>收货企业：</label>
+						<select></select>
+					</div>
+					<div class="form-group">
+						<label>&emsp;&emsp;货场：</label>
+						<select></select>
+					</div>
+
+					<div class="form-group">
+						<label>&emsp;&emsp;货位：</label>
+						<select></select>
+					</div>
+
+					<div class="form-group">
+						<label>计费模式：</label>
+						<select></select>
+					</div>
+
+				</div>
+				<div class="foot">
+					<a class="btn btn-success" href="#"><em class="search"></em> 
+						<span>搜索</span>
+					</a>
+					<div id="lookMore"></div>
+				</div>
+			</form>
+		</div>
+		<!-- 预付款支抵明细表格 -->
+		<div class="container_top tableDiv">
+			<div class="tabbable" id="tabs-529262">
+				<ul class="nav nav-tabs">
+					<li class="active">
+						<a href="#panel1" data-toggle="tab">存入明细</a>
+					</li>
+				</ul>
+				<div class="tab-content">
+					<!--存入明细表格开始-->
+					<div class="tab-pane active" id="panel1">
+						<div class="domain">
+							<!--<div class="tableBg">
+								<a href="#" class="exportBtn" id="imprestPayment"><em class=""></em><span>预付款存入</span></a>
+								<a href="#" class="exportBtn" ><em class=""></em><span>财务审核</span></a>
+								<a href="#" class="exportBtn" ><em class=""></em><span>反审核</span></a>
+							</div>-->
+							<div class="table-responsive">
+								<table class="table">
+									<thead>
+										<tr class="tableTop">
+											<th><label class="demo--label">
+											     <input class="demo--checkbox" type="checkbox"   >
+                                                 <span class="demo--checkboxInput"></span>
+	                                        </label> </th>
+											<th>序号</th>
+											<th>日期</th>
+											<th>分支机构</th>
+											<th>项目编号</th>
+											<th>预付款类型</th>
+											<th>账户</th>
+											<th>流水号</th>
+											<th>存入金额</th>
+											<th>票据名称</th>
+											<th>起号</th>
+											<th>止号</th>
+											<th>张数</th>
+											<th>作废</th>
+											<th>金额</th>
+											<th>客户凭证号</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td><label class="demo--label">
+											     <input class="demo--checkbox" type="checkbox"   >
+                                                 <span class="demo--checkboxInput"></span>
+	                                        </label></td>
+											<td>1</td>
+											<td>2017.09.09</td>
+											<td>XX机构</td>
+											<td><a href="#">J00001</a></td>
+											<td>运费</td>
+											<td>王大锤</td>
+											<td>123456789123456789</td>
+											<td>1000元</td>
+											<td>XX票据</td>
+											<td>123451234512</td>
+											<td>123451234512</td>
+											<td>8</td>
+											<td>8</td>
+											<td>1000元</td>
+											<td>1234567892214</td>
+										</tr>
+										<tr>
+											<td><label class="demo--label">
+											     <input class="demo--checkbox" type="checkbox"   >
+                                                 <span class="demo--checkboxInput"></span>
+	                                        </label></td>
+											<td>2</td>
+											<td>2017.09.09</td>
+											<td>XX机构</td>
+											<td><a href="#">J00001</a></td>
+											<td>运费</td>
+											<td>王大锤</td>
+											<td>123456789123456789</td>
+											<td>1000元</td>
+											<td>XX票据</td>
+											<td>123451234512</td>
+											<td>123451234512</td>
+											<td>8</td>
+											<td>8</td>
+											<td>1000元</td>
+											<td>1234567892214</td>
+										</tr>
+										<tr>
+											<td><label class="demo--label">
+											     <input class="demo--checkbox" type="checkbox"   >
+                                                 <span class="demo--checkboxInput"></span>
+	                                        </label></td>
+											<td>3</td>
+											<td>2017.09.09</td>
+											<td>XX机构</td>
+											<td><a href="#">J00001</a></td>
+											<td>运费</td>
+											<td>王大锤</td>
+											<td>123456789123456789</td>
+											<td>1000元</td>
+											<td>XX票据</td>
+											<td>123451234512</td>
+											<td>123451234512</td>
+											<td>8</td>
+											<td>8</td>
+											<td>1000元</td>
+											<td>1234567892214</td>
+										</tr>
+										<tr>
+											<td><label class="demo--label">
+											     <input class="demo--checkbox" type="checkbox"   >
+                                                 <span class="demo--checkboxInput"></span>
+	                                        </label></td>
+											<td>4</td>
+											<td>2017.09.09</td>
+											<td>XX机构</td>
+											<td><a href="#">J00001</a></td>
+											<td>运费</td>
+											<td>王大锤</td>
+											<td>123456789123456789</td>
+											<td>1000元</td>
+											<td>XX票据</td>
+											<td>123451234512</td>
+											<td>123451234512</td>
+											<td>8</td>
+											<td>8</td>
+											<td>1000元</td>
+											<td>1234567892214</td>
+										</tr>
+										<tr>
+											<td><label class="demo--label">
+											     <input class="demo--checkbox" type="checkbox"   >
+                                                 <span class="demo--checkboxInput"></span>
+	                                        </label></td>
+											<td>5</td>
+											<td>2017.09.09</td>
+											<td>XX机构</td>
+											<td><a href="#">J00001</a></td>
+											<td>运费</td>
+											<td>王大锤</td>
+											<td>123456789123456789</td>
+											<td>1000元</td>
+											<td>XX票据</td>
+											<td>123451234512</td>
+											<td>123451234512</td>
+											<td>8</td>
+											<td>8</td>
+											<td>1000元</td>
+											<td>1234567892214</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="row clearfix">
+							<div class="col-md-12 column paging">
+								<ul class="pagination clearfix">
+									<li>
+										<a href="#" class="newA">上一页</a>
+									</li>
+									<li>
+										<a href="#" class="newA actives">1</a>
+									</li>
+									<li>
+										<a href="#" class="newA">2</a>
+									</li>
+									<li>
+										<a href="#" class="newA">3</a>
+									</li>
+									<li>
+										<a href="#" class="newA">4</a>
+									</li>
+									<li>
+										<a href="#" class="newA">5</a>
+									</li>
+
+									<li>
+										<a href="#" class="newA">...</a>
+									</li>
+									<li>
+										<a href="#" class="newA">10</a>
+									</li>
+
+									<li>
+										<a href="#" class="newA">下一页 </a>
+									</li>
+
+									<li>
+										<a class="pageSpan">跳转到 <input type="text" id="pageInput" />页</a>
+									</li>
+									<li>
+
+									</li>
+									<li>
+										<a href="#" class="pageGo">GO</a>
+									</li>
+
+								</ul>
+							</div>
+						</div>
+					</div>
+					<!--存入明细表格结束-->
+				</div>
+			</div>
+		</div>
+
+	
+	</body>
+</html>
+

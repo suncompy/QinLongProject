@@ -1,0 +1,25 @@
+.tableDivs{background: #fff;border: 1px solid #ccc;margin-bottom: 10px;position: relative;display: none;}
+
+/*新建模态框*/
+.project_info .creat_content{font-size: 14px;font-family: "Microsoft YaHei";color: rgb(51, 51, 51);line-height: 1.2;}
+form .modal-header{padding: 5px!important;}
+form h5{color:#FFAE00;margin-top: 0px !important;font-weight: normal;}
+form p{color:#04A9ED;margin:10px;}
+form hr{margin-top: 10px !important;margin-bottom: 10px !important;border-top: 1px dashed #D8D8D8 !important;}
+#changeForm label{font-weight: normal;font-size: 14px;font-family: "Microsoft YaHei";color: #666666;line-height: 1.2;}
+#changeForm select,#changeForm input[type=text]{width:140px;border: 1px solid #dde3ef;border-radius: 4px; height: 28px;margin: 5px 0;}
+form .sm-tag{width: 70px;text-align: right;}
+form .lg-tag{width: 84px;text-align: right;}
+.modal .form-group{padding:0!important;position: relative;margin: 0 15px!important;}
+@media (min-width: 768px){
+.addr_info{width: 150px;}	
+}
+@media (min-width: 992px){
+.addr_info{width: 333px !important;}
+.modal-lg{width: 930px}
+}
+.waitUl {overflow: hidden; padding-left: 10px !important;}
+.waitUl li{float: left;list-style: none;margin: 10px 0 0 0;min-width: 225px;}
+
+.returnClass{    background: #04a9ed !important;
+    color: #FFFFFF !important;}

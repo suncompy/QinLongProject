@@ -1,0 +1,640 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shenhesoft.logistics.manage.mapper.TbSystemUserMapper" >
+  <resultMap id="BaseResultMap" type="com.shenhesoft.logistics.manage.pojo.systemuser.TbSystemUser" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="account" property="account" jdbcType="VARCHAR" />
+    <result column="passwd" property="passwd" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="age" property="age" jdbcType="INTEGER" />
+    <result column="sex" property="sex" jdbcType="TINYINT" />
+    <result column="user_icon" property="userIcon" jdbcType="VARCHAR" />
+    <result column="is_marry" property="isMarry" jdbcType="TINYINT" />
+    <result column="education" property="education" jdbcType="TINYINT" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="branch_group_id" property="branchGroupId" jdbcType="INTEGER" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="area_code" property="areaCode" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="work_status" property="workStatus" jdbcType="TINYINT" />
+    <result column="idcard" property="idcard" jdbcType="VARCHAR" />
+    <result column="start_work_date" property="startWorkDate" jdbcType="TIMESTAMP" />
+    <result column="leave_office_date" property="leaveOfficeDate" jdbcType="TIMESTAMP" />
+    <result column="last_login_date" property="lastLoginDate" jdbcType="TIMESTAMP" />
+    <result column="company_id" property="companyId" jdbcType="INTEGER" />
+    <result column="checked_code" property="checkedCode" jdbcType="VARCHAR" />
+    <result column="checked_code_date" property="checkedCodeDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, create_date, account, passwd, name, age, sex, user_icon, is_marry, education, 
+    phone, branch_group_id, email, area_code, address, remark, work_status, idcard, start_work_date, 
+    leave_office_date, last_login_date, company_id, checked_code, checked_code_date
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shenhesoft.logistics.manage.pojo.systemuser.TbSystemUserExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_system_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_system_user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_system_user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.shenhesoft.logistics.manage.pojo.systemuser.TbSystemUserExample" >
+    delete from tb_system_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.shenhesoft.logistics.manage.pojo.systemuser.TbSystemUser" >
+       <selectKey keyProperty="id" resultType="int">  
+            select LAST_INSERT_ID()
+     </selectKey> 
+    insert into tb_system_user (id, create_date, account, 
+      passwd, name, age, 
+      sex, user_icon, is_marry, 
+      education, phone, branch_group_id, 
+      email, area_code, address, 
+      remark, work_status, idcard, 
+      start_work_date, leave_office_date, last_login_date, 
+      company_id, checked_code, checked_code_date
+      )
+    values (#{id,jdbcType=INTEGER}, #{createDate,jdbcType=TIMESTAMP}, #{account,jdbcType=VARCHAR}, 
+      #{passwd,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, 
+      #{sex,jdbcType=TINYINT}, #{userIcon,jdbcType=VARCHAR}, #{isMarry,jdbcType=TINYINT}, 
+      #{education,jdbcType=TINYINT}, #{phone,jdbcType=VARCHAR}, #{branchGroupId,jdbcType=INTEGER}, 
+      #{email,jdbcType=VARCHAR}, #{areaCode,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{workStatus,jdbcType=TINYINT}, #{idcard,jdbcType=VARCHAR}, 
+      #{startWorkDate,jdbcType=TIMESTAMP}, #{leaveOfficeDate,jdbcType=TIMESTAMP}, #{lastLoginDate,jdbcType=TIMESTAMP}, 
+      #{companyId,jdbcType=INTEGER}, #{checkedCode,jdbcType=VARCHAR}, #{checkedCodeDate,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.shenhesoft.logistics.manage.pojo.systemuser.TbSystemUser" >
+       <selectKey keyProperty="id" resultType="int">  
+            select LAST_INSERT_ID()
+     </selectKey> 
+    insert into tb_system_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="account != null" >
+        account,
+      </if>
+      <if test="passwd != null" >
+        passwd,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="age != null" >
+        age,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="userIcon != null" >
+        user_icon,
+      </if>
+      <if test="isMarry != null" >
+        is_marry,
+      </if>
+      <if test="education != null" >
+        education,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="branchGroupId != null" >
+        branch_group_id,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="areaCode != null" >
+        area_code,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="workStatus != null" >
+        work_status,
+      </if>
+      <if test="idcard != null" >
+        idcard,
+      </if>
+      <if test="startWorkDate != null" >
+        start_work_date,
+      </if>
+      <if test="leaveOfficeDate != null" >
+        leave_office_date,
+      </if>
+      <if test="lastLoginDate != null" >
+        last_login_date,
+      </if>
+      <if test="companyId != null" >
+        company_id,
+      </if>
+      <if test="checkedCode != null" >
+        checked_code,
+      </if>
+      <if test="checkedCodeDate != null" >
+        checked_code_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="account != null" >
+        #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="passwd != null" >
+        #{passwd,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null" >
+        #{age,jdbcType=INTEGER},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=TINYINT},
+      </if>
+      <if test="userIcon != null" >
+        #{userIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="isMarry != null" >
+        #{isMarry,jdbcType=TINYINT},
+      </if>
+      <if test="education != null" >
+        #{education,jdbcType=TINYINT},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="branchGroupId != null" >
+        #{branchGroupId,jdbcType=INTEGER},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="areaCode != null" >
+        #{areaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="workStatus != null" >
+        #{workStatus,jdbcType=TINYINT},
+      </if>
+      <if test="idcard != null" >
+        #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="startWorkDate != null" >
+        #{startWorkDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="leaveOfficeDate != null" >
+        #{leaveOfficeDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastLoginDate != null" >
+        #{lastLoginDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="companyId != null" >
+        #{companyId,jdbcType=INTEGER},
+      </if>
+      <if test="checkedCode != null" >
+        #{checkedCode,jdbcType=VARCHAR},
+      </if>
+      <if test="checkedCodeDate != null" >
+        #{checkedCodeDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.shenhesoft.logistics.manage.pojo.systemuser.TbSystemUserExample" resultType="java.lang.Integer" >
+    select count(*) from tb_system_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_system_user
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.createDate != null" >
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.account != null" >
+        account = #{record.account,jdbcType=VARCHAR},
+      </if>
+      <if test="record.passwd != null" >
+        passwd = #{record.passwd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.age != null" >
+        age = #{record.age,jdbcType=INTEGER},
+      </if>
+      <if test="record.sex != null" >
+        sex = #{record.sex,jdbcType=TINYINT},
+      </if>
+      <if test="record.userIcon != null" >
+        user_icon = #{record.userIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isMarry != null" >
+        is_marry = #{record.isMarry,jdbcType=TINYINT},
+      </if>
+      <if test="record.education != null" >
+        education = #{record.education,jdbcType=TINYINT},
+      </if>
+      <if test="record.phone != null" >
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.branchGroupId != null" >
+        branch_group_id = #{record.branchGroupId,jdbcType=INTEGER},
+      </if>
+      <if test="record.email != null" >
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.areaCode != null" >
+        area_code = #{record.areaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null" >
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.workStatus != null" >
+        work_status = #{record.workStatus,jdbcType=TINYINT},
+      </if>
+      <if test="record.idcard != null" >
+        idcard = #{record.idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.startWorkDate != null" >
+        start_work_date = #{record.startWorkDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.leaveOfficeDate != null" >
+        leave_office_date = #{record.leaveOfficeDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastLoginDate != null" >
+        last_login_date = #{record.lastLoginDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.companyId != null" >
+        company_id = #{record.companyId,jdbcType=INTEGER},
+      </if>
+      <if test="record.checkedCode != null" >
+        checked_code = #{record.checkedCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.checkedCodeDate != null" >
+        checked_code_date = #{record.checkedCodeDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_system_user
+    set id = #{record.id,jdbcType=INTEGER},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      account = #{record.account,jdbcType=VARCHAR},
+      passwd = #{record.passwd,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      age = #{record.age,jdbcType=INTEGER},
+      sex = #{record.sex,jdbcType=TINYINT},
+      user_icon = #{record.userIcon,jdbcType=VARCHAR},
+      is_marry = #{record.isMarry,jdbcType=TINYINT},
+      education = #{record.education,jdbcType=TINYINT},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      branch_group_id = #{record.branchGroupId,jdbcType=INTEGER},
+      email = #{record.email,jdbcType=VARCHAR},
+      area_code = #{record.areaCode,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      work_status = #{record.workStatus,jdbcType=TINYINT},
+      idcard = #{record.idcard,jdbcType=VARCHAR},
+      start_work_date = #{record.startWorkDate,jdbcType=TIMESTAMP},
+      leave_office_date = #{record.leaveOfficeDate,jdbcType=TIMESTAMP},
+      last_login_date = #{record.lastLoginDate,jdbcType=TIMESTAMP},
+      company_id = #{record.companyId,jdbcType=INTEGER},
+      checked_code = #{record.checkedCode,jdbcType=VARCHAR},
+      checked_code_date = #{record.checkedCodeDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.shenhesoft.logistics.manage.pojo.systemuser.TbSystemUser" >
+    update tb_system_user
+    <set >
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="account != null" >
+        account = #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="passwd != null" >
+        passwd = #{passwd,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null" >
+        age = #{age,jdbcType=INTEGER},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=TINYINT},
+      </if>
+      <if test="userIcon != null" >
+        user_icon = #{userIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="isMarry != null" >
+        is_marry = #{isMarry,jdbcType=TINYINT},
+      </if>
+      <if test="education != null" >
+        education = #{education,jdbcType=TINYINT},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="branchGroupId != null" >
+        branch_group_id = #{branchGroupId,jdbcType=INTEGER},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="areaCode != null" >
+        area_code = #{areaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="workStatus != null" >
+        work_status = #{workStatus,jdbcType=TINYINT},
+      </if>
+      <if test="idcard != null" >
+        idcard = #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="startWorkDate != null" >
+        start_work_date = #{startWorkDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="leaveOfficeDate != null" >
+        leave_office_date = #{leaveOfficeDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastLoginDate != null" >
+        last_login_date = #{lastLoginDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="companyId != null" >
+        company_id = #{companyId,jdbcType=INTEGER},
+      </if>
+      <if test="checkedCode != null" >
+        checked_code = #{checkedCode,jdbcType=VARCHAR},
+      </if>
+      <if test="checkedCodeDate != null" >
+        checked_code_date = #{checkedCodeDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.shenhesoft.logistics.manage.pojo.systemuser.TbSystemUser" >
+    update tb_system_user
+    set create_date = #{createDate,jdbcType=TIMESTAMP},
+      account = #{account,jdbcType=VARCHAR},
+      passwd = #{passwd,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      age = #{age,jdbcType=INTEGER},
+      sex = #{sex,jdbcType=TINYINT},
+      user_icon = #{userIcon,jdbcType=VARCHAR},
+      is_marry = #{isMarry,jdbcType=TINYINT},
+      education = #{education,jdbcType=TINYINT},
+      phone = #{phone,jdbcType=VARCHAR},
+      branch_group_id = #{branchGroupId,jdbcType=INTEGER},
+      email = #{email,jdbcType=VARCHAR},
+      area_code = #{areaCode,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      work_status = #{workStatus,jdbcType=TINYINT},
+      idcard = #{idcard,jdbcType=VARCHAR},
+      start_work_date = #{startWorkDate,jdbcType=TIMESTAMP},
+      leave_office_date = #{leaveOfficeDate,jdbcType=TIMESTAMP},
+      last_login_date = #{lastLoginDate,jdbcType=TIMESTAMP},
+      company_id = #{companyId,jdbcType=INTEGER},
+      checked_code = #{checkedCode,jdbcType=VARCHAR},
+      checked_code_date = #{checkedCodeDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <!-- 条件查询用户信息 -->
+   <select id="selectEmployInfoByExample" resultType="com.shenhesoft.logistics.manage.helpPojo.EmployInfo" 
+   parameterType="com.shenhesoft.logistics.manage.pojo.systemuser.TbSystemUserExample" >
+  	 SELECT
+		A.id id,
+		A.create_date createDate,
+		A.account account,
+		A.age age,
+		A.is_marry isMarry,
+		A.area_code areaCode,
+		A.education education,
+		A.branch_group_id branchGroupId,
+		A.idcard idcard,
+		A.start_work_date startWorkDate,
+		A.leave_office_date leaveOfficeDate,
+	  	A.`name` name,
+	  	A.sex sex,
+		C.`name` roleName,
+		A.phone phone,
+		A.email email,
+		A.address address,
+		A.remark remark,
+		A.start_work_date startWorkDate,
+		A.work_status workStatus,
+		A.last_login_date lastLoginDate
+	FROM
+		tb_system_user A
+		LEFT JOIN tb_role_systemuser B ON A.id=B.user_id 
+		LEFT JOIN tb_role C ON b.role_id=c.id
+		LEFT JOIN tb_branch_group_link y on A.id=y.row_id
+ 	<if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+	  <if test="orderByClause != null" >
+	      order by ${orderByClause}
+	  </if>
+  </select>
+  <!--通过用户id查询用户信息  -->
+   <select id="selectEmployInfoBySid" resultType="com.shenhesoft.logistics.manage.helpPojo.EmployInfo" 
+   parameterType="java.lang.Integer" >
+  	SELECT
+		tmp.*,C.`name` roleName
+	FROM
+		(
+			SELECT
+				A.id id,
+				A.`name` NAME,
+				A.sex sex,
+				A.age age,
+				A.branch_group_id branchGroupId,
+				A.phone phone,
+				A.email email,
+				B.role_id roleId,
+				A.address address,
+				A.remark remark,
+				A.last_login_date lastLoginDate,
+				A.is_marry isMarry,
+				A.education education,
+				A.area_code areaCode,
+				A.idcard idcard,
+				A.start_work_date startWorkDate,
+				A.work_status workStatus,
+				A.leave_office_date leaveOfficeDate
+			FROM
+				tb_system_user A
+			LEFT JOIN tb_role_systemuser B ON A.id = B.user_id
+		) tmp
+		LEFT JOIN tb_role C ON tmp.roleId = c.id
+		where tmp.id= #{id,jdbcType=INTEGER}
+  </select>
+  
+  <!-- 获取负责人 -->
+   <select id="selectReponsibler" resultType="com.shenhesoft.logistics.manage.helpPojo.EmployInfo" 
+   parameterType="com.shenhesoft.logistics.manage.pojo.systemuser.TbSystemUserExample" >
+  	 SELECT
+		A.id id,
+		A.`name` name
+	FROM
+		tb_system_user A,
+		tb_branch_group_link y,
+		tb_role_systemuser B,
+		tb_role C
+ 	<if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    	AND a.id = y.row_id
+		AND
+			A.id=B.user_id
+		AND
+			B.role_id=C.id
+		AND 
+			C.name="网点分支负责人"
+		and
+			C.is_default = 1 <!--是默认权限  -->
+	 <if test="orderByClause != null" >
+	      order by ${orderByClause}
+	 </if>
+  </select>
+  
+   <select id="getTbSystemUserByUserNamePassword" parameterType="com.shenhesoft.logistics.manage.pojo.systemuser.TbSystemUser" resultMap="BaseResultMap">
+	select * from tb_system_user c where 1=1
+	<if test="account != null">
+		and c.account = #{account,jdbcType=VARCHAR}
+	</if>
+	<if test="passwd != null">
+		and c.passwd = #{passwd,jdbcType=VARCHAR}
+	</if>
+	limit 1
+  </select>
+  <!-- 通过id查询用户信息 -->
+  <select id="getTbSystemUserById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+	select  <include refid="Base_Column_List" /> from tb_system_user c where id = #{id,jdbcType=INTEGER}
+  </select>
+   <!-- 通过phone查询用户存在信息 -->
+   <select id="getUserValiByPhone" resultType="Map">
+	select id from tb_system_user c where c.phone = #{map.phone}
+	limit 1
+  </select>
+   <!-- 通过phone重置密码 -->
+  <update id="updatePasswdByPhone">
+	update tb_system_user set passwd = #{passwd} where phone = #{phone}
+  </update>
+</mapper>

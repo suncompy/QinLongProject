@@ -1,0 +1,74 @@
+body{background: #f2f2f2;min-width: 1200px;}
+.banner-img{text-align:center;background-color:#1e8af7 ;}
+.navbg{background: #1e8af7;height: 90px !important;padding: 15px 0;color: #FFFFFF;}
+nav .container{padding-top:0}
+.navs{background: #FFFFFF;height: 90px !important;padding: 15px 0;color: #000000;box-shadow:0 4px 4px rgba(0, 0, 0, 0.1);-moz-box-shadow:0 4px 4px rgba(0, 0, 0, 0.1); -webkit-box-shadow:0 4px 4px rgba(0, 0, 0, 0.1);  }
+.navLogo{float: left;}
+.menucolor{color: #FFFFFF !important ;}
+.menubg{color: #000000 !important ;}
+.navLogo img{width: 60px;height: 60px;}
+#logo_name {float: left;font-family: "微软雅黑";margin-top: 10px;margin-left: 10px;}
+#logo_name .title{font-size: 18px;}
+#logo_name .Cname{font-size: 12px;margin-top: 5px;}
+.searchInput{border-width:0px;border-bottom:1px solid #FFFFFF;background: none;}
+.searchInput::-webkit-input-placeholder{color: white;font-size: 14px;opacity: 0.5;}
+.searchInputs{border-width:0px;border-bottom:1px solid #999999;background: none;}
+.searchInputs::-webkit-input-placeholder{color: #999999;font-size: 14px;opacity: 0.5;}
+.searchIcon{position:absolute;right: 0;top: -3px;display: inline-block;background: url(../img/projectsearch.png) no-repeat center center;width: 30px;height: 30px;}
+.searchIcons{position:absolute;right: 0;top: -3px;display: inline-block;background: url(../img/shows.png) no-repeat center center;width: 30px;height: 30px;}
+.searchdiv{position: relative;}
+.navbar-form{margin-top: 20px;}
+.menu{padding: 10px 0;}
+.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
+    color: #555;
+    background-color: #1e8af7;
+}
+
+.navbar{border: none !important;}
+.mainBox{margin-top: 90px;}
+.conTop{background: #FFFFFF;}
+.conTitle{border-left:4px solid  #1e8af7;padding-left: 20px;}
+.conTitle p{margin: 0 !important;}
+.cons{padding: 20px;}
+.titleName{font-size: 16px;}
+.titleNames{font-size: 30px;}
+.projectList{padding: 0 !important;}
+ ul{margin-bottom: 0;}
+.projectList li{float: left;list-style: none;/*width: 30%;min-width: 350px;background: #FFFFFF;margin: 20px 15px;padding: 20px;*/margin-bottom: 30px;}
+.projectBg{display: inline-block;height: 100px;width: 100px;background: #fff;}
+.projectList .listItem p{float: left;font-size: 30px;padding-left: 10px; height: 100px;width: 235px;word-break: break-all;}
+.projectList .listItem em{float: left;}
+.projectList .listItem em img{width: 100px;height: 100px;}
+.projectList .listItem label{font-size: 14px;font-weight: 500;color: #666666;width: 100px;vertical-align: top;}
+.goodsInformation span{margin-right:10px;}
+.pagination a{color:#333333 !important;font-size: 12px !important;border: none !important;border-radius: 5px;}
+.paginationul{text-align: center;}
+.pagination > .listItem{display: inline-block;margin: 0 5px !important;border-radius: 5px;}
+/*.pagination > .listItem a:hover{background: #1e8af7 !important;color: #FFFFFF !important;}*/
+.pagination .click{background: #1e8af7 !important;color: #FFFFFF !important;}
+.projectList .listItem:hover{-webkit-transition:0.3s;-moz-transition:0.3s; -o-transition:0.3s; background:#1d7cdc;box-shadow:10px 10px 10px #ccc; color: #FFFFFF !important;}
+/*.projectList .listItem:hover label{color: red;}*/
+.projectList .listItem:hover label{color: #d7ebff !important;}
+#footCon{width: 100%;height: 180px;background: #e5eaee;}
+#footCon a{color: #666666 !important;}
+.footConDiv div{float: left;}
+.footConDiv .pFoot{width: 68%;text-align: center;}
+.footConDiv dl{margin-top: 50px;}
+.footConDiv  dd{margin: 10px 0;font-size: 12px;color: #666666;}
+.footConDiv h4{color: #333333;font-size: 20px !important;}
+.footConDiv p{ margin-top: 80px;line-height: 26px;font-size: 14px;color: #333333;}
+.shortClient{display: inline-block;margin-bottom: 0;}
+.listItem{background-color: #fff;width: 380px;height: 300px;margin-right: 30px;padding: 20px;}
+.nomarg{margin-right: 0 !important;}
+.container{width: 1200px;padding-left: 0;padding-top: 20px;padding-right: 0;}
+@media (min-width: 1200px){
+	.container {
+    width: 1200px;
+}
+}
+.pagination{
+	margin-top: 0;
+	
+}
+.paginationul{padding-top: 0;}
+.pagination > li > a, .pagination > li > span{margin-right: 10px;}

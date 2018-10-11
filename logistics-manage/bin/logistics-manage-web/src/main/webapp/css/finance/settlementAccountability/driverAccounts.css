@@ -1,0 +1,12 @@
+/*新建模态框*/
+.project_info .creat_content{font-size: 14px;font-family: "Microsoft YaHei";color: rgb(51, 51, 51);line-height: 1.2;}
+.account p{color:#04A9ED;margin:10px;}
+.account hr{margin-top: 10px !important;margin-bottom: 10px !important;border-top: 1px dashed #D8D8D8 !important;}
+.account label{font-weight: normal;font-size: 14px;font-family: "Microsoft YaHei";color: #666666;line-height: 1.2;}
+.account select,.account input[type=text],#myForms select,#myForms input[type=text]{width:120px;border: 1px solid #DDE3EF;;height: 28px;margin: 5px 0;border-radius: 2px;}
+.account.form-group{padding:0!important;position: relative;margin: 0 15px!important;}
+.driverUl{padding-left: 20px;}
+.driverUl li{list-style: none;float: left;min-width:230px;margin: 5px 0;color: #666666;}
+.driverUl li span{color: #333333;}
+.waitUl{overflow:hidden;padding-left: 0 !important;}
+.waitUl li{float: left;list-style: none;min-width: 257px;margin: 2px 10px;}

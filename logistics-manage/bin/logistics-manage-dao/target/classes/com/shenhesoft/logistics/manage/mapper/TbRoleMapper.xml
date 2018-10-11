@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shenhesoft.logistics.manage.mapper.TbRoleMapper" >
+  <resultMap id="BaseResultMap" type="com.shenhesoft.logistics.manage.pojo.role.TbRole" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="is_default" property="isDefault" jdbcType="TINYINT" />
+    <result column="delete_flag" property="deleteFlag" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, name, is_default, delete_flag
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shenhesoft.logistics.manage.pojo.role.TbRoleExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_role
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_role
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_role
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.shenhesoft.logistics.manage.pojo.role.TbRoleExample" >
+    delete from tb_role
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.shenhesoft.logistics.manage.pojo.role.TbRole" >
+   <selectKey keyProperty="id" resultType="int">  
+            select LAST_INSERT_ID()
+     </selectKey> 
+    insert into tb_role (id, name, is_default, 
+      delete_flag)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{isDefault,jdbcType=TINYINT}, 
+      #{deleteFlag,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.shenhesoft.logistics.manage.pojo.role.TbRole" >
+   <selectKey keyProperty="id" resultType="int">  
+            select LAST_INSERT_ID()
+     </selectKey> 
+    insert into tb_role
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="isDefault != null" >
+        is_default,
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="isDefault != null" >
+        #{isDefault,jdbcType=TINYINT},
+      </if>
+      <if test="deleteFlag != null" >
+        #{deleteFlag,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.shenhesoft.logistics.manage.pojo.role.TbRoleExample" resultType="java.lang.Integer" >
+    select count(*) from tb_role
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_role
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isDefault != null" >
+        is_default = #{record.isDefault,jdbcType=TINYINT},
+      </if>
+      <if test="record.deleteFlag != null" >
+        delete_flag = #{record.deleteFlag,jdbcType=TINYINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_role
+    set id = #{record.id,jdbcType=INTEGER},
+      name = #{record.name,jdbcType=VARCHAR},
+      is_default = #{record.isDefault,jdbcType=TINYINT},
+      delete_flag = #{record.deleteFlag,jdbcType=TINYINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.shenhesoft.logistics.manage.pojo.role.TbRole" >
+    update tb_role
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="isDefault != null" >
+        is_default = #{isDefault,jdbcType=TINYINT},
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag = #{deleteFlag,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.shenhesoft.logistics.manage.pojo.role.TbRole" >
+    update tb_role
+    set name = #{name,jdbcType=VARCHAR},
+      is_default = #{isDefault,jdbcType=TINYINT},
+      delete_flag = #{deleteFlag,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <select id="getRoles" resultType="com.shenhesoft.logistics.manage.pojo.role.TbRole" >
+    select ro.id ,ro.name,ro.is_default isDefault,ro.delete_flag deleteFlag
+    from tb_role ro LEFT JOIN tb_branch_group_link y ON ro.id = y.row_id 
+  	<where>
+		and y.tab_name='tb_role'
+		and y.sys_org_code like CONCAT(#{map.sysOrgCode},'%')
+        <if test="map != null">
+            <if test="map.id != null" >
+		       and ro.id = #{map.id,jdbcType=INTEGER}
+		      </if>
+		       <if test="map.ids != null" >
+		          <foreach collection="map.ids" item="id" open="and (" close=")" separator="or">  
+                <!-- 每个遍历需要生成的串 -->  
+                    ro.id=#{id,jdbcType=TINYINT}  
+                </foreach>  
+		      </if>
+		      <if test="map.name != null and map.name != '' and map.name != 'null' and map.name != 'undefined'" >
+		         and ro.name = #{map.name,jdbcType=VARCHAR}
+		      </if>
+		      <if test="map.isDefault != null" >
+		         and ro.is_default = #{map.isDefault,jdbcType=TINYINT}
+		      </if>
+		       <if test="map.deleteFlag != null" >
+		         and ro.delete_flag = #{map.deleteFlag,jdbcType=TINYINT}
+		      </if>
+        </if>
+        </where>
+         order by ro.id 
+	</select>
+  
+  <select id="selectMenus" resultType="Map">
+  		select m.id id ,m.parent_id pid,m.name name,m.level level,p.id permissionId  from tb_menu m LEFT JOIN tb_permission p ON m.id = p.menu_id
+  </select>
+  
+ <select id="selectMenuByRoleId" parameterType="Integer" resultType="Map">
+ 	SELECT
+	tmp.id id,tmp.pid ,tmp.name name,tmp.perssionId,   
+	CASE IFNULL(role.perssion_id,0) WHEN 0 THEN "false" ELSE "true"
+	END isCheck
+	FROM
+	(
+		SELECT
+			m.id id,
+			m.parent_id pid,
+			m.`name` NAME,
+			p.id perssionId
+		FROM
+			tb_menu m
+		LEFT JOIN tb_permission p ON m.id = p.menu_id
+	) tmp
+	LEFT JOIN (SELECT rp.perssion_id FROM tb_role r ,tb_role_perssion rp where r.id = rp.role_id AND r.id = #{roleId})role ON tmp.perssionId = role.perssion_id
+ </select>
+  
+</mapper>

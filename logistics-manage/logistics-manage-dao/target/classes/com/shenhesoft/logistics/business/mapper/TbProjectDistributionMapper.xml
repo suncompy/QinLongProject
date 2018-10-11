@@ -1,0 +1,699 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shenhesoft.logistics.business.mapper.TbProjectDistributionMapper" >
+  <resultMap id="BaseResultMap" type="com.shenhesoft.logistics.manage.pojo.project.distribution.TbProjectDistribution" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="project_id" property="projectId" jdbcType="INTEGER" />
+    <result column="project_code" property="projectCode" jdbcType="VARCHAR" />
+    <result column="project_type" property="projectType" jdbcType="TINYINT" />
+    <result column="transport_type" property="transportType" jdbcType="TINYINT" />
+    <result column="send_company_id" property="sendCompanyId" jdbcType="INTEGER" />
+    <result column="receive_company_id" property="receiveCompanyId" jdbcType="INTEGER" />
+    <result column="car_num" property="carNum" jdbcType="INTEGER" />
+    <result column="single_weight" property="singleWeight" jdbcType="DECIMAL" />
+    <result column="creator_id" property="creatorId" jdbcType="INTEGER" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="expire_date" property="expireDate" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="type" property="type" jdbcType="TINYINT" />
+    <result column="already_rec_num" property="alreadyRecNum" jdbcType="INTEGER" />
+    <result column="complete_num" property="completeNum" jdbcType="INTEGER" />
+    <result column="delete_flag" property="deleteFlag" jdbcType="TINYINT" />
+    <result column="over_flag" property="overFlag" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, project_id, project_code, project_type, transport_type, send_company_id, receive_company_id, 
+    car_num, single_weight, creator_id, create_date, expire_date, status, type, already_rec_num, 
+    complete_num, delete_flag, over_flag
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shenhesoft.logistics.manage.pojo.project.distribution.TbProjectDistributionExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_project_distribution
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_project_distribution
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_project_distribution
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.shenhesoft.logistics.manage.pojo.project.distribution.TbProjectDistributionExample" >
+    delete from tb_project_distribution
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.shenhesoft.logistics.manage.pojo.project.distribution.TbProjectDistribution" >
+    insert into tb_project_distribution (id, project_id, project_code, 
+      project_type, transport_type, send_company_id, 
+      receive_company_id, car_num, single_weight, 
+      creator_id, create_date, expire_date, 
+      status, type, already_rec_num, 
+      complete_num, delete_flag, over_flag
+      )
+    values (#{id,jdbcType=INTEGER}, #{projectId,jdbcType=INTEGER}, #{projectCode,jdbcType=VARCHAR}, 
+      #{projectType,jdbcType=TINYINT}, #{transportType,jdbcType=TINYINT}, #{sendCompanyId,jdbcType=INTEGER}, 
+      #{receiveCompanyId,jdbcType=INTEGER}, #{carNum,jdbcType=INTEGER}, #{singleWeight,jdbcType=DECIMAL}, 
+      #{creatorId,jdbcType=INTEGER}, #{createDate,jdbcType=TIMESTAMP}, #{expireDate,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=TINYINT}, #{type,jdbcType=TINYINT}, #{alreadyRecNum,jdbcType=INTEGER}, 
+      #{completeNum,jdbcType=INTEGER}, #{deleteFlag,jdbcType=TINYINT}, #{overFlag,jdbcType=TINYINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.shenhesoft.logistics.manage.pojo.project.distribution.TbProjectDistribution" >
+    insert into tb_project_distribution
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="projectId != null" >
+        project_id,
+      </if>
+      <if test="projectCode != null" >
+        project_code,
+      </if>
+      <if test="projectType != null" >
+        project_type,
+      </if>
+      <if test="transportType != null" >
+        transport_type,
+      </if>
+      <if test="sendCompanyId != null" >
+        send_company_id,
+      </if>
+      <if test="receiveCompanyId != null" >
+        receive_company_id,
+      </if>
+      <if test="carNum != null" >
+        car_num,
+      </if>
+      <if test="singleWeight != null" >
+        single_weight,
+      </if>
+      <if test="creatorId != null" >
+        creator_id,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="expireDate != null" >
+        expire_date,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="alreadyRecNum != null" >
+        already_rec_num,
+      </if>
+      <if test="completeNum != null" >
+        complete_num,
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag,
+      </if>
+      <if test="overFlag != null" >
+        over_flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="projectId != null" >
+        #{projectId,jdbcType=INTEGER},
+      </if>
+      <if test="projectCode != null" >
+        #{projectCode,jdbcType=VARCHAR},
+      </if>
+      <if test="projectType != null" >
+        #{projectType,jdbcType=TINYINT},
+      </if>
+      <if test="transportType != null" >
+        #{transportType,jdbcType=TINYINT},
+      </if>
+      <if test="sendCompanyId != null" >
+        #{sendCompanyId,jdbcType=INTEGER},
+      </if>
+      <if test="receiveCompanyId != null" >
+        #{receiveCompanyId,jdbcType=INTEGER},
+      </if>
+      <if test="carNum != null" >
+        #{carNum,jdbcType=INTEGER},
+      </if>
+      <if test="singleWeight != null" >
+        #{singleWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="creatorId != null" >
+        #{creatorId,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="expireDate != null" >
+        #{expireDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=TINYINT},
+      </if>
+      <if test="alreadyRecNum != null" >
+        #{alreadyRecNum,jdbcType=INTEGER},
+      </if>
+      <if test="completeNum != null" >
+        #{completeNum,jdbcType=INTEGER},
+      </if>
+      <if test="deleteFlag != null" >
+        #{deleteFlag,jdbcType=TINYINT},
+      </if>
+      <if test="overFlag != null" >
+        #{overFlag,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.shenhesoft.logistics.manage.pojo.project.distribution.TbProjectDistributionExample" resultType="java.lang.Integer" >
+    select count(*) from tb_project_distribution
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_project_distribution
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.projectId != null" >
+        project_id = #{record.projectId,jdbcType=INTEGER},
+      </if>
+      <if test="record.projectCode != null" >
+        project_code = #{record.projectCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.projectType != null" >
+        project_type = #{record.projectType,jdbcType=TINYINT},
+      </if>
+      <if test="record.transportType != null" >
+        transport_type = #{record.transportType,jdbcType=TINYINT},
+      </if>
+      <if test="record.sendCompanyId != null" >
+        send_company_id = #{record.sendCompanyId,jdbcType=INTEGER},
+      </if>
+      <if test="record.receiveCompanyId != null" >
+        receive_company_id = #{record.receiveCompanyId,jdbcType=INTEGER},
+      </if>
+      <if test="record.carNum != null" >
+        car_num = #{record.carNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.singleWeight != null" >
+        single_weight = #{record.singleWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="record.creatorId != null" >
+        creator_id = #{record.creatorId,jdbcType=INTEGER},
+      </if>
+      <if test="record.createDate != null" >
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.expireDate != null" >
+        expire_date = #{record.expireDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=TINYINT},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=TINYINT},
+      </if>
+      <if test="record.alreadyRecNum != null" >
+        already_rec_num = #{record.alreadyRecNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.completeNum != null" >
+        complete_num = #{record.completeNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.deleteFlag != null" >
+        delete_flag = #{record.deleteFlag,jdbcType=TINYINT},
+      </if>
+      <if test="record.overFlag != null" >
+        over_flag = #{record.overFlag,jdbcType=TINYINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_project_distribution
+    set id = #{record.id,jdbcType=INTEGER},
+      project_id = #{record.projectId,jdbcType=INTEGER},
+      project_code = #{record.projectCode,jdbcType=VARCHAR},
+      project_type = #{record.projectType,jdbcType=TINYINT},
+      transport_type = #{record.transportType,jdbcType=TINYINT},
+      send_company_id = #{record.sendCompanyId,jdbcType=INTEGER},
+      receive_company_id = #{record.receiveCompanyId,jdbcType=INTEGER},
+      car_num = #{record.carNum,jdbcType=INTEGER},
+      single_weight = #{record.singleWeight,jdbcType=DECIMAL},
+      creator_id = #{record.creatorId,jdbcType=INTEGER},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      expire_date = #{record.expireDate,jdbcType=TIMESTAMP},
+      status = #{record.status,jdbcType=TINYINT},
+      type = #{record.type,jdbcType=TINYINT},
+      already_rec_num = #{record.alreadyRecNum,jdbcType=INTEGER},
+      complete_num = #{record.completeNum,jdbcType=INTEGER},
+      delete_flag = #{record.deleteFlag,jdbcType=TINYINT},
+      over_flag = #{record.overFlag,jdbcType=TINYINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.shenhesoft.logistics.manage.pojo.project.distribution.TbProjectDistribution" >
+    update tb_project_distribution
+    <set >
+      <if test="projectId != null" >
+        project_id = #{projectId,jdbcType=INTEGER},
+      </if>
+      <if test="projectCode != null" >
+        project_code = #{projectCode,jdbcType=VARCHAR},
+      </if>
+      <if test="projectType != null" >
+        project_type = #{projectType,jdbcType=TINYINT},
+      </if>
+      <if test="transportType != null" >
+        transport_type = #{transportType,jdbcType=TINYINT},
+      </if>
+      <if test="sendCompanyId != null" >
+        send_company_id = #{sendCompanyId,jdbcType=INTEGER},
+      </if>
+      <if test="receiveCompanyId != null" >
+        receive_company_id = #{receiveCompanyId,jdbcType=INTEGER},
+      </if>
+      <if test="carNum != null" >
+        car_num = #{carNum,jdbcType=INTEGER},
+      </if>
+      <if test="singleWeight != null" >
+        single_weight = #{singleWeight,jdbcType=DECIMAL},
+      </if>
+      <if test="creatorId != null" >
+        creator_id = #{creatorId,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="expireDate != null" >
+        expire_date = #{expireDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=TINYINT},
+      </if>
+      <if test="alreadyRecNum != null" >
+        already_rec_num = #{alreadyRecNum,jdbcType=INTEGER},
+      </if>
+      <if test="completeNum != null" >
+        complete_num = #{completeNum,jdbcType=INTEGER},
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag = #{deleteFlag,jdbcType=TINYINT},
+      </if>
+      <if test="overFlag != null" >
+        over_flag = #{overFlag,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.shenhesoft.logistics.manage.pojo.project.distribution.TbProjectDistribution" >
+    update tb_project_distribution
+    set project_id = #{projectId,jdbcType=INTEGER},
+      project_code = #{projectCode,jdbcType=VARCHAR},
+      project_type = #{projectType,jdbcType=TINYINT},
+      transport_type = #{transportType,jdbcType=TINYINT},
+      send_company_id = #{sendCompanyId,jdbcType=INTEGER},
+      receive_company_id = #{receiveCompanyId,jdbcType=INTEGER},
+      car_num = #{carNum,jdbcType=INTEGER},
+      single_weight = #{singleWeight,jdbcType=DECIMAL},
+      creator_id = #{creatorId,jdbcType=INTEGER},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      expire_date = #{expireDate,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT},
+      type = #{type,jdbcType=TINYINT},
+      already_rec_num = #{alreadyRecNum,jdbcType=INTEGER},
+      complete_num = #{completeNum,jdbcType=INTEGER},
+      delete_flag = #{deleteFlag,jdbcType=TINYINT},
+      over_flag = #{overFlag,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+   <select id="selectTodayalreadyRecNumsByProjectId" parameterType="java.util.Map" resultType="com.shenhesoft.logistics.manage.pojo.project.distribution.TbProjectDistribution">
+  		select id,project_id projectId , car_num carNum,already_rec_num alreadyRecNum ,creator_id creatorId,
+  		create_date createDate,type,single_weight singleWeight,over_flag overFlag
+  		from tb_project_distribution 
+  		where project_id = #{projectId,jdbcType=INTEGER}
+  		AND type = #{taskType,jdbcType=TINYINT}
+  		AND delete_flag = 0
+  		AND over_flag = 0
+		<!-- 任务有效期  expire_date 任务过期时间-->
+		AND UNIX_TIMESTAMP(expire_date) - UNIX_TIMESTAMP(NOW())  <![CDATA[  < ]]>   86400
+	 	AND UNIX_TIMESTAMP(expire_date) - UNIX_TIMESTAMP(NOW())  <![CDATA[  > ]]>   0
+  </select>
+	
+	
+	<select id="getTodayProjectDistributionByProjectId" parameterType="java.util.Map" resultMap="BaseResultMap">
+		select 
+		 <include refid="Base_Column_List" />
+  		from tb_project_distribution 
+  		where project_id = #{projectId,jdbcType=INTEGER}
+  		AND type = #{taskType,jdbcType=TINYINT}
+  		AND delete_flag = 0
+  		AND over_flag = 0
+	 	AND UNIX_TIMESTAMP(expire_date) - UNIX_TIMESTAMP(NOW())  <![CDATA[  < ]]>   86400
+	 	AND UNIX_TIMESTAMP(expire_date) - UNIX_TIMESTAMP(NOW())  <![CDATA[  > ]]>   0
+	</select>
+	
+	<!-- 查询任务的状态 是分配中 还是暂停分配 -->
+	<select id="getProjectDistributionStatus" parameterType="java.util.Map" resultType="java.lang.Byte">
+		SELECT
+			status
+		FROM
+			tb_project_distribution
+		WHERE
+			project_id =#{projectId,jdbcType=INTEGER}
+		AND delete_flag=0
+		AND over_flag=0
+		AND type =#{taskType,jdbcType=TINYINT}
+		<!-- 任务有效期  expire_date 任务过期时间-->
+		AND UNIX_TIMESTAMP(expire_date) - UNIX_TIMESTAMP(NOW())  <![CDATA[  < ]]>   86400
+	 	AND UNIX_TIMESTAMP(expire_date) - UNIX_TIMESTAMP(NOW())  <![CDATA[  > ]]>   0
+	</select>
+
+	<!-- 查询已领任务 -->
+	<select id="selectAlreadyrecNumByProjectId" parameterType="java.util.Map" resultType="java.lang.Integer">
+		SELECT
+			sum(already_rec_num)
+		FROM
+			tb_project_distribution
+		WHERE
+			project_id =#{projectId,jdbcType=INTEGER}
+		AND delete_flag=0
+		AND over_flag=0
+		AND type =#{taskType,jdbcType=TINYINT}
+	</select>
+	
+	<!--  查询今日待领取任务-->
+	<select id="selectTodayCarNumByProjectId"  parameterType="java.util.Map" resultType="java.lang.Integer">
+		SELECT
+			sum(car_num)
+		FROM
+			tb_project_distribution
+		WHERE
+			project_id =#{projectId,jdbcType=INTEGER}
+		AND delete_flag=0
+		AND over_flag=0
+		AND status = 1
+		AND type =#{taskType,jdbcType=TINYINT}
+		<!-- 任务有效期  expire_date 任务过期时间-->
+		AND UNIX_TIMESTAMP(expire_date) - UNIX_TIMESTAMP(NOW())  <![CDATA[  < ]]>   86400
+	 	AND UNIX_TIMESTAMP(expire_date) - UNIX_TIMESTAMP(NOW())  <![CDATA[  > ]]>   0
+	</select>
+
+	<!--查询当天完成的任务 -->
+	<select id="selectTodayCompleteNumByProjectId" parameterType="java.util.Map"  resultType="java.lang.Integer">
+		SELECT
+			sum(complete_num)
+		FROM
+			tb_project_distribution
+		WHERE
+			project_id = #{projectId,jdbcType=INTEGER}
+		AND delete_flag=0
+		AND type =#{taskType,jdbcType=TINYINT}
+		<!-- 任务有效期  expire_date 任务过期时间-->
+		AND UNIX_TIMESTAMP(expire_date) - UNIX_TIMESTAMP(NOW())  <![CDATA[  < ]]>   86400
+	 	AND UNIX_TIMESTAMP(expire_date) - UNIX_TIMESTAMP(NOW())  <![CDATA[  > ]]>   0
+	</select> 
+
+	<!-- 累积完成任务数 -->
+	<select id="selectSumCompleteNumByProjectId" parameterType="java.util.Map" resultType="java.lang.Integer" >
+		SELECT
+			sum(complete_num)
+		FROM
+			tb_project_distribution
+		WHERE
+			project_id = #{projectId,jdbcType=INTEGER}
+		AND delete_flag=0
+		AND type =#{taskType,jdbcType=TINYINT}
+	</select>
+
+	<!--根据项目id获取任务 id  -->
+	<select id="isHaveJob" parameterType="java.util.Map" resultType="java.lang.Integer" >
+		SELECT
+			id
+		FROM
+			tb_project_distribution
+		WHERE
+			project_id =#{projectId,jdbcType=INTEGER}
+		AND delete_flag=0
+		AND over_flag=0
+		AND type =#{taskType,jdbcType=TINYINT}
+		<!-- 任务有效期  expire_date 任务过期时间-->
+		AND UNIX_TIMESTAMP(expire_date) - UNIX_TIMESTAMP(NOW())  <![CDATA[  < ]]>   86400
+	 	AND UNIX_TIMESTAMP(expire_date) - UNIX_TIMESTAMP(NOW())  <![CDATA[  > ]]>   0
+	</select>
+
+	<update id="clearNoReceiveTbOrderTask">
+		update tb_project_distribution set over_flag = 1 where delete_flag = 0 and
+		over_flag = 0
+	</update>
+	
+	<sql id="Project_Column_List" >
+  p.id,p.project_code projectCode,p.branch_group_id branchGroupId,p.branch_group_name branchGroupName, 
+	   p.project_type projectType,p.transport_type transportType, 
+	  p.cargo_id cargoId,p.cargo_name cargoName,p.cargo_specifications cargoSpecifications,p.cargo_price cargoPrice,
+	   p.valuation_unit_name valuationUnitName,p.send_cargo_company_id sendCargoCompanyId, 
+	   p.send_cargo_company_name sendCargoCompanyName,p.receive_cargo_company_id receiveCargoCompanyId, 
+	   p.receive_cargo_company_name receiveCargoCompanyName,p.send_cargo_unit_id sendCargoUnitId, 
+	   p.send_cargo_unit_name sendCargoUnitName,
+	    p.receive_cargo_site_id receiveCargoSiteId,p.receive_cargo_site receiveCargoSite, 
+	   p.short_barge_carrier_id shortBargeCarrierId,p.short_barge_carrier_name shortBargeCarrierName,
+	    p.begin_center_site_id beginCenterSiteId,p.begin_center_site_name beginCenterSiteName, 
+	   p.begin_site_id beginSiteId,p.begin_site_name beginSiteName,p.begin_address beginAddress,
+	   p.end_center_site_id endCenterSiteId,p.end_center_site_name endCenterSiteName, 
+	   p.end_site_id endSiteId,p.end_site_name endSiteName,p.end_address endAddress, 
+	   p.freight,p.material_cost materialCost,p.tarpaulin_cost tarpaulinCost, 
+	   p.begin_stevedoring_cost beginStevedoringCost,p.end_stevedoring_cost endStevedoringCost,
+	    p.freight_sum freightSum,p.forwarding_site_id forwardingSiteId,p.forwarding_site_name forwardingSiteName, 
+	   p.forwarding_unit_id forwardingUnitId,p.forwarding_unit_name forwardingUnitName, 
+	   p.take_place takePlace,p.take_place_detail takePlaceDetail,p.receiving_department_id receivingDepartmentId, 
+	   p.receiving_department_name receivingDepartmentName,p.arrive_place arrivePlace,p.arrive_place_address arrivePlaceAddress, 
+	   p.pick_up_price pickUpPrice,p.train_price trainPrice,  
+	   p.arrive_price arrivePrice,p.transport_price transportPrice,p.remark,p.create_date createDate,p.edit_date editDate,
+	    p.status,p.creator_id creatorId, 
+	   p.principal Principal,p.is__distribution isDistribution,p.delete_flag deleteFlag,
+  </sql>
+	
+	<select id="selectProjectByExample" resultType="com.shenhesoft.logistics.business.helpPojo.ProjectDistributionDetail"
+	parameterType="com.shenhesoft.logistics.manage.pojo.project.TbProjectExample">
+		SELECT
+		   <include refid="Project_Column_List" />
+		   	(case p.transport_type 
+			  when 0	then p.short_barge_carrier_mode 
+			  when 1	then p.short_barge_carrier_mode 
+			  when 2	then p.send_short_barge_carrier_mode
+			  when 4	then p.short_barge_carrier_mode 
+			  when 5	then p.send_short_barge_carrier_mode 
+			end) shortBargeCarrierMode,
+		 	(case p.transport_type 
+		   when 0 then '3' 
+		   when 1 then '1' 
+			when 2 then '2'
+		   when 4	then '1' 
+		   when 5	then '2'
+				end) taskType,
+			case p.transport_type 
+			when 0 then p.send_cargo_unit_id 
+			when 1	then p.send_cargo_unit_id 
+		  when 2	then p.forwarding_site_id
+		  when 4	then p.send_cargo_unit_id 
+		  when 5	then p.forwarding_site_id 
+			end sendCompanyId ,
+		  case p.transport_type 
+			when 0 then p.send_cargo_unit_name 
+			when 1	then p.send_cargo_unit_name 
+		  when 2	then p.forwarding_site_name 
+			when 4	then p.send_cargo_unit_name 
+		  when 5	then p.forwarding_site_name 
+			end sendCompanyName ,
+		  case p.transport_type 
+		  when 0 then p.receiving_department_id
+			when 1 then p.receive_cargo_site_id 
+			when 2 then p.receiving_department_id 
+		  when 4	then p.receive_cargo_site_id 
+		  when 5	then p.receiving_department_id 
+			end receiptCompanyId,
+			case p.transport_type 
+		  when 0 then p.receiving_department_name 
+		  when 1 then p.receive_cargo_site 
+		  when 2 then p.receiving_department_name 
+		  when 4	then p.receive_cargo_site 
+		  when 5	then p.receiving_department_name 
+			end receiptCompanyName 
+		FROM
+			tb_project p 
+		left join tb_branch_group_link y on p.id=y.row_id 	
+		 <if test="_parameter != null" >
+	      <include refid="Example_Where_Clause" />
+	    </if> and p.transport_type in(0,1,2,4,5)
+		UNION ALL
+		SELECT
+			<include refid="Project_Column_List" />
+			p.short_barge_carrier_mode shortBargeCarrierMode,
+		   (case p.transport_type 
+			  when 6 then '1' 
+			  when 7 then '1' 
+			end) taskType,
+		  p.send_cargo_unit_id sendCompanyId ,
+		  p.send_cargo_unit_name sendCargoCompanyName ,
+		  p.receive_cargo_site_id  receiptCompanyId,
+		  p.receive_cargo_site receiveCargoCompanyName 
+		FROM
+			tb_project p
+		left join tb_branch_group_link y on p.id=y.row_id 		
+		 <if test="_parameter != null" >
+	      <include refid="Example_Where_Clause" />
+	    </if> and p.transport_type in(6,7)
+		UNION ALL
+		SELECT
+			<include refid="Project_Column_List" />
+			p.send_short_barge_carrier_mode shortBargeCarrierMode,
+		   (case p.transport_type 
+			  when 6 then '2' 
+			  when 7 then '2' 
+			end) taskType,
+			p.forwarding_site_id sendCompanyId,
+		    p.forwarding_site_name  sendCargoCompanyName ,
+		    p.receiving_department_id receiptCompanyId,
+		    p.receiving_department_name receiveCargoCompanyName 
+		FROM
+			tb_project p
+		left join tb_branch_group_link y on p.id=y.row_id 		
+		 <if test="_parameter != null" >
+	      <include refid="Example_Where_Clause" />
+	    </if> and p.transport_type in(6,7)
+		 <if test="orderByClause != null" >
+	      order by ${orderByClause}
+	    </if>
+	</select>
+	
+	<select id="selectTbProjectDetailByExample" resultType="com.shenhesoft.logistics.business.helpPojo.TbProjectDetail" parameterType="com.shenhesoft.logistics.manage.pojo.project.TbProjectExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+	    A.id, A.project_code projectCode, A.branch_group_id branchGroupId, A.branch_group_name branchGroupName, 
+	    A.project_type projectType, A.transport_type transportType, 
+	   A.cargo_id cargoId, A.cargo_name cargoName, A.cargo_specifications cargoSpecifications, A.cargo_price cargoPrice,
+	    A.valuation_unit_name valuationUnitName, A.send_cargo_company_id sendCargoCompanyId, 
+	    A.send_cargo_company_name sendCargoCompanyName, A.receive_cargo_company_id receiveCargoCompanyId, 
+	    A.receive_cargo_company_name receiveCargoCompanyName, A.send_cargo_unit_id sendCargoUnitId, 
+	    A.send_cargo_unit_name sendCargoUnitName,
+	     A.receive_cargo_site_id receiveCargoSiteId, A.receive_cargo_site receiveCargoSite, A.short_barge_carrier_mode shortBargeCarrierMode, 
+	    A.short_barge_carrier_id shortBargeCarrierId, A.short_barge_carrier_name shortBargeCarrierName,
+	     A.begin_center_site_id beginCenterSiteId, A.begin_center_site_name beginCenterSiteName, 
+	    A.begin_site_id beginSiteId, A.begin_site_name beginSiteName, A.begin_address beginAddress,
+	    A.end_center_site_id endCenterSiteId, A.end_center_site_name endCenterSiteName, 
+	    A.end_site_id endSiteId, A.end_site_name endSiteName, A.end_address endAddress, 
+	    A.freight, A.material_cost materialCost, A.tarpaulin_cost tarpaulinCost, 
+	    A.begin_stevedoring_cost beginStevedoringCost, A.end_stevedoring_cost endStevedoringCost,
+	     A.freight_sum freightSum, A.forwarding_site_id forwardingSiteId, A.forwarding_site_name forwardingSiteName, 
+	    A.forwarding_unit_id forwardingUnitId, A.forwarding_unit_name forwardingUnitName, 
+	    A.take_place takePlace, A.take_place_detail takePlaceDetail, A.receiving_department_id receivingDepartmentId, 
+	    A.receiving_department_name receivingDepartmentName, A.arrive_place arrivePlace, A.arrive_place_address arrivePlaceAddress, 
+	    A.pick_up_price pickUpPrice, A.train_price trainPrice,  
+	    A.arrive_price arrivePrice, A.transport_price transportPrice, A.remark, A.create_date createDate, A.edit_date editDate,
+	     A.status, A.creator_id creatorId, 
+	    A.principal Principal, A.is__distribution isDistribution, A.delete_flag deleteFlag,
+	     B.id as bId, B.car_num carNum,B.creator_id creatorId,
+	    B.create_date createDate,B.type type, B.already_rec_num alreadyRecNum
+	   
+	    from tb_project as A left join tb_project_distribution as B on B.project_id =A.id and TO_DAYS( B.create_date) = TO_DAYS(now()) and B.delete_flag =0
+	    <if test="_parameter != null" >
+	      <include refid="Example_Where_Clause" />
+	    </if>
+	    <if test="orderByClause != null" >
+	      order by ${orderByClause}
+	    </if>
+  </select>
+  
+  
+</mapper>

@@ -1,0 +1,51 @@
+body{background-color: #F8F8F8;margin:0 30px;}
+h4{font-size: 16px;font-family: "Microsoft YaHei";color: rgb(51, 51, 51);font-weight: bold;}
+ul{list-style-type: none;}
+
+.anchored-fleet,.anchored-company,.askCompany,.askFleet,.anchoredHistory{background-color: #fff;padding:20px;box-shadow: 2px 2px 5px #ccc;border-radius: 3px;margin: 20px 0;}
+
+
+
+.anchored-fleet ul{padding:0; margin-top: 10px;margin-bottom: 20px}
+.anchored-company ul,.anchoredHistory ul{padding:0; margin-top: 0px;margin-bottom: 20px}
+
+
+.read-more a,.read-more1 a,.read-more2 a,.read-more3 a{color: #666}
+.wrap{padding: 0 50px;}
+.anchored-fleet>ul>li,.anchored-company>ul>li,.anchoredHistory>ul>li{float: left;width: 25%;padding-left: 50px}
+.fleet-info>ul>li{width: 20%;float: left;white-space: nowrap;}
+
+
+.company-info>ul>li{width: 25%;float: left;}
+.fleet-info{background-color: #eee;}
+/*申请挂靠公司信息*/
+.askCompany .detail-info a{color: #ED986D}
+.askFleet .detail-info a{color: #ED986D}
+.askCompany ul li{float: left;}
+.more{padding: 10px 0;}
+label,span {font-size: 14px;font-family: "Microsoft YaHei"; font-weight: normal;margin: 0px;}
+hr{margin-top: 10px;margin-bottom: 20px;border: 0;border-top: 1px solid #ccc;}
+.left-part{border-right: 1px dashed #ccc;}
+.left-part ul{padding-left:50px;padding-right: 100px;}
+.right-part ul{padding-left:100px;padding-right: 50px;}
+
+
+.col-sm-2,.col-sm-5,.col-sm-6,.col-sm-7{padding: 0;}
+.right-part{padding-left: 50px}
+.left-part>div,.right-part>div{margin-bottom: 20px}
+/*.col-sm-6{padding-left: 50px !important;padding-right: 0px;}*/
+
+
+/*历史申请记录*/
+.history-info>ul>li{float: left;width: 25%;}
+
+
+/*确认模态框*/
+.btn,.btn:hover,.btn:active,.btn:focus,.btn.focus{height: 45px !important;font-size: 18px;background-color: #393945;color: #fff;}
+.modal .modal-header{background-color: #403f4d;position: relative;}
+.promptModal .modal-header{padding: 20px}
+.promptModal .glyphicon-remove{position: absolute;right: 10px;top: 10px;font-size: 20px;color: #FFF;}
+.promptModal .modal-body{padding: 50px;font-size: 22px;text-align: center;}
+.promptModal .modal-dialog{margin-top: 200px;}
+.promptModal .modal-footer{border: none;}
+.promptModal .btn{font-size: 14px !important;height: 30px !important;}

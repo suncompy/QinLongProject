@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shenhesoft.logistics.finance.mapper.ThreePartiesReceivablesMapper" >
+  
+  <select id="getThreePartiesReceivables" resultType="Map" >
+	    SELECT
+			pr.id threeId,
+			pr.customer_pack_id custPackId,
+			p.project_code projectCode,
+			pr.status settleAuditType,
+			"货款" cargoType,
+			pr.produce_money produceMoney,
+			pr.payment_ratio paymentRatio,
+			pr.payable_money payableMoney,
+		    pr.settled_money settledMoney,
+		    pr.besettled_money besettledMoney,
+			cus.company_name threeCompanies,
+			cus.id threeCompaniesId,
+		    pr.create_date createDate
+		FROM
+			tb_three_parties_receivables pr
+		<!-- LEFT JOIN tb_customer_pack cp ON pr.customer_pack_id = cp.cust_pack_id -->
+		LEFT JOIN tb_customer cus ON pr.three_companies_id = cus.id
+		LEFT JOIN tb_project p ON pr.project_id = p.id
+		left join tb_branch_group_link y on pr.id=y.row_id and y.tab_name='tb_three_parties_receivables'
+		where pr.del_flag = 0  and y.sys_org_code like CONCAT(#{map.sysOrgCode},'%')
+	<if test="map!=null">
+	<if test="map.projectId != null and map.projectId != ''  and map.projectId != 'null' and map.projectId != 'undefined' " >
+       and pr.project_id = #{map.projectId,jdbcType=INTEGER}
+      </if>
+      <if test="map.customerPackId != null" >
+        and pr.customer_pack_id = #{map.customerPackId,jdbcType=VARCHAR}
+      </if>
+      <if test="map.threeCompaniesId != null" >
+        and pr.three_companies_id = #{map.threeCompaniesId,jdbcType=INTEGER}
+      </if>
+      <if test="map.produceMoney != null" >
+        and pr.produce_money = #{map.produceMoney,jdbcType=DECIMAL}
+      </if>
+      <if test="map.paymentRatio != null" >
+        and pr.payment_ratio = #{map.paymentRatio,jdbcType=DECIMAL}
+      </if>
+      <if test="map.payableMoney != null" >
+        and pr.payable_money = #{map.payableMoney,jdbcType=DECIMAL}
+      </if>
+      <if test="map.createBy != null" >
+        and pr.create_by = #{map.createBy,jdbcType=VARCHAR}
+      </if>
+      <if test="map.createDate != null" >
+        and pr.create_date = #{map.createDate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="map.updateBy != null" >
+        and pr.update_by = #{map.updateBy,jdbcType=VARCHAR}
+      </if>
+      <if test="map.updateDate != null" >
+        and pr.update_date = #{map.updateDate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="map.remarks != null" >
+        and pr.remarks = #{map.remarks,jdbcType=VARCHAR}
+      </if>
+      <if test="map.delFlag != null" >
+        and pr.del_flag = #{map.delFlag,jdbcType=CHAR}
+      </if>
+      </if>		
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from tb_three_parties_receivables
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  
+  <insert id="addThreePartiesReceivables" parameterType="com.shenhesoft.logistics.finance.ThreePartiesReceivables" >
+    insert into tb_three_parties_receivables
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="projectId != null" >
+        project_id,
+      </if>
+      <if test="customerPackId != null" >
+        customer_pack_id,
+      </if>
+      <if test="threeCompaniesId != null" >
+        three_companies_id,
+      </if>
+      <if test="paymentRatio != null" >
+        payment_ratio,
+      </if>
+      <if test="payableMoney != null" >
+        payable_money,
+      </if>
+      <if test="produceMoney != null" >
+        produce_money,
+      </if>
+      <if test="besettledMoney != null" >
+        besettled_money,
+      </if>
+      <if test="settleMoney != null" >
+        settle_money,
+      </if>
+      <if test="settledMoney != null" >
+        settled_money,
+      </if>
+      <if test="createBy != null" >
+        create_by,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateBy != null" >
+        update_by,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="remarks != null" >
+        remarks,
+      </if>
+      <if test="delFlag != null" >
+        del_flag,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="projectId != null" >
+        #{projectId,jdbcType=INTEGER},
+      </if>
+      <if test="customerPackId != null" >
+        #{customerPackId,jdbcType=VARCHAR},
+      </if>
+      <if test="threeCompaniesId != null" >
+        #{threeCompaniesId,jdbcType=INTEGER},
+      </if>
+      <if test="paymentRatio != null" >
+        #{paymentRatio,jdbcType=DECIMAL},
+      </if>
+      <if test="payableMoney != null" >
+        #{payableMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="produceMoney != null" >
+        #{produceMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="besettledMoney != null" >
+        #{besettledMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="settleMoney != null" >
+        #{settleMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="settledMoney != null" >
+        #{settledMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="createBy != null" >
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarks != null" >
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        #{delFlag,jdbcType=CHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.shenhesoft.logistics.finance.ThreePartiesReceivables" >
+    update tb_three_parties_receivables
+     <set >
+      <if test="projectId != null" >
+        project_id = #{projectId,jdbcType=INTEGER},
+      </if>
+      <if test="customerPackId != null" >
+        customer_pack_id = #{customerPackId,jdbcType=VARCHAR},
+      </if>
+      <if test="threeCompaniesId != null" >
+        three_companies_id = #{threeCompaniesId,jdbcType=INTEGER},
+      </if>
+      <if test="paymentRatio != null" >
+        payment_ratio = #{paymentRatio,jdbcType=DECIMAL},
+      </if>
+      <if test="payableMoney != null" >
+        payable_money = #{payableMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="produceMoney != null" >
+        produce_money = #{produceMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="besettledMoney != null" >
+        besettled_money = #{besettledMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="settleMoney != null" >
+        settle_money = #{settleMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="settledMoney != null" >
+        settled_money = #{settledMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="createBy != null" >
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null" >
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarks != null" >
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag,jdbcType=CHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=CHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+</mapper>

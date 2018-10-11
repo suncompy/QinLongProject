@@ -1,0 +1,52 @@
+body{background-color: #F8F8F8;margin:0 30px;}
+.row{margin: 0px !important;}
+h4{font-size: 16px;font-family: "Microsoft YaHei";color: rgb(51, 51, 51);font-weight: bold;}
+ul{list-style-type: none;padding: 0;margin: 0px;}
+.driver-info>div>ul{padding-left: 50px}
+.vehicle-info>div>ul{padding-left: 50px}
+.driver-info>div{width:50%;}
+.vehicle-info>div{width:50%;}
+.driver-info a{padding: 10px 0}
+.vehicle-info a{padding: 10px 0;}
+label{margin:0;font-size: 14px;font-family: "Microsoft YaHei";font-weight: normal;vertical-align: top;}
+/*.width60{padding-left: 50px;}*/
+.width40{text-align: left;width: 40%;}
+
+.driver-info,.vehicle-info{background-color: #fff;padding:20px;box-shadow: 2px 2px 5px #ccc;border-radius: 3px;margin: 20px 0;}
+.detailInfo>li{padding-top: 10px;padding-bottom: 10px}
+.photo span{margin-left: 20px;width: 150px;height: 150px;}
+
+/*模态框*/
+a{cursor: pointer;}
+.modal h4{font-size: 18px;font-family: "Microsoft YaHei";color: rgb(255, 255, 255);font-weight: bold;}
+.modal .fa-times{color: #fff;font-size: 20px;position: absolute;top: 17px;right: 20px;}
+.modal .modal-header{background-color: #403f4d;position: relative;}
+.modal .modal-body{padding: 20px 50px}
+.modal label{font-size: 18px;font-family: "Microsoft YaHei";color: rgb(51, 51, 51);margin-bottom: 10px;}
+.modal input{height:45px !important;}
+.input-group-addon{font-size: 16px;font-family: "Microsoft YaHei";color: rgb(51, 51, 51);}
+.modal .form-group{margin-bottom: 20px !important;position: relative;}
+.form-group>span{position: absolute;top: 80px;right: 10px;color: red;}
+/*确认模态框*/
+.btn,.btn:hover,.btn:active,.btn:focus,.btn.focus{height: 45px !important;font-size: 18px;background-color: #393945;color: #fff;}
+.modal .modal-header{background-color: #403f4d;position: relative;}
+.promptModal .modal-header{padding: 20px}
+.promptModal .glyphicon-remove{position: absolute;right: 10px;top: 10px;font-size: 20px;color: #FFF;}
+.promptModal .modal-body{padding: 50px;font-size: 22px;text-align: center;}
+.promptModal .modal-dialog{margin-top: 200px;}
+.promptModal .modal-footer{border: none;}
+.promptModal .btn{font-size: 14px !important;height: 30px !important;}
+/*车辆驾驶员信息修改*/
+.modal b{color: red;padding: 6px;font-size: 20px;vertical-align: top;}
+.modifyVehicle .modal-body,.modifyDriverInfo .modal-body{padding: 20px !important;}
+.modifyVehicle label,.modifyDriverInfo label {font-size: 14px;font-family: "Microsoft YaHei";color: rgb(51, 51, 51);}
+.modifyVehicle input,.modifyDriverInfo input{ height: 38px !important;border-radius: 2px;border: 1px solid #ccc;}
+.modifyVehicle select,.modifyDriverInfo select{width: 120px;height: 38px !important;border-radius: 2px;border: 1px solid #ccc;}
+.modifyVehicle .form-group , .modifyDriverInfo .form-group {margin-bottom: 10px !important ;}
+.dataTimes{position: relative;}
+.modal .fa-calendar{position: absolute;top: 7px;right: 20px;font-size: 25px;color: #ccc;}
+.modifyVehicle .modal-dialog,.modifyDriverInfo .modal-dialog{width: 700px;}
+.insure-time .col-sm-9>div{position: relative;float: left;}
+.insure-time .fa-calendar{position: absolute;top: 7px;right: 5px;}
+.insure-time .fa-minus{color: #CCCCCC;padding: 14px 5px;}
+.insure-time input{width: 175px;}

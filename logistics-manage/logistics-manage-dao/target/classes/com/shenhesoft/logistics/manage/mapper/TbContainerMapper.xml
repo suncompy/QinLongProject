@@ -1,0 +1,478 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shenhesoft.logistics.manage.mapper.TbContainerMapper" >
+  <resultMap id="BaseResultMap" type="com.shenhesoft.logistics.manage.pojo.box.TbContainer" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="container_type_id" property="containerTypeId" jdbcType="INTEGER" />
+    <result column="container_num" property="containerNum" jdbcType="VARCHAR" />
+    <result column="east_container" property="eastContainer" jdbcType="VARCHAR" />
+    <result column="container_kind" property="containerKind" jdbcType="VARCHAR" />
+    <result column="container_code" property="containerCode" jdbcType="VARCHAR" />
+    <result column="container_id" property="containerId" jdbcType="VARCHAR" />
+    <result column="length" property="length" jdbcType="INTEGER" />
+    <result column="width" property="width" jdbcType="INTEGER" />
+    <result column="hight" property="hight" jdbcType="INTEGER" />
+    <result column="size" property="size" jdbcType="INTEGER" />
+    <result column="volume" property="volume" jdbcType="INTEGER" />
+    <result column="self_weight" property="selfWeight" jdbcType="INTEGER" />
+    <result column="weight" property="weight" jdbcType="INTEGER" />
+    <result column="train_location_id" property="trainLocationId" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="project_id" property="projectId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, container_type_id, container_num, east_container, container_kind, container_code, 
+    container_id, length, width, hight, size, volume, self_weight, weight, train_location_id, 
+    status, project_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shenhesoft.logistics.manage.pojo.box.TbContainerExample" >
+   <!--  select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_container
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if> -->
+    select 
+     A.id id,A.container_type_id containerTypeId,A.container_num containerNum,A.east_container eastContainer,
+     A.container_kind containerKind,A.container_code containerCode,A.container_id containerId,A.length length,A.width width,
+     A.hight hight,A.size size,A.volume volume,A.self_weight ,A.weight weight,A.train_location_id trainLocationId,A.status status,A.project_id projectId
+    from tb_container A left join tb_branch_group_link y on A.id=y.row_id
+    
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_container
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_container
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.shenhesoft.logistics.manage.pojo.box.TbContainerExample" >
+    delete from tb_container
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.shenhesoft.logistics.manage.pojo.box.TbContainer" >
+    insert into tb_container (id, container_type_id, container_num, 
+      east_container, container_kind, container_code, 
+      container_id, length, width, 
+      hight, size, volume, 
+      self_weight, weight, train_location_id, 
+      status, project_id)
+    values (#{id,jdbcType=INTEGER}, #{containerTypeId,jdbcType=INTEGER}, #{containerNum,jdbcType=VARCHAR}, 
+      #{eastContainer,jdbcType=VARCHAR}, #{containerKind,jdbcType=VARCHAR}, #{containerCode,jdbcType=VARCHAR}, 
+      #{containerId,jdbcType=VARCHAR}, #{length,jdbcType=INTEGER}, #{width,jdbcType=INTEGER}, 
+      #{hight,jdbcType=INTEGER}, #{size,jdbcType=INTEGER}, #{volume,jdbcType=INTEGER}, 
+      #{selfWeight,jdbcType=INTEGER}, #{weight,jdbcType=INTEGER}, #{trainLocationId,jdbcType=INTEGER}, 
+      #{status,jdbcType=INTEGER}, #{projectId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.shenhesoft.logistics.manage.pojo.box.TbContainer" >
+  <selectKey resultType="java.lang.Integer" keyProperty="id"
+			order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+    insert into tb_container
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="containerTypeId != null" >
+        container_type_id,
+      </if>
+      <if test="containerNum != null" >
+        container_num,
+      </if>
+      <if test="eastContainer != null" >
+        east_container,
+      </if>
+      <if test="containerKind != null" >
+        container_kind,
+      </if>
+      <if test="containerCode != null" >
+        container_code,
+      </if>
+      <if test="containerId != null" >
+        container_id,
+      </if>
+      <if test="length != null" >
+        length,
+      </if>
+      <if test="width != null" >
+        width,
+      </if>
+      <if test="hight != null" >
+        hight,
+      </if>
+      <if test="size != null" >
+        size,
+      </if>
+      <if test="volume != null" >
+        volume,
+      </if>
+      <if test="selfWeight != null" >
+        self_weight,
+      </if>
+      <if test="weight != null" >
+        weight,
+      </if>
+      <if test="trainLocationId != null" >
+        train_location_id,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="projectId != null" >
+        project_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="containerTypeId != null" >
+        #{containerTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="containerNum != null" >
+        #{containerNum,jdbcType=VARCHAR},
+      </if>
+      <if test="eastContainer != null" >
+        #{eastContainer,jdbcType=VARCHAR},
+      </if>
+      <if test="containerKind != null" >
+        #{containerKind,jdbcType=VARCHAR},
+      </if>
+      <if test="containerCode != null" >
+        #{containerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="containerId != null" >
+        #{containerId,jdbcType=VARCHAR},
+      </if>
+      <if test="length != null" >
+        #{length,jdbcType=INTEGER},
+      </if>
+      <if test="width != null" >
+        #{width,jdbcType=INTEGER},
+      </if>
+      <if test="hight != null" >
+        #{hight,jdbcType=INTEGER},
+      </if>
+      <if test="size != null" >
+        #{size,jdbcType=INTEGER},
+      </if>
+      <if test="volume != null" >
+        #{volume,jdbcType=INTEGER},
+      </if>
+      <if test="selfWeight != null" >
+        #{selfWeight,jdbcType=INTEGER},
+      </if>
+      <if test="weight != null" >
+        #{weight,jdbcType=INTEGER},
+      </if>
+      <if test="trainLocationId != null" >
+        #{trainLocationId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="projectId != null" >
+        #{projectId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.shenhesoft.logistics.manage.pojo.box.TbContainerExample" resultType="java.lang.Integer" >
+    select count(*) from tb_container
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_container
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.containerTypeId != null" >
+        container_type_id = #{record.containerTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.containerNum != null" >
+        container_num = #{record.containerNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.eastContainer != null" >
+        east_container = #{record.eastContainer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.containerKind != null" >
+        container_kind = #{record.containerKind,jdbcType=VARCHAR},
+      </if>
+      <if test="record.containerCode != null" >
+        container_code = #{record.containerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.containerId != null" >
+        container_id = #{record.containerId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.length != null" >
+        length = #{record.length,jdbcType=INTEGER},
+      </if>
+      <if test="record.width != null" >
+        width = #{record.width,jdbcType=INTEGER},
+      </if>
+      <if test="record.hight != null" >
+        hight = #{record.hight,jdbcType=INTEGER},
+      </if>
+      <if test="record.size != null" >
+        size = #{record.size,jdbcType=INTEGER},
+      </if>
+      <if test="record.volume != null" >
+        volume = #{record.volume,jdbcType=INTEGER},
+      </if>
+      <if test="record.selfWeight != null" >
+        self_weight = #{record.selfWeight,jdbcType=INTEGER},
+      </if>
+      <if test="record.weight != null" >
+        weight = #{record.weight,jdbcType=INTEGER},
+      </if>
+      <if test="record.trainLocationId != null" >
+        train_location_id = #{record.trainLocationId,jdbcType=INTEGER},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.projectId != null" >
+        project_id = #{record.projectId,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_container
+    set id = #{record.id,jdbcType=INTEGER},
+      container_type_id = #{record.containerTypeId,jdbcType=INTEGER},
+      container_num = #{record.containerNum,jdbcType=VARCHAR},
+      east_container = #{record.eastContainer,jdbcType=VARCHAR},
+      container_kind = #{record.containerKind,jdbcType=VARCHAR},
+      container_code = #{record.containerCode,jdbcType=VARCHAR},
+      container_id = #{record.containerId,jdbcType=VARCHAR},
+      length = #{record.length,jdbcType=INTEGER},
+      width = #{record.width,jdbcType=INTEGER},
+      hight = #{record.hight,jdbcType=INTEGER},
+      size = #{record.size,jdbcType=INTEGER},
+      volume = #{record.volume,jdbcType=INTEGER},
+      self_weight = #{record.selfWeight,jdbcType=INTEGER},
+      weight = #{record.weight,jdbcType=INTEGER},
+      train_location_id = #{record.trainLocationId,jdbcType=INTEGER},
+      status = #{record.status,jdbcType=INTEGER},
+      project_id = #{record.projectId,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.shenhesoft.logistics.manage.pojo.box.TbContainer" >
+    update tb_container
+    <set >
+      <if test="containerTypeId != null" >
+        container_type_id = #{containerTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="containerNum != null" >
+        container_num = #{containerNum,jdbcType=VARCHAR},
+      </if>
+      <if test="eastContainer != null" >
+        east_container = #{eastContainer,jdbcType=VARCHAR},
+      </if>
+      <if test="containerKind != null" >
+        container_kind = #{containerKind,jdbcType=VARCHAR},
+      </if>
+      <if test="containerCode != null" >
+        container_code = #{containerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="containerId != null" >
+        container_id = #{containerId,jdbcType=VARCHAR},
+      </if>
+      <if test="length != null" >
+        length = #{length,jdbcType=INTEGER},
+      </if>
+      <if test="width != null" >
+        width = #{width,jdbcType=INTEGER},
+      </if>
+      <if test="hight != null" >
+        hight = #{hight,jdbcType=INTEGER},
+      </if>
+      <if test="size != null" >
+        size = #{size,jdbcType=INTEGER},
+      </if>
+      <if test="volume != null" >
+        volume = #{volume,jdbcType=INTEGER},
+      </if>
+      <if test="selfWeight != null" >
+        self_weight = #{selfWeight,jdbcType=INTEGER},
+      </if>
+      <if test="weight != null" >
+        weight = #{weight,jdbcType=INTEGER},
+      </if>
+      <if test="trainLocationId != null" >
+        train_location_id = #{trainLocationId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="projectId != null" >
+        project_id = #{projectId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.shenhesoft.logistics.manage.pojo.box.TbContainer" >
+    update tb_container
+    set container_type_id = #{containerTypeId,jdbcType=INTEGER},
+      container_num = #{containerNum,jdbcType=VARCHAR},
+      east_container = #{eastContainer,jdbcType=VARCHAR},
+      container_kind = #{containerKind,jdbcType=VARCHAR},
+      container_code = #{containerCode,jdbcType=VARCHAR},
+      container_id = #{containerId,jdbcType=VARCHAR},
+      length = #{length,jdbcType=INTEGER},
+      width = #{width,jdbcType=INTEGER},
+      hight = #{hight,jdbcType=INTEGER},
+      size = #{size,jdbcType=INTEGER},
+      volume = #{volume,jdbcType=INTEGER},
+      self_weight = #{selfWeight,jdbcType=INTEGER},
+      weight = #{weight,jdbcType=INTEGER},
+      train_location_id = #{trainLocationId,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      project_id = #{projectId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+    <select id="selectBoxByPage" resultType="com.shenhesoft.logistics.manage.helpPojo.TbBoxDetail" >
+    select 
+     A.id, A.container_type_id containerTypeId,B.name name , B.code code , A.container_num containerNum,
+     A.east_container eastContainer, A.container_kind containerKind, A.container_code containerCode, 
+     A.container_id containerId, A.length length, A.width width, A.hight hight, A.size size,
+     A.volume volume, A.self_weight selfWeight, A.weight weight,
+     A.train_location_id trainLocationId
+     from tb_container as A, tb_container_type as B
+     where A.container_type_id = B.id
+  </select>
+  
+  
+  <delete id="deleteBoxBatch" parameterType="java.util.List">
+			delete from tb_container where id 
+			in 
+			<foreach collection="list" item="id" open="(" close=")" separator=",">
+				#{id,jdbcType =INTEGER}
+			</foreach>
+  </delete>
+  
+  
+    <select id="selectBoxByExample"  parameterType="com.shenhesoft.logistics.manage.pojo.box.TbContainerExample"  resultType="com.shenhesoft.logistics.manage.helpPojo.TbBoxDetail" >
+	    select 
+	     A.id, A.container_type_id containerTypeId,B.name name , B.code code , A.container_num containerNum,
+	     A.east_container eastContainer, A.container_kind containerKind, A.container_code containerCode, 
+	     A.container_id containerId, A.length length, A.width width, A.hight hight, A.size size,
+	     A.volume volume, A.self_weight selfWeight, A.weight weight,
+	     A.train_location_id trainLocationId,A.status status,A.project_id projectId
+	     from tb_container as A, tb_container_type as B,tb_branch_group_link y
+	     <if test="_parameter != null" >
+			    <include refid="Example_Where_Clause" />
+		 </if>
+	      and A.container_type_id = B.id and A.id=y.row_id 
+	     <if test="orderByClause != null" >
+	      order by ${orderByClause}
+		 </if>
+    </select>
+
+	<select id="veiwTbContainerByContainerId"
+		parameterType="java.lang.String" resultMap="BaseResultMap">
+		select * from tb_container where container_id= #{containerId,jdbcType =VARCHAR} limit 1
+	</select>
+  
+    <select id="selectContainNumByStationId" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+		select count(id) num from tb_container where train_location_id= #{stationId,jdbcType =INTEGER}
+	</select>
+  
+    <select id="selectProjectCodeByProjectId" parameterType="java.lang.Integer" resultType="java.lang.String">
+		select project_code from tb_project where id= #{projectId,jdbcType =INTEGER}
+	</select>
+	
+    <update id="updateContainerStatus" parameterType="map" >
+	    update tb_container
+	    set 
+	      status = #{status,jdbcType=INTEGER},
+	      project_id = #{projectId,jdbcType=INTEGER}
+	    where container_id = #{containerId,jdbcType=VARCHAR} and id in (
+	    		select row_id from tb_branch_group_link where tab_name = 'tb_container' and sys_org_code like CONCAT(#{sysOrgCode},'%')
+	    	  )
+    </update>
+</mapper>

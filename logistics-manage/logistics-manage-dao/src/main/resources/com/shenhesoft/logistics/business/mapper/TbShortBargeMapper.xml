@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shenhesoft.logistics.business.mapper.TbShortBargeMapper" >
+  <resultMap id="BaseResultMap" type="com.shenhesoft.logistics.business.pojo.shortBarge.TbShortBarge" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="project_id" property="projectId" jdbcType="INTEGER" />
+    <result column="short_barge_name" property="shortBargeName" jdbcType="VARCHAR" />
+    <result column="short_barge_id" property="shortBargeId" jdbcType="INTEGER" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="transport_price" property="transportPrice" jdbcType="DECIMAL" />
+    <result column="deduction_rate" property="deductionRate" jdbcType="REAL" />
+    <result column="deduction_price" property="deductionPrice" jdbcType="DECIMAL" />
+    <result column="payment" property="payment" jdbcType="INTEGER" />
+    <result column="type" property="type" jdbcType="TINYINT" />
+    <result column="short_barge_type" property="shortBargeType" jdbcType="TINYINT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, project_id, short_barge_name, short_barge_id, create_date, transport_price, deduction_rate, 
+    deduction_price, payment, type, short_barge_type
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shenhesoft.logistics.business.pojo.shortBarge.TbShortBargeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_short_barge
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tb_short_barge
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tb_short_barge
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.shenhesoft.logistics.business.pojo.shortBarge.TbShortBargeExample" >
+    delete from tb_short_barge
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.shenhesoft.logistics.business.pojo.shortBarge.TbShortBarge" >
+    insert into tb_short_barge (id, project_id, short_barge_name, 
+      short_barge_id, create_date, transport_price, 
+      deduction_rate, deduction_price, payment, 
+      type, short_barge_type)
+    values (#{id,jdbcType=INTEGER}, #{projectId,jdbcType=INTEGER}, #{shortBargeName,jdbcType=VARCHAR}, 
+      #{shortBargeId,jdbcType=INTEGER}, #{createDate,jdbcType=TIMESTAMP}, #{transportPrice,jdbcType=DECIMAL}, 
+      #{deductionRate,jdbcType=REAL}, #{deductionPrice,jdbcType=DECIMAL}, #{payment,jdbcType=INTEGER}, 
+      #{type,jdbcType=TINYINT}, #{shortBargeType,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.shenhesoft.logistics.business.pojo.shortBarge.TbShortBarge" >
+    insert into tb_short_barge
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="projectId != null" >
+        project_id,
+      </if>
+      <if test="shortBargeName != null" >
+        short_barge_name,
+      </if>
+      <if test="shortBargeId != null" >
+        short_barge_id,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="transportPrice != null" >
+        transport_price,
+      </if>
+      <if test="deductionRate != null" >
+        deduction_rate,
+      </if>
+      <if test="deductionPrice != null" >
+        deduction_price,
+      </if>
+      <if test="payment != null" >
+        payment,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="shortBargeType != null" >
+        short_barge_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="projectId != null" >
+        #{projectId,jdbcType=INTEGER},
+      </if>
+      <if test="shortBargeName != null" >
+        #{shortBargeName,jdbcType=VARCHAR},
+      </if>
+      <if test="shortBargeId != null" >
+        #{shortBargeId,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="transportPrice != null" >
+        #{transportPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="deductionRate != null" >
+        #{deductionRate,jdbcType=REAL},
+      </if>
+      <if test="deductionPrice != null" >
+        #{deductionPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="payment != null" >
+        #{payment,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=TINYINT},
+      </if>
+      <if test="shortBargeType != null" >
+        #{shortBargeType,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.shenhesoft.logistics.business.pojo.shortBarge.TbShortBargeExample" resultType="java.lang.Integer" >
+    select count(*) from tb_short_barge
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update tb_short_barge
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.projectId != null" >
+        project_id = #{record.projectId,jdbcType=INTEGER},
+      </if>
+      <if test="record.shortBargeName != null" >
+        short_barge_name = #{record.shortBargeName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shortBargeId != null" >
+        short_barge_id = #{record.shortBargeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.createDate != null" >
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.transportPrice != null" >
+        transport_price = #{record.transportPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.deductionRate != null" >
+        deduction_rate = #{record.deductionRate,jdbcType=REAL},
+      </if>
+      <if test="record.deductionPrice != null" >
+        deduction_price = #{record.deductionPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.payment != null" >
+        payment = #{record.payment,jdbcType=INTEGER},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=TINYINT},
+      </if>
+      <if test="record.shortBargeType != null" >
+        short_barge_type = #{record.shortBargeType,jdbcType=TINYINT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update tb_short_barge
+    set id = #{record.id,jdbcType=INTEGER},
+      project_id = #{record.projectId,jdbcType=INTEGER},
+      short_barge_name = #{record.shortBargeName,jdbcType=VARCHAR},
+      short_barge_id = #{record.shortBargeId,jdbcType=INTEGER},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      transport_price = #{record.transportPrice,jdbcType=DECIMAL},
+      deduction_rate = #{record.deductionRate,jdbcType=REAL},
+      deduction_price = #{record.deductionPrice,jdbcType=DECIMAL},
+      payment = #{record.payment,jdbcType=INTEGER},
+      type = #{record.type,jdbcType=TINYINT},
+      short_barge_type = #{record.shortBargeType,jdbcType=TINYINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.shenhesoft.logistics.business.pojo.shortBarge.TbShortBarge" >
+    update tb_short_barge
+    <set >
+      <if test="projectId != null" >
+        project_id = #{projectId,jdbcType=INTEGER},
+      </if>
+      <if test="shortBargeName != null" >
+        short_barge_name = #{shortBargeName,jdbcType=VARCHAR},
+      </if>
+      <if test="shortBargeId != null" >
+        short_barge_id = #{shortBargeId,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="transportPrice != null" >
+        transport_price = #{transportPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="deductionRate != null" >
+        deduction_rate = #{deductionRate,jdbcType=REAL},
+      </if>
+      <if test="deductionPrice != null" >
+        deduction_price = #{deductionPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="payment != null" >
+        payment = #{payment,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=TINYINT},
+      </if>
+      <if test="shortBargeType != null" >
+        short_barge_type = #{shortBargeType,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.shenhesoft.logistics.business.pojo.shortBarge.TbShortBarge" >
+    update tb_short_barge
+    set project_id = #{projectId,jdbcType=INTEGER},
+      short_barge_name = #{shortBargeName,jdbcType=VARCHAR},
+      short_barge_id = #{shortBargeId,jdbcType=INTEGER},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      transport_price = #{transportPrice,jdbcType=DECIMAL},
+      deduction_rate = #{deductionRate,jdbcType=REAL},
+      deduction_price = #{deductionPrice,jdbcType=DECIMAL},
+      payment = #{payment,jdbcType=INTEGER},
+      type = #{type,jdbcType=TINYINT},
+      short_barge_type = #{shortBargeType,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
